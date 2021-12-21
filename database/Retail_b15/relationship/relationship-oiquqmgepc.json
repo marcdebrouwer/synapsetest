@@ -19,7 +19,8 @@
 		"ObjectVersion": 1,
 		"ObjectId": "5ac6270e-07f2-47a1-8eba-e763ecdbfd74",
 		"Name": "relationship-oiquqmgepc",
-		"EntityType": "RELATIONSHIP"
+		"EntityType": "RELATIONSHIP",
+		"RelationshipType": 0
 	},
 	"type": "RELATIONSHIP"
 }

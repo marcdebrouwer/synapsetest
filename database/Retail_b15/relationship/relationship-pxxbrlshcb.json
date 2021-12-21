@@ -22,7 +22,8 @@
 		"ObjectVersion": 1,
 		"ObjectId": "35504748-3cd3-44b4-bf12-6bcc15f4ec8e",
 		"Name": "relationship-pxxbrlshcb",
-		"EntityType": "RELATIONSHIP"
+		"EntityType": "RELATIONSHIP",
+		"RelationshipType": 0
 	},
 	"type": "RELATIONSHIP"
 }

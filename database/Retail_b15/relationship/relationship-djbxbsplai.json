@@ -22,7 +22,8 @@
 		"ObjectVersion": 1,
 		"ObjectId": "26b50363-ca59-4099-a4a0-1ffe5c32f2af",
 		"Name": "relationship-djbxbsplai",
-		"EntityType": "RELATIONSHIP"
+		"EntityType": "RELATIONSHIP",
+		"RelationshipType": 0
 	},
 	"type": "RELATIONSHIP"
 }

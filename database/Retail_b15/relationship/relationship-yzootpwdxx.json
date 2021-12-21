@@ -22,7 +22,8 @@
 		"ObjectVersion": 1,
 		"ObjectId": "c1074d26-276f-4627-9d9e-3f4af8c10a3c",
 		"Name": "relationship-yzootpwdxx",
-		"EntityType": "RELATIONSHIP"
+		"EntityType": "RELATIONSHIP",
+		"RelationshipType": 0
 	},
 	"type": "RELATIONSHIP"
 }

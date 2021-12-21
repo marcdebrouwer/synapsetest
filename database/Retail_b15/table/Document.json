@@ -12,521 +12,448 @@
 				{
 					"Name": "DocumentId",
 					"Description": "The unique identifier of a Document.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentId"
 					}
 				},
 				{
 					"Name": "DocumentName",
 					"Description": "The name of the Document.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentName"
 					}
 				},
 				{
 					"Name": "DocumentDescription",
 					"Description": "The description of the Document.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentDescription"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 512,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentDescription"
 					}
 				},
 				{
 					"Name": "GlobalDocumentTypeIdentifier",
 					"Description": "The Global Document Type Identifier (GDTI) is part of the GS1 system of standards. It is used to identify a document by type or specifically as required.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "GlobalDocumentTypeIdentifier"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 30,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "GlobalDocumentTypeIdentifier"
 					}
 				},
 				{
 					"Name": "DocumentScopeStatement",
 					"Description": "The scope of the document.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentScopeStatement"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentScopeStatement"
 					}
 				},
 				{
 					"Name": "DocumentRevisionNumber",
 					"Description": "The revision number of the associated document.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentRevisionNumber"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentRevisionNumber"
 					}
 				},
 				{
 					"Name": "DocumentCreatedTimestamp",
 					"Description": "The timestamp that the Document was created.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentCreatedTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentCreatedTimestamp"
 					}
 				},
 				{
 					"Name": "DocumentCompletedTimestamp",
 					"Description": "The timestamp that the document was completed.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentCompletedTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentCompletedTimestamp"
 					}
 				},
 				{
 					"Name": "DocumentFiledTimestamp",
 					"Description": "The timestamp that the document was filed.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentFiledTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentFiledTimestamp"
 					}
 				},
 				{
 					"Name": "DocumentFirstPublishedTimestamp",
 					"Description": "The timestamp that the document was first published.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentFirstPublishedTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentFirstPublishedTimestamp"
 					}
 				},
 				{
 					"Name": "DocumentMinimumRetentionTimestamp",
 					"Description": "The timestamp that a document must be retained until. This is typically the earliest timestamp that a document can be deleted and in many cases the timestamp that the document should be deleted.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentMinimumRetentionTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentMinimumRetentionTimestamp"
 					}
 				},
 				{
 					"Name": "DocumentCopyrightTimestamp",
 					"Description": "The document copyright timestamp.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentCopyrightTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentCopyrightTimestamp"
 					}
 				},
 				{
 					"Name": "DocumentDeletedTimestamp",
 					"Description": "The timestamp that the Document was deleted. Once a document is deleted all data associated with the document, attributes of the document (including Document Image) and related entities may be deleted.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentDeletedTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentDeletedTimestamp"
 					}
 				},
 				{
 					"Name": "DocumentImage",
 					"Description": "The image or text of the document (scanned).",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentImage"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "binary",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "binary"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentImage"
 					}
 				},
 				{
 					"Name": "DocumentText",
 					"Description": "The text of the document.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentText"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentText"
 					}
 				},
 				{
 					"Name": "DocumentNote",
 					"Description": "A note, comment or additional information regarding the Document.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentNote"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentNote"
 					}
 				},
 				{
 					"Name": "NumberOfPages",
 					"Description": "The number of document pages.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "NumberOfPages"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "NumberOfPages"
 					}
 				},
 				{
 					"Name": "PageSize",
 					"Description": "The size of the document pages.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "PageSize"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "PageSize"
 					}
 				},
 				{
 					"Name": "DocumentUrl",
 					"Description": "The URL at which the document is located on the www.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentUrl"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2083,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentUrl"
 					}
 				},
 				{
 					"Name": "IsoLanguageId",
 					"Description": "The unique identifier of an ISO Language.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "IsoLanguageId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "IsoLanguageId"
 					}
 				},
 				{
 					"Name": "DeliveryMethodId",
 					"Description": "The unique identifier of a document delivery method.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DeliveryMethodId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DeliveryMethodId"
 					}
 				},
 				{
 					"Name": "DocumentFormatTypeId",
 					"Description": "The unique identifier of a document format type.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentFormatTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentFormatTypeId"
 					}
 				},
 				{
 					"Name": "DocumentTypeId",
 					"Description": "The unique identifier of a Document Type.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "DocumentTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "DocumentTypeId"
 					}
 				},
 				{
 					"Name": "MediaTypeId",
 					"Description": "The unique identifier of a Media Type.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "MediaTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "MediaTypeId"
 					}
 				},
 				{
 					"Name": "CountryId",
 					"Description": "The unique identifier of the Country.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "CountryId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "CountryId"
 					}
 				},
 				{
 					"Name": "StateId",
 					"Description": "The unique identifier of a State.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "StateId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "StateId"
 					}
 				},
 				{
 					"Name": "IdentificationId",
 					"Description": "The unique identifier of the identification.",
+					"BaseAttributeReference": {
+						"Entity": "Document.cdm.json/Document",
+						"Name": "IdentificationId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Document.cdm.json/Document",
-						"Name": "IdentificationId"
 					}
 				}
 			],

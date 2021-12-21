@@ -22,7 +22,8 @@
 		"ObjectVersion": 1,
 		"ObjectId": "39b03aa2-0c2a-4d98-9523-6461c1735bae",
 		"Name": "relationship-kgdsopybyi",
-		"EntityType": "RELATIONSHIP"
+		"EntityType": "RELATIONSHIP",
+		"RelationshipType": 0
 	},
 	"type": "RELATIONSHIP"
 }

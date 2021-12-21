@@ -12,97 +12,83 @@
 				{
 					"Name": "CustomerId",
 					"Description": "The unique identifier of a Customer.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerActivity.cdm.json/CustomerActivity",
+						"Name": "CustomerId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerActivity.cdm.json/CustomerActivity",
-						"Name": "CustomerId"
 					}
 				},
 				{
 					"Name": "ActivityId",
 					"Description": "The unique identifier of an Activity.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerActivity.cdm.json/CustomerActivity",
+						"Name": "ActivityId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerActivity.cdm.json/CustomerActivity",
-						"Name": "ActivityId"
 					}
 				},
 				{
 					"Name": "Date",
 					"Description": "The timestamp that the associated information is reported, recorded or effective as-of.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerActivity.cdm.json/CustomerActivity",
+						"Name": "Date"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerActivity.cdm.json/CustomerActivity",
-						"Name": "Date"
 					}
 				},
 				{
 					"Name": "AioLevelId",
 					"Description": "The unique identifier of an AIO Level.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerActivity.cdm.json/CustomerActivity",
+						"Name": "AioLevelId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerActivity.cdm.json/CustomerActivity",
-						"Name": "AioLevelId"
 					}
 				},
 				{
 					"Name": "CustomerActivityNote",
 					"Description": "A note, comment or additional information related to the Activity in which the Customer participates.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerActivity.cdm.json/CustomerActivity",
+						"Name": "CustomerActivityNote"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerActivity.cdm.json/CustomerActivity",
-						"Name": "CustomerActivityNote"
 					}
 				}
 			],

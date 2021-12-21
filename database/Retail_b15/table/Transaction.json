@@ -12,1438 +12,1247 @@
 				{
 					"Name": "TransactionId",
 					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionId"
 					}
 				},
 				{
 					"Name": "TransactionInitiatedTimestamp",
 					"Description": "The timestamp the transaction was initiated.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionInitiatedTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionInitiatedTimestamp"
 					}
 				},
 				{
 					"Name": "TransactionCompletedTimestamp",
 					"Description": "The timestamp that the transaction was completed or closed.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionCompletedTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionCompletedTimestamp"
 					}
 				},
 				{
 					"Name": "TransactionReceivedTimestamp",
 					"Description": "The timestamp that the Transaction was received.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionReceivedTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionReceivedTimestamp"
 					}
 				},
 				{
 					"Name": "TransactionEntryTimestamp",
 					"Description": "The timestamp that the Transaction was entered into the appropriate system for processing.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionEntryTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionEntryTimestamp"
 					}
 				},
 				{
 					"Name": "TransactionConfirmationTimestamp",
 					"Description": "The timestamp that the Transaction was confirmed to the Customer/Customer Account.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionConfirmationTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionConfirmationTimestamp"
 					}
 				},
 				{
 					"Name": "CreditCheckTimestamp",
 					"Description": "The timestamp that the Customer/Customer Account had a credit check in regard to the Transaction amount.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "CreditCheckTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "CreditCheckTimestamp"
 					}
 				},
 				{
 					"Name": "RequestedDeliveryDate",
 					"Description": "The date that the Customer/Customer Account requested delivery of the items.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "RequestedDeliveryDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "RequestedDeliveryDate"
 					}
 				},
 				{
 					"Name": "CommittedDeliveryDate",
 					"Description": "The date committed to the Customer/Customer Account for delivery of the items.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "CommittedDeliveryDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "CommittedDeliveryDate"
 					}
 				},
 				{
 					"Name": "ActualDeliveryTimestamp",
 					"Description": "The actual timestamp of delivery of the items to the Customer/Customer Account.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "ActualDeliveryTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "ActualDeliveryTimestamp"
 					}
 				},
 				{
 					"Name": "DeliveryConfirmationTimestamp",
 					"Description": "The timestamp that confirmation of the delivery or Shipment was made to the Customer/Customer Account.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "DeliveryConfirmationTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "DeliveryConfirmationTimestamp"
 					}
 				},
 				{
 					"Name": "TransactionAmount",
 					"Description": "The amount associated with the transaction.\n\nEx:\nRefund = 'amount'\nCredit = 'amount'",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionAmount"
 					}
 				},
 				{
 					"Name": "ShipmentToName",
 					"Description": "The name of the ship-to party.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "ShipmentToName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "ShipmentToName"
 					}
 				},
 				{
 					"Name": "ShipmentToLocationId",
 					"Description": "The unique identifier of a Location.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "ShipmentToLocationId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "ShipmentToLocationId"
 					}
 				},
 				{
 					"Name": "TransactionConfirmationNumber",
 					"Description": "The transaction confirmation number provided to confirm that the transaction was executed.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionConfirmationNumber"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 16,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionConfirmationNumber"
 					}
 				},
 				{
 					"Name": "IdentificationCheckedIndicator",
 					"Description": "Indicates whether the individual's identification was checked for any requirements for the transaction. For example: The individual is 21 years of age or older in order to purchase alcohol products.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "IdentificationCheckedIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "IdentificationCheckedIndicator"
 					}
 				},
 				{
 					"Name": "IdentificationId",
 					"Description": "The unique identifier of the identification.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "IdentificationId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "IdentificationId"
 					}
 				},
 				{
 					"Name": "TotalRetailPriceAmount",
 					"Description": "The total list price value of the Transaction products = (list price per unit product price)x(quantity ordered) for each line item.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TotalRetailPriceAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TotalRetailPriceAmount"
 					}
 				},
 				{
 					"Name": "TotalAdjustmentPercentage",
 					"Description": "The total percentage of adjustment(s) applied to the Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TotalAdjustmentPercentage"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TotalAdjustmentPercentage"
 					}
 				},
 				{
 					"Name": "TotalAdjustmentAmount",
 					"Description": "The total amount of adjustments applied to the Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TotalAdjustmentAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TotalAdjustmentAmount"
 					}
 				},
 				{
 					"Name": "TotalTransactionSalesPriceAmount",
 					"Description": "The total actual price value of the transaction item(s) = (actual selling price per unit product price)x(quantity) for each line item.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TotalTransactionSalesPriceAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TotalTransactionSalesPriceAmount"
 					}
 				},
 				{
 					"Name": "TotalShippingChargeAmount",
 					"Description": "The total amount of shipping charge associated with the Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TotalShippingChargeAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TotalShippingChargeAmount"
 					}
 				},
 				{
 					"Name": "TransactionTotalTaxAmount",
 					"Description": "The total amount of all taxes applied to the Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionTotalTaxAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionTotalTaxAmount"
 					}
 				},
 				{
 					"Name": "TransactionRoundingAmount",
 					"Description": "The amount of rounding applied to the transaction. This is typically done when the payment method is cash and the total invoice amount is rounded to an amount that is payable using legal tender. (e.g. 1 cent coin is no longer in legal circulation.)",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionRoundingAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionRoundingAmount"
 					}
 				},
 				{
 					"Name": "TransactionTotalInvoicedAmount",
 					"Description": "The total invoiced amount to the Customer/Customer Account.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionTotalInvoicedAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionTotalInvoicedAmount"
 					}
 				},
 				{
 					"Name": "TotalCommissionsPayableAmount",
 					"Description": "The total amount of commissions payable and due in regard to the Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TotalCommissionsPayableAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TotalCommissionsPayableAmount"
 					}
 				},
 				{
 					"Name": "SplitCommissionsIndicator",
 					"Description": "Indicates that the commissions are to be split between two or more employees.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "SplitCommissionsIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "SplitCommissionsIndicator"
 					}
 				},
 				{
 					"Name": "RequestedShipmentCarrierName",
 					"Description": "The name of the Carrier for the Shipment requested by the Customer/Customer Account.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "RequestedShipmentCarrierName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "RequestedShipmentCarrierName"
 					}
 				},
 				{
 					"Name": "AlternateCarrierAcceptableIndicator",
 					"Description": "Indicates that an alternate Carrier of the Shipment would be acceptable to the Customer/Customer Account.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "AlternateCarrierAcceptableIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "AlternateCarrierAcceptableIndicator"
 					}
 				},
 				{
 					"Name": "ShipCompleteIndicator",
 					"Description": "Indicates that the Transaction item(s) are only to be shipped when complete - no partial shipments.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "ShipCompleteIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "ShipCompleteIndicator"
 					}
 				},
 				{
 					"Name": "AcknowledgementRequiredIndicator",
 					"Description": "Indicates that an acknowledgement  to the Customer/Customer Account is required for the Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "AcknowledgementRequiredIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "AcknowledgementRequiredIndicator"
 					}
 				},
 				{
 					"Name": "ExpediteTransactionIndicator",
 					"Description": "Indicates that the Transaction is to be expedited.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "ExpediteTransactionIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "ExpediteTransactionIndicator"
 					}
 				},
 				{
 					"Name": "DropShipmentIndicator",
 					"Description": "Indicates that the Transaction item(s) are to be drop shipped.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "DropShipmentIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "DropShipmentIndicator"
 					}
 				},
 				{
 					"Name": "ActualShipmentCarrierName",
 					"Description": "The Carrier of the Shipment.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "ActualShipmentCarrierName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "ActualShipmentCarrierName"
 					}
 				},
 				{
 					"Name": "TotalWeight",
 					"Description": "The total weight of the Transaction item(s).",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TotalWeight"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TotalWeight"
 					}
 				},
 				{
 					"Name": "TotalFreightChargeAmount",
 					"Description": "The total freight charges amount.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TotalFreightChargeAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TotalFreightChargeAmount"
 					}
 				},
 				{
 					"Name": "UnitOfMeasureId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "UnitOfMeasureId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "UnitOfMeasureId"
 					}
 				},
 				{
 					"Name": "EarliestDeliveryWindowTimestamp",
 					"Description": "The earliest timestamp that the transaction should be made available for delivery.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "EarliestDeliveryWindowTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "EarliestDeliveryWindowTimestamp"
 					}
 				},
 				{
 					"Name": "LatestDeliveryWindowTimestamp",
 					"Description": "The latest timestamp that the transaction should be made available for delivery.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "LatestDeliveryWindowTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "LatestDeliveryWindowTimestamp"
 					}
 				},
 				{
 					"Name": "DeliveryInstructions",
 					"Description": "Instructions related to the delivery of the Transaction item(s).",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "DeliveryInstructions"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "DeliveryInstructions"
 					}
 				},
 				{
 					"Name": "CustomerCreditCheckNote",
 					"Description": "A note, comment or additional information regarding the Transaction credit check.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "CustomerCreditCheckNote"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "CustomerCreditCheckNote"
 					}
 				},
 				{
 					"Name": "MessageToCustomer",
 					"Description": "A message to the Customer/Customer Account regarding the Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "MessageToCustomer"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "MessageToCustomer"
 					}
 				},
 				{
 					"Name": "CustomerId",
 					"Description": "The unique identifier of a Customer.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "CustomerId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "CustomerId"
 					}
 				},
 				{
 					"Name": "CustomerAccountId",
 					"Description": "The unique identifier of a Customer Account.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "CustomerAccountId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "CustomerAccountId"
 					}
 				},
 				{
 					"Name": "PurchasingChannelId",
 					"Description": "The unique identifier of a Channel.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "PurchasingChannelId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "PurchasingChannelId"
 					}
 				},
 				{
 					"Name": "SalesChannelId",
 					"Description": "The unique identifier of a Channel.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "SalesChannelId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "SalesChannelId"
 					}
 				},
 				{
 					"Name": "DistributionChannelId",
 					"Description": "The unique identifier of a Channel.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "DistributionChannelId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "DistributionChannelId"
 					}
 				},
 				{
 					"Name": "MarketingEventId",
 					"Description": "The unique identifier of a Marketing Event.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "MarketingEventId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "MarketingEventId"
 					}
 				},
 				{
 					"Name": "AdvertisingEventId",
 					"Description": "The unique identifier of an Advertising Event.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "AdvertisingEventId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "AdvertisingEventId"
 					}
 				},
 				{
 					"Name": "PromotionId",
 					"Description": "The unique identifier of a Promotion.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "PromotionId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "PromotionId"
 					}
 				},
 				{
 					"Name": "TransactionTypeId",
 					"Description": "The unique identifier of a Transaction Type.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionTypeId"
 					}
 				},
 				{
 					"Name": "BillingCycleId",
 					"Description": "The unique identifier of a Billing Cycle.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "BillingCycleId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "BillingCycleId"
 					}
 				},
 				{
 					"Name": "MerchantId",
 					"Description": "The unique identifier of a Merchant.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "MerchantId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "MerchantId"
 					}
 				},
 				{
 					"Name": "CustomerIdentificationMethodId",
 					"Description": "The unique identifier of a customer identification method.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "CustomerIdentificationMethodId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "CustomerIdentificationMethodId"
 					}
 				},
 				{
 					"Name": "TransactionClassificationId",
 					"Description": "The unique identifier of an Transaction Classification.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionClassificationId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionClassificationId"
 					}
 				},
 				{
 					"Name": "TransactionProcessingStatusId",
 					"Description": "The unique identifier of a Transaction Processing Status.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionProcessingStatusId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionProcessingStatusId"
 					}
 				},
 				{
 					"Name": "IsoCurrencyCode",
 					"Description": "The ISO 4217 currency code.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "IsoCurrencyCode"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 3,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "IsoCurrencyCode"
 					}
 				},
 				{
 					"Name": "TransactionExecutionMethodId",
 					"Description": "The unique identifier of a Transaction Execution Type.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionExecutionMethodId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionExecutionMethodId"
 					}
 				},
 				{
 					"Name": "TransactionPriorityId",
 					"Description": "The unique identifier of a Transaction Priority.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionPriorityId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionPriorityId"
 					}
 				},
 				{
 					"Name": "TransactionTaxStatusId",
 					"Description": "The unique identifier of a Transaction Tax Status.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionTaxStatusId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionTaxStatusId"
 					}
 				},
 				{
 					"Name": "WebPageUrl",
 					"Description": "The unique address of any Web document.\n\nThe URL consists of:\nType of file (ex: http://)\nDomain name (ex: www. name.com)\nPath or directory to file (ex: /notes/internet)\nName of file (...name.html)",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "WebPageUrl"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2083,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "WebPageUrl"
 					}
 				},
 				{
 					"Name": "SessionId",
 					"Description": "The unique identifier of a Session.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "SessionId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "SessionId"
 					}
 				},
 				{
 					"Name": "WorkstationSessionId",
 					"Description": "The unique identifier of a Workstation Session.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "WorkstationSessionId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "WorkstationSessionId"
 					}
 				},
 				{
 					"Name": "PointOfSaleId",
 					"Description": "The unique identifier of a POS.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "PointOfSaleId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "PointOfSaleId"
 					}
 				},
 				{
 					"Name": "StoreId",
 					"Description": "The unique identifier of a Store.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "StoreId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "StoreId"
 					}
 				},
 				{
 					"Name": "WarehouseId",
 					"Description": "The unique identifier of a Warehouse.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "WarehouseId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "WarehouseId"
 					}
 				},
 				{
 					"Name": "ResponsibilityCenterId",
 					"Description": "The unique identifier of a Responsibility Center.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "ResponsibilityCenterId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "ResponsibilityCenterId"
 					}
 				},
 				{
 					"Name": "TransactionNote",
 					"Description": "A note, comment or additional information regarding the Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "TransactionNote"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "TransactionNote"
 					}
 				},
 				{
 					"Name": "ShipmentMethodId",
 					"Description": "The unique identifier of a Shipment Method.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "ShipmentMethodId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "ShipmentMethodId"
 					}
 				},
 				{
 					"Name": "DeviceId",
 					"Description": "The unique identifier of a Device.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "DeviceId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "DeviceId"
 					}
 				},
 				{
 					"Name": "SoftwareProductId",
 					"Description": "The unique identifier of a software product.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "SoftwareProductId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "SoftwareProductId"
 					}
 				},
 				{
 					"Name": "SoftwareProductVersionNumber",
 					"Description": "The version number of the software product.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "SoftwareProductVersionNumber"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "SoftwareProductVersionNumber"
 					}
 				},
 				{
 					"Name": "ApprovedByEmployeeId",
 					"Description": "The unique identifier of an Employee.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "ApprovedByEmployeeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "ApprovedByEmployeeId"
 					}
 				},
 				{
 					"Name": "PromotionOfferId",
 					"Description": "The unique identifier of a Promotion Offer. The Promotion Offer ID is unique to each account or party that is offered to.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "PromotionOfferId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "PromotionOfferId"
 					}
 				},
 				{
 					"Name": "LoyaltyCardId",
 					"Description": "The unique identifier of a Loyalty Card.",
+					"BaseAttributeReference": {
+						"Entity": "Transaction.cdm.json/Transaction",
+						"Name": "LoyaltyCardId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Transaction.cdm.json/Transaction",
-						"Name": "LoyaltyCardId"
 					}
 				}
 			],

@@ -12,136 +12,117 @@
 				{
 					"Name": "CustomerId",
 					"Description": "The unique identifier of a Customer.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
+						"Name": "CustomerId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
-						"Name": "CustomerId"
 					}
 				},
 				{
 					"Name": "EmailTypeId",
 					"Description": "The unique identifier of an email type.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
+						"Name": "EmailTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
-						"Name": "EmailTypeId"
 					}
 				},
 				{
 					"Name": "EmailAddress",
 					"Description": "The Customer email address.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
+						"Name": "EmailAddress"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": false,
 						"Length": 256,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
-						"Name": "EmailAddress"
 					}
 				},
 				{
 					"Name": "PeriodStartTimestamp",
 					"Description": "The period start timestamp associated with the information.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
+						"Name": "PeriodStartTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
-						"Name": "PeriodStartTimestamp"
 					}
 				},
 				{
 					"Name": "PeriodEndTimestamp",
 					"Description": "The period end timestamp associated with the information.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
+						"Name": "PeriodEndTimestamp"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
-						"Name": "PeriodEndTimestamp"
 					}
 				},
 				{
 					"Name": "PreferenceId",
 					"Description": "The unique identifier of a Preference.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
+						"Name": "PreferenceId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
-						"Name": "PreferenceId"
 					}
 				},
 				{
 					"Name": "CustomerEmailNote",
 					"Description": "A note, comment or additional information regarding the customer email address.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
+						"Name": "CustomerEmailNote"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "CustomerEmail.cdm.json/CustomerEmail",
-						"Name": "CustomerEmailNote"
 					}
 				}
 			],

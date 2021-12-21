@@ -12,1835 +12,1616 @@
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "ProductName",
 					"Description": "The name of the Product, which normally corresponds to the 'marketing name' of the Product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductName"
 					}
 				},
 				{
 					"Name": "ProductShortDescription",
 					"Description": "The short description of the Product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductShortDescription"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 512,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductShortDescription"
 					}
 				},
 				{
 					"Name": "ProductDescription",
 					"Description": "The description of the Product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductDescription"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 512,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductDescription"
 					}
 				},
 				{
 					"Name": "ProductInternalName",
 					"Description": "The internal name by which a Product is known.\n\nThis normally approximates the business name by which the public identifies the Product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductInternalName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductInternalName"
 					}
 				},
 				{
 					"Name": "ProductModelName",
 					"Description": "The name of the Product Model.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductModelName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductModelName"
 					}
 				},
 				{
 					"Name": "ProductBaseName",
 					"Description": "The name of the Product, which normally corresponds to the 'marketing name' of the Product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductBaseName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductBaseName"
 					}
 				},
 				{
 					"Name": "ProductCodeName",
 					"Description": "The internal code name by which the Product is known within the company.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductCodeName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductCodeName"
 					}
 				},
 				{
 					"Name": "ProductIntendedUse",
 					"Description": "The intended use of the product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductIntendedUse"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductIntendedUse"
 					}
 				},
 				{
 					"Name": "IntroductionDate",
 					"Description": "The date that the Product was introduced for sale.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "IntroductionDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "IntroductionDate"
 					}
 				},
 				{
 					"Name": "FirstDateManufactured",
 					"Description": "The date that the Product was first manufactured by the Manufacturer.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "FirstDateManufactured"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "FirstDateManufactured"
 					}
 				},
 				{
 					"Name": "PlannedAbandonmentDate",
 					"Description": "The planned date to discontinue marketing the product.    \n\nAbandonment is a component in the decline stage of the product's life cycle characterized by a reduced market demand for the product and an increased number of competing products with similar characteristics.\n\nThere are three (3) strategies for abandoning a product:\n\n(1)  Reduced marketing and expenditures to maintain profits.\n\n(2)  Concentrating on the strongest market segments and eliminating the weaker market segments\n\n(3)  Maintain the marketing level until the product is discontinued.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "PlannedAbandonmentDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "PlannedAbandonmentDate"
 					}
 				},
 				{
 					"Name": "ActualAbandonmentDate",
 					"Description": "The actual date that the marketing of the product was discontinued. \n\nAbandonment is a component in the decline stage of the product's life cycle characterized by a reduced market demand for the product and an increased number of competing products with similar characteristics.\n\nThere are three (3) strategies for abandoning a product:\n\n(1)  Reduced marketing and expenditures to maintain profits.\n\n(2)  Concentrating on the strongest market segments and eliminating the weaker market segments\n\n(3)  Maintain the marketing level until the product is discontinued.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ActualAbandonmentDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ActualAbandonmentDate"
 					}
 				},
 				{
 					"Name": "GlobalTradeItemNumber",
 					"Description": "The Global Trade Item Number (GTIN) is an identifier for trade items that was developed by GS1.\n\nA GTIN can be assigned to only one brick.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "GlobalTradeItemNumber"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 14,
 						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "GlobalTradeItemNumber"
 					}
 				},
 				{
 					"Name": "GtinName",
 					"Description": "A note, comment or additional information regarding the Product GTIN.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "GtinName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "GtinName"
 					}
 				},
 				{
 					"Name": "EuropeanArticleNumber",
 					"Description": "A 13 digit barcoding standard which is a superset of the original 12-digit Universal Product Code (UPC).\n\naka International Article Number (abbreviation of EAN retained)",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "EuropeanArticleNumber"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 13,
 						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "EuropeanArticleNumber"
 					}
 				},
 				{
 					"Name": "UniversalProductCode",
 					"Description": "A system that identifies products by type and by manufacturer.  \n\nA UPC consists of eleven (11) digits.  Six (6) indicate the Manufacturer and five (5) digits describe the product.\n\nUPCs appear on product packages as bar codes, which are graphic symbols that are read by optical scanner devices.   \n\nUPCs are assigned by the Uniform Code Council of Dayton, Ohio.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "UniversalProductCode"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 12,
 						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "UniversalProductCode"
 					}
 				},
 				{
 					"Name": "GpcBrickId",
 					"Description": "The unique identifier of a GPC Brick.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "GpcBrickId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "GpcBrickId"
 					}
 				},
 				{
 					"Name": "ItemElectronicProductCode",
 					"Description": "EPC is the RFID version of the UPC barcode. \nEPC is intended to be used for specific product identification. However, EPC goes beyond UPC by not only identifying the product as an SKU, but also providing access to additional data about the origin and history of the specific units. \nThe EPC tag itself identifies the manufacturer, product, version, and serial number. It's the serial number that takes EPC to the next level. \nThis is the key to data related to specific lots/batches as well as potentially tracking the specific unit's history as it moves through the supply chain.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ItemElectronicProductCode"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 14,
 						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ItemElectronicProductCode"
 					}
 				},
 				{
 					"Name": "ComponentPartIdentifier",
 					"Description": "The Component / Part Identifier (CPID) is used to identify components or parts that are used in the assembly of a larger item. The CPID is part of the GS1 system of standards.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ComponentPartIdentifier"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 30,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ComponentPartIdentifier"
 					}
 				},
 				{
 					"Name": "PluCode",
 					"Description": "The PLU or Price Look-Up code is a 4- or 5-digit number that is primarily used on fresh produce items and will typically appear on a small sticker that is applied to an individual piece of fresh produce. \n\nThe PLU code identifies produce items based upon the commodity, variety and size group. \n\nThey are used by supermarkets to make check-out and inventory control easier, faster and more accurate. \n\nThese numbers are assigned by the International Federation for Produce Standards (IFPS)\n\nEx: WHITE FLESH PEACHES\nPLU Code = 4400",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "PluCode"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 5,
 						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "PluCode"
 					}
 				},
 				{
 					"Name": "ProductNetContent",
 					"Description": "The standard product length.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductNetContent"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductNetContent"
 					}
 				},
 				{
 					"Name": "NetContentUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "NetContentUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "NetContentUomId"
 					}
 				},
 				{
 					"Name": "ResponsibilityCenterId",
 					"Description": "The unique identifier of a Responsibility Center.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ResponsibilityCenterId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ResponsibilityCenterId"
 					}
 				},
 				{
 					"Name": "StorageInstructions",
 					"Description": "Statements regarding how the product should be stored.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "StorageInstructions"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "StorageInstructions"
 					}
 				},
 				{
 					"Name": "ShelfLifeDays",
 					"Description": "The amount of time that a product can be stored before it can no longer be safely consumed or sold.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ShelfLifeDays"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ShelfLifeDays"
 					}
 				},
 				{
 					"Name": "ConsumerStorageInstructions",
 					"Description": "Statements regarding how the product should be stored by the consumer.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ConsumerStorageInstructions"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ConsumerStorageInstructions"
 					}
 				},
 				{
 					"Name": "ProductShippingInstructions",
 					"Description": "Statements regarding how the product should be shipped.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductShippingInstructions"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductShippingInstructions"
 					}
 				},
 				{
 					"Name": "ConsumerUsageInstructions",
 					"Description": "Statements regarding how the product should be used by the consumer.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ConsumerUsageInstructions"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ConsumerUsageInstructions"
 					}
 				},
 				{
 					"Name": "HealthClaimDescription",
 					"Description": "A health claim regarding the product as per regulations of the target market.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "HealthClaimDescription"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 512,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "HealthClaimDescription"
 					}
 				},
 				{
 					"Name": "MarketingMessageDescription",
 					"Description": "A market message that is present on the packaging of the product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "MarketingMessageDescription"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 512,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "MarketingMessageDescription"
 					}
 				},
 				{
 					"Name": "BundledProductIndicator",
 					"Description": "Indicates whether a Product is comprised of a bundle of other Products.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "BundledProductIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "BundledProductIndicator"
 					}
 				},
 				{
 					"Name": "InformationLabelText",
 					"Description": "The label text that identifies the care, use, preparation and handling or the product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "InformationLabelText"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "InformationLabelText"
 					}
 				},
 				{
 					"Name": "DescriptiveLabelText",
 					"Description": "The label text that describes significant characteristics and benefits.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "DescriptiveLabelText"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "DescriptiveLabelText"
 					}
 				},
 				{
 					"Name": "WarningInformationText",
 					"Description": "The text of the warning label, if any, appearing upon the product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "WarningInformationText"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "WarningInformationText"
 					}
 				},
 				{
 					"Name": "GradeLabelText",
 					"Description": "The label text that identifies Product quality with letters, number or conditions.\n\nExamples:\n\n-  Grade A\n-  Prime\n-  #1",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "GradeLabelText"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "GradeLabelText"
 					}
 				},
 				{
 					"Name": "GovernmentWarningLabelText",
 					"Description": "The US Government (or foreign government) label text that addressing the US legal requirements of the Product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "GovernmentWarningLabelText"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 1024,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "GovernmentWarningLabelText"
 					}
 				},
 				{
 					"Name": "PatentNumber",
 					"Description": "The patent that is associated with the Product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "PatentNumber"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 12,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "PatentNumber"
 					}
 				},
 				{
 					"Name": "PatentDate",
 					"Description": "The date that the Patent was granted.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "PatentDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "PatentDate"
 					}
 				},
 				{
 					"Name": "PatentExpirationDate",
 					"Description": "The date that the patent is scheduled to expire.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "PatentExpirationDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "PatentExpirationDate"
 					}
 				},
 				{
 					"Name": "Trademark",
 					"Description": "A 'trademark' is a brand name or brand mark that is given legal protection.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "Trademark"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "binary",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "binary"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "Trademark"
 					}
 				},
 				{
 					"Name": "ProductLogo",
 					"Description": "A design, symbol or series of words that identifies the product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductLogo"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "binary",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "binary"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductLogo"
 					}
 				},
 				{
 					"Name": "ProductSymbol",
 					"Description": "A symbol by which the product is known.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductSymbol"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "binary",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "binary"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductSymbol"
 					}
 				},
 				{
 					"Name": "CopyrightNumber",
 					"Description": "The unique identifier (number) of the copyright granted.\n\nA copyright is legal protection given to a work so that it can only be published or sold by the copyright holder.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "CopyrightNumber"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 18,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "CopyrightNumber"
 					}
 				},
 				{
 					"Name": "CopyrightDate",
 					"Description": "The date that the copyright was granted.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "CopyrightDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "CopyrightDate"
 					}
 				},
 				{
 					"Name": "ProductLicenserName",
 					"Description": "The name of the company that receives a flat fee or royalty for selling the rights to use a trademark, Patent, manufacturing right or process for the Product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductLicenserName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 128,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductLicenserName"
 					}
 				},
 				{
 					"Name": "EligibleForExportIndicator",
 					"Description": "Indicates that the product is eligible for export to foreign countries without restriction.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "EligibleForExportIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "EligibleForExportIndicator"
 					}
 				},
 				{
 					"Name": "ProductExportRestrictionIndicator",
 					"Description": "Indicates that exportation of the product is restricted.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductExportRestrictionIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductExportRestrictionIndicator"
 					}
 				},
 				{
 					"Name": "ProductExportRestrictionStartDate",
 					"Description": "The period start date for which the associated restriction is in effect.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductExportRestrictionStartDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductExportRestrictionStartDate"
 					}
 				},
 				{
 					"Name": "ProductExportRestrictionEndDate",
 					"Description": "The period end date for which the associated restriction is in effect.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductExportRestrictionEndDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductExportRestrictionEndDate"
 					}
 				},
 				{
 					"Name": "ProductExportRestrictionDescription",
 					"Description": "A description or statement defining the export restriction(s) placed upon the Product.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductExportRestrictionDescription"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 512,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductExportRestrictionDescription"
 					}
 				},
 				{
 					"Name": "BaseProductQuantity",
 					"Description": "The number of base product items contained in the product packaging.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "BaseProductQuantity"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "BaseProductQuantity"
 					}
 				},
 				{
 					"Name": "ProductLength",
 					"Description": "The standard product length.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductLength"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductLength"
 					}
 				},
 				{
 					"Name": "ProductPlanogramLength",
 					"Description": "The standard product length.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductPlanogramLength"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductPlanogramLength"
 					}
 				},
 				{
 					"Name": "ProductLengthUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductLengthUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductLengthUomId"
 					}
 				},
 				{
 					"Name": "ProductWidth",
 					"Description": "The standard product width.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductWidth"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductWidth"
 					}
 				},
 				{
 					"Name": "ProductPlanogramWidth",
 					"Description": "The standard product width.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductPlanogramWidth"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductPlanogramWidth"
 					}
 				},
 				{
 					"Name": "ProductWidthUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductWidthUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductWidthUomId"
 					}
 				},
 				{
 					"Name": "ProductHeight",
 					"Description": "The standard product height.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductHeight"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductHeight"
 					}
 				},
 				{
 					"Name": "ProductPlanogramHeight",
 					"Description": "The standard product height.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductPlanogramHeight"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductPlanogramHeight"
 					}
 				},
 				{
 					"Name": "ProductHeightUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductHeightUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductHeightUomId"
 					}
 				},
 				{
 					"Name": "ProductVolume",
 					"Description": "The standard product volume.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductVolume"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductVolume"
 					}
 				},
 				{
 					"Name": "ProductVolumeUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductVolumeUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductVolumeUomId"
 					}
 				},
 				{
 					"Name": "ProductNetWeight",
 					"Description": "The net product weight.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductNetWeight"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductNetWeight"
 					}
 				},
 				{
 					"Name": "ProductNetWeightUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductNetWeightUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductNetWeightUomId"
 					}
 				},
 				{
 					"Name": "ProductGrossWeight",
 					"Description": "The gross product weight.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductGrossWeight"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductGrossWeight"
 					}
 				},
 				{
 					"Name": "ProductGrossWeightUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductGrossWeightUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductGrossWeightUomId"
 					}
 				},
 				{
 					"Name": "ProductDrainedWeight",
 					"Description": "The drained product weight.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductDrainedWeight"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductDrainedWeight"
 					}
 				},
 				{
 					"Name": "ProductDrainedWeightUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductDrainedWeightUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductDrainedWeightUomId"
 					}
 				},
 				{
 					"Name": "MinimumStorageTemperature",
 					"Description": "The minimum temperature at which the product may be stored.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "MinimumStorageTemperature"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "MinimumStorageTemperature"
 					}
 				},
 				{
 					"Name": "MinimumStorageTemperatureUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "MinimumStorageTemperatureUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "MinimumStorageTemperatureUomId"
 					}
 				},
 				{
 					"Name": "MaximumStorageTemperature",
 					"Description": "The maximum temperature at which the product may be stored.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "MaximumStorageTemperature"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "MaximumStorageTemperature"
 					}
 				},
 				{
 					"Name": "MaximumStorageTemperatureUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "MaximumStorageTemperatureUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "MaximumStorageTemperatureUomId"
 					}
 				},
 				{
 					"Name": "MinimumStorageHumidity",
 					"Description": "The minimum humidity that the product may be stored at.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "MinimumStorageHumidity"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "MinimumStorageHumidity"
 					}
 				},
 				{
 					"Name": "MinimumStorageHumidityUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "MinimumStorageHumidityUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "MinimumStorageHumidityUomId"
 					}
 				},
 				{
 					"Name": "MaximumStorageHumidity",
 					"Description": "The maximum humidity that the product may be stored at.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "MaximumStorageHumidity"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
 						"Precision": 18,
 						"Scale": 8,
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "MaximumStorageHumidity"
 					}
 				},
 				{
 					"Name": "MaximumStorageHumidityUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "MaximumStorageHumidityUomId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "MaximumStorageHumidityUomId"
 					}
 				},
 				{
 					"Name": "ReturnPolicyStatement",
 					"Description": "A statement detailing the product return policy.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ReturnPolicyStatement"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ReturnPolicyStatement"
 					}
 				},
 				{
 					"Name": "ReturnPolicyPeriodInDays",
 					"Description": "The period in days allowed under the associated return policy.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ReturnPolicyPeriodInDays"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ReturnPolicyPeriodInDays"
 					}
 				},
 				{
 					"Name": "ReplacementPolicyStatement",
 					"Description": "A statement detailing the product replacement policy.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ReplacementPolicyStatement"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ReplacementPolicyStatement"
 					}
 				},
 				{
 					"Name": "ReplacementPeriodInDays",
 					"Description": "The period in days allowed under the associated replacement policy.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ReplacementPeriodInDays"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ReplacementPeriodInDays"
 					}
 				},
 				{
 					"Name": "ExchangePolicyStatement",
 					"Description": "A statement detailing the product exchange policy.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ExchangePolicyStatement"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 2048,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ExchangePolicyStatement"
 					}
 				},
 				{
 					"Name": "ExchangePolicyPeriodInDays",
 					"Description": "The period in days allowed under the associated exchange policy.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ExchangePolicyPeriodInDays"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ExchangePolicyPeriodInDays"
 					}
 				},
 				{
 					"Name": "ProductMustBeDeliveredDaysPriorToExpirationDate",
 					"Description": "The number of days prior to the expiration date of the product that the product must be delivered to the an agreed upon point in the distribution system.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductMustBeDeliveredDaysPriorToExpirationDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductMustBeDeliveredDaysPriorToExpirationDate"
 					}
 				},
 				{
 					"Name": "WarrantyId",
 					"Description": "The unique identifier of a Warranty.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "WarrantyId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "WarrantyId"
 					}
 				},
 				{
 					"Name": "ItemSku",
 					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ItemSku"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
 						"IsNullable": true,
 						"Length": 20,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ItemSku"
 					}
 				},
 				{
 					"Name": "PrimaryBrandId",
 					"Description": "The unique identifier of a Brand.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "PrimaryBrandId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "PrimaryBrandId"
 					}
 				},
 				{
 					"Name": "ProductTypeId",
 					"Description": "The unique identifier of a Product Type.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ProductTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ProductTypeId"
 					}
 				},
 				{
 					"Name": "PackageTypeId",
 					"Description": "The unique identifier of a Package Type.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "PackageTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "PackageTypeId"
 					}
 				},
 				{
 					"Name": "PrimaryCountryOfOriginCountryId",
 					"Description": "The unique identifier of the Country.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "PrimaryCountryOfOriginCountryId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "PrimaryCountryOfOriginCountryId"
 					}
 				},
 				{
 					"Name": "GeographicAreaOfOriginGeographicAreaId",
 					"Description": "The unique identifier of a Geographic Area.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "GeographicAreaOfOriginGeographicAreaId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "GeographicAreaOfOriginGeographicAreaId"
 					}
 				},
 				{
 					"Name": "PrimaryColorId",
 					"Description": "The unique identifier of a color.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "PrimaryColorId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "PrimaryColorId"
 					}
 				},
 				{
 					"Name": "FlavorTypeId",
 					"Description": "The unique identifier of a Flavor Type.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "FlavorTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "FlavorTypeId"
 					}
 				},
 				{
 					"Name": "ScentTypeId",
 					"Description": "The unique identifier of a Scent Type.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "ScentTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "ScentTypeId"
 					}
 				},
 				{
 					"Name": "SuitableAgeRatingId",
 					"Description": "The unique identifier of a suitable age rating.",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "SuitableAgeRatingId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "SuitableAgeRatingId"
 					}
 				},
 				{
 					"Name": "SeasonalUsageId",
 					"Description": "The unique identifier of a seasonal usage for the associated product.\n\nEx:\n- Summer\n- Fall\n- Winter\n- Spring\n- All seasons",
+					"BaseAttributeReference": {
+						"Entity": "RetailProduct.cdm.json/RetailProduct",
+						"Name": "SeasonalUsageId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 0,
-						"Precision": 0,
-						"Scale": 0,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "RetailProduct.cdm.json/RetailProduct",
-						"Name": "SeasonalUsageId"
 					}
 				}
 			],
