@@ -1,0 +1,28 @@
+{
+	"name": "Retail_b15",
+	"properties": {
+		"Description": "Marc's trial DB",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"Retail\",\"Version\":\"0.1.0\"}}}",
+			"IsSyMSCDMDatabase": true,
+			"x-ms-usageinfo": "AzureSynapseDatabaseTemplate"
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Retail_b15",
+			"Properties": {
+				"FormatType": "parquet",
+				"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage"
+			}
+		},
+		"PublishStatus": "PUBLISHED",
+		"ObjectVersion": 4,
+		"ObjectId": "b5e60dad-1882-4f40-b06b-1922ef67a5a8",
+		"Name": "Retail_b15",
+		"EntityType": "DATABASE"
+	},
+	"type": "DATABASE"
+}
