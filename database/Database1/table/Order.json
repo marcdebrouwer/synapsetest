@@ -5,7 +5,7 @@
 			"DatabaseName": "Database1"
 		},
 		"Name": "Order",
-		"Description": "A document or commission by the customer to order products. Could be an e-commerce order.",
+		"Description": "A document or commission by the customer to order products. Could be a silly order.",
 		"EntityType": "TABLE",
 		"TableType": "EXTERNAL",
 		"Origin": {
