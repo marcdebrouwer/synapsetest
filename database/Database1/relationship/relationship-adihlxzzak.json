@@ -1,0 +1,26 @@
+{
+	"name": "relationship-adihlxzzak",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-adihlxzzak",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "OrderType",
+		"ToTableName": "Order",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "OrderTypeId",
+				"ToColumnName": "OrderTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"OrderType.cdm.json/OrderType\",\"toEntity\":\"Order.cdm.json/Order\",\"joinPairs\":[{\"fromAttribute\":\"OrderTypeId\",\"toAttribute\":\"OrderTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

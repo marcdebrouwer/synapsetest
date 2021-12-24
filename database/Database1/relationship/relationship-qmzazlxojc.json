@@ -1,0 +1,26 @@
+{
+	"name": "relationship-qmzazlxojc",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-qmzazlxojc",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Order",
+		"ToTableName": "OrderStatus",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "OrderId",
+				"ToColumnName": "OrderId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Order.cdm.json/Order\",\"toEntity\":\"OrderStatus.cdm.json/OrderStatus\",\"joinPairs\":[{\"fromAttribute\":\"OrderId\",\"toAttribute\":\"OrderId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

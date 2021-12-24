@@ -1,0 +1,112 @@
+{
+	"name": "OrderType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "OrderType",
+		"Description": "A categorization of Orders based upon the time when they are to be fulfilled.\n\nEx:\n\nADVANCE ORDER\nA sales order that is placed far in advance of the requested delivery date.\n\nThe buyer typically receives a discount when placing an Advance Order.\n\nOften times Advanced Orders are placed when demand is low, which encourages the seller to grant a larger discount.\n\nCURRENT ORDER\nAn Order that can be filled immediately because inventory is available.\n\nBACK ORDER\nAn Order that cannot be filled due to lack of inventory and must be filled when inventory is available.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "OrderTypeId",
+					"Description": "The unique identifier of an Order Type.",
+					"BaseAttributeReference": {
+						"Entity": "OrderType.cdm.json/OrderType",
+						"Name": "OrderTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "OrderTypeName",
+					"Description": "The name of the Order Type.",
+					"BaseAttributeReference": {
+						"Entity": "OrderType.cdm.json/OrderType",
+						"Name": "OrderTypeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "OrderTypeDescription",
+					"Description": "The description of the Order Type.",
+					"BaseAttributeReference": {
+						"Entity": "OrderType.cdm.json/OrderType",
+						"Name": "OrderTypeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/OrderType",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/OrderType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"OrderTypeId\":{\"entity\":\"OrderType.cdm.json/OrderType\",\"name\":\"OrderTypeId\"},\"OrderTypeName\":{\"entity\":\"OrderType.cdm.json/OrderType\",\"name\":\"OrderTypeName\"},\"OrderTypeDescription\":{\"entity\":\"OrderType.cdm.json/OrderType\",\"name\":\"OrderTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"OrderType\",\"path\":\"OrderType.cdm.json/OrderType\"},\"description\":\"A categorization of Orders based upon the time when they are to be fulfilled.\\n\\nEx:\\n\\nADVANCE ORDER\\nA sales order that is placed far in advance of the requested delivery date.\\n\\nThe buyer typically receives a discount when placing an Advance Order.\\n\\nOften times Advanced Orders are placed when demand is low, which encourages the seller to grant a larger discount.\\n\\nCURRENT ORDER\\nAn Order that can be filled immediately because inventory is available.\\n\\nBACK ORDER\\nAn Order that cannot be filled due to lack of inventory and must be filled when inventory is available.\",\"primaryKey\":[\"OrderTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"OrderTypeId\",\"attributeReference\":{\"entity\":\"OrderType.cdm.json/OrderType\",\"name\":\"OrderTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"OrderTypeName\",\"attributeReference\":{\"entity\":\"OrderType.cdm.json/OrderType\",\"name\":\"OrderTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"OrderTypeDescription\",\"attributeReference\":{\"entity\":\"OrderType.cdm.json/OrderType\",\"name\":\"OrderTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "A categorization of Orders based upon the time when they are to be fulfilled.\n\nEx:\n\nADVANCE ORDER\nA sales order that is placed far in advance of the requested delivery date.\n\nThe buyer typically receives a discount when placing an Advance Order.\n\nOften times Advanced Orders are placed when demand is low, which encourages the seller to grant a larger discount.\n\nCURRENT ORDER\nAn Order that can be filled immediately because inventory is available.\n\nBACK ORDER\nAn Order that cannot be filled due to lack of inventory and must be filled when inventory is available.",
+			"DisplayFolderInfo": "{\"name\":\"Order\",\"colorCode\":\"#7062A8\"}",
+			"PrimaryKeys": "OrderTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}
