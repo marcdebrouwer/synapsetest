@@ -1,0 +1,198 @@
+{
+	"name": "ManufacturingSiteProductProduction",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "ManufacturingSiteProductProduction",
+		"Description": "The quantity of pharmaceutical product manufactured and shipped, by a manufacturing site during a specific period.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ManufacturerFacilityId",
+					"Description": "The unique identifier of a Manufacturer Facility.",
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ManufacturerFacilityId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ProductId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "PeriodStartDate",
+					"Description": "The period start date.",
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "PeriodStartDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "ManufacturerId",
+					"Description": "The unique identifier of a Manufacturer.",
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ManufacturerId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PeriodEndDate",
+					"Description": "The period end date.",
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "PeriodEndDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "ProductUnitsPlannedQuantity",
+					"Description": "The quantity of Product planned to be built during the period.",
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ProductUnitsPlannedQuantity"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "ProductUnitsManufacturedQuantity",
+					"Description": "The quantity of Product actually manufactured during the period.",
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ProductUnitsManufacturedQuantity"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "ProductUnitsShippedQuantity",
+					"Description": "The quantity of Product shipped during the period.",
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ProductUnitsShippedQuantity"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ManufacturingSiteProductProduction",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ManufacturingSiteProductProduction",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ManufacturerFacilityId\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ManufacturerFacilityId\"},\"ProductId\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ProductId\"},\"PeriodStartDate\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"PeriodStartDate\"},\"ManufacturerId\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ManufacturerId\"},\"PeriodEndDate\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"PeriodEndDate\"},\"ProductUnitsPlannedQuantity\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ProductUnitsPlannedQuantity\"},\"ProductUnitsManufacturedQuantity\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ProductUnitsManufacturedQuantity\"},\"ProductUnitsShippedQuantity\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ProductUnitsShippedQuantity\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ManufacturingSiteProductProduction\",\"path\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\"},\"description\":\"The quantity of pharmaceutical product manufactured and shipped, by a manufacturing site during a specific period.\",\"primaryKey\":[\"ManufacturerFacilityId\",\"ProductId\",\"PeriodStartDate\",\"ManufacturerId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ManufacturerFacilityId\",\"attributeReference\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ManufacturerFacilityId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"PeriodStartDate\",\"attributeReference\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"PeriodStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ManufacturerId\",\"attributeReference\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ManufacturerId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PeriodEndDate\",\"attributeReference\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"PeriodEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ProductUnitsPlannedQuantity\",\"attributeReference\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ProductUnitsPlannedQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"ProductUnitsManufacturedQuantity\",\"attributeReference\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ProductUnitsManufacturedQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"ProductUnitsShippedQuantity\",\"attributeReference\":{\"entity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"name\":\"ProductUnitsShippedQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2}]}}}",
+			"Description": "The quantity of pharmaceutical product manufactured and shipped, by a manufacturing site during a specific period.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "ManufacturerFacilityId,ProductId,PeriodStartDate,ManufacturerId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

@@ -1,0 +1,112 @@
+{
+	"name": "IngredientPropertyType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "IngredientPropertyType",
+		"Description": "The property of an ingredient.\n\nEx:\n- Color\n- Odor\n- Allergen\n- Preservative",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "IngredientPropertyTypeId",
+					"Description": "The unique identifier of an Ingredient Property Type.",
+					"BaseAttributeReference": {
+						"Entity": "IngredientPropertyType.cdm.json/IngredientPropertyType",
+						"Name": "IngredientPropertyTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "IngredientPropertyTypeName",
+					"Description": "The name of an Ingredient Property Type.",
+					"BaseAttributeReference": {
+						"Entity": "IngredientPropertyType.cdm.json/IngredientPropertyType",
+						"Name": "IngredientPropertyTypeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "IngredientPropertyTypeDescription",
+					"Description": "The description of an Ingredient Property Type.",
+					"BaseAttributeReference": {
+						"Entity": "IngredientPropertyType.cdm.json/IngredientPropertyType",
+						"Name": "IngredientPropertyTypeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/IngredientPropertyType",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/IngredientPropertyType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"IngredientPropertyTypeId\":{\"entity\":\"IngredientPropertyType.cdm.json/IngredientPropertyType\",\"name\":\"IngredientPropertyTypeId\"},\"IngredientPropertyTypeName\":{\"entity\":\"IngredientPropertyType.cdm.json/IngredientPropertyType\",\"name\":\"IngredientPropertyTypeName\"},\"IngredientPropertyTypeDescription\":{\"entity\":\"IngredientPropertyType.cdm.json/IngredientPropertyType\",\"name\":\"IngredientPropertyTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"IngredientPropertyType\",\"path\":\"IngredientPropertyType.cdm.json/IngredientPropertyType\"},\"description\":\"The property of an ingredient.\\n\\nEx:\\n- Color\\n- Odor\\n- Allergen\\n- Preservative\",\"primaryKey\":[\"IngredientPropertyTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"IngredientPropertyTypeId\",\"attributeReference\":{\"entity\":\"IngredientPropertyType.cdm.json/IngredientPropertyType\",\"name\":\"IngredientPropertyTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientPropertyTypeName\",\"attributeReference\":{\"entity\":\"IngredientPropertyType.cdm.json/IngredientPropertyType\",\"name\":\"IngredientPropertyTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"IngredientPropertyTypeDescription\",\"attributeReference\":{\"entity\":\"IngredientPropertyType.cdm.json/IngredientPropertyType\",\"name\":\"IngredientPropertyTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "The property of an ingredient.\n\nEx:\n- Color\n- Odor\n- Allergen\n- Preservative",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "IngredientPropertyTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

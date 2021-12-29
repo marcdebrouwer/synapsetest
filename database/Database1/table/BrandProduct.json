@@ -1,0 +1,145 @@
+{
+	"name": "BrandProduct",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "BrandProduct",
+		"Description": "An association between Brand and Product. \n\nBrands are often associated with more than one Product and a Product can in some cases be associated with more than one Brand.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "BrandId",
+					"Description": "The unique identifier of a Brand.",
+					"BaseAttributeReference": {
+						"Entity": "BrandProduct.cdm.json/BrandProduct",
+						"Name": "BrandId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"BaseAttributeReference": {
+						"Entity": "BrandProduct.cdm.json/BrandProduct",
+						"Name": "ProductId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "PeriodStartDate",
+					"Description": "The start date of the relationship between the Brand and Product.",
+					"BaseAttributeReference": {
+						"Entity": "BrandProduct.cdm.json/BrandProduct",
+						"Name": "PeriodStartDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "PeriodEndDate",
+					"Description": "The end date of the relationship between the Brand and Product.",
+					"BaseAttributeReference": {
+						"Entity": "BrandProduct.cdm.json/BrandProduct",
+						"Name": "PeriodEndDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "BrandProductNote",
+					"Description": "A note regarding the relationship between a Brand and a specific Product.",
+					"BaseAttributeReference": {
+						"Entity": "BrandProduct.cdm.json/BrandProduct",
+						"Name": "BrandProductNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/BrandProduct",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/BrandProduct",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"BrandId\":{\"entity\":\"BrandProduct.cdm.json/BrandProduct\",\"name\":\"BrandId\"},\"ProductId\":{\"entity\":\"BrandProduct.cdm.json/BrandProduct\",\"name\":\"ProductId\"},\"PeriodStartDate\":{\"entity\":\"BrandProduct.cdm.json/BrandProduct\",\"name\":\"PeriodStartDate\"},\"PeriodEndDate\":{\"entity\":\"BrandProduct.cdm.json/BrandProduct\",\"name\":\"PeriodEndDate\"},\"BrandProductNote\":{\"entity\":\"BrandProduct.cdm.json/BrandProduct\",\"name\":\"BrandProductNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"BrandProduct\",\"path\":\"BrandProduct.cdm.json/BrandProduct\"},\"description\":\"An association between Brand and Product. \\n\\nBrands are often associated with more than one Product and a Product can in some cases be associated with more than one Brand.\",\"primaryKey\":[\"BrandId\",\"ProductId\",\"PeriodStartDate\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"BrandId\",\"attributeReference\":{\"entity\":\"BrandProduct.cdm.json/BrandProduct\",\"name\":\"BrandId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"BrandProduct.cdm.json/BrandProduct\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"PeriodStartDate\",\"attributeReference\":{\"entity\":\"BrandProduct.cdm.json/BrandProduct\",\"name\":\"PeriodStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"PeriodEndDate\",\"attributeReference\":{\"entity\":\"BrandProduct.cdm.json/BrandProduct\",\"name\":\"PeriodEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"BrandProductNote\",\"attributeReference\":{\"entity\":\"BrandProduct.cdm.json/BrandProduct\",\"name\":\"BrandProductNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "An association between Brand and Product. \n\nBrands are often associated with more than one Product and a Product can in some cases be associated with more than one Brand.",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "BrandId,ProductId,PeriodStartDate",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

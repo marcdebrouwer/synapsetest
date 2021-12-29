@@ -1,0 +1,111 @@
+{
+	"name": "ProductDocument",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "ProductDocument",
+		"Description": "A document related to the associated product(s).",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"BaseAttributeReference": {
+						"Entity": "ProductDocument.cdm.json/ProductDocument",
+						"Name": "ProductId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "DocumentId",
+					"Description": "The unique identifier of a Document.",
+					"BaseAttributeReference": {
+						"Entity": "ProductDocument.cdm.json/ProductDocument",
+						"Name": "DocumentId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "ProductDocumentNote",
+					"Description": "A note, comment or additional information regarding the product document.",
+					"BaseAttributeReference": {
+						"Entity": "ProductDocument.cdm.json/ProductDocument",
+						"Name": "ProductDocumentNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductDocument",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductDocument",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"ProductDocument.cdm.json/ProductDocument\",\"name\":\"ProductId\"},\"DocumentId\":{\"entity\":\"ProductDocument.cdm.json/ProductDocument\",\"name\":\"DocumentId\"},\"ProductDocumentNote\":{\"entity\":\"ProductDocument.cdm.json/ProductDocument\",\"name\":\"ProductDocumentNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ProductDocument\",\"path\":\"ProductDocument.cdm.json/ProductDocument\"},\"description\":\"A document related to the associated product(s).\",\"primaryKey\":[\"ProductId\",\"DocumentId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"ProductDocument.cdm.json/ProductDocument\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"DocumentId\",\"attributeReference\":{\"entity\":\"ProductDocument.cdm.json/ProductDocument\",\"name\":\"DocumentId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"ProductDocumentNote\",\"attributeReference\":{\"entity\":\"ProductDocument.cdm.json/ProductDocument\",\"name\":\"ProductDocumentNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "A document related to the associated product(s).",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "ProductId,DocumentId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

@@ -1,0 +1,112 @@
+{
+	"name": "RecipeType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "RecipeType",
+		"Description": "There are different types of recipes to serve different requirements in the organization.\n\nDifferent parts of a company may require different types of information about a product or the process to manufacture it. \n\nThe R&D group is focused upon the properties of a product and general processing procedures necessary to make it, but do not care exactly what specific equipment is used.\n\nAn engineering group tasked with creating a process to manufacture a product may be very focused on the type of equipment used, but not the specific piece of equipment used to make a batch.\n\nA Manufacturer Facility production team is concerned with what specific pieces of equipment are available to make a batch.\n\nEach of these scenarios requires a different type of information and extra information would be confusing.\n\nThere are four types of recipes:\n- General \n- Master\n- Control\n- Site",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeTypeId",
+					"Description": "The unique identifier of a Recipe Type.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeType.cdm.json/RecipeType",
+						"Name": "RecipeTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "RecipeTypeName",
+					"Description": "The name of a Recipe Type.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeType.cdm.json/RecipeType",
+						"Name": "RecipeTypeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "RecipeTypeDescription",
+					"Description": "The description of a Recipe Type.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeType.cdm.json/RecipeType",
+						"Name": "RecipeTypeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeType",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeTypeId\":{\"entity\":\"RecipeType.cdm.json/RecipeType\",\"name\":\"RecipeTypeId\"},\"RecipeTypeName\":{\"entity\":\"RecipeType.cdm.json/RecipeType\",\"name\":\"RecipeTypeName\"},\"RecipeTypeDescription\":{\"entity\":\"RecipeType.cdm.json/RecipeType\",\"name\":\"RecipeTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"RecipeType\",\"path\":\"RecipeType.cdm.json/RecipeType\"},\"description\":\"There are different types of recipes to serve different requirements in the organization.\\n\\nDifferent parts of a company may require different types of information about a product or the process to manufacture it. \\n\\nThe R&D group is focused upon the properties of a product and general processing procedures necessary to make it, but do not care exactly what specific equipment is used.\\n\\nAn engineering group tasked with creating a process to manufacture a product may be very focused on the type of equipment used, but not the specific piece of equipment used to make a batch.\\n\\nA Manufacturer Facility production team is concerned with what specific pieces of equipment are available to make a batch.\\n\\nEach of these scenarios requires a different type of information and extra information would be confusing.\\n\\nThere are four types of recipes:\\n- General \\n- Master\\n- Control\\n- Site\",\"primaryKey\":[\"RecipeTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeTypeId\",\"attributeReference\":{\"entity\":\"RecipeType.cdm.json/RecipeType\",\"name\":\"RecipeTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RecipeTypeName\",\"attributeReference\":{\"entity\":\"RecipeType.cdm.json/RecipeType\",\"name\":\"RecipeTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"RecipeTypeDescription\",\"attributeReference\":{\"entity\":\"RecipeType.cdm.json/RecipeType\",\"name\":\"RecipeTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "There are different types of recipes to serve different requirements in the organization.\n\nDifferent parts of a company may require different types of information about a product or the process to manufacture it. \n\nThe R&D group is focused upon the properties of a product and general processing procedures necessary to make it, but do not care exactly what specific equipment is used.\n\nAn engineering group tasked with creating a process to manufacture a product may be very focused on the type of equipment used, but not the specific piece of equipment used to make a batch.\n\nA Manufacturer Facility production team is concerned with what specific pieces of equipment are available to make a batch.\n\nEach of these scenarios requires a different type of information and extra information would be confusing.\n\nThere are four types of recipes:\n- General \n- Master\n- Control\n- Site",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

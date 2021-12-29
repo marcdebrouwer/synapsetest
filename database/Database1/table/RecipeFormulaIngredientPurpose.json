@@ -1,0 +1,143 @@
+{
+	"name": "RecipeFormulaIngredientPurpose",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "RecipeFormulaIngredientPurpose",
+		"Description": "A purpose associated with the recipe formula ingredient.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
+						"Name": "RecipeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "SequenceNumber",
+					"Description": "The sequence in which the items are processed in the formula.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
+						"Name": "SequenceNumber"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "IngredientId",
+					"Description": "The unique identifier of an Ingredient.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
+						"Name": "IngredientId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "IngredientPurposeTypeId",
+					"Description": "The unique identifier of an Ingredient Purpose Type.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
+						"Name": "IngredientPurposeTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "RecipeFormulaIngredientPurposeNote",
+					"Description": "A note, comment or additional information regarding the recipe formula ingredient purpose.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
+						"Name": "RecipeFormulaIngredientPurposeNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormulaIngredientPurpose",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormulaIngredientPurpose",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeId\":{\"entity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"name\":\"RecipeId\"},\"SequenceNumber\":{\"entity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"name\":\"SequenceNumber\"},\"IngredientId\":{\"entity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"name\":\"IngredientId\"},\"IngredientPurposeTypeId\":{\"entity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"name\":\"IngredientPurposeTypeId\"},\"RecipeFormulaIngredientPurposeNote\":{\"entity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"name\":\"RecipeFormulaIngredientPurposeNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"RecipeFormulaIngredientPurpose\",\"path\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\"},\"description\":\"A purpose associated with the recipe formula ingredient.\",\"primaryKey\":[\"RecipeId\",\"SequenceNumber\",\"IngredientId\",\"IngredientPurposeTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"SequenceNumber\",\"attributeReference\":{\"entity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"name\":\"SequenceNumber\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientId\",\"attributeReference\":{\"entity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"name\":\"IngredientId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientPurposeTypeId\",\"attributeReference\":{\"entity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"name\":\"IngredientPurposeTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RecipeFormulaIngredientPurposeNote\",\"attributeReference\":{\"entity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"name\":\"RecipeFormulaIngredientPurposeNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "A purpose associated with the recipe formula ingredient.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeId,SequenceNumber,IngredientId,IngredientPurposeTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

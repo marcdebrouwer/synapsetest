@@ -1,0 +1,128 @@
+{
+	"name": "RecipeFormulaProductProduction",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "RecipeFormulaProductProduction",
+		"Description": "The quantity of product that may be produced by the associated recipe.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
+						"Name": "RecipeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
+						"Name": "ProductId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "PlannedProductionQuantity",
+					"Description": "The planned quantity of product that may be produced by the associated formula.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
+						"Name": "PlannedProductionQuantity"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "UnitOfMeasureId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
+						"Name": "UnitOfMeasureId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormulaProductProduction",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormulaProductProduction",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeId\":{\"entity\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\",\"name\":\"RecipeId\"},\"ProductId\":{\"entity\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\",\"name\":\"ProductId\"},\"PlannedProductionQuantity\":{\"entity\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\",\"name\":\"PlannedProductionQuantity\"},\"UnitOfMeasureId\":{\"entity\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\",\"name\":\"UnitOfMeasureId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"RecipeFormulaProductProduction\",\"path\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\"},\"description\":\"The quantity of product that may be produced by the associated recipe.\",\"primaryKey\":[\"RecipeId\",\"ProductId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"PlannedProductionQuantity\",\"attributeReference\":{\"entity\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\",\"name\":\"PlannedProductionQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"UnitOfMeasureId\",\"attributeReference\":{\"entity\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\",\"name\":\"UnitOfMeasureId\"},\"dataType\":\"integer\"}]}}}",
+			"Description": "The quantity of product that may be produced by the associated recipe.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeId,ProductId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

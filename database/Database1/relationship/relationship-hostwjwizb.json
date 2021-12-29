@@ -1,0 +1,26 @@
+{
+	"name": "relationship-hostwjwizb",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-hostwjwizb",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "IngredientPurposeType",
+		"ToTableName": "RecipeFormulaIngredientPurpose",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "IngredientPurposeTypeId",
+				"ToColumnName": "IngredientPurposeTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\",\"toEntity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"joinPairs\":[{\"fromAttribute\":\"IngredientPurposeTypeId\",\"toAttribute\":\"IngredientPurposeTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

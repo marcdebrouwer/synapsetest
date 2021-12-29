@@ -1,0 +1,143 @@
+{
+	"name": "RecipeFormulaIngredientProperty",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "RecipeFormulaIngredientProperty",
+		"Description": "A property associated with the recipe formula ingredient.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty",
+						"Name": "RecipeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "SequenceNumber",
+					"Description": "The sequence in which the items are processed in the formula.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty",
+						"Name": "SequenceNumber"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "IngredientId",
+					"Description": "The unique identifier of an Ingredient.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty",
+						"Name": "IngredientId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "IngredientPropertyTypeId",
+					"Description": "The unique identifier of an Ingredient Property Type.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty",
+						"Name": "IngredientPropertyTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "RecipeFormulaIngredientPropertyNote",
+					"Description": "A note, comment or additional information regarding the recipe formula ingredient property.",
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty",
+						"Name": "RecipeFormulaIngredientPropertyNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormulaIngredientProperty",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormulaIngredientProperty",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeId\":{\"entity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"name\":\"RecipeId\"},\"SequenceNumber\":{\"entity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"name\":\"SequenceNumber\"},\"IngredientId\":{\"entity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"name\":\"IngredientId\"},\"IngredientPropertyTypeId\":{\"entity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"name\":\"IngredientPropertyTypeId\"},\"RecipeFormulaIngredientPropertyNote\":{\"entity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"name\":\"RecipeFormulaIngredientPropertyNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"RecipeFormulaIngredientProperty\",\"path\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\"},\"description\":\"A property associated with the recipe formula ingredient.\",\"primaryKey\":[\"RecipeId\",\"SequenceNumber\",\"IngredientId\",\"IngredientPropertyTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"SequenceNumber\",\"attributeReference\":{\"entity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"name\":\"SequenceNumber\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientId\",\"attributeReference\":{\"entity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"name\":\"IngredientId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientPropertyTypeId\",\"attributeReference\":{\"entity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"name\":\"IngredientPropertyTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RecipeFormulaIngredientPropertyNote\",\"attributeReference\":{\"entity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"name\":\"RecipeFormulaIngredientPropertyNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "A property associated with the recipe formula ingredient.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeId,SequenceNumber,IngredientId,IngredientPropertyTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

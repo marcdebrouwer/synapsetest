@@ -1,0 +1,112 @@
+{
+	"name": "IngredientPurposeType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "IngredientPurposeType",
+		"Description": "The purpose for using an ingredient.\n\nEx:\n- Cross-Linkers\n- Solubility enhancers\n         Hydrotropes\n         Small Amines\n- Bleaching agents\n- Preservatives/Antioxidant\n- Rheology Modifiers\n- Plasticizers\n- Foam Boosters, Defoamers and Antifoamers\n- Denaturants\n- Absorbents and Adsorbents\n- Corrosion inhibitors\n- Antiredisposition agent\n- Dispersing agent\n- Coalescing agent\n- Dyes & Optical Brighteners\n- Antioxidant\n- Emollient\n- Emulsifier\n- Moisturizer\n- Pigment\n- Sunscreen\n- Surfactant\n- Viscosity Control",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "IngredientPurposeTypeId",
+					"Description": "The unique identifier of an Ingredient Purpose Type.",
+					"BaseAttributeReference": {
+						"Entity": "IngredientPurposeType.cdm.json/IngredientPurposeType",
+						"Name": "IngredientPurposeTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "IngredientPurposeTypeName",
+					"Description": "The name of an Ingredient Purpose Type.",
+					"BaseAttributeReference": {
+						"Entity": "IngredientPurposeType.cdm.json/IngredientPurposeType",
+						"Name": "IngredientPurposeTypeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "IngredientPurposeTypeDescription",
+					"Description": "The description of an Ingredient Purpose Type.",
+					"BaseAttributeReference": {
+						"Entity": "IngredientPurposeType.cdm.json/IngredientPurposeType",
+						"Name": "IngredientPurposeTypeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/IngredientPurposeType",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/IngredientPurposeType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"IngredientPurposeTypeId\":{\"entity\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\",\"name\":\"IngredientPurposeTypeId\"},\"IngredientPurposeTypeName\":{\"entity\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\",\"name\":\"IngredientPurposeTypeName\"},\"IngredientPurposeTypeDescription\":{\"entity\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\",\"name\":\"IngredientPurposeTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"IngredientPurposeType\",\"path\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\"},\"description\":\"The purpose for using an ingredient.\\n\\nEx:\\n- Cross-Linkers\\n- Solubility enhancers\\n         Hydrotropes\\n         Small Amines\\n- Bleaching agents\\n- Preservatives/Antioxidant\\n- Rheology Modifiers\\n- Plasticizers\\n- Foam Boosters, Defoamers and Antifoamers\\n- Denaturants\\n- Absorbents and Adsorbents\\n- Corrosion inhibitors\\n- Antiredisposition agent\\n- Dispersing agent\\n- Coalescing agent\\n- Dyes & Optical Brighteners\\n- Antioxidant\\n- Emollient\\n- Emulsifier\\n- Moisturizer\\n- Pigment\\n- Sunscreen\\n- Surfactant\\n- Viscosity Control\",\"primaryKey\":[\"IngredientPurposeTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"IngredientPurposeTypeId\",\"attributeReference\":{\"entity\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\",\"name\":\"IngredientPurposeTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientPurposeTypeName\",\"attributeReference\":{\"entity\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\",\"name\":\"IngredientPurposeTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"IngredientPurposeTypeDescription\",\"attributeReference\":{\"entity\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\",\"name\":\"IngredientPurposeTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "The purpose for using an ingredient.\n\nEx:\n- Cross-Linkers\n- Solubility enhancers\n         Hydrotropes\n         Small Amines\n- Bleaching agents\n- Preservatives/Antioxidant\n- Rheology Modifiers\n- Plasticizers\n- Foam Boosters, Defoamers and Antifoamers\n- Denaturants\n- Absorbents and Adsorbents\n- Corrosion inhibitors\n- Antiredisposition agent\n- Dispersing agent\n- Coalescing agent\n- Dyes & Optical Brighteners\n- Antioxidant\n- Emollient\n- Emulsifier\n- Moisturizer\n- Pigment\n- Sunscreen\n- Surfactant\n- Viscosity Control",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "IngredientPurposeTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

@@ -1,0 +1,78 @@
+{
+	"name": "MasterRecipe",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "MasterRecipe",
+		"Description": "A master recipe is targeted to a processing area and is derived from either a general or site recipe. \n\nMaster recipes depend on equipment types or classes\n\nThese recipes can contain product-specific information required for detailed scheduling, such as equipment requirements. \n\nA master recipe is the template for recipes used to create individual batches. Without this template, no specific batch recipes can be created, and therefore, no batches can be produced.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"BaseAttributeReference": {
+						"Entity": "MasterRecipe.cdm.json/MasterRecipe",
+						"Name": "RecipeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/MasterRecipe",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/MasterRecipe",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeId\":{\"entity\":\"MasterRecipe.cdm.json/MasterRecipe\",\"name\":\"RecipeId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"MasterRecipe\",\"path\":\"MasterRecipe.cdm.json/MasterRecipe\"},\"description\":\"A master recipe is targeted to a processing area and is derived from either a general or site recipe. \\n\\nMaster recipes depend on equipment types or classes\\n\\nThese recipes can contain product-specific information required for detailed scheduling, such as equipment requirements. \\n\\nA master recipe is the template for recipes used to create individual batches. Without this template, no specific batch recipes can be created, and therefore, no batches can be produced.\",\"primaryKey\":[\"RecipeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"MasterRecipe.cdm.json/MasterRecipe\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"}]}}}",
+			"Description": "A master recipe is targeted to a processing area and is derived from either a general or site recipe. \n\nMaster recipes depend on equipment types or classes\n\nThese recipes can contain product-specific information required for detailed scheduling, such as equipment requirements. \n\nA master recipe is the template for recipes used to create individual batches. Without this template, no specific batch recipes can be created, and therefore, no batches can be produced.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

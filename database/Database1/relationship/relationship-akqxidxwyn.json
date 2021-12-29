@@ -1,0 +1,26 @@
+{
+	"name": "relationship-akqxidxwyn",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-akqxidxwyn",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EnvironmentalParameter",
+		"ToTableName": "FormulaEnvironmentalParameter",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EnvironmentalParameterId",
+				"ToColumnName": "EnvironmentalParameterId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"EnvironmentalParameter.cdm.json/EnvironmentalParameter\",\"toEntity\":\"FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter\",\"joinPairs\":[{\"fromAttribute\":\"EnvironmentalParameterId\",\"toAttribute\":\"EnvironmentalParameterId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

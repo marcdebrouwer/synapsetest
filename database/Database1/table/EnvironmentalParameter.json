@@ -1,0 +1,112 @@
+{
+	"name": "EnvironmentalParameter",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "EnvironmentalParameter",
+		"Description": "An environmental parameter that is used for planning the optimum environmental conditions associated with a process and measuring the actual environmental parameters.\n\nEx:\n- Temperature\n- Humidity\n- Altitude\n- Barometric Pressure\n- Contamination Particles\n- Air Pressure\n- Precipitation\n- Wind Speed",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "EnvironmentalParameterId",
+					"Description": "The unique identifier of an Environmental Parameter.",
+					"BaseAttributeReference": {
+						"Entity": "EnvironmentalParameter.cdm.json/EnvironmentalParameter",
+						"Name": "EnvironmentalParameterId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "EnvironmentalParameterName",
+					"Description": "The name of an Environmental Parameter.",
+					"BaseAttributeReference": {
+						"Entity": "EnvironmentalParameter.cdm.json/EnvironmentalParameter",
+						"Name": "EnvironmentalParameterName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "EnvironmentalParameterDescription",
+					"Description": "The description of an Environmental Parameter.",
+					"BaseAttributeReference": {
+						"Entity": "EnvironmentalParameter.cdm.json/EnvironmentalParameter",
+						"Name": "EnvironmentalParameterDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/EnvironmentalParameter",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/EnvironmentalParameter",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EnvironmentalParameterId\":{\"entity\":\"EnvironmentalParameter.cdm.json/EnvironmentalParameter\",\"name\":\"EnvironmentalParameterId\"},\"EnvironmentalParameterName\":{\"entity\":\"EnvironmentalParameter.cdm.json/EnvironmentalParameter\",\"name\":\"EnvironmentalParameterName\"},\"EnvironmentalParameterDescription\":{\"entity\":\"EnvironmentalParameter.cdm.json/EnvironmentalParameter\",\"name\":\"EnvironmentalParameterDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"EnvironmentalParameter\",\"path\":\"EnvironmentalParameter.cdm.json/EnvironmentalParameter\"},\"description\":\"An environmental parameter that is used for planning the optimum environmental conditions associated with a process and measuring the actual environmental parameters.\\n\\nEx:\\n- Temperature\\n- Humidity\\n- Altitude\\n- Barometric Pressure\\n- Contamination Particles\\n- Air Pressure\\n- Precipitation\\n- Wind Speed\",\"primaryKey\":[\"EnvironmentalParameterId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"EnvironmentalParameterId\",\"attributeReference\":{\"entity\":\"EnvironmentalParameter.cdm.json/EnvironmentalParameter\",\"name\":\"EnvironmentalParameterId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"EnvironmentalParameterName\",\"attributeReference\":{\"entity\":\"EnvironmentalParameter.cdm.json/EnvironmentalParameter\",\"name\":\"EnvironmentalParameterName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"EnvironmentalParameterDescription\",\"attributeReference\":{\"entity\":\"EnvironmentalParameter.cdm.json/EnvironmentalParameter\",\"name\":\"EnvironmentalParameterDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "An environmental parameter that is used for planning the optimum environmental conditions associated with a process and measuring the actual environmental parameters.\n\nEx:\n- Temperature\n- Humidity\n- Altitude\n- Barometric Pressure\n- Contamination Particles\n- Air Pressure\n- Precipitation\n- Wind Speed",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "EnvironmentalParameterId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

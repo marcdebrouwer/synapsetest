@@ -1,0 +1,26 @@
+{
+	"name": "relationship-sestavfphi",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-sestavfphi",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Ingredient",
+		"ToTableName": "IngredientPurpose",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "IngredientId",
+				"ToColumnName": "IngredientId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Ingredient.cdm.json/Ingredient\",\"toEntity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

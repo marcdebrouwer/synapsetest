@@ -1,0 +1,162 @@
+{
+	"name": "Recipe",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "Recipe",
+		"Description": "The recipe used to manufacture a particular product.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "RecipeName",
+					"Description": "The name of a recipe.",
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "RecipeDescription",
+					"Description": "The description of a recipe.",
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "RecipeCreatedTimestamp",
+					"Description": "The timestamp that the recipe was created.",
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeCreatedTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "RecipeTypeId",
+					"Description": "The unique identifier of a Recipe Type.",
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "RecipeNote",
+					"Description": "A note, comment or additional information regarding the recipe.",
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/Recipe",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/Recipe",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeId\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeId\"},\"RecipeName\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeName\"},\"RecipeDescription\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeDescription\"},\"RecipeCreatedTimestamp\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeCreatedTimestamp\"},\"RecipeTypeId\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeTypeId\"},\"RecipeNote\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"Recipe\",\"path\":\"Recipe.cdm.json/Recipe\"},\"description\":\"The recipe used to manufacture a particular product.\",\"primaryKey\":[\"RecipeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RecipeName\",\"attributeReference\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"RecipeDescription\",\"attributeReference\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"RecipeCreatedTimestamp\",\"attributeReference\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeCreatedTimestamp\"},\"dataType\":\"timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"name\":\"RecipeTypeId\",\"attributeReference\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RecipeNote\",\"attributeReference\":{\"entity\":\"Recipe.cdm.json/Recipe\",\"name\":\"RecipeNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "The recipe used to manufacture a particular product.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

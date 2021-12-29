@@ -1,0 +1,127 @@
+{
+	"name": "RelatedRecipe",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "RelatedRecipe",
+		"Description": "Two or more related recipes over the indicated period.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"BaseAttributeReference": {
+						"Entity": "RelatedRecipe.cdm.json/RelatedRecipe",
+						"Name": "RecipeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "RelatedRecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"BaseAttributeReference": {
+						"Entity": "RelatedRecipe.cdm.json/RelatedRecipe",
+						"Name": "RelatedRecipeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "RecipeRelationshipTypeId",
+					"Description": "The unique identifier of a recipe relationship type.",
+					"BaseAttributeReference": {
+						"Entity": "RelatedRecipe.cdm.json/RelatedRecipe",
+						"Name": "RecipeRelationshipTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "RelatedRecipeNote",
+					"Description": "A note, comment or additional information regarding the related recipe.",
+					"BaseAttributeReference": {
+						"Entity": "RelatedRecipe.cdm.json/RelatedRecipe",
+						"Name": "RelatedRecipeNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RelatedRecipe",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RelatedRecipe",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeId\":{\"entity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"name\":\"RecipeId\"},\"RelatedRecipeId\":{\"entity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"name\":\"RelatedRecipeId\"},\"RecipeRelationshipTypeId\":{\"entity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"name\":\"RecipeRelationshipTypeId\"},\"RelatedRecipeNote\":{\"entity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"name\":\"RelatedRecipeNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"RelatedRecipe\",\"path\":\"RelatedRecipe.cdm.json/RelatedRecipe\"},\"description\":\"Two or more related recipes over the indicated period.\",\"primaryKey\":[\"RecipeId\",\"RelatedRecipeId\",\"RecipeRelationshipTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RelatedRecipeId\",\"attributeReference\":{\"entity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"name\":\"RelatedRecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RecipeRelationshipTypeId\",\"attributeReference\":{\"entity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"name\":\"RecipeRelationshipTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RelatedRecipeNote\",\"attributeReference\":{\"entity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"name\":\"RelatedRecipeNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "Two or more related recipes over the indicated period.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeId,RelatedRecipeId,RecipeRelationshipTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}
