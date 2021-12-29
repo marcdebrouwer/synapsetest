@@ -1,0 +1,26 @@
+{
+	"name": "relationship-oiofuedgpr",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-oiofuedgpr",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PackageComponentType",
+		"ToTableName": "ItemPackagingItem",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PackageComponentTypeId",
+				"ToColumnName": "PackageComponentTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackageComponentType.cdm.json/PackageComponentType\",\"toEntity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"joinPairs\":[{\"fromAttribute\":\"PackageComponentTypeId\",\"toAttribute\":\"PackageComponentTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

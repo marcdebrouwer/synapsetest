@@ -1,0 +1,26 @@
+{
+	"name": "relationship-ouhgmjwunc",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-ouhgmjwunc",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PackageComponentType",
+		"ToTableName": "PackagedItemRelatedItem",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PackageComponentTypeId",
+				"ToColumnName": "PackageComponentTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackageComponentType.cdm.json/PackageComponentType\",\"toEntity\":\"PackagedItemRelatedItem.cdm.json/PackagedItemRelatedItem\",\"joinPairs\":[{\"fromAttribute\":\"PackageComponentTypeId\",\"toAttribute\":\"PackageComponentTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

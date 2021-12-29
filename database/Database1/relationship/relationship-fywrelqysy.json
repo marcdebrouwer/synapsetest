@@ -1,0 +1,26 @@
+{
+	"name": "relationship-fywrelqysy",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-fywrelqysy",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PackageType",
+		"ToTableName": "RetailProduct",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PackageTypeId",
+				"ToColumnName": "PackageTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackageType.cdm.json/PackageType\",\"toEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"joinPairs\":[{\"fromAttribute\":\"PackageTypeId\",\"toAttribute\":\"PackageTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

@@ -1,0 +1,264 @@
+{
+	"name": "ItemPackagingItem",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "ItemPackagingItem",
+		"Description": "Indicates the number of an item (SKU) that are used in the packaging of the Product.\n\nNote: This contains packaging and supplementary items such as documentation, coupons and free items but does not include any base product items.\n\nNote: Changes  in packaging does not necessarily result in a changed GTIN, UPC, etc. The following are a few of the many examples where a new GTIN, UPC, etc. would be required for the packaged product:\n- change of over 20% to a physical dimension, on any axis, or gross weight\n- change in the case or pallet orientation (even when there is no change in the base product)\n- change in the number of base products included on the pallet\n- free trial item included even though this does not change the GTIN, UPC, etc. of the base product",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ItemPackagingVersionId",
+					"Description": "The unique identifier of an Item Packaging Version.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemPackagingVersionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ItemSku",
+					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemSku"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 20,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PackingItemId",
+					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "PackingItemId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 20,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ItemPackagingItemStartDate",
+					"Description": "The effective end date or last date that the item and quantity is used in the item packaging.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemPackagingItemStartDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "ItemPackagingItemEndDate",
+					"Description": "The effective end date or last date that the item and quantity is used in the item packaging.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemPackagingItemEndDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "PackageComponentTypeId",
+					"Description": "The unique identifier of a Package Component Type.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "PackageComponentTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ItemPackagingItemQuantity",
+					"Description": "The number of items contained in an item packaging.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemPackagingItemQuantity"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "DepositAmount",
+					"Description": "The amount of the deposit associated with the item packaging item.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "DepositAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "IsoCurrencyCode",
+					"Description": "The ISO 4217 currency code.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "IsoCurrencyCode"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "UnitOfMeasureId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "UnitOfMeasureId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PackageMaterialTypeId",
+					"Description": "The unique identifier of a Package Material Type.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "PackageMaterialTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ItemPackagingNote",
+					"Description": "A note, comment or additional information regarding the item packaging.",
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemPackagingNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ItemPackagingItem",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ItemPackagingItem",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ItemPackagingVersionId\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemPackagingVersionId\"},\"ItemSku\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemSku\"},\"PackingItemId\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"PackingItemId\"},\"ItemPackagingItemStartDate\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemPackagingItemStartDate\"},\"ItemPackagingItemEndDate\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemPackagingItemEndDate\"},\"PackageComponentTypeId\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"PackageComponentTypeId\"},\"ItemPackagingItemQuantity\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemPackagingItemQuantity\"},\"DepositAmount\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"DepositAmount\"},\"IsoCurrencyCode\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"IsoCurrencyCode\"},\"UnitOfMeasureId\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"UnitOfMeasureId\"},\"PackageMaterialTypeId\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"PackageMaterialTypeId\"},\"ItemPackagingNote\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemPackagingNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ItemPackagingItem\",\"path\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\"},\"description\":\"Indicates the number of an item (SKU) that are used in the packaging of the Product.\\n\\nNote: This contains packaging and supplementary items such as documentation, coupons and free items but does not include any base product items.\\n\\nNote: Changes  in packaging does not necessarily result in a changed GTIN, UPC, etc. The following are a few of the many examples where a new GTIN, UPC, etc. would be required for the packaged product:\\n- change of over 20% to a physical dimension, on any axis, or gross weight\\n- change in the case or pallet orientation (even when there is no change in the base product)\\n- change in the number of base products included on the pallet\\n- free trial item included even though this does not change the GTIN, UPC, etc. of the base product\",\"primaryKey\":[\"ItemPackagingVersionId\",\"ItemSku\",\"PackingItemId\",\"ItemPackagingItemStartDate\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ItemPackagingVersionId\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemPackagingVersionId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ItemSku\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemSku\"},\"dataType\":\"string\",\"dataTypeLength\":20},{\"type\":\"Existing\",\"name\":\"PackingItemId\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"PackingItemId\"},\"dataType\":\"string\",\"dataTypeLength\":20},{\"type\":\"Existing\",\"name\":\"ItemPackagingItemStartDate\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemPackagingItemStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ItemPackagingItemEndDate\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemPackagingItemEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"PackageComponentTypeId\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"PackageComponentTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ItemPackagingItemQuantity\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemPackagingItemQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"DepositAmount\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"DepositAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"IsoCurrencyCode\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"IsoCurrencyCode\"},\"dataType\":\"string\",\"dataTypeLength\":3},{\"type\":\"Existing\",\"name\":\"UnitOfMeasureId\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"UnitOfMeasureId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackageMaterialTypeId\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"PackageMaterialTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ItemPackagingNote\",\"attributeReference\":{\"entity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"name\":\"ItemPackagingNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "Indicates the number of an item (SKU) that are used in the packaging of the Product.\n\nNote: This contains packaging and supplementary items such as documentation, coupons and free items but does not include any base product items.\n\nNote: Changes  in packaging does not necessarily result in a changed GTIN, UPC, etc. The following are a few of the many examples where a new GTIN, UPC, etc. would be required for the packaged product:\n- change of over 20% to a physical dimension, on any axis, or gross weight\n- change in the case or pallet orientation (even when there is no change in the base product)\n- change in the number of base products included on the pallet\n- free trial item included even though this does not change the GTIN, UPC, etc. of the base product",
+			"DisplayFolderInfo": "{\"name\":\"Inventory\",\"colorCode\":\"#692B0C\"}",
+			"PrimaryKeys": "ItemPackagingVersionId,ItemSku,PackingItemId,ItemPackagingItemStartDate",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

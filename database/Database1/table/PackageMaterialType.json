@@ -1,0 +1,112 @@
+{
+	"name": "PackageMaterialType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "PackageMaterialType",
+		"Description": "The type of package material used in constructing the packaging.\n\nEx:\n- Bio-Plastic \n- Burlap \n- Composite \n- Corrugated \n- Corrugated Board \n- Double Wall Corrugated Board \n- Double-wall Paper \n- Fiberboard \n- Fiberboard Metal \n- Fiber \n- Fiber (Paperboard) \n- Hard Wood \n- Laminated Carton \n- Molded Plastic \n- Multiple-wall Paper (2 or more walls) \n- Multiple-wall Paper (3 or more walls) \n- Not Otherwise Specified \n- Plastic \n- Polyethylene \n- Pulpboard \n- Single Wall Corrugated Board \n- Soft Wood\n- Triple Wall Corrugated Board\n- Wire Mesh\n- Wood",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PackageMaterialTypeId",
+					"Description": "The unique identifier of a Package Material Type.",
+					"BaseAttributeReference": {
+						"Entity": "PackageMaterialType.cdm.json/PackageMaterialType",
+						"Name": "PackageMaterialTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PackageMaterialTypeName",
+					"Description": "The name of a Package Material Type.",
+					"BaseAttributeReference": {
+						"Entity": "PackageMaterialType.cdm.json/PackageMaterialType",
+						"Name": "PackageMaterialTypeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PackageMaterialTypeDescription",
+					"Description": "The description of a Package Material Type.",
+					"BaseAttributeReference": {
+						"Entity": "PackageMaterialType.cdm.json/PackageMaterialType",
+						"Name": "PackageMaterialTypeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackageMaterialType",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackageMaterialType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PackageMaterialTypeId\":{\"entity\":\"PackageMaterialType.cdm.json/PackageMaterialType\",\"name\":\"PackageMaterialTypeId\"},\"PackageMaterialTypeName\":{\"entity\":\"PackageMaterialType.cdm.json/PackageMaterialType\",\"name\":\"PackageMaterialTypeName\"},\"PackageMaterialTypeDescription\":{\"entity\":\"PackageMaterialType.cdm.json/PackageMaterialType\",\"name\":\"PackageMaterialTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PackageMaterialType\",\"path\":\"PackageMaterialType.cdm.json/PackageMaterialType\"},\"description\":\"The type of package material used in constructing the packaging.\\n\\nEx:\\n- Bio-Plastic \\n- Burlap \\n- Composite \\n- Corrugated \\n- Corrugated Board \\n- Double Wall Corrugated Board \\n- Double-wall Paper \\n- Fiberboard \\n- Fiberboard Metal \\n- Fiber \\n- Fiber (Paperboard) \\n- Hard Wood \\n- Laminated Carton \\n- Molded Plastic \\n- Multiple-wall Paper (2 or more walls) \\n- Multiple-wall Paper (3 or more walls) \\n- Not Otherwise Specified \\n- Plastic \\n- Polyethylene \\n- Pulpboard \\n- Single Wall Corrugated Board \\n- Soft Wood\\n- Triple Wall Corrugated Board\\n- Wire Mesh\\n- Wood\",\"primaryKey\":[\"PackageMaterialTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"PackageMaterialTypeId\",\"attributeReference\":{\"entity\":\"PackageMaterialType.cdm.json/PackageMaterialType\",\"name\":\"PackageMaterialTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackageMaterialTypeName\",\"attributeReference\":{\"entity\":\"PackageMaterialType.cdm.json/PackageMaterialType\",\"name\":\"PackageMaterialTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"PackageMaterialTypeDescription\",\"attributeReference\":{\"entity\":\"PackageMaterialType.cdm.json/PackageMaterialType\",\"name\":\"PackageMaterialTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "The type of package material used in constructing the packaging.\n\nEx:\n- Bio-Plastic \n- Burlap \n- Composite \n- Corrugated \n- Corrugated Board \n- Double Wall Corrugated Board \n- Double-wall Paper \n- Fiberboard \n- Fiberboard Metal \n- Fiber \n- Fiber (Paperboard) \n- Hard Wood \n- Laminated Carton \n- Molded Plastic \n- Multiple-wall Paper (2 or more walls) \n- Multiple-wall Paper (3 or more walls) \n- Not Otherwise Specified \n- Plastic \n- Polyethylene \n- Pulpboard \n- Single Wall Corrugated Board \n- Soft Wood\n- Triple Wall Corrugated Board\n- Wire Mesh\n- Wood",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "PackageMaterialTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

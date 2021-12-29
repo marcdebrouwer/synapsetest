@@ -1,0 +1,112 @@
+{
+	"name": "PackageType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "PackageType",
+		"Description": "The type of package that a Product is packaged in.\n\nEx:\n-  Box\n-  Bottle\n-  Quick serve meal tray\n-  Pressed tray\n-  Carton\n-  Container\n-  Packet\n-  Can",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PackageTypeId",
+					"Description": "The unique identifier of a Package Type.",
+					"BaseAttributeReference": {
+						"Entity": "PackageType.cdm.json/PackageType",
+						"Name": "PackageTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PackageTypeName",
+					"Description": "The name of a Package Type.",
+					"BaseAttributeReference": {
+						"Entity": "PackageType.cdm.json/PackageType",
+						"Name": "PackageTypeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PackageTypeDescription",
+					"Description": "The description of a Package Type.",
+					"BaseAttributeReference": {
+						"Entity": "PackageType.cdm.json/PackageType",
+						"Name": "PackageTypeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackageType",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackageType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PackageTypeId\":{\"entity\":\"PackageType.cdm.json/PackageType\",\"name\":\"PackageTypeId\"},\"PackageTypeName\":{\"entity\":\"PackageType.cdm.json/PackageType\",\"name\":\"PackageTypeName\"},\"PackageTypeDescription\":{\"entity\":\"PackageType.cdm.json/PackageType\",\"name\":\"PackageTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PackageType\",\"path\":\"PackageType.cdm.json/PackageType\"},\"description\":\"The type of package that a Product is packaged in.\\n\\nEx:\\n-  Box\\n-  Bottle\\n-  Quick serve meal tray\\n-  Pressed tray\\n-  Carton\\n-  Container\\n-  Packet\\n-  Can\",\"primaryKey\":[\"PackageTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"PackageTypeId\",\"attributeReference\":{\"entity\":\"PackageType.cdm.json/PackageType\",\"name\":\"PackageTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackageTypeName\",\"attributeReference\":{\"entity\":\"PackageType.cdm.json/PackageType\",\"name\":\"PackageTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"PackageTypeDescription\",\"attributeReference\":{\"entity\":\"PackageType.cdm.json/PackageType\",\"name\":\"PackageTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "The type of package that a Product is packaged in.\n\nEx:\n-  Box\n-  Bottle\n-  Quick serve meal tray\n-  Pressed tray\n-  Carton\n-  Container\n-  Packet\n-  Can",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "PackageTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

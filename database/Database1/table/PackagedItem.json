@@ -1,0 +1,368 @@
+{
+	"name": "PackagedItem",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "PackagedItem",
+		"Description": "Indicates the Packaging that is used when distributing the item.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ItemSku",
+					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "ItemSku"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 20,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemVersionId",
+					"Description": "The unique identifier of a Packaged Item Version.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemVersionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemName",
+					"Description": "The name of the Packaged Item.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemDescription",
+					"Description": "The description of the Packaged Item.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemStartDate",
+					"Description": "The effective start date or first date that the packaged item is used for the product.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemStartDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemEndDate",
+					"Description": "The effective end date or first date that the packaged item is used for the product.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemEndDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "PackagingHierarchyId",
+					"Description": "The unique identifier of a Packaging Hierarchy.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagingHierarchyId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PackagingHierarchyLevelId",
+					"Description": "The unique identifier of a Packaging Hierarchy Level.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagingHierarchyLevelId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "BaseItemQuantity",
+					"Description": "The number of base item items contained in the packaged item.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "BaseItemQuantity"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemNote",
+					"Description": "A note, comment or additional information regarding the packaged item.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemLength",
+					"Description": "The standard item length.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemLength"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 8,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemWidth",
+					"Description": "The standard item width.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemWidth"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 8,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemHeight",
+					"Description": "The standard item height.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemHeight"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 8,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemLwhUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemLwhUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemVolume",
+					"Description": "The standard item volume.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemVolume"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 8,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemVolumeUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemVolumeUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemWeight",
+					"Description": "The standard item weight.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemWeight"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 8,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "PackagedItemWeightUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemWeightUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackagedItem",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackagedItem",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ItemSku\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"ItemSku\"},\"PackagedItemVersionId\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemVersionId\"},\"PackagedItemName\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemName\"},\"PackagedItemDescription\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemDescription\"},\"PackagedItemStartDate\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemStartDate\"},\"PackagedItemEndDate\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemEndDate\"},\"PackagingHierarchyId\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagingHierarchyId\"},\"PackagingHierarchyLevelId\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagingHierarchyLevelId\"},\"BaseItemQuantity\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"BaseItemQuantity\"},\"PackagedItemNote\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemNote\"},\"PackagedItemLength\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemLength\"},\"PackagedItemWidth\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemWidth\"},\"PackagedItemHeight\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemHeight\"},\"PackagedItemLwhUomId\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemLwhUomId\"},\"PackagedItemVolume\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemVolume\"},\"PackagedItemVolumeUomId\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemVolumeUomId\"},\"PackagedItemWeight\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemWeight\"},\"PackagedItemWeightUomId\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemWeightUomId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PackagedItem\",\"path\":\"PackagedItem.cdm.json/PackagedItem\"},\"description\":\"Indicates the Packaging that is used when distributing the item.\",\"primaryKey\":[\"ItemSku\",\"PackagedItemVersionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ItemSku\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"ItemSku\"},\"dataType\":\"string\",\"dataTypeLength\":20},{\"type\":\"Existing\",\"name\":\"PackagedItemVersionId\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemVersionId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackagedItemName\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"PackagedItemDescription\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"PackagedItemStartDate\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"PackagedItemEndDate\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"PackagingHierarchyId\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagingHierarchyId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackagingHierarchyLevelId\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagingHierarchyLevelId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"BaseItemQuantity\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"BaseItemQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"PackagedItemNote\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024},{\"type\":\"Existing\",\"name\":\"PackagedItemLength\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemLength\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":8},{\"type\":\"Existing\",\"name\":\"PackagedItemWidth\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemWidth\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":8},{\"type\":\"Existing\",\"name\":\"PackagedItemHeight\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemHeight\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":8},{\"type\":\"Existing\",\"name\":\"PackagedItemLwhUomId\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemLwhUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackagedItemVolume\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemVolume\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":8},{\"type\":\"Existing\",\"name\":\"PackagedItemVolumeUomId\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemVolumeUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackagedItemWeight\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemWeight\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":8},{\"type\":\"Existing\",\"name\":\"PackagedItemWeightUomId\",\"attributeReference\":{\"entity\":\"PackagedItem.cdm.json/PackagedItem\",\"name\":\"PackagedItemWeightUomId\"},\"dataType\":\"integer\"}]}}}",
+			"Description": "Indicates the Packaging that is used when distributing the item.",
+			"DisplayFolderInfo": "{\"name\":\"Inventory\",\"colorCode\":\"#692B0C\"}",
+			"PrimaryKeys": "ItemSku,PackagedItemVersionId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

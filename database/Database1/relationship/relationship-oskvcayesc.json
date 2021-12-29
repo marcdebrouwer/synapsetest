@@ -1,0 +1,26 @@
+{
+	"name": "relationship-oskvcayesc",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-oskvcayesc",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PackagingHierarchyLevelType",
+		"ToTableName": "PackagingHierarchyLevel",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PackagingHierarchyLevelTypeId",
+				"ToColumnName": "PackagingHierarchyLevelTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType\",\"toEntity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"joinPairs\":[{\"fromAttribute\":\"PackagingHierarchyLevelTypeId\",\"toAttribute\":\"PackagingHierarchyLevelTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}
