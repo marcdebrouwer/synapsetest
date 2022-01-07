@@ -16,10 +16,6 @@
 				{
 					"Name": "ItemSku",
 					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "ItemSku"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -28,15 +24,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "ItemSku"
 					}
 				},
 				{
 					"Name": "PackagedItemVersionId",
 					"Description": "The unique identifier of a Packaged Item Version.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemVersionId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemVersionId"
 					}
 				},
 				{
 					"Name": "PackagedItemName",
 					"Description": "The name of the Packaged Item.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemName"
 					}
 				},
 				{
 					"Name": "PackagedItemDescription",
 					"Description": "The description of the Packaged Item.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -78,15 +74,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemDescription"
 					}
 				},
 				{
 					"Name": "PackagedItemStartDate",
 					"Description": "The effective start date or first date that the packaged item is used for the product.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -95,15 +91,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemStartDate"
 					}
 				},
 				{
 					"Name": "PackagedItemEndDate",
 					"Description": "The effective end date or first date that the packaged item is used for the product.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -112,15 +108,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemEndDate"
 					}
 				},
 				{
 					"Name": "PackagingHierarchyId",
 					"Description": "The unique identifier of a Packaging Hierarchy.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagingHierarchyId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -128,15 +124,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagingHierarchyId"
 					}
 				},
 				{
 					"Name": "PackagingHierarchyLevelId",
 					"Description": "The unique identifier of a Packaging Hierarchy Level.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagingHierarchyLevelId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -144,15 +140,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagingHierarchyLevelId"
 					}
 				},
 				{
 					"Name": "BaseItemQuantity",
 					"Description": "The number of base item items contained in the packaged item.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "BaseItemQuantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -162,15 +158,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "BaseItemQuantity"
 					}
 				},
 				{
 					"Name": "PackagedItemNote",
 					"Description": "A note, comment or additional information regarding the packaged item.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -179,15 +175,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemNote"
 					}
 				},
 				{
 					"Name": "PackagedItemLength",
 					"Description": "The standard item length.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemLength"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -197,15 +193,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemLength"
 					}
 				},
 				{
 					"Name": "PackagedItemWidth",
 					"Description": "The standard item width.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemWidth"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -215,15 +211,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemWidth"
 					}
 				},
 				{
 					"Name": "PackagedItemHeight",
 					"Description": "The standard item height.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemHeight"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -233,15 +229,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemHeight"
 					}
 				},
 				{
 					"Name": "PackagedItemLwhUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemLwhUomId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -249,15 +245,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemLwhUomId"
 					}
 				},
 				{
 					"Name": "PackagedItemVolume",
 					"Description": "The standard item volume.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemVolume"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -267,15 +263,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemVolume"
 					}
 				},
 				{
 					"Name": "PackagedItemVolumeUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemVolumeUomId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -283,15 +279,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemVolumeUomId"
 					}
 				},
 				{
 					"Name": "PackagedItemWeight",
 					"Description": "The standard item weight.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemWeight"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -301,15 +297,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemWeight"
 					}
 				},
 				{
 					"Name": "PackagedItemWeightUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
-					"BaseAttributeReference": {
-						"Entity": "PackagedItem.cdm.json/PackagedItem",
-						"Name": "PackagedItemWeightUomId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -317,24 +313,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagedItem.cdm.json/PackagedItem",
+						"Name": "PackagedItemWeightUomId"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackagedItem",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -358,7 +351,7 @@
 			"Description": "Indicates the Packaging that is used when distributing the item.",
 			"DisplayFolderInfo": "{\"name\":\"Inventory\",\"colorCode\":\"#692B0C\"}",
 			"PrimaryKeys": "ItemSku,PackagedItemVersionId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

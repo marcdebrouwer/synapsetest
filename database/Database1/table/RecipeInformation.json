@@ -16,10 +16,6 @@
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeInformation.cdm.json/RecipeInformation",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeInformation.cdm.json/RecipeInformation",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "RecipeInformationTypeId",
 					"Description": "The unique identifier of a Recipe Information Type.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeInformation.cdm.json/RecipeInformation",
-						"Name": "RecipeInformationTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeInformation.cdm.json/RecipeInformation",
+						"Name": "RecipeInformationTypeId"
 					}
 				},
 				{
 					"Name": "RecipeInformationStatement",
 					"Description": "The information type statement associated with the recipe.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeInformation.cdm.json/RecipeInformation",
-						"Name": "RecipeInformationStatement"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -60,24 +56,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeInformation.cdm.json/RecipeInformation",
+						"Name": "RecipeInformationStatement"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeInformation",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -101,7 +94,7 @@
 			"Description": "Information regarding the recipe.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "RecipeId,RecipeInformationTypeId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

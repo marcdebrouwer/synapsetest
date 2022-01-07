@@ -16,10 +16,6 @@
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "IngredientId",
 					"Description": "The unique identifier of an Ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
-						"Name": "IngredientId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
+						"Name": "IngredientId"
 					}
 				},
 				{
 					"Name": "IngredientPurposeTypeId",
 					"Description": "The unique identifier of an Ingredient Purpose Type.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
-						"Name": "IngredientPurposeTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -59,15 +55,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
+						"Name": "IngredientPurposeTypeId"
 					}
 				},
 				{
 					"Name": "ProductIngredientPurposeNote",
 					"Description": "A note, comment or additional information regarding the product ingredient purpose.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
-						"Name": "ProductIngredientPurposeNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -76,24 +72,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
+						"Name": "ProductIngredientPurposeNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductIngredientPurpose",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -117,7 +110,7 @@
 			"Description": "A purpose associated with the product ingredient.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "ProductId,IngredientId,IngredientPurposeTypeId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

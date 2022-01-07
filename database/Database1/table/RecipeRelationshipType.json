@@ -16,10 +16,6 @@
 				{
 					"Name": "RecipeRelationshipTypeId",
 					"Description": "The unique identifier of a recipe relationship type.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeRelationshipType.cdm.json/RecipeRelationshipType",
-						"Name": "RecipeRelationshipTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeRelationshipType.cdm.json/RecipeRelationshipType",
+						"Name": "RecipeRelationshipTypeId"
 					}
 				},
 				{
 					"Name": "RecipeRelationshipTypeName",
 					"Description": "The name of a recipe relationship type.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeRelationshipType.cdm.json/RecipeRelationshipType",
-						"Name": "RecipeRelationshipTypeName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeRelationshipType.cdm.json/RecipeRelationshipType",
+						"Name": "RecipeRelationshipTypeName"
 					}
 				},
 				{
 					"Name": "RecipeRelationshipTypeDescription",
 					"Description": "The description of a recipe relationship type.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeRelationshipType.cdm.json/RecipeRelationshipType",
-						"Name": "RecipeRelationshipTypeDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,24 +57,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeRelationshipType.cdm.json/RecipeRelationshipType",
+						"Name": "RecipeRelationshipTypeDescription"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeRelationshipType",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -102,7 +95,7 @@
 			"Description": "The nature of the relationship between the related recipes.\n\nEx:\n- Replacement recipe\n- Comparable recipe\n- Master-Site Recipe\n- General-Site recipe\n- Updated recipe",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "RecipeRelationshipTypeId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

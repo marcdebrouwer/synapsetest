@@ -16,10 +16,6 @@
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductRecipe.cdm.json/ProductRecipe",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductRecipe.cdm.json/ProductRecipe",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "ProductRecipe.cdm.json/ProductRecipe",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductRecipe.cdm.json/ProductRecipe",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "ProductRecipePeriodStartDate",
 					"Description": "The start date of the recipe being used to create the Product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductRecipe.cdm.json/ProductRecipe",
-						"Name": "ProductRecipePeriodStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductRecipe.cdm.json/ProductRecipe",
+						"Name": "ProductRecipePeriodStartDate"
 					}
 				},
 				{
 					"Name": "ProductRecipePeriodEndDate",
 					"Description": "The end date of the recipe being used to create the Product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductRecipe.cdm.json/ProductRecipe",
-						"Name": "ProductRecipePeriodEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -77,15 +73,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductRecipe.cdm.json/ProductRecipe",
+						"Name": "ProductRecipePeriodEndDate"
 					}
 				},
 				{
 					"Name": "ProductRecipeNote",
 					"Description": "Notes, comments or additional information regarding the product recipe.",
-					"BaseAttributeReference": {
-						"Entity": "ProductRecipe.cdm.json/ProductRecipe",
-						"Name": "ProductRecipeNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -94,24 +90,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductRecipe.cdm.json/ProductRecipe",
+						"Name": "ProductRecipeNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductRecipe",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -135,7 +128,7 @@
 			"Description": "The recipe used to make the product.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "ProductId,RecipeId,ProductRecipePeriodStartDate",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

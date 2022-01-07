@@ -16,10 +16,6 @@
 				{
 					"Name": "ItemSku",
 					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
-					"BaseAttributeReference": {
-						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
-						"Name": "ItemSku"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -28,15 +24,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
+						"Name": "ItemSku"
 					}
 				},
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "PeriodStartDate",
 					"Description": "The start date of the recipe being used to create the Item.",
-					"BaseAttributeReference": {
-						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
-						"Name": "PeriodStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
+						"Name": "PeriodStartDate"
 					}
 				},
 				{
 					"Name": "PeriodEndDate",
 					"Description": "The end date of the recipe being used to create the Item.",
-					"BaseAttributeReference": {
-						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
-						"Name": "PeriodEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -78,15 +74,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
+						"Name": "PeriodEndDate"
 					}
 				},
 				{
 					"Name": "ItemRecipeNote",
 					"Description": "Notes, comments or additional information regarding the item recipe.",
-					"BaseAttributeReference": {
-						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
-						"Name": "ItemRecipeNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -95,24 +91,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
+						"Name": "ItemRecipeNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ItemRecipe",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -136,7 +129,7 @@
 			"Description": "The recipe used to make the item.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "ItemSku,RecipeId,PeriodStartDate",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

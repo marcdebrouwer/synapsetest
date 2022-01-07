@@ -16,10 +16,6 @@
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "PlannedProductionQuantity",
 					"Description": "The planned quantity of product that may be produced by the associated formula.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
-						"Name": "PlannedProductionQuantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
+						"Name": "PlannedProductionQuantity"
 					}
 				},
 				{
 					"Name": "UnitOfMeasureId",
 					"Description": "The unique identifier of a Unit Of Measure.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
-						"Name": "UnitOfMeasureId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -77,24 +73,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction",
+						"Name": "UnitOfMeasureId"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormulaProductProduction",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -118,7 +111,7 @@
 			"Description": "The quantity of product that may be produced by the associated recipe.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "RecipeId,ProductId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

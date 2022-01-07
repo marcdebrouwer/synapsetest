@@ -16,10 +16,6 @@
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "BomLevelNumber",
 					"Description": "The Bill of Material level for the associated Item/BOM components.",
-					"BaseAttributeReference": {
-						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
-						"Name": "BomLevelNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
+						"Name": "BomLevelNumber"
 					}
 				},
 				{
 					"Name": "ItemSku",
 					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
-					"BaseAttributeReference": {
-						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
-						"Name": "ItemSku"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
+						"Name": "ItemSku"
 					}
 				},
 				{
 					"Name": "ItemInstallationSequence",
 					"Description": "The Bill Of Material installation sequence of the associated Item.",
-					"BaseAttributeReference": {
-						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
-						"Name": "ItemInstallationSequence"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -76,15 +72,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
+						"Name": "ItemInstallationSequence"
 					}
 				},
 				{
 					"Name": "BomQuantity",
 					"Description": "The quantity of Items associated with the BOM Level.",
-					"BaseAttributeReference": {
-						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
-						"Name": "BomQuantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -94,15 +90,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
+						"Name": "BomQuantity"
 					}
 				},
 				{
 					"Name": "EngineeringSpecificationNumber",
 					"Description": "The Engineering Specification Number that addresses the associated BOM/Item Level.",
-					"BaseAttributeReference": {
-						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
-						"Name": "EngineeringSpecificationNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -110,15 +106,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
+						"Name": "EngineeringSpecificationNumber"
 					}
 				},
 				{
 					"Name": "UnitOfMeasureId",
 					"Description": "The unique identifier of a Unit Of Measure.",
-					"BaseAttributeReference": {
-						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
-						"Name": "UnitOfMeasureId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -126,15 +122,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
+						"Name": "UnitOfMeasureId"
 					}
 				},
 				{
 					"Name": "Note",
 					"Description": "A note, comment or additional detail regarding the BOM component.",
-					"BaseAttributeReference": {
-						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
-						"Name": "Note"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -143,24 +139,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductBillOfMaterial.cdm.json/ProductBillOfMaterial",
+						"Name": "Note"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductBillOfMaterial",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -184,7 +177,7 @@
 			"Description": "The Bill Of Material (BOM) used to create the product. The BOM lists the items (materials) that are part of the product.",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
 			"PrimaryKeys": "ProductId,BomLevelNumber,ItemSku",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

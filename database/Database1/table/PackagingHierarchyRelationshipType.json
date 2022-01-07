@@ -16,10 +16,6 @@
 				{
 					"Name": "PackagingHierarchyRelationshipTypeId",
 					"Description": "The unique identifier of a Packaging Hierarchy Relationship Type.",
-					"BaseAttributeReference": {
-						"Entity": "PackagingHierarchyRelationshipType.cdm.json/PackagingHierarchyRelationshipType",
-						"Name": "PackagingHierarchyRelationshipTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyRelationshipType.cdm.json/PackagingHierarchyRelationshipType",
+						"Name": "PackagingHierarchyRelationshipTypeId"
 					}
 				},
 				{
 					"Name": "PackagingHierarchyRelationshipTypeName",
 					"Description": "The name of a Packaging Hierarchy Relationship Type.",
-					"BaseAttributeReference": {
-						"Entity": "PackagingHierarchyRelationshipType.cdm.json/PackagingHierarchyRelationshipType",
-						"Name": "PackagingHierarchyRelationshipTypeName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyRelationshipType.cdm.json/PackagingHierarchyRelationshipType",
+						"Name": "PackagingHierarchyRelationshipTypeName"
 					}
 				},
 				{
 					"Name": "PackagingHierarchyRelationshipTypeDescription",
 					"Description": "The description of a Packaging Hierarchy Relationship Type.",
-					"BaseAttributeReference": {
-						"Entity": "PackagingHierarchyRelationshipType.cdm.json/PackagingHierarchyRelationshipType",
-						"Name": "PackagingHierarchyRelationshipTypeDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,24 +57,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyRelationshipType.cdm.json/PackagingHierarchyRelationshipType",
+						"Name": "PackagingHierarchyRelationshipTypeDescription"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackagingHierarchyRelationshipType",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -102,7 +95,7 @@
 			"Description": "The nature of the relationship between Packaging Hierarchy Levels\n\nEx:\n- Consolidates\n- Alternate Packaging",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
 			"PrimaryKeys": "PackagingHierarchyRelationshipTypeId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

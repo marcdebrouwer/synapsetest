@@ -16,10 +16,6 @@
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeResultingIngredients.cdm.json/RecipeResultingIngredients",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeResultingIngredients.cdm.json/RecipeResultingIngredients",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "IngredientId",
 					"Description": "The unique identifier of an Ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeResultingIngredients.cdm.json/RecipeResultingIngredients",
-						"Name": "IngredientId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeResultingIngredients.cdm.json/RecipeResultingIngredients",
+						"Name": "IngredientId"
 					}
 				},
 				{
 					"Name": "SubstituteIngredientIndicator",
 					"Description": "Indicates whether the recipe resulting ingredients may have used the ingredient as a substitute or alternate for another ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeResultingIngredients.cdm.json/RecipeResultingIngredients",
-						"Name": "SubstituteIngredientIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -59,15 +55,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeResultingIngredients.cdm.json/RecipeResultingIngredients",
+						"Name": "SubstituteIngredientIndicator"
 					}
 				},
 				{
 					"Name": "MayContainIngredientIndicator",
 					"Description": "Indicates whether the recipe resulting ingredients may contain the ingredient. This is usually as a result of the ingredient being used elsewhere in the manufacturing facility and it may have come in contact with the production process. Commonly used for items such as peanuts where some individuals are highly allergic.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeResultingIngredients.cdm.json/RecipeResultingIngredients",
-						"Name": "MayContainIngredientIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -75,15 +71,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeResultingIngredients.cdm.json/RecipeResultingIngredients",
+						"Name": "MayContainIngredientIndicator"
 					}
 				},
 				{
 					"Name": "RecipeResultingIngredientsNote",
 					"Description": "A note, comment or additional information regarding the recipe resulting ingredients.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeResultingIngredients.cdm.json/RecipeResultingIngredients",
-						"Name": "RecipeResultingIngredientsNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -92,24 +88,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeResultingIngredients.cdm.json/RecipeResultingIngredients",
+						"Name": "RecipeResultingIngredientsNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeResultingIngredients",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -133,7 +126,7 @@
 			"Description": "The ingredients that the recipe results in.\n\nNote: that the ingredients used may differ from the resulting ingredients in volume or weight.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "RecipeId,IngredientId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

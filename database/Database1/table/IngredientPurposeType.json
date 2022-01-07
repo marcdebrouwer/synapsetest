@@ -16,10 +16,6 @@
 				{
 					"Name": "IngredientPurposeTypeId",
 					"Description": "The unique identifier of an Ingredient Purpose Type.",
-					"BaseAttributeReference": {
-						"Entity": "IngredientPurposeType.cdm.json/IngredientPurposeType",
-						"Name": "IngredientPurposeTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientPurposeType.cdm.json/IngredientPurposeType",
+						"Name": "IngredientPurposeTypeId"
 					}
 				},
 				{
 					"Name": "IngredientPurposeTypeName",
 					"Description": "The name of an Ingredient Purpose Type.",
-					"BaseAttributeReference": {
-						"Entity": "IngredientPurposeType.cdm.json/IngredientPurposeType",
-						"Name": "IngredientPurposeTypeName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientPurposeType.cdm.json/IngredientPurposeType",
+						"Name": "IngredientPurposeTypeName"
 					}
 				},
 				{
 					"Name": "IngredientPurposeTypeDescription",
 					"Description": "The description of an Ingredient Purpose Type.",
-					"BaseAttributeReference": {
-						"Entity": "IngredientPurposeType.cdm.json/IngredientPurposeType",
-						"Name": "IngredientPurposeTypeDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,24 +57,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientPurposeType.cdm.json/IngredientPurposeType",
+						"Name": "IngredientPurposeTypeDescription"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/IngredientPurposeType",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -102,7 +95,7 @@
 			"Description": "The purpose for using an ingredient.\n\nEx:\n- Cross-Linkers\n- Solubility enhancers\n         Hydrotropes\n         Small Amines\n- Bleaching agents\n- Preservatives/Antioxidant\n- Rheology Modifiers\n- Plasticizers\n- Foam Boosters, Defoamers and Antifoamers\n- Denaturants\n- Absorbents and Adsorbents\n- Corrosion inhibitors\n- Antiredisposition agent\n- Dispersing agent\n- Coalescing agent\n- Dyes & Optical Brighteners\n- Antioxidant\n- Emollient\n- Emulsifier\n- Moisturizer\n- Pigment\n- Sunscreen\n- Surfactant\n- Viscosity Control",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "IngredientPurposeTypeId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

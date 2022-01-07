@@ -16,10 +16,6 @@
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "SequenceNumber",
 					"Description": "The sequence in which the items are processed in the formula.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
-						"Name": "SequenceNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
+						"Name": "SequenceNumber"
 					}
 				},
 				{
 					"Name": "IngredientId",
 					"Description": "The unique identifier of an Ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
-						"Name": "IngredientId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -59,15 +55,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
+						"Name": "IngredientId"
 					}
 				},
 				{
 					"Name": "IngredientPurposeTypeId",
 					"Description": "The unique identifier of an Ingredient Purpose Type.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
-						"Name": "IngredientPurposeTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -75,15 +71,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
+						"Name": "IngredientPurposeTypeId"
 					}
 				},
 				{
 					"Name": "RecipeFormulaIngredientPurposeNote",
 					"Description": "A note, comment or additional information regarding the recipe formula ingredient purpose.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
-						"Name": "RecipeFormulaIngredientPurposeNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -92,24 +88,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose",
+						"Name": "RecipeFormulaIngredientPurposeNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormulaIngredientPurpose",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -133,7 +126,7 @@
 			"Description": "A purpose associated with the recipe formula ingredient.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "RecipeId,SequenceNumber,IngredientId,IngredientPurposeTypeId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

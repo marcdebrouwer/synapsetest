@@ -16,10 +16,6 @@
 				{
 					"Name": "BrandId",
 					"Description": "The unique identifier of a Brand.",
-					"BaseAttributeReference": {
-						"Entity": "BrandProduct.cdm.json/BrandProduct",
-						"Name": "BrandId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "BrandProduct.cdm.json/BrandProduct",
+						"Name": "BrandId"
 					}
 				},
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "BrandProduct.cdm.json/BrandProduct",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "BrandProduct.cdm.json/BrandProduct",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "PeriodStartDate",
 					"Description": "The start date of the relationship between the Brand and Product.",
-					"BaseAttributeReference": {
-						"Entity": "BrandProduct.cdm.json/BrandProduct",
-						"Name": "PeriodStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "BrandProduct.cdm.json/BrandProduct",
+						"Name": "PeriodStartDate"
 					}
 				},
 				{
 					"Name": "PeriodEndDate",
 					"Description": "The end date of the relationship between the Brand and Product.",
-					"BaseAttributeReference": {
-						"Entity": "BrandProduct.cdm.json/BrandProduct",
-						"Name": "PeriodEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -77,15 +73,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "BrandProduct.cdm.json/BrandProduct",
+						"Name": "PeriodEndDate"
 					}
 				},
 				{
 					"Name": "BrandProductNote",
 					"Description": "A note regarding the relationship between a Brand and a specific Product.",
-					"BaseAttributeReference": {
-						"Entity": "BrandProduct.cdm.json/BrandProduct",
-						"Name": "BrandProductNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -94,24 +90,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "BrandProduct.cdm.json/BrandProduct",
+						"Name": "BrandProductNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/BrandProduct",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -135,7 +128,7 @@
 			"Description": "An association between Brand and Product. \n\nBrands are often associated with more than one Product and a Product can in some cases be associated with more than one Brand.",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
 			"PrimaryKeys": "BrandId,ProductId,PeriodStartDate",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

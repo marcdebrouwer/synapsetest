@@ -16,10 +16,6 @@
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "SequenceNumber",
 					"Description": "The sequence in which the items are processed in the formula.",
-					"BaseAttributeReference": {
-						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
-						"Name": "SequenceNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
+						"Name": "SequenceNumber"
 					}
 				},
 				{
 					"Name": "EnvironmentalParameterId",
 					"Description": "The unique identifier of an Environmental Parameter.",
-					"BaseAttributeReference": {
-						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
-						"Name": "EnvironmentalParameterId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -59,15 +55,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
+						"Name": "EnvironmentalParameterId"
 					}
 				},
 				{
 					"Name": "IngredientId",
 					"Description": "The unique identifier of an Ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
-						"Name": "IngredientId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -75,15 +71,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
+						"Name": "IngredientId"
 					}
 				},
 				{
 					"Name": "MinimumEnvironmentalParameterValue",
 					"Description": "The minimum environmental parameter associated with the recipe formula sequence.",
-					"BaseAttributeReference": {
-						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
-						"Name": "MinimumEnvironmentalParameterValue"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -93,15 +89,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
+						"Name": "MinimumEnvironmentalParameterValue"
 					}
 				},
 				{
 					"Name": "MaximumEnvironmentalParameterValue",
 					"Description": "The maximum environmental parameter associated with the recipe formula sequence.",
-					"BaseAttributeReference": {
-						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
-						"Name": "MaximumEnvironmentalParameterValue"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -111,15 +107,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
+						"Name": "MaximumEnvironmentalParameterValue"
 					}
 				},
 				{
 					"Name": "OptimumEnvironmentalParameterValue",
 					"Description": "The optimum environmental parameter associated with the recipe formula sequence.",
-					"BaseAttributeReference": {
-						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
-						"Name": "OptimumEnvironmentalParameterValue"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -129,15 +125,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
+						"Name": "OptimumEnvironmentalParameterValue"
 					}
 				},
 				{
 					"Name": "UnitOfMeasureId",
 					"Description": "The unique identifier of a Unit Of Measure.",
-					"BaseAttributeReference": {
-						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
-						"Name": "UnitOfMeasureId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -145,24 +141,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter",
+						"Name": "UnitOfMeasureId"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/FormulaEnvironmentalParameter",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -186,7 +179,7 @@
 			"Description": "The environment parameter(s) planned or associated with the recipe formula sequence.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "RecipeId,SequenceNumber,EnvironmentalParameterId,IngredientId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

@@ -16,10 +16,6 @@
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "IngredientId",
 					"Description": "The unique identifier of an Ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "IngredientId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "IngredientId"
 					}
 				},
 				{
 					"Name": "ProductIngredientPeriodStartDate",
 					"Description": "The period start date for which the associated Product Ingredient was used in the product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "ProductIngredientPeriodStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "ProductIngredientPeriodStartDate"
 					}
 				},
 				{
 					"Name": "ProductIngredientPeriodEndDate",
 					"Description": "The period end date for which the associated Product Ingredient was used in the product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "ProductIngredientPeriodEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -77,15 +73,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "ProductIngredientPeriodEndDate"
 					}
 				},
 				{
 					"Name": "TotalIngredient",
 					"Description": "The total amount of associated ingredient in a single serving.\n\nEx:\nEx\" 4g total sugar per serving",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "TotalIngredient"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -93,15 +89,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "TotalIngredient"
 					}
 				},
 				{
 					"Name": "TotalIngredientUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "TotalIngredientUomId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -109,15 +105,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "TotalIngredientUomId"
 					}
 				},
 				{
 					"Name": "ActiveIngredientIndicator",
 					"Description": "Indicates whether the ingredient is considered an active ingredient or not.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "ActiveIngredientIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -125,15 +121,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "ActiveIngredientIndicator"
 					}
 				},
 				{
 					"Name": "SubstituteIngredientIndicator",
 					"Description": "Indicates whether the recipe resulting ingredients may have used the ingredient as a substitute or alternate for another ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "SubstituteIngredientIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -141,15 +137,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "SubstituteIngredientIndicator"
 					}
 				},
 				{
 					"Name": "MayContainIngredientIndicator",
 					"Description": "Indicates whether the recipe resulting ingredients may contain the ingredient. This is usually as a result of the ingredient being used elsewhere in the manufacturing facility and it may have come in contact with the production process. Commonly used for items such as peanuts where some individuals are highly allergic.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "MayContainIngredientIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -157,15 +153,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "MayContainIngredientIndicator"
 					}
 				},
 				{
 					"Name": "AlternateIngredientName",
 					"Description": "The alternate name of an Ingredient as provided by a specified source.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "AlternateIngredientName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -174,15 +170,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "AlternateIngredientName"
 					}
 				},
 				{
 					"Name": "AlternateIngredientNameSourcePartyId",
 					"Description": "The unique identifier of a Party.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "AlternateIngredientNameSourcePartyId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -190,15 +186,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "AlternateIngredientNameSourcePartyId"
 					}
 				},
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -206,15 +202,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "ProductIngredientNote",
 					"Description": "A note, comment or additional information regarding the product ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
-						"Name": "ProductIngredientNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -223,24 +219,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "ProductIngredientNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductIngredient",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -264,7 +257,7 @@
 			"Description": "The ingredients that are contained in the product.",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
 			"PrimaryKeys": "ProductId,IngredientId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

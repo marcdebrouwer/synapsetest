@@ -16,10 +16,6 @@
 				{
 					"Name": "ManufacturerFacilityId",
 					"Description": "The unique identifier of a Manufacturer Facility.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
-						"Name": "ManufacturerFacilityId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ManufacturerFacilityId"
 					}
 				},
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "PeriodStartDate",
 					"Description": "The period start date.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
-						"Name": "PeriodStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "PeriodStartDate"
 					}
 				},
 				{
 					"Name": "ManufacturerId",
 					"Description": "The unique identifier of a Manufacturer.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
-						"Name": "ManufacturerId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -76,15 +72,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ManufacturerId"
 					}
 				},
 				{
 					"Name": "PeriodEndDate",
 					"Description": "The period end date.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
-						"Name": "PeriodEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -93,15 +89,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "PeriodEndDate"
 					}
 				},
 				{
 					"Name": "ProductUnitsPlannedQuantity",
 					"Description": "The quantity of Product planned to be built during the period.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
-						"Name": "ProductUnitsPlannedQuantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -111,15 +107,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ProductUnitsPlannedQuantity"
 					}
 				},
 				{
 					"Name": "ProductUnitsManufacturedQuantity",
 					"Description": "The quantity of Product actually manufactured during the period.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
-						"Name": "ProductUnitsManufacturedQuantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -129,15 +125,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ProductUnitsManufacturedQuantity"
 					}
 				},
 				{
 					"Name": "ProductUnitsShippedQuantity",
 					"Description": "The quantity of Product shipped during the period.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
-						"Name": "ProductUnitsShippedQuantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -147,24 +143,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction",
+						"Name": "ProductUnitsShippedQuantity"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ManufacturingSiteProductProduction",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -188,7 +181,7 @@
 			"Description": "The quantity of pharmaceutical product manufactured and shipped, by a manufacturing site during a specific period.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "ManufacturerFacilityId,ProductId,PeriodStartDate,ManufacturerId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

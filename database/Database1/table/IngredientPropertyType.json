@@ -16,10 +16,6 @@
 				{
 					"Name": "IngredientPropertyTypeId",
 					"Description": "The unique identifier of an Ingredient Property Type.",
-					"BaseAttributeReference": {
-						"Entity": "IngredientPropertyType.cdm.json/IngredientPropertyType",
-						"Name": "IngredientPropertyTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientPropertyType.cdm.json/IngredientPropertyType",
+						"Name": "IngredientPropertyTypeId"
 					}
 				},
 				{
 					"Name": "IngredientPropertyTypeName",
 					"Description": "The name of an Ingredient Property Type.",
-					"BaseAttributeReference": {
-						"Entity": "IngredientPropertyType.cdm.json/IngredientPropertyType",
-						"Name": "IngredientPropertyTypeName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientPropertyType.cdm.json/IngredientPropertyType",
+						"Name": "IngredientPropertyTypeName"
 					}
 				},
 				{
 					"Name": "IngredientPropertyTypeDescription",
 					"Description": "The description of an Ingredient Property Type.",
-					"BaseAttributeReference": {
-						"Entity": "IngredientPropertyType.cdm.json/IngredientPropertyType",
-						"Name": "IngredientPropertyTypeDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,24 +57,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientPropertyType.cdm.json/IngredientPropertyType",
+						"Name": "IngredientPropertyTypeDescription"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/IngredientPropertyType",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -102,7 +95,7 @@
 			"Description": "The property of an ingredient.\n\nEx:\n- Color\n- Odor\n- Allergen\n- Preservative",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "IngredientPropertyTypeId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

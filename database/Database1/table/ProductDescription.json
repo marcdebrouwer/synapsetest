@@ -16,10 +16,6 @@
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductDescription.cdm.json/ProductDescription",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductDescription.cdm.json/ProductDescription",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "ProductDescriptionTypeId",
 					"Description": "The unique identifier of a Product Description.",
-					"BaseAttributeReference": {
-						"Entity": "ProductDescription.cdm.json/ProductDescription",
-						"Name": "ProductDescriptionTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductDescription.cdm.json/ProductDescription",
+						"Name": "ProductDescriptionTypeId"
 					}
 				},
 				{
 					"Name": "CountryId",
 					"Description": "The unique identifier of the Country.",
-					"BaseAttributeReference": {
-						"Entity": "ProductDescription.cdm.json/ProductDescription",
-						"Name": "CountryId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -59,15 +55,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductDescription.cdm.json/ProductDescription",
+						"Name": "CountryId"
 					}
 				},
 				{
 					"Name": "IsoLanguageId",
 					"Description": "The unique identifier of an ISO Language.",
-					"BaseAttributeReference": {
-						"Entity": "ProductDescription.cdm.json/ProductDescription",
-						"Name": "IsoLanguageId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -75,15 +71,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductDescription.cdm.json/ProductDescription",
+						"Name": "IsoLanguageId"
 					}
 				},
 				{
 					"Name": "ProductDescriptionPeriodStartDate",
 					"Description": "The period start date for which the associated Product Description is valid.",
-					"BaseAttributeReference": {
-						"Entity": "ProductDescription.cdm.json/ProductDescription",
-						"Name": "ProductDescriptionPeriodStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -92,15 +88,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductDescription.cdm.json/ProductDescription",
+						"Name": "ProductDescriptionPeriodStartDate"
 					}
 				},
 				{
 					"Name": "ProductDescriptionPeriodEndDate",
 					"Description": "The period end date for which the associated Product Description is valid.",
-					"BaseAttributeReference": {
-						"Entity": "ProductDescription.cdm.json/ProductDescription",
-						"Name": "ProductDescriptionPeriodEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -109,15 +105,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductDescription.cdm.json/ProductDescription",
+						"Name": "ProductDescriptionPeriodEndDate"
 					}
 				},
 				{
 					"Name": "ProductDescription",
 					"Description": "The Product Description.",
-					"BaseAttributeReference": {
-						"Entity": "ProductDescription.cdm.json/ProductDescription",
-						"Name": "ProductDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -126,15 +122,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductDescription.cdm.json/ProductDescription",
+						"Name": "ProductDescription"
 					}
 				},
 				{
 					"Name": "ProductDescriptionNote",
 					"Description": "A note, comment or additional information regarding the Product Description.",
-					"BaseAttributeReference": {
-						"Entity": "ProductDescription.cdm.json/ProductDescription",
-						"Name": "ProductDescriptionNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -143,24 +139,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductDescription.cdm.json/ProductDescription",
+						"Name": "ProductDescriptionNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductDescription",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -184,7 +177,7 @@
 			"Description": "The Product Description for the Product Description Type.",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
 			"PrimaryKeys": "ProductId,ProductDescriptionTypeId,CountryId,IsoLanguageId,ProductDescriptionPeriodStartDate",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

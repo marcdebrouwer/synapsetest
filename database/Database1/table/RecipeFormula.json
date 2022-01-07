@@ -16,10 +16,6 @@
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "SequenceNumber",
 					"Description": "The sequence in which the items are processed in the formula.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
-						"Name": "SequenceNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "SequenceNumber"
 					}
 				},
 				{
 					"Name": "IngredientId",
 					"Description": "The unique identifier of an Ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
-						"Name": "IngredientId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -59,15 +55,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "IngredientId"
 					}
 				},
 				{
 					"Name": "Quantity",
 					"Description": "The quantity of item required by the formula.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
-						"Name": "Quantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -77,15 +73,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "Quantity"
 					}
 				},
 				{
 					"Name": "UnitOfMeasureId",
 					"Description": "The unique identifier of a Unit Of Measure.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
-						"Name": "UnitOfMeasureId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -93,15 +89,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "UnitOfMeasureId"
 					}
 				},
 				{
 					"Name": "FormulaActivityTypeId",
 					"Description": "The unique identifier of a formula activity type.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
-						"Name": "FormulaActivityTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -109,15 +105,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "FormulaActivityTypeId"
 					}
 				},
 				{
 					"Name": "SubstituteIngredientIndicator",
 					"Description": "Indicates whether the ingredient may be used in the recipe formula as a substitute or alternate for another ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
-						"Name": "SubstituteIngredientIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -125,15 +121,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "SubstituteIngredientIndicator"
 					}
 				},
 				{
 					"Name": "RecipeFormulaNote",
 					"Description": "A note, comment or additional information regarding the recipe formula.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
-						"Name": "RecipeFormulaNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -142,24 +138,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "RecipeFormulaNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormula",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -183,7 +176,7 @@
 			"Description": "Describes recipe process inputs (e.g., ingredients, quantities), process parameters (e.g., processing temperature, ingredient transfer rate, mixing speed ), and process outputs (the product and its quantity resulting from a single batch). Formulas can be used to distinguish between different products or different product \"grades\" defined by the same procedure.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "RecipeId,SequenceNumber,IngredientId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

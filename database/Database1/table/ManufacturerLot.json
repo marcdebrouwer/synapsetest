@@ -16,10 +16,6 @@
 				{
 					"Name": "ManufacturerId",
 					"Description": "The unique identifier of a Manufacturer.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "ManufacturerId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturerId"
 					}
 				},
 				{
 					"Name": "ManufacturerLotId",
 					"Description": "The unique identifier of a Manufacturer Lot.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "ManufacturerLotId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturerLotId"
 					}
 				},
 				{
 					"Name": "ItemSku",
 					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "ItemSku"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ItemSku"
 					}
 				},
 				{
 					"Name": "Quantity",
 					"Description": "The quantity of non-serialized items in the Manufacturer Lot.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "Quantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -78,15 +74,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "Quantity"
 					}
 				},
 				{
 					"Name": "MinimumSerialNumber",
 					"Description": "The minimum (low) serial number of products included in the manufacturer item lot.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "MinimumSerialNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -95,15 +91,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "MinimumSerialNumber"
 					}
 				},
 				{
 					"Name": "MaximumSerialNumber",
 					"Description": "The maximum (high) serial number of products included in the manufacturer item lot.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "MaximumSerialNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -112,15 +108,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "MaximumSerialNumber"
 					}
 				},
 				{
 					"Name": "ManufacturedPeriodStartDate",
 					"Description": "The starting manufactured date of products included in the manufacturer item lot.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "ManufacturedPeriodStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -129,15 +125,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturedPeriodStartDate"
 					}
 				},
 				{
 					"Name": "ManufacturedPeriodEndDate",
 					"Description": "The ending manufactured date of products included in the manufacturer item lot.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "ManufacturedPeriodEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -146,15 +142,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturedPeriodEndDate"
 					}
 				},
 				{
 					"Name": "BestBeforeDate",
 					"Description": "The date before which the item is best used. This does not imply that the item has expired, just that the product is no longer at its best.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "BestBeforeDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -163,15 +159,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "BestBeforeDate"
 					}
 				},
 				{
 					"Name": "ExpiryDate",
 					"Description": "The date after which the item has expired and should not be used.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "ExpiryDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -180,15 +176,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ExpiryDate"
 					}
 				},
 				{
 					"Name": "ManufacturerLotNote",
 					"Description": "A note, comment or additional information regarding the Manufacturer Lot.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "ManufacturerLotNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -197,15 +193,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturerLotNote"
 					}
 				},
 				{
 					"Name": "ManufacturerFacilityId",
 					"Description": "The unique identifier of a Manufacturer Facility.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "ManufacturerFacilityId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -213,15 +209,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturerFacilityId"
 					}
 				},
 				{
 					"Name": "CountryOfOriginId",
 					"Description": "The unique identifier of the Country.",
-					"BaseAttributeReference": {
-						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
-						"Name": "CountryOfOriginId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -229,24 +225,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "CountryOfOriginId"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ManufacturerLot",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -270,7 +263,7 @@
 			"Description": "A group of related Items as designated by the Manufacturer. This could include lots or batch numbers. This is a particularly relevant for recall purposes.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "ManufacturerId,ManufacturerLotId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

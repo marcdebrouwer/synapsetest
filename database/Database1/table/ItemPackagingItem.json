@@ -16,10 +16,6 @@
 				{
 					"Name": "ItemPackagingVersionId",
 					"Description": "The unique identifier of an Item Packaging Version.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "ItemPackagingVersionId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemPackagingVersionId"
 					}
 				},
 				{
 					"Name": "ItemSku",
 					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "ItemSku"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemSku"
 					}
 				},
 				{
 					"Name": "PackingItemId",
 					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "PackingItemId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "PackingItemId"
 					}
 				},
 				{
 					"Name": "ItemPackagingItemStartDate",
 					"Description": "The effective end date or last date that the item and quantity is used in the item packaging.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "ItemPackagingItemStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -78,15 +74,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemPackagingItemStartDate"
 					}
 				},
 				{
 					"Name": "ItemPackagingItemEndDate",
 					"Description": "The effective end date or last date that the item and quantity is used in the item packaging.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "ItemPackagingItemEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -95,15 +91,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemPackagingItemEndDate"
 					}
 				},
 				{
 					"Name": "PackageComponentTypeId",
 					"Description": "The unique identifier of a Package Component Type.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "PackageComponentTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -111,15 +107,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "PackageComponentTypeId"
 					}
 				},
 				{
 					"Name": "ItemPackagingItemQuantity",
 					"Description": "The number of items contained in an item packaging.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "ItemPackagingItemQuantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -129,15 +125,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemPackagingItemQuantity"
 					}
 				},
 				{
 					"Name": "DepositAmount",
 					"Description": "The amount of the deposit associated with the item packaging item.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "DepositAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -147,15 +143,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "DepositAmount"
 					}
 				},
 				{
 					"Name": "IsoCurrencyCode",
 					"Description": "The ISO 4217 currency code.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "IsoCurrencyCode"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -164,15 +160,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "IsoCurrencyCode"
 					}
 				},
 				{
 					"Name": "UnitOfMeasureId",
 					"Description": "The unique identifier of a Unit Of Measure.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "UnitOfMeasureId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -180,15 +176,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "UnitOfMeasureId"
 					}
 				},
 				{
 					"Name": "PackageMaterialTypeId",
 					"Description": "The unique identifier of a Package Material Type.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "PackageMaterialTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -196,15 +192,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "PackageMaterialTypeId"
 					}
 				},
 				{
 					"Name": "ItemPackagingNote",
 					"Description": "A note, comment or additional information regarding the item packaging.",
-					"BaseAttributeReference": {
-						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
-						"Name": "ItemPackagingNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -213,24 +209,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemPackagingItem.cdm.json/ItemPackagingItem",
+						"Name": "ItemPackagingNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ItemPackagingItem",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -254,7 +247,7 @@
 			"Description": "Indicates the number of an item (SKU) that are used in the packaging of the Product.\n\nNote: This contains packaging and supplementary items such as documentation, coupons and free items but does not include any base product items.\n\nNote: Changes  in packaging does not necessarily result in a changed GTIN, UPC, etc. The following are a few of the many examples where a new GTIN, UPC, etc. would be required for the packaged product:\n- change of over 20% to a physical dimension, on any axis, or gross weight\n- change in the case or pallet orientation (even when there is no change in the base product)\n- change in the number of base products included on the pallet\n- free trial item included even though this does not change the GTIN, UPC, etc. of the base product",
 			"DisplayFolderInfo": "{\"name\":\"Inventory\",\"colorCode\":\"#692B0C\"}",
 			"PrimaryKeys": "ItemPackagingVersionId,ItemSku,PackingItemId,ItemPackagingItemStartDate",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

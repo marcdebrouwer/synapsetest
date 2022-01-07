@@ -16,10 +16,6 @@
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "ProcedureId",
 					"Description": "The unique identifier of a Procedure.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
-						"Name": "ProcedureId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
+						"Name": "ProcedureId"
 					}
 				},
 				{
 					"Name": "ProcedureSequenceNumber",
 					"Description": "The sequence in which the procedure is executed by the recipe.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
-						"Name": "ProcedureSequenceNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -59,15 +55,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
+						"Name": "ProcedureSequenceNumber"
 					}
 				},
 				{
 					"Name": "RecipeProcedureNote",
 					"Description": "A note, comment or additional information regarding the recipe procedure.",
-					"BaseAttributeReference": {
-						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
-						"Name": "RecipeProcedureNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -76,24 +72,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
+						"Name": "RecipeProcedureNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeProcedure",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -117,7 +110,7 @@
 			"Description": "The procedure(s) associated with a recipe.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "RecipeId,ProcedureId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

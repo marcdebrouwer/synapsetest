@@ -16,10 +16,6 @@
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductGtin.cdm.json/ProductGtin",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductGtin.cdm.json/ProductGtin",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "GlobalTradeItemNumber",
 					"Description": "The Global Trade Item Number (GTIN) is an identifier for trade items that was developed by GS1.\n\nA GTIN can be assigned to only one brick.",
-					"BaseAttributeReference": {
-						"Entity": "ProductGtin.cdm.json/ProductGtin",
-						"Name": "GlobalTradeItemNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -45,15 +41,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductGtin.cdm.json/ProductGtin",
+						"Name": "GlobalTradeItemNumber"
 					}
 				},
 				{
 					"Name": "ProductGtinPeriodStartDate",
 					"Description": "The period start date for which the associated Product GTIN is valid.",
-					"BaseAttributeReference": {
-						"Entity": "ProductGtin.cdm.json/ProductGtin",
-						"Name": "ProductGtinPeriodStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -62,15 +58,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductGtin.cdm.json/ProductGtin",
+						"Name": "ProductGtinPeriodStartDate"
 					}
 				},
 				{
 					"Name": "ProductGtinPeriodEndDate",
 					"Description": "The period end date for which the associated Product GTIN is valid.",
-					"BaseAttributeReference": {
-						"Entity": "ProductGtin.cdm.json/ProductGtin",
-						"Name": "ProductGtinPeriodEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -79,15 +75,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductGtin.cdm.json/ProductGtin",
+						"Name": "ProductGtinPeriodEndDate"
 					}
 				},
 				{
 					"Name": "ProductGtinName",
 					"Description": "A note, comment or additional information regarding the Product GTIN.",
-					"BaseAttributeReference": {
-						"Entity": "ProductGtin.cdm.json/ProductGtin",
-						"Name": "ProductGtinName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -96,15 +92,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductGtin.cdm.json/ProductGtin",
+						"Name": "ProductGtinName"
 					}
 				},
 				{
 					"Name": "ProductGtinNote",
 					"Description": "A note, comment or additional information regarding the Product GTIN.",
-					"BaseAttributeReference": {
-						"Entity": "ProductGtin.cdm.json/ProductGtin",
-						"Name": "ProductGtinNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -113,24 +109,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductGtin.cdm.json/ProductGtin",
+						"Name": "ProductGtinNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductGtin",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -154,7 +147,7 @@
 			"Description": "The GTIN of a Product.",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
 			"PrimaryKeys": "ProductId,GlobalTradeItemNumber,ProductGtinPeriodStartDate",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

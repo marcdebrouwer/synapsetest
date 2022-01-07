@@ -16,10 +16,6 @@
 				{
 					"Name": "RecipeId",
 					"Description": "The unique identifier of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "Recipe.cdm.json/Recipe",
-						"Name": "RecipeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeId"
 					}
 				},
 				{
 					"Name": "RecipeName",
 					"Description": "The name of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "Recipe.cdm.json/Recipe",
-						"Name": "RecipeName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeName"
 					}
 				},
 				{
 					"Name": "RecipeDescription",
 					"Description": "The description of a recipe.",
-					"BaseAttributeReference": {
-						"Entity": "Recipe.cdm.json/Recipe",
-						"Name": "RecipeDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeDescription"
 					}
 				},
 				{
 					"Name": "RecipeCreatedTimestamp",
 					"Description": "The timestamp that the recipe was created.",
-					"BaseAttributeReference": {
-						"Entity": "Recipe.cdm.json/Recipe",
-						"Name": "RecipeCreatedTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -78,15 +74,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeCreatedTimestamp"
 					}
 				},
 				{
 					"Name": "RecipeTypeId",
 					"Description": "The unique identifier of a Recipe Type.",
-					"BaseAttributeReference": {
-						"Entity": "Recipe.cdm.json/Recipe",
-						"Name": "RecipeTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -94,15 +90,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeTypeId"
 					}
 				},
 				{
 					"Name": "RecipeNote",
 					"Description": "A note, comment or additional information regarding the recipe.",
-					"BaseAttributeReference": {
-						"Entity": "Recipe.cdm.json/Recipe",
-						"Name": "RecipeNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -111,24 +107,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Recipe.cdm.json/Recipe",
+						"Name": "RecipeNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/Recipe",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -152,7 +145,7 @@
 			"Description": "The recipe used to manufacture a particular product.",
 			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
 			"PrimaryKeys": "RecipeId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

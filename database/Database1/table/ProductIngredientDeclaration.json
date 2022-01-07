@@ -16,10 +16,6 @@
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "IngredientId",
 					"Description": "The unique identifier of an Ingredient.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
-						"Name": "IngredientId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
+						"Name": "IngredientId"
 					}
 				},
 				{
 					"Name": "IngredientDeclarationId",
 					"Description": "The unique identifier of an ingredient declaration type.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
-						"Name": "IngredientDeclarationId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
+						"Name": "IngredientDeclarationId"
 					}
 				},
 				{
 					"Name": "BeautyBodycareProductIngredientDeclarationNote",
 					"Description": "A note, comment or additional information regarding the ingredient declaration.",
-					"BaseAttributeReference": {
-						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
-						"Name": "BeautyBodycareProductIngredientDeclarationNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -77,24 +73,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
+						"Name": "BeautyBodycareProductIngredientDeclarationNote"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductIngredientDeclaration",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -118,7 +111,7 @@
 			"Description": "The ingredient declaration(s) associated with the product ingredient.",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
 			"PrimaryKeys": "ProductId,IngredientId,IngredientDeclarationId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

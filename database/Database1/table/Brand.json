@@ -16,10 +16,6 @@
 				{
 					"Name": "BrandId",
 					"Description": "The unique identifier of a Brand.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandId"
 					}
 				},
 				{
 					"Name": "BrandName",
 					"Description": "The name of a Brand.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandName"
 					}
 				},
 				{
 					"Name": "BrandDescription",
 					"Description": "The description of a Brand.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandDescription"
 					}
 				},
 				{
 					"Name": "BrandMark",
 					"Description": "The 'brand mark' is that part of the brand that can be recognized - such as a symbol that identifies a company or product.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandMark"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "binary",
 						"IsComplexType": false,
@@ -77,15 +73,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "binary"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandMark"
 					}
 				},
 				{
 					"Name": "BrandTrademark",
 					"Description": "A 'trademark' is a brand name or brand mark that is given legal protection.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandTrademark"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "binary",
 						"IsComplexType": false,
@@ -93,15 +89,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "binary"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandTrademark"
 					}
 				},
 				{
 					"Name": "BrandLogo",
 					"Description": "A design, symbol or series of words that identifies the brand.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandLogo"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "binary",
 						"IsComplexType": false,
@@ -109,15 +105,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "binary"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandLogo"
 					}
 				},
 				{
 					"Name": "BrandTypeId",
 					"Description": "The unique identifier of the Brand Type.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -125,15 +121,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandTypeId"
 					}
 				},
 				{
 					"Name": "BrandCategoryId",
 					"Description": "The unique identifier of a Brand Category.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandCategoryId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -141,15 +137,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandCategoryId"
 					}
 				},
 				{
 					"Name": "BrandOwningPartyId",
 					"Description": "The unique identifier of a Party.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandOwningPartyId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -157,24 +153,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandOwningPartyId"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/Brand",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -198,7 +191,7 @@
 			"Description": "A brand is a distinctive name that is used for identifying a product, service or organization. Brands are often associated with products for marketing purposes.",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
 			"PrimaryKeys": "BrandId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

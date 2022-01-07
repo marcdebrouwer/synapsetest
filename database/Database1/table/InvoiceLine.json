@@ -16,10 +16,6 @@
 				{
 					"Name": "InvoiceId",
 					"Description": "The unique identifier of an Invoice.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "InvoiceId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "InvoiceId"
 					}
 				},
 				{
 					"Name": "InvoiceLineNumber",
 					"Description": "The unique identifier of an Invoice Line Item.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "InvoiceLineNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "InvoiceLineNumber"
 					}
 				},
 				{
 					"Name": "Quantity",
 					"Description": "The quantity of Products to be invoiced by the invoice line item.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "Quantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "Quantity"
 					}
 				},
 				{
 					"Name": "UnitPriceAmount",
 					"Description": "The list unit price of the invoiced line item products.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "UnitPriceAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -79,15 +75,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "UnitPriceAmount"
 					}
 				},
 				{
 					"Name": "SalesPriceAmount",
 					"Description": "The actual price invoice for the Product(s), which may differ from the list price.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "SalesPriceAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -97,15 +93,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "SalesPriceAmount"
 					}
 				},
 				{
 					"Name": "InvoiceLineItemNote",
 					"Description": "A note, comment or additional information regarding the invoice line item.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "InvoiceLineItemNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -114,15 +110,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "InvoiceLineItemNote"
 					}
 				},
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -130,15 +126,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "ItemSku",
 					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "ItemSku"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -147,15 +143,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "ItemSku"
 					}
 				},
 				{
 					"Name": "TotalProductInvoiceAmount",
 					"Description": "The total amount of product invoiced on the invoice line.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "TotalProductInvoiceAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -165,15 +161,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "TotalProductInvoiceAmount"
 					}
 				},
 				{
 					"Name": "ChargeId",
 					"Description": "The unique identifier of a Charge.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "ChargeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -181,15 +177,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "ChargeId"
 					}
 				},
 				{
 					"Name": "InvoiceLineChargeAmount",
 					"Description": "The amount of the charge invoiced on the invoice line.\n\nNote:\nOne or more adjustments may be invoiced on the same invoice line (see INVOICE LINE ADJUSTMENT).     However, each Charge is invoiced as a single invoice line item.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "InvoiceLineChargeAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -199,15 +195,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "InvoiceLineChargeAmount"
 					}
 				},
 				{
 					"Name": "InvoiceLineAdjustmentsAmount",
 					"Description": "The amount of adjustment(s) invoiced on the invoice line.\n\nNote:\nOne or more adjustments may be invoiced on the same invoice line (see INVOICE LINE ADJUSTMENT).     However, each Charge is invoiced as a single invoice line item.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "InvoiceLineAdjustmentsAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -217,15 +213,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "InvoiceLineAdjustmentsAmount"
 					}
 				},
 				{
 					"Name": "OrderId",
 					"Description": "The unique number that identifies an Order.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "OrderId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -233,15 +229,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "OrderId"
 					}
 				},
 				{
 					"Name": "OrderLineNumber",
 					"Description": "The number that identifies the Order Line Item.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "OrderLineNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -249,15 +245,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "OrderLineNumber"
 					}
 				},
 				{
 					"Name": "IsoCurrencyCode",
 					"Description": "The ISO 4217 currency code.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "IsoCurrencyCode"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -266,15 +262,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "IsoCurrencyCode"
 					}
 				},
 				{
 					"Name": "InvoiceLineTypeId",
 					"Description": "The unique identifier of an Invoice Item Type.",
-					"BaseAttributeReference": {
-						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
-						"Name": "InvoiceLineTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -282,24 +278,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "InvoiceLine.cdm.json/InvoiceLine",
+						"Name": "InvoiceLineTypeId"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/InvoiceLine",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -323,7 +316,7 @@
 			"Description": "A component of the invoice that details specific products, quantities and values invoiced.",
 			"DisplayFolderInfo": "{\"name\":\"Order\",\"colorCode\":\"#7062A8\"}",
 			"PrimaryKeys": "InvoiceId,InvoiceLineNumber",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,
