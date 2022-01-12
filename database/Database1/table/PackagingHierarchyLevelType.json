@@ -1,0 +1,105 @@
+{
+	"name": "PackagingHierarchyLevelType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "PackagingHierarchyLevelType",
+		"Description": "The type of packaging hierarchy level.\n\nEx:\n- Base Unit\n- Pack or Inner Pack\n- Multipack\n- Setpack\n- Case\n- Display Shipper\n- Pallet\n- Mixed Module\n- Transport Load\n\nwhere:\nBase Unit: The lowest level of the item hierarch intended or labeled for individual resale. For example, an individual box of Kleenex.\n\nPack or Inner Pack: A logistical unit or a consumer unit between a cash and each. For example, a single GTIN that includes two toothpaste tubes.\n\nMultipack: A group of items (not necessarily the same) that are intended to be sold as a single consumer unit. For example, a three-pack of chocolate bars, each one different.\n\nSetpack: A consumer unit that contains multiple instances of lower level items.\n\nCase: A standard trade item shipping unit. \n\nDisplay Shipper: A display which can contain a single or multiple GTINs. \n\nPallet: A unit load that contains a single or multiple GTINs that is not display ready. Includes a box pallet.\n\nMixed Module: A unit load that is a display ready pallet that may contain one or more GTINs that are intended to go directly to the selling floor.\n\nTransport Load: The trade item above the pallet level used for transporting trade items. This level can be used to define truckloads, shipping containers, rail cars, ships and other forms of mass transportation.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PackagingHierarchyLevelTypeId",
+					"Description": "The unique identifier of a Packaging Hierarchy Level Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType",
+						"Name": "PackagingHierarchyLevelTypeId"
+					}
+				},
+				{
+					"Name": "PackagingHierarchyLevelTypeName",
+					"Description": "The name of a Packaging Hierarchy Level Type.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType",
+						"Name": "PackagingHierarchyLevelTypeName"
+					}
+				},
+				{
+					"Name": "PackagingHierarchyLevelTypeDescription",
+					"Description": "The description of a Packaging Hierarchy Level Type.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType",
+						"Name": "PackagingHierarchyLevelTypeDescription"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackagingHierarchyLevelType",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackagingHierarchyLevelType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PackagingHierarchyLevelTypeId\":{\"entity\":\"PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType\",\"name\":\"PackagingHierarchyLevelTypeId\"},\"PackagingHierarchyLevelTypeName\":{\"entity\":\"PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType\",\"name\":\"PackagingHierarchyLevelTypeName\"},\"PackagingHierarchyLevelTypeDescription\":{\"entity\":\"PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType\",\"name\":\"PackagingHierarchyLevelTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PackagingHierarchyLevelType\",\"path\":\"PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType\"},\"description\":\"The type of packaging hierarchy level.\\n\\nEx:\\n- Base Unit\\n- Pack or Inner Pack\\n- Multipack\\n- Setpack\\n- Case\\n- Display Shipper\\n- Pallet\\n- Mixed Module\\n- Transport Load\\n\\nwhere:\\nBase Unit: The lowest level of the item hierarch intended or labeled for individual resale. For example, an individual box of Kleenex.\\n\\nPack or Inner Pack: A logistical unit or a consumer unit between a cash and each. For example, a single GTIN that includes two toothpaste tubes.\\n\\nMultipack: A group of items (not necessarily the same) that are intended to be sold as a single consumer unit. For example, a three-pack of chocolate bars, each one different.\\n\\nSetpack: A consumer unit that contains multiple instances of lower level items.\\n\\nCase: A standard trade item shipping unit. \\n\\nDisplay Shipper: A display which can contain a single or multiple GTINs. \\n\\nPallet: A unit load that contains a single or multiple GTINs that is not display ready. Includes a box pallet.\\n\\nMixed Module: A unit load that is a display ready pallet that may contain one or more GTINs that are intended to go directly to the selling floor.\\n\\nTransport Load: The trade item above the pallet level used for transporting trade items. This level can be used to define truckloads, shipping containers, rail cars, ships and other forms of mass transportation.\",\"primaryKey\":[\"PackagingHierarchyLevelTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"PackagingHierarchyLevelTypeId\",\"attributeReference\":{\"entity\":\"PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType\",\"name\":\"PackagingHierarchyLevelTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackagingHierarchyLevelTypeName\",\"attributeReference\":{\"entity\":\"PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType\",\"name\":\"PackagingHierarchyLevelTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"PackagingHierarchyLevelTypeDescription\",\"attributeReference\":{\"entity\":\"PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType\",\"name\":\"PackagingHierarchyLevelTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "The type of packaging hierarchy level.\n\nEx:\n- Base Unit\n- Pack or Inner Pack\n- Multipack\n- Setpack\n- Case\n- Display Shipper\n- Pallet\n- Mixed Module\n- Transport Load\n\nwhere:\nBase Unit: The lowest level of the item hierarch intended or labeled for individual resale. For example, an individual box of Kleenex.\n\nPack or Inner Pack: A logistical unit or a consumer unit between a cash and each. For example, a single GTIN that includes two toothpaste tubes.\n\nMultipack: A group of items (not necessarily the same) that are intended to be sold as a single consumer unit. For example, a three-pack of chocolate bars, each one different.\n\nSetpack: A consumer unit that contains multiple instances of lower level items.\n\nCase: A standard trade item shipping unit. \n\nDisplay Shipper: A display which can contain a single or multiple GTINs. \n\nPallet: A unit load that contains a single or multiple GTINs that is not display ready. Includes a box pallet.\n\nMixed Module: A unit load that is a display ready pallet that may contain one or more GTINs that are intended to go directly to the selling floor.\n\nTransport Load: The trade item above the pallet level used for transporting trade items. This level can be used to define truckloads, shipping containers, rail cars, ships and other forms of mass transportation.",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "PackagingHierarchyLevelTypeId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

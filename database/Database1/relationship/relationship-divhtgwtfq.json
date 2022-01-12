@@ -1,0 +1,26 @@
+{
+	"name": "relationship-divhtgwtfq",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-divhtgwtfq",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Recipe",
+		"ToTableName": "RecipeFormula",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "RecipeId",
+				"ToColumnName": "RecipeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

@@ -1,0 +1,139 @@
+{
+	"name": "ItemRecipe",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "ItemRecipe",
+		"Description": "The recipe used to make the item.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ItemSku",
+					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 20,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
+						"Name": "ItemSku"
+					}
+				},
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
+						"Name": "RecipeId"
+					}
+				},
+				{
+					"Name": "PeriodStartDate",
+					"Description": "The start date of the recipe being used to create the Item.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
+						"Name": "PeriodStartDate"
+					}
+				},
+				{
+					"Name": "PeriodEndDate",
+					"Description": "The end date of the recipe being used to create the Item.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
+						"Name": "PeriodEndDate"
+					}
+				},
+				{
+					"Name": "ItemRecipeNote",
+					"Description": "Notes, comments or additional information regarding the item recipe.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ItemRecipe.cdm.json/ItemRecipe",
+						"Name": "ItemRecipeNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ItemRecipe",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ItemRecipe",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ItemSku\":{\"entity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"name\":\"ItemSku\"},\"RecipeId\":{\"entity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"name\":\"RecipeId\"},\"PeriodStartDate\":{\"entity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"name\":\"PeriodStartDate\"},\"PeriodEndDate\":{\"entity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"name\":\"PeriodEndDate\"},\"ItemRecipeNote\":{\"entity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"name\":\"ItemRecipeNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ItemRecipe\",\"path\":\"ItemRecipe.cdm.json/ItemRecipe\"},\"description\":\"The recipe used to make the item.\",\"primaryKey\":[\"ItemSku\",\"RecipeId\",\"PeriodStartDate\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ItemSku\",\"attributeReference\":{\"entity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"name\":\"ItemSku\"},\"dataType\":\"string\",\"dataTypeLength\":20},{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PeriodStartDate\",\"attributeReference\":{\"entity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"name\":\"PeriodStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"PeriodEndDate\",\"attributeReference\":{\"entity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"name\":\"PeriodEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ItemRecipeNote\",\"attributeReference\":{\"entity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"name\":\"ItemRecipeNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "The recipe used to make the item.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "ItemSku,RecipeId,PeriodStartDate",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

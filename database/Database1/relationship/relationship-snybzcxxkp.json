@@ -1,0 +1,26 @@
+{
+	"name": "relationship-snybzcxxkp",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-snybzcxxkp",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Recipe",
+		"ToTableName": "RecipeRelatedParty",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "RecipeId",
+				"ToColumnName": "RecipeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

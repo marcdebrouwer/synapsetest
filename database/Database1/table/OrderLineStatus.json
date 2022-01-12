@@ -16,10 +16,6 @@
 				{
 					"Name": "OrderId",
 					"Description": "The unique number that identifies an Order.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLineStatus.cdm.json/OrderLineStatus",
-						"Name": "OrderId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLineStatus.cdm.json/OrderLineStatus",
+						"Name": "OrderId"
 					}
 				},
 				{
 					"Name": "OrderLineNumber",
 					"Description": "The number that identifies the Order Line Item.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLineStatus.cdm.json/OrderLineStatus",
-						"Name": "OrderLineNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLineStatus.cdm.json/OrderLineStatus",
+						"Name": "OrderLineNumber"
 					}
 				},
 				{
 					"Name": "OrderLineStatusStartTimestamp",
 					"Description": "The start timestamp of the order line status.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLineStatus.cdm.json/OrderLineStatus",
-						"Name": "OrderLineStatusStartTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLineStatus.cdm.json/OrderLineStatus",
+						"Name": "OrderLineStatusStartTimestamp"
 					}
 				},
 				{
 					"Name": "OrderLineStatusEndTimestamp",
 					"Description": "The end timestamp of the order line status.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLineStatus.cdm.json/OrderLineStatus",
-						"Name": "OrderLineStatusEndTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -77,15 +73,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLineStatus.cdm.json/OrderLineStatus",
+						"Name": "OrderLineStatusEndTimestamp"
 					}
 				},
 				{
 					"Name": "OrderStatusTypeId",
 					"Description": "The unique identifier of an Order Status Type.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLineStatus.cdm.json/OrderLineStatus",
-						"Name": "OrderStatusTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -93,24 +89,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLineStatus.cdm.json/OrderLineStatus",
+						"Name": "OrderStatusTypeId"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/OrderLineStatus",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -134,7 +127,7 @@
 			"Description": "The status of the associated Order Line.",
 			"DisplayFolderInfo": "{\"name\":\"Order\",\"colorCode\":\"#7062A8\"}",
 			"PrimaryKeys": "OrderId,OrderLineNumber,OrderLineStatusStartTimestamp",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

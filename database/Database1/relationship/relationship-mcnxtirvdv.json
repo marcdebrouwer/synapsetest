@@ -1,0 +1,26 @@
+{
+	"name": "relationship-mcnxtirvdv",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-mcnxtirvdv",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "RecipeType",
+		"ToTableName": "Recipe",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "RecipeTypeId",
+				"ToColumnName": "RecipeTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RecipeType.cdm.json/RecipeType\",\"toEntity\":\"Recipe.cdm.json/Recipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeTypeId\",\"toAttribute\":\"RecipeTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

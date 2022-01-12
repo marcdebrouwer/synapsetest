@@ -1,0 +1,267 @@
+{
+	"name": "ProductIngredient",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "ProductIngredient",
+		"Description": "The ingredients that are contained in the product.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "ProductId"
+					}
+				},
+				{
+					"Name": "IngredientId",
+					"Description": "The unique identifier of an Ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "IngredientId"
+					}
+				},
+				{
+					"Name": "ProductIngredientPeriodStartDate",
+					"Description": "The period start date for which the associated Product Ingredient was used in the product.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "ProductIngredientPeriodStartDate"
+					}
+				},
+				{
+					"Name": "ProductIngredientPeriodEndDate",
+					"Description": "The period end date for which the associated Product Ingredient was used in the product.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "ProductIngredientPeriodEndDate"
+					}
+				},
+				{
+					"Name": "TotalIngredient",
+					"Description": "The total amount of associated ingredient in a single serving.\n\nEx:\nEx\" 4g total sugar per serving",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "TotalIngredient"
+					}
+				},
+				{
+					"Name": "TotalIngredientUomId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "TotalIngredientUomId"
+					}
+				},
+				{
+					"Name": "ActiveIngredientIndicator",
+					"Description": "Indicates whether the ingredient is considered an active ingredient or not.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "ActiveIngredientIndicator"
+					}
+				},
+				{
+					"Name": "SubstituteIngredientIndicator",
+					"Description": "Indicates whether the recipe resulting ingredients may have used the ingredient as a substitute or alternate for another ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "SubstituteIngredientIndicator"
+					}
+				},
+				{
+					"Name": "MayContainIngredientIndicator",
+					"Description": "Indicates whether the recipe resulting ingredients may contain the ingredient. This is usually as a result of the ingredient being used elsewhere in the manufacturing facility and it may have come in contact with the production process. Commonly used for items such as peanuts where some individuals are highly allergic.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "MayContainIngredientIndicator"
+					}
+				},
+				{
+					"Name": "AlternateIngredientName",
+					"Description": "The alternate name of an Ingredient as provided by a specified source.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "AlternateIngredientName"
+					}
+				},
+				{
+					"Name": "AlternateIngredientNameSourcePartyId",
+					"Description": "The unique identifier of a Party.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "AlternateIngredientNameSourcePartyId"
+					}
+				},
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "RecipeId"
+					}
+				},
+				{
+					"Name": "ProductIngredientNote",
+					"Description": "A note, comment or additional information regarding the product ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredient.cdm.json/ProductIngredient",
+						"Name": "ProductIngredientNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductIngredient",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductIngredient",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"ProductId\"},\"IngredientId\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"IngredientId\"},\"ProductIngredientPeriodStartDate\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"ProductIngredientPeriodStartDate\"},\"ProductIngredientPeriodEndDate\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"ProductIngredientPeriodEndDate\"},\"TotalIngredient\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"TotalIngredient\"},\"TotalIngredientUomId\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"TotalIngredientUomId\"},\"ActiveIngredientIndicator\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"ActiveIngredientIndicator\"},\"SubstituteIngredientIndicator\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"SubstituteIngredientIndicator\"},\"MayContainIngredientIndicator\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"MayContainIngredientIndicator\"},\"AlternateIngredientName\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"AlternateIngredientName\"},\"AlternateIngredientNameSourcePartyId\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"AlternateIngredientNameSourcePartyId\"},\"RecipeId\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"RecipeId\"},\"ProductIngredientNote\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"ProductIngredientNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ProductIngredient\",\"path\":\"ProductIngredient.cdm.json/ProductIngredient\"},\"description\":\"The ingredients that are contained in the product.\",\"primaryKey\":[\"ProductId\",\"IngredientId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"IngredientId\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"IngredientId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductIngredientPeriodStartDate\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"ProductIngredientPeriodStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ProductIngredientPeriodEndDate\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"ProductIngredientPeriodEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"TotalIngredient\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"TotalIngredient\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"TotalIngredientUomId\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"TotalIngredientUomId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ActiveIngredientIndicator\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"ActiveIngredientIndicator\"},\"dataType\":\"boolean\"},{\"type\":\"Existing\",\"name\":\"SubstituteIngredientIndicator\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"SubstituteIngredientIndicator\"},\"dataType\":\"boolean\"},{\"type\":\"Existing\",\"name\":\"MayContainIngredientIndicator\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"MayContainIngredientIndicator\"},\"dataType\":\"boolean\"},{\"type\":\"Existing\",\"name\":\"AlternateIngredientName\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"AlternateIngredientName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"AlternateIngredientNameSourcePartyId\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"AlternateIngredientNameSourcePartyId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductIngredientNote\",\"attributeReference\":{\"entity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"name\":\"ProductIngredientNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "The ingredients that are contained in the product.",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "ProductId,IngredientId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

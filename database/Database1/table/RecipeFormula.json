@@ -1,0 +1,186 @@
+{
+	"name": "RecipeFormula",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "RecipeFormula",
+		"Description": "Describes recipe process inputs (e.g., ingredients, quantities), process parameters (e.g., processing temperature, ingredient transfer rate, mixing speed ), and process outputs (the product and its quantity resulting from a single batch). Formulas can be used to distinguish between different products or different product \"grades\" defined by the same procedure.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "RecipeId"
+					}
+				},
+				{
+					"Name": "SequenceNumber",
+					"Description": "The sequence in which the items are processed in the formula.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "SequenceNumber"
+					}
+				},
+				{
+					"Name": "IngredientId",
+					"Description": "The unique identifier of an Ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "IngredientId"
+					}
+				},
+				{
+					"Name": "Quantity",
+					"Description": "The quantity of item required by the formula.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "Quantity"
+					}
+				},
+				{
+					"Name": "UnitOfMeasureId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "UnitOfMeasureId"
+					}
+				},
+				{
+					"Name": "FormulaActivityTypeId",
+					"Description": "The unique identifier of a formula activity type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "FormulaActivityTypeId"
+					}
+				},
+				{
+					"Name": "SubstituteIngredientIndicator",
+					"Description": "Indicates whether the ingredient may be used in the recipe formula as a substitute or alternate for another ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "SubstituteIngredientIndicator"
+					}
+				},
+				{
+					"Name": "RecipeFormulaNote",
+					"Description": "A note, comment or additional information regarding the recipe formula.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeFormula.cdm.json/RecipeFormula",
+						"Name": "RecipeFormulaNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormula",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeFormula",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeId\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"RecipeId\"},\"SequenceNumber\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"SequenceNumber\"},\"IngredientId\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"IngredientId\"},\"Quantity\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"Quantity\"},\"UnitOfMeasureId\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"UnitOfMeasureId\"},\"FormulaActivityTypeId\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"FormulaActivityTypeId\"},\"SubstituteIngredientIndicator\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"SubstituteIngredientIndicator\"},\"RecipeFormulaNote\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"RecipeFormulaNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"RecipeFormula\",\"path\":\"RecipeFormula.cdm.json/RecipeFormula\"},\"description\":\"Describes recipe process inputs (e.g., ingredients, quantities), process parameters (e.g., processing temperature, ingredient transfer rate, mixing speed ), and process outputs (the product and its quantity resulting from a single batch). Formulas can be used to distinguish between different products or different product \\\"grades\\\" defined by the same procedure.\",\"primaryKey\":[\"RecipeId\",\"SequenceNumber\",\"IngredientId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"SequenceNumber\",\"attributeReference\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"SequenceNumber\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientId\",\"attributeReference\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"IngredientId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"Quantity\",\"attributeReference\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"Quantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"UnitOfMeasureId\",\"attributeReference\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"UnitOfMeasureId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"FormulaActivityTypeId\",\"attributeReference\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"FormulaActivityTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"SubstituteIngredientIndicator\",\"attributeReference\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"SubstituteIngredientIndicator\"},\"dataType\":\"boolean\"},{\"type\":\"Existing\",\"name\":\"RecipeFormulaNote\",\"attributeReference\":{\"entity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"name\":\"RecipeFormulaNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "Describes recipe process inputs (e.g., ingredients, quantities), process parameters (e.g., processing temperature, ingredient transfer rate, mixing speed ), and process outputs (the product and its quantity resulting from a single batch). Formulas can be used to distinguish between different products or different product \"grades\" defined by the same procedure.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeId,SequenceNumber,IngredientId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

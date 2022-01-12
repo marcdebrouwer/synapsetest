@@ -1,0 +1,104 @@
+{
+	"name": "IngredientPurpose",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "IngredientPurpose",
+		"Description": "A purpose associated with the ingredient.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "IngredientId",
+					"Description": "The unique identifier of an Ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientPurpose.cdm.json/IngredientPurpose",
+						"Name": "IngredientId"
+					}
+				},
+				{
+					"Name": "IngredientPurposeTypeId",
+					"Description": "The unique identifier of an Ingredient Purpose Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientPurpose.cdm.json/IngredientPurpose",
+						"Name": "IngredientPurposeTypeId"
+					}
+				},
+				{
+					"Name": "IngredientPurposeNote",
+					"Description": "A note, comment or additional information regarding the ingredient purpose.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientPurpose.cdm.json/IngredientPurpose",
+						"Name": "IngredientPurposeNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/IngredientPurpose",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/IngredientPurpose",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"IngredientId\":{\"entity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"name\":\"IngredientId\"},\"IngredientPurposeTypeId\":{\"entity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"name\":\"IngredientPurposeTypeId\"},\"IngredientPurposeNote\":{\"entity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"name\":\"IngredientPurposeNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"IngredientPurpose\",\"path\":\"IngredientPurpose.cdm.json/IngredientPurpose\"},\"description\":\"A purpose associated with the ingredient.\",\"primaryKey\":[\"IngredientId\",\"IngredientPurposeTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"IngredientId\",\"attributeReference\":{\"entity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"name\":\"IngredientId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientPurposeTypeId\",\"attributeReference\":{\"entity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"name\":\"IngredientPurposeTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientPurposeNote\",\"attributeReference\":{\"entity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"name\":\"IngredientPurposeNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "A purpose associated with the ingredient.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "IngredientId,IngredientPurposeTypeId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

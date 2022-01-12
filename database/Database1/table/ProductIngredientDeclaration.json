@@ -1,0 +1,121 @@
+{
+	"name": "ProductIngredientDeclaration",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "ProductIngredientDeclaration",
+		"Description": "The ingredient declaration(s) associated with the product ingredient.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
+						"Name": "ProductId"
+					}
+				},
+				{
+					"Name": "IngredientId",
+					"Description": "The unique identifier of an Ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
+						"Name": "IngredientId"
+					}
+				},
+				{
+					"Name": "IngredientDeclarationId",
+					"Description": "The unique identifier of an ingredient declaration type.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
+						"Name": "IngredientDeclarationId"
+					}
+				},
+				{
+					"Name": "BeautyBodycareProductIngredientDeclarationNote",
+					"Description": "A note, comment or additional information regarding the ingredient declaration.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration",
+						"Name": "BeautyBodycareProductIngredientDeclarationNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductIngredientDeclaration",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductIngredientDeclaration",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration\",\"name\":\"ProductId\"},\"IngredientId\":{\"entity\":\"ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration\",\"name\":\"IngredientId\"},\"IngredientDeclarationId\":{\"entity\":\"ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration\",\"name\":\"IngredientDeclarationId\"},\"BeautyBodycareProductIngredientDeclarationNote\":{\"entity\":\"ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration\",\"name\":\"BeautyBodycareProductIngredientDeclarationNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ProductIngredientDeclaration\",\"path\":\"ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration\"},\"description\":\"The ingredient declaration(s) associated with the product ingredient.\",\"primaryKey\":[\"ProductId\",\"IngredientId\",\"IngredientDeclarationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"IngredientId\",\"attributeReference\":{\"entity\":\"ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration\",\"name\":\"IngredientId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientDeclarationId\",\"attributeReference\":{\"entity\":\"ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration\",\"name\":\"IngredientDeclarationId\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"BeautyBodycareProductIngredientDeclarationNote\",\"attributeReference\":{\"entity\":\"ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration\",\"name\":\"BeautyBodycareProductIngredientDeclarationNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "The ingredient declaration(s) associated with the product ingredient.",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "ProductId,IngredientId,IngredientDeclarationId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

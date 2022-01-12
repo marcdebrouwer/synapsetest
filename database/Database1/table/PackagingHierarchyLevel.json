@@ -1,0 +1,137 @@
+{
+	"name": "PackagingHierarchyLevel",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "PackagingHierarchyLevel",
+		"Description": "A level within a packaging hierarchy.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PackagingHierarchyId",
+					"Description": "The unique identifier of a Packaging Hierarchy.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel",
+						"Name": "PackagingHierarchyId"
+					}
+				},
+				{
+					"Name": "PackagingHierarchyLevelId",
+					"Description": "The unique identifier of a Packaging Hierarchy Level.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel",
+						"Name": "PackagingHierarchyLevelId"
+					}
+				},
+				{
+					"Name": "PackagingHierarchyLevelName",
+					"Description": "The name of a Packaging Hierarchy Level.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel",
+						"Name": "PackagingHierarchyLevelName"
+					}
+				},
+				{
+					"Name": "PackagingHierarchyLevelDescription",
+					"Description": "The description of a Packaging Hierarchy Level.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel",
+						"Name": "PackagingHierarchyLevelDescription"
+					}
+				},
+				{
+					"Name": "PackagingHierarchyLevelTypeId",
+					"Description": "The unique identifier of a Packaging Hierarchy Level Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel",
+						"Name": "PackagingHierarchyLevelTypeId"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackagingHierarchyLevel",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackagingHierarchyLevel",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PackagingHierarchyId\":{\"entity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"name\":\"PackagingHierarchyId\"},\"PackagingHierarchyLevelId\":{\"entity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"name\":\"PackagingHierarchyLevelId\"},\"PackagingHierarchyLevelName\":{\"entity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"name\":\"PackagingHierarchyLevelName\"},\"PackagingHierarchyLevelDescription\":{\"entity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"name\":\"PackagingHierarchyLevelDescription\"},\"PackagingHierarchyLevelTypeId\":{\"entity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"name\":\"PackagingHierarchyLevelTypeId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PackagingHierarchyLevel\",\"path\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\"},\"description\":\"A level within a packaging hierarchy.\",\"primaryKey\":[\"PackagingHierarchyId\",\"PackagingHierarchyLevelId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"PackagingHierarchyId\",\"attributeReference\":{\"entity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"name\":\"PackagingHierarchyId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackagingHierarchyLevelId\",\"attributeReference\":{\"entity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"name\":\"PackagingHierarchyLevelId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackagingHierarchyLevelName\",\"attributeReference\":{\"entity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"name\":\"PackagingHierarchyLevelName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"PackagingHierarchyLevelDescription\",\"attributeReference\":{\"entity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"name\":\"PackagingHierarchyLevelDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"PackagingHierarchyLevelTypeId\",\"attributeReference\":{\"entity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"name\":\"PackagingHierarchyLevelTypeId\"},\"dataType\":\"integer\"}]}}}",
+			"Description": "A level within a packaging hierarchy.",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "PackagingHierarchyId,PackagingHierarchyLevelId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

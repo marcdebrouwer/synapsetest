@@ -1,0 +1,170 @@
+{
+	"name": "ProductNutrient",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "ProductNutrient",
+		"Description": "The nutrients that are provided by the product.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductNutrient.cdm.json/ProductNutrient",
+						"Name": "ProductId"
+					}
+				},
+				{
+					"Name": "NutrientId",
+					"Description": "The unique identifier of a Nutrient.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductNutrient.cdm.json/ProductNutrient",
+						"Name": "NutrientId"
+					}
+				},
+				{
+					"Name": "PreparedStateId",
+					"Description": "The unique identifier of a Prepared State.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductNutrient.cdm.json/ProductNutrient",
+						"Name": "PreparedStateId"
+					}
+				},
+				{
+					"Name": "ProductNutrientPeriodStartDate",
+					"Description": "The period start date for which the associated Product Nutrient was present in the product.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductNutrient.cdm.json/ProductNutrient",
+						"Name": "ProductNutrientPeriodStartDate"
+					}
+				},
+				{
+					"Name": "ProductNutrientPeriodEndDate",
+					"Description": "The period end date for which the associated Product Nutrient was present in the product.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductNutrient.cdm.json/ProductNutrient",
+						"Name": "ProductNutrientPeriodEndDate"
+					}
+				},
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductNutrient.cdm.json/ProductNutrient",
+						"Name": "RecipeId"
+					}
+				},
+				{
+					"Name": "RecipeNutrientNote",
+					"Description": "A note, comment or additional information regarding the recipe nutrient.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductNutrient.cdm.json/ProductNutrient",
+						"Name": "RecipeNutrientNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductNutrient",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductNutrient",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"ProductId\"},\"NutrientId\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"NutrientId\"},\"PreparedStateId\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"PreparedStateId\"},\"ProductNutrientPeriodStartDate\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"ProductNutrientPeriodStartDate\"},\"ProductNutrientPeriodEndDate\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"ProductNutrientPeriodEndDate\"},\"RecipeId\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"RecipeId\"},\"RecipeNutrientNote\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"RecipeNutrientNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ProductNutrient\",\"path\":\"ProductNutrient.cdm.json/ProductNutrient\"},\"description\":\"The nutrients that are provided by the product.\",\"primaryKey\":[\"ProductId\",\"NutrientId\",\"PreparedStateId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"NutrientId\",\"attributeReference\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"NutrientId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PreparedStateId\",\"attributeReference\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"PreparedStateId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductNutrientPeriodStartDate\",\"attributeReference\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"ProductNutrientPeriodStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ProductNutrientPeriodEndDate\",\"attributeReference\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"ProductNutrientPeriodEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RecipeNutrientNote\",\"attributeReference\":{\"entity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"name\":\"RecipeNutrientNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "The nutrients that are provided by the product.",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "ProductId,NutrientId,PreparedStateId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

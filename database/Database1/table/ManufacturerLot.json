@@ -1,0 +1,273 @@
+{
+	"name": "ManufacturerLot",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "ManufacturerLot",
+		"Description": "A group of related Items as designated by the Manufacturer. This could include lots or batch numbers. This is a particularly relevant for recall purposes.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ManufacturerId",
+					"Description": "The unique identifier of a Manufacturer.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturerId"
+					}
+				},
+				{
+					"Name": "ManufacturerLotId",
+					"Description": "The unique identifier of a Manufacturer Lot.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturerLotId"
+					}
+				},
+				{
+					"Name": "ItemSku",
+					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 20,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ItemSku"
+					}
+				},
+				{
+					"Name": "Quantity",
+					"Description": "The quantity of non-serialized items in the Manufacturer Lot.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "Quantity"
+					}
+				},
+				{
+					"Name": "MinimumSerialNumber",
+					"Description": "The minimum (low) serial number of products included in the manufacturer item lot.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 30,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "MinimumSerialNumber"
+					}
+				},
+				{
+					"Name": "MaximumSerialNumber",
+					"Description": "The maximum (high) serial number of products included in the manufacturer item lot.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 30,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "MaximumSerialNumber"
+					}
+				},
+				{
+					"Name": "ManufacturedPeriodStartDate",
+					"Description": "The starting manufactured date of products included in the manufacturer item lot.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturedPeriodStartDate"
+					}
+				},
+				{
+					"Name": "ManufacturedPeriodEndDate",
+					"Description": "The ending manufactured date of products included in the manufacturer item lot.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturedPeriodEndDate"
+					}
+				},
+				{
+					"Name": "BestBeforeDate",
+					"Description": "The date before which the item is best used. This does not imply that the item has expired, just that the product is no longer at its best.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "BestBeforeDate"
+					}
+				},
+				{
+					"Name": "ExpiryDate",
+					"Description": "The date after which the item has expired and should not be used.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ExpiryDate"
+					}
+				},
+				{
+					"Name": "ManufacturerLotNote",
+					"Description": "A note, comment or additional information regarding the Manufacturer Lot.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturerLotNote"
+					}
+				},
+				{
+					"Name": "ManufacturerFacilityId",
+					"Description": "The unique identifier of a Manufacturer Facility.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "ManufacturerFacilityId"
+					}
+				},
+				{
+					"Name": "CountryOfOriginId",
+					"Description": "The unique identifier of the Country.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ManufacturerLot.cdm.json/ManufacturerLot",
+						"Name": "CountryOfOriginId"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ManufacturerLot",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ManufacturerLot",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ManufacturerId\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturerId\"},\"ManufacturerLotId\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturerLotId\"},\"ItemSku\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ItemSku\"},\"Quantity\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"Quantity\"},\"MinimumSerialNumber\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"MinimumSerialNumber\"},\"MaximumSerialNumber\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"MaximumSerialNumber\"},\"ManufacturedPeriodStartDate\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturedPeriodStartDate\"},\"ManufacturedPeriodEndDate\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturedPeriodEndDate\"},\"BestBeforeDate\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"BestBeforeDate\"},\"ExpiryDate\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ExpiryDate\"},\"ManufacturerLotNote\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturerLotNote\"},\"ManufacturerFacilityId\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturerFacilityId\"},\"CountryOfOriginId\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"CountryOfOriginId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ManufacturerLot\",\"path\":\"ManufacturerLot.cdm.json/ManufacturerLot\"},\"description\":\"A group of related Items as designated by the Manufacturer. This could include lots or batch numbers. This is a particularly relevant for recall purposes.\",\"primaryKey\":[\"ManufacturerId\",\"ManufacturerLotId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ManufacturerId\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturerId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ManufacturerLotId\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturerLotId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ItemSku\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ItemSku\"},\"dataType\":\"string\",\"dataTypeLength\":20},{\"type\":\"Existing\",\"name\":\"Quantity\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"Quantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"MinimumSerialNumber\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"MinimumSerialNumber\"},\"dataType\":\"string\",\"dataTypeLength\":30},{\"type\":\"Existing\",\"name\":\"MaximumSerialNumber\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"MaximumSerialNumber\"},\"dataType\":\"string\",\"dataTypeLength\":30},{\"type\":\"Existing\",\"name\":\"ManufacturedPeriodStartDate\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturedPeriodStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ManufacturedPeriodEndDate\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturedPeriodEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"BestBeforeDate\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"BestBeforeDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ExpiryDate\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ExpiryDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ManufacturerLotNote\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturerLotNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024},{\"type\":\"Existing\",\"name\":\"ManufacturerFacilityId\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"ManufacturerFacilityId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"CountryOfOriginId\",\"attributeReference\":{\"entity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"name\":\"CountryOfOriginId\"},\"dataType\":\"integer\"}]}}}",
+			"Description": "A group of related Items as designated by the Manufacturer. This could include lots or batch numbers. This is a particularly relevant for recall purposes.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "ManufacturerId,ManufacturerLotId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

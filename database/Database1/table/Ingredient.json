@@ -1,0 +1,170 @@
+{
+	"name": "Ingredient",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "Ingredient",
+		"Description": "Any material, including additives, used during the production or preparation of a product and which are still present in the finished product, even if in altered form. \n\nLike a recipe, the ingredient list defines what is in the package. \nIf a product contains more than one ingredient, the label must list all ingredients in descending order by percentage of the total weight of the contents they comprise. This means that the ingredient in the largest amount must be listed first and the ingredient present in the least amount must be listed last.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "IngredientId",
+					"Description": "The unique identifier of an Ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Ingredient.cdm.json/Ingredient",
+						"Name": "IngredientId"
+					}
+				},
+				{
+					"Name": "IngredientName",
+					"Description": "The name of an Ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Ingredient.cdm.json/Ingredient",
+						"Name": "IngredientName"
+					}
+				},
+				{
+					"Name": "IngredientDescription",
+					"Description": "The description of an Ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Ingredient.cdm.json/Ingredient",
+						"Name": "IngredientDescription"
+					}
+				},
+				{
+					"Name": "OrganicIngredientIndicator",
+					"Description": "Organics include substances that contain carbon bonded to hydrogen.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Ingredient.cdm.json/Ingredient",
+						"Name": "OrganicIngredientIndicator"
+					}
+				},
+				{
+					"Name": "InorganicIngredientIndicator",
+					"Description": "Inorganics include salts, metals, substances made from single elements and any other compounds that don't contain carbon bonded to hydrogen.",
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Ingredient.cdm.json/Ingredient",
+						"Name": "InorganicIngredientIndicator"
+					}
+				},
+				{
+					"Name": "CasNumber",
+					"Description": "Chemical Abstracts Service Registry Number is a unique identifier for a chemical and its synonyms. CAS numbers identify the chemical, but not its concentration or specific mixture.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Ingredient.cdm.json/Ingredient",
+						"Name": "CasNumber"
+					}
+				},
+				{
+					"Name": "ItemSku",
+					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 20,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Ingredient.cdm.json/Ingredient",
+						"Name": "ItemSku"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/Ingredient",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/Ingredient",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"IngredientId\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"IngredientId\"},\"IngredientName\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"IngredientName\"},\"IngredientDescription\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"IngredientDescription\"},\"OrganicIngredientIndicator\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"OrganicIngredientIndicator\"},\"InorganicIngredientIndicator\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"InorganicIngredientIndicator\"},\"CasNumber\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"CasNumber\"},\"ItemSku\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"ItemSku\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"Ingredient\",\"path\":\"Ingredient.cdm.json/Ingredient\"},\"description\":\"Any material, including additives, used during the production or preparation of a product and which are still present in the finished product, even if in altered form. \\n\\nLike a recipe, the ingredient list defines what is in the package. \\nIf a product contains more than one ingredient, the label must list all ingredients in descending order by percentage of the total weight of the contents they comprise. This means that the ingredient in the largest amount must be listed first and the ingredient present in the least amount must be listed last.\",\"primaryKey\":[\"IngredientId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"IngredientId\",\"attributeReference\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"IngredientId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientName\",\"attributeReference\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"IngredientName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"IngredientDescription\",\"attributeReference\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"IngredientDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512},{\"type\":\"Existing\",\"name\":\"OrganicIngredientIndicator\",\"attributeReference\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"OrganicIngredientIndicator\"},\"dataType\":\"boolean\"},{\"type\":\"Existing\",\"name\":\"InorganicIngredientIndicator\",\"attributeReference\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"InorganicIngredientIndicator\"},\"dataType\":\"boolean\"},{\"type\":\"Existing\",\"name\":\"CasNumber\",\"attributeReference\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"CasNumber\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ItemSku\",\"attributeReference\":{\"entity\":\"Ingredient.cdm.json/Ingredient\",\"name\":\"ItemSku\"},\"dataType\":\"string\",\"dataTypeLength\":20}]}}}",
+			"Description": "Any material, including additives, used during the production or preparation of a product and which are still present in the finished product, even if in altered form. \n\nLike a recipe, the ingredient list defines what is in the package. \nIf a product contains more than one ingredient, the label must list all ingredients in descending order by percentage of the total weight of the contents they comprise. This means that the ingredient in the largest amount must be listed first and the ingredient present in the least amount must be listed last.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "IngredientId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

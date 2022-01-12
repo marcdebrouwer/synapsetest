@@ -1,0 +1,173 @@
+{
+	"name": "ProductItemQuantity",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "ProductItemQuantity",
+		"Description": "Indicates the number of an item (SKU) that are contained within a single Product. Used primarily for statistical purposes.\n\nNote: While start and end dates are included it should be noted that any change in the quantity of product items would necessitate a change in GTIN, UPC, etc. and would therefore require a new product id.\n\nNote: This only contains base product items and does not included any packaging.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductItemQuantity.cdm.json/ProductItemQuantity",
+						"Name": "ProductId"
+					}
+				},
+				{
+					"Name": "ItemSku",
+					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Length": 20,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductItemQuantity.cdm.json/ProductItemQuantity",
+						"Name": "ItemSku"
+					}
+				},
+				{
+					"Name": "ProductItemQuantityStartDate",
+					"Description": "The effective start date or first date that the Product Item Quantity is in effect.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductItemQuantity.cdm.json/ProductItemQuantity",
+						"Name": "ProductItemQuantityStartDate"
+					}
+				},
+				{
+					"Name": "ProductItemQuantityEndDate",
+					"Description": "The effective end date or last date that the Product Item Quantity is in effect.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductItemQuantity.cdm.json/ProductItemQuantity",
+						"Name": "ProductItemQuantityEndDate"
+					}
+				},
+				{
+					"Name": "ProductItemQuantity",
+					"Description": "The number of items contained in a product.",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductItemQuantity.cdm.json/ProductItemQuantity",
+						"Name": "ProductItemQuantity"
+					}
+				},
+				{
+					"Name": "UnitOfMeasureId",
+					"Description": "The unique identifier of a Unit Of Measure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductItemQuantity.cdm.json/ProductItemQuantity",
+						"Name": "UnitOfMeasureId"
+					}
+				},
+				{
+					"Name": "ProductItemQuantityNote",
+					"Description": "A note, comment or additional information regarding the product item quantity.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductItemQuantity.cdm.json/ProductItemQuantity",
+						"Name": "ProductItemQuantityNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductItemQuantity",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductItemQuantity",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ProductId\"},\"ItemSku\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ItemSku\"},\"ProductItemQuantityStartDate\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ProductItemQuantityStartDate\"},\"ProductItemQuantityEndDate\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ProductItemQuantityEndDate\"},\"ProductItemQuantity\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ProductItemQuantity\"},\"UnitOfMeasureId\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"UnitOfMeasureId\"},\"ProductItemQuantityNote\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ProductItemQuantityNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ProductItemQuantity\",\"path\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\"},\"description\":\"Indicates the number of an item (SKU) that are contained within a single Product. Used primarily for statistical purposes.\\n\\nNote: While start and end dates are included it should be noted that any change in the quantity of product items would necessitate a change in GTIN, UPC, etc. and would therefore require a new product id.\\n\\nNote: This only contains base product items and does not included any packaging.\",\"primaryKey\":[\"ProductId\",\"ItemSku\",\"ProductItemQuantityStartDate\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"ItemSku\",\"attributeReference\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ItemSku\"},\"dataType\":\"string\",\"dataTypeLength\":20},{\"type\":\"Existing\",\"name\":\"ProductItemQuantityStartDate\",\"attributeReference\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ProductItemQuantityStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ProductItemQuantityEndDate\",\"attributeReference\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ProductItemQuantityEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"ProductItemQuantity\",\"attributeReference\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ProductItemQuantity\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"scale\":2},{\"type\":\"Existing\",\"name\":\"UnitOfMeasureId\",\"attributeReference\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"UnitOfMeasureId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductItemQuantityNote\",\"attributeReference\":{\"entity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"name\":\"ProductItemQuantityNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "Indicates the number of an item (SKU) that are contained within a single Product. Used primarily for statistical purposes.\n\nNote: While start and end dates are included it should be noted that any change in the quantity of product items would necessitate a change in GTIN, UPC, etc. and would therefore require a new product id.\n\nNote: This only contains base product items and does not included any packaging.",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "ProductId,ItemSku,ProductItemQuantityStartDate",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

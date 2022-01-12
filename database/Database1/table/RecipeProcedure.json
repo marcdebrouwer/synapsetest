@@ -1,0 +1,120 @@
+{
+	"name": "RecipeProcedure",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "RecipeProcedure",
+		"Description": "The procedure(s) associated with a recipe.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
+						"Name": "RecipeId"
+					}
+				},
+				{
+					"Name": "ProcedureId",
+					"Description": "The unique identifier of a Procedure.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
+						"Name": "ProcedureId"
+					}
+				},
+				{
+					"Name": "ProcedureSequenceNumber",
+					"Description": "The sequence in which the procedure is executed by the recipe.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
+						"Name": "ProcedureSequenceNumber"
+					}
+				},
+				{
+					"Name": "RecipeProcedureNote",
+					"Description": "A note, comment or additional information regarding the recipe procedure.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeProcedure.cdm.json/RecipeProcedure",
+						"Name": "RecipeProcedureNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeProcedure",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeProcedure",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeId\":{\"entity\":\"RecipeProcedure.cdm.json/RecipeProcedure\",\"name\":\"RecipeId\"},\"ProcedureId\":{\"entity\":\"RecipeProcedure.cdm.json/RecipeProcedure\",\"name\":\"ProcedureId\"},\"ProcedureSequenceNumber\":{\"entity\":\"RecipeProcedure.cdm.json/RecipeProcedure\",\"name\":\"ProcedureSequenceNumber\"},\"RecipeProcedureNote\":{\"entity\":\"RecipeProcedure.cdm.json/RecipeProcedure\",\"name\":\"RecipeProcedureNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"RecipeProcedure\",\"path\":\"RecipeProcedure.cdm.json/RecipeProcedure\"},\"description\":\"The procedure(s) associated with a recipe.\",\"primaryKey\":[\"RecipeId\",\"ProcedureId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"RecipeProcedure.cdm.json/RecipeProcedure\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProcedureId\",\"attributeReference\":{\"entity\":\"RecipeProcedure.cdm.json/RecipeProcedure\",\"name\":\"ProcedureId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProcedureSequenceNumber\",\"attributeReference\":{\"entity\":\"RecipeProcedure.cdm.json/RecipeProcedure\",\"name\":\"ProcedureSequenceNumber\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"RecipeProcedureNote\",\"attributeReference\":{\"entity\":\"RecipeProcedure.cdm.json/RecipeProcedure\",\"name\":\"RecipeProcedureNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "The procedure(s) associated with a recipe.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeId,ProcedureId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

@@ -1,0 +1,104 @@
+{
+	"name": "IngredientProperty",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "IngredientProperty",
+		"Description": "A property associated with the ingredient.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "IngredientId",
+					"Description": "The unique identifier of an Ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientProperty.cdm.json/IngredientProperty",
+						"Name": "IngredientId"
+					}
+				},
+				{
+					"Name": "IngredientPropertyTypeId",
+					"Description": "The unique identifier of an Ingredient Property Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientProperty.cdm.json/IngredientProperty",
+						"Name": "IngredientPropertyTypeId"
+					}
+				},
+				{
+					"Name": "IngredientPropertyNote",
+					"Description": "A note, comment or additional information regarding the ingredient purpose.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "IngredientProperty.cdm.json/IngredientProperty",
+						"Name": "IngredientPropertyNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/IngredientProperty",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/IngredientProperty",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"IngredientId\":{\"entity\":\"IngredientProperty.cdm.json/IngredientProperty\",\"name\":\"IngredientId\"},\"IngredientPropertyTypeId\":{\"entity\":\"IngredientProperty.cdm.json/IngredientProperty\",\"name\":\"IngredientPropertyTypeId\"},\"IngredientPropertyNote\":{\"entity\":\"IngredientProperty.cdm.json/IngredientProperty\",\"name\":\"IngredientPropertyNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"IngredientProperty\",\"path\":\"IngredientProperty.cdm.json/IngredientProperty\"},\"description\":\"A property associated with the ingredient.\",\"primaryKey\":[\"IngredientId\",\"IngredientPropertyTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"IngredientId\",\"attributeReference\":{\"entity\":\"IngredientProperty.cdm.json/IngredientProperty\",\"name\":\"IngredientId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientPropertyTypeId\",\"attributeReference\":{\"entity\":\"IngredientProperty.cdm.json/IngredientProperty\",\"name\":\"IngredientPropertyTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientPropertyNote\",\"attributeReference\":{\"entity\":\"IngredientProperty.cdm.json/IngredientProperty\",\"name\":\"IngredientPropertyNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "A property associated with the ingredient.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "IngredientId,IngredientPropertyTypeId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

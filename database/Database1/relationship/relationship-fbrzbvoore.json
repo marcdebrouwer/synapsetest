@@ -1,0 +1,26 @@
+{
+	"name": "relationship-fbrzbvoore",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-fbrzbvoore",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Recipe",
+		"ToTableName": "ProductIngredient",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "RecipeId",
+				"ToColumnName": "RecipeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

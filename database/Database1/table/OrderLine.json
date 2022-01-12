@@ -16,10 +16,6 @@
 				{
 					"Name": "OrderId",
 					"Description": "The unique number that identifies an Order.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "OrderId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "OrderId"
 					}
 				},
 				{
 					"Name": "OrderLineNumber",
 					"Description": "The number that identifies the Order Line Item.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "OrderLineNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "OrderLineNumber"
 					}
 				},
 				{
 					"Name": "ProductId",
 					"Description": "The unique identifier of a Product.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ProductId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -59,15 +55,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ProductId"
 					}
 				},
 				{
 					"Name": "ItemSku",
 					"Description": "The Stock Keeping Unit identifier, which is typically used for inventory-related activities.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ItemSku"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -76,15 +72,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ItemSku"
 					}
 				},
 				{
 					"Name": "Quantity",
 					"Description": "The quantity of Product ordered on the order line item.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "Quantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -94,15 +90,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "Quantity"
 					}
 				},
 				{
 					"Name": "ProductListPriceAmount",
 					"Description": "The current per unit list price of the Order Line Item products.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ProductListPriceAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -112,15 +108,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ProductListPriceAmount"
 					}
 				},
 				{
 					"Name": "ProductSalesPriceAmount",
 					"Description": "The actual per unit selling price of the Order Line Item products.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ProductSalesPriceAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -130,15 +126,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ProductSalesPriceAmount"
 					}
 				},
 				{
 					"Name": "ProductAdjustmentAmount",
 					"Description": "The per product unit adjustment amount applied to each product unit.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ProductAdjustmentAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -148,15 +144,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ProductAdjustmentAmount"
 					}
 				},
 				{
 					"Name": "ProductAdjustmentPercentage",
 					"Description": "The per product unit adjustment percentage applied to each product unit.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ProductAdjustmentPercentage"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -166,15 +162,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ProductAdjustmentPercentage"
 					}
 				},
 				{
 					"Name": "TotalOrderLineAdjustmentAmount",
 					"Description": "The amount of adjustment for all order line items.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "TotalOrderLineAdjustmentAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -184,15 +180,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "TotalOrderLineAdjustmentAmount"
 					}
 				},
 				{
 					"Name": "TotalOrderLineAmount",
 					"Description": "The total amount of line item charges related to the quantity of products sold at the actual selling price less rebates and discounts.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "TotalOrderLineAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -202,15 +198,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "TotalOrderLineAmount"
 					}
 				},
 				{
 					"Name": "OrderLineNote",
 					"Description": "A note, comment or additional information regarding the Order Line.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "OrderLineNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -219,15 +215,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "OrderLineNote"
 					}
 				},
 				{
 					"Name": "QuantityBooked",
 					"Description": "The quantity of Product booked.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "QuantityBooked"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -235,15 +231,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "QuantityBooked"
 					}
 				},
 				{
 					"Name": "QuantityBilled",
 					"Description": "The quantity billed.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "QuantityBilled"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -251,15 +247,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "QuantityBilled"
 					}
 				},
 				{
 					"Name": "QuantityBacklog",
 					"Description": "The quantity on backlog.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "QuantityBacklog"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -267,15 +263,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "QuantityBacklog"
 					}
 				},
 				{
 					"Name": "AcceptedQuantity",
 					"Description": "The quantity of Order Line Item products accepted.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "AcceptedQuantity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -285,15 +281,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "AcceptedQuantity"
 					}
 				},
 				{
 					"Name": "QuantityCancelled",
 					"Description": "The quantity of Order Line Items cancelled.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "QuantityCancelled"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -301,15 +297,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "QuantityCancelled"
 					}
 				},
 				{
 					"Name": "QuantityReturned",
 					"Description": "The quantity of Order Line Items returned.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "QuantityReturned"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -317,15 +313,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "QuantityReturned"
 					}
 				},
 				{
 					"Name": "BookedDate",
 					"Description": "The booked date of the Order Line Items.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "BookedDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -334,15 +330,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "BookedDate"
 					}
 				},
 				{
 					"Name": "BilledDate",
 					"Description": "The billed date of the Order Line Items.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "BilledDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -351,15 +347,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "BilledDate"
 					}
 				},
 				{
 					"Name": "CancelledTimestamp",
 					"Description": "The date  and time that Order Line Items were cancelled.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "CancelledTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -368,15 +364,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "CancelledTimestamp"
 					}
 				},
 				{
 					"Name": "ReturnedDate",
 					"Description": "The date that Order Line Items were returned.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ReturnedDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -385,15 +381,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ReturnedDate"
 					}
 				},
 				{
 					"Name": "RequestedDeliveryDate",
 					"Description": "The date for delivery of the Order Line Item requested by the Customer/Customer Account.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "RequestedDeliveryDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -402,15 +398,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "RequestedDeliveryDate"
 					}
 				},
 				{
 					"Name": "CommittedDeliveryDate",
 					"Description": "The date committed for delivery of the Order Line Item.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "CommittedDeliveryDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -419,15 +415,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "CommittedDeliveryDate"
 					}
 				},
 				{
 					"Name": "PlannedPickDate",
 					"Description": "The planned inventory pick date for the Order Line Items.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "PlannedPickDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -436,15 +432,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "PlannedPickDate"
 					}
 				},
 				{
 					"Name": "ActualPickTimestamp",
 					"Description": "The actual inventory pick timestamp for the Order Line Items.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ActualPickTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -453,15 +449,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ActualPickTimestamp"
 					}
 				},
 				{
 					"Name": "PlannedShipmentDate",
 					"Description": "The planned shipment date of the Order Line Items.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "PlannedShipmentDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -470,15 +466,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "PlannedShipmentDate"
 					}
 				},
 				{
 					"Name": "ActualShipmentTimestamp",
 					"Description": "The actual shipment timestamp of the Order Line Items.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ActualShipmentTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -487,15 +483,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ActualShipmentTimestamp"
 					}
 				},
 				{
 					"Name": "PlannedDeliveryDate",
 					"Description": "The planned delivery date of the Order Line Items.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "PlannedDeliveryDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -504,15 +500,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "PlannedDeliveryDate"
 					}
 				},
 				{
 					"Name": "ActualDeliveryTimestamp",
 					"Description": "The actual delivery timestamp of the Order Line Items.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ActualDeliveryTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -521,15 +517,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ActualDeliveryTimestamp"
 					}
 				},
 				{
 					"Name": "ShipmentConfirmationTimestamp",
 					"Description": "The timestamp that the shipment confirmation notice was sent to the Customer/Customer Account.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ShipmentConfirmationTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -538,15 +534,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ShipmentConfirmationTimestamp"
 					}
 				},
 				{
 					"Name": "DropShipOrderLineItemIndicator",
 					"Description": "Indicates that the Order Line Item(s) are to be drop shipped.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "DropShipOrderLineItemIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -554,15 +550,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "DropShipOrderLineItemIndicator"
 					}
 				},
 				{
 					"Name": "WaybillNumber",
 					"Description": "The shipment waybill number.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "WaybillNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -570,15 +566,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "WaybillNumber"
 					}
 				},
 				{
 					"Name": "TareWeight",
 					"Description": "The weight of the line items excluding packaging.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "TareWeight"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -588,15 +584,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "TareWeight"
 					}
 				},
 				{
 					"Name": "NetWeight",
 					"Description": "The weight of the line items including packaging.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "NetWeight"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -606,15 +602,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "NetWeight"
 					}
 				},
 				{
 					"Name": "WeightUomId",
 					"Description": "The unique identifier of a Unit Of Measure.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "WeightUomId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -622,15 +618,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "WeightUomId"
 					}
 				},
 				{
 					"Name": "EarliestDeliveryWindowTimestamp",
 					"Description": "The earliest timestamp that the order should be made available for delivery.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "EarliestDeliveryWindowTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -639,15 +635,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "EarliestDeliveryWindowTimestamp"
 					}
 				},
 				{
 					"Name": "LatestDeliveryWindowTimestamp",
 					"Description": "The latest timestamp that the order should be made available for delivery.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "LatestDeliveryWindowTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -656,15 +652,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "LatestDeliveryWindowTimestamp"
 					}
 				},
 				{
 					"Name": "ReturnOrderId",
 					"Description": "The unique number that identifies an Order.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ReturnOrderId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -672,15 +668,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ReturnOrderId"
 					}
 				},
 				{
 					"Name": "ReturnOrderLineNumber",
 					"Description": "The number that identifies the Order Line Item.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ReturnOrderLineNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -688,15 +684,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ReturnOrderLineNumber"
 					}
 				},
 				{
 					"Name": "ReturnToStockIndicator",
 					"Description": "Indicates that the Line Item(s) were returned to stock.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ReturnToStockIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -704,15 +700,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ReturnToStockIndicator"
 					}
 				},
 				{
 					"Name": "ReturnToStoreIndicator",
 					"Description": "Indicates that the Line Item(s) were returned to the store from which they were purchased.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "ReturnToStoreIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -720,15 +716,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "ReturnToStoreIndicator"
 					}
 				},
 				{
 					"Name": "OrderLineTypeId",
 					"Description": "The unique identifier of an Order Line Type.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "OrderLineTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -736,15 +732,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "OrderLineTypeId"
 					}
 				},
 				{
 					"Name": "RejectionReasonId",
 					"Description": "The unique identifier of a Rejection Reason.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "RejectionReasonId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -752,15 +748,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "RejectionReasonId"
 					}
 				},
 				{
 					"Name": "WorkOrderId",
 					"Description": "The unique identifier of a Work Order.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "WorkOrderId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -768,15 +764,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "WorkOrderId"
 					}
 				},
 				{
 					"Name": "TaskId",
 					"Description": "The unique identifier of a Task.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "TaskId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -784,15 +780,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "TaskId"
 					}
 				},
 				{
 					"Name": "BuyClassId",
 					"Description": "The unique identifier of a Buy Class.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "BuyClassId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -800,15 +796,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "BuyClassId"
 					}
 				},
 				{
 					"Name": "PromotionOfferId",
 					"Description": "The unique identifier of a Promotion Offer. The Promotion Offer ID is unique to each account or party that is offered to.",
-					"BaseAttributeReference": {
-						"Entity": "OrderLine.cdm.json/OrderLine",
-						"Name": "PromotionOfferId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -816,24 +812,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderLine.cdm.json/OrderLine",
+						"Name": "PromotionOfferId"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/OrderLine",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -857,7 +850,7 @@
 			"Description": "The components of an Order broken down by Product and Quantity, one per line item.",
 			"DisplayFolderInfo": "{\"name\":\"Order\",\"colorCode\":\"#7062A8\"}",
 			"PrimaryKeys": "OrderId,OrderLineNumber",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

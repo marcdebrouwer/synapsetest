@@ -1,0 +1,34 @@
+{
+	"name": "relationship-yyrsqzcmne",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-yyrsqzcmne",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "RecipeFormula",
+		"ToTableName": "RecipeFormulaIngredientProperty",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "IngredientId",
+				"ToColumnName": "IngredientId"
+			},
+			{
+				"FromColumnName": "RecipeId",
+				"ToColumnName": "RecipeId"
+			},
+			{
+				"FromColumnName": "SequenceNumber",
+				"ToColumnName": "SequenceNumber"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"toEntity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"},{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"},{\"fromAttribute\":\"SequenceNumber\",\"toAttribute\":\"SequenceNumber\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

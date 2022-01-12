@@ -1,0 +1,26 @@
+{
+	"name": "relationship-hdrggjzcmo",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-hdrggjzcmo",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Ingredient",
+		"ToTableName": "IngredientProperty",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "IngredientId",
+				"ToColumnName": "IngredientId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Ingredient.cdm.json/Ingredient\",\"toEntity\":\"IngredientProperty.cdm.json/IngredientProperty\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

@@ -1,0 +1,105 @@
+{
+	"name": "PackagingHierarchy",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "PackagingHierarchy",
+		"Description": "A hierarchy of packaging that can be used.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PackagingHierarchyId",
+					"Description": "The unique identifier of a Packaging Hierarchy.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchy.cdm.json/PackagingHierarchy",
+						"Name": "PackagingHierarchyId"
+					}
+				},
+				{
+					"Name": "PackagingHierarchyName",
+					"Description": "The name of a Packaging Hierarchy.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchy.cdm.json/PackagingHierarchy",
+						"Name": "PackagingHierarchyName"
+					}
+				},
+				{
+					"Name": "PackagingHierarchyDescription",
+					"Description": "The description of a Packaging Hierarchy.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PackagingHierarchy.cdm.json/PackagingHierarchy",
+						"Name": "PackagingHierarchyDescription"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackagingHierarchy",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/PackagingHierarchy",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PackagingHierarchyId\":{\"entity\":\"PackagingHierarchy.cdm.json/PackagingHierarchy\",\"name\":\"PackagingHierarchyId\"},\"PackagingHierarchyName\":{\"entity\":\"PackagingHierarchy.cdm.json/PackagingHierarchy\",\"name\":\"PackagingHierarchyName\"},\"PackagingHierarchyDescription\":{\"entity\":\"PackagingHierarchy.cdm.json/PackagingHierarchy\",\"name\":\"PackagingHierarchyDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PackagingHierarchy\",\"path\":\"PackagingHierarchy.cdm.json/PackagingHierarchy\"},\"description\":\"A hierarchy of packaging that can be used.\",\"primaryKey\":[\"PackagingHierarchyId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"PackagingHierarchyId\",\"attributeReference\":{\"entity\":\"PackagingHierarchy.cdm.json/PackagingHierarchy\",\"name\":\"PackagingHierarchyId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PackagingHierarchyName\",\"attributeReference\":{\"entity\":\"PackagingHierarchy.cdm.json/PackagingHierarchy\",\"name\":\"PackagingHierarchyName\"},\"dataType\":\"string\",\"dataTypeLength\":128},{\"type\":\"Existing\",\"name\":\"PackagingHierarchyDescription\",\"attributeReference\":{\"entity\":\"PackagingHierarchy.cdm.json/PackagingHierarchy\",\"name\":\"PackagingHierarchyDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512}]}}}",
+			"Description": "A hierarchy of packaging that can be used.",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "PackagingHierarchyId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

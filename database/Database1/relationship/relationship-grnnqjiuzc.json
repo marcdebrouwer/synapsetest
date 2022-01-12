@@ -1,0 +1,30 @@
+{
+	"name": "relationship-grnnqjiuzc",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-grnnqjiuzc",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PackagingHierarchyLevel",
+		"ToTableName": "PackagedItem",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PackagingHierarchyId",
+				"ToColumnName": "PackagingHierarchyId"
+			},
+			{
+				"FromColumnName": "PackagingHierarchyLevelId",
+				"ToColumnName": "PackagingHierarchyLevelId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"toEntity\":\"PackagedItem.cdm.json/PackagedItem\",\"joinPairs\":[{\"fromAttribute\":\"PackagingHierarchyId\",\"toAttribute\":\"PackagingHierarchyId\"},{\"fromAttribute\":\"PackagingHierarchyLevelId\",\"toAttribute\":\"PackagingHierarchyLevelId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

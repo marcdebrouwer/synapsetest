@@ -16,10 +16,6 @@
 				{
 					"Name": "InvoiceId",
 					"Description": "The unique identifier of an Invoice.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceId"
 					}
 				},
 				{
 					"Name": "CustomerAccountId",
 					"Description": "The unique identifier of a Customer Account.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "CustomerAccountId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -43,15 +39,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "CustomerAccountId"
 					}
 				},
 				{
 					"Name": "InvoiceDate",
 					"Description": "The date that the invoice was issued.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceDate"
 					}
 				},
 				{
 					"Name": "InvoiceToName",
 					"Description": "The name of the person invoiced.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceToName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -77,15 +73,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceToName"
 					}
 				},
 				{
 					"Name": "InvoiceToPartyId",
 					"Description": "The unique identifier of a Party.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceToPartyId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -93,15 +89,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceToPartyId"
 					}
 				},
 				{
 					"Name": "InvoiceToLocationId",
 					"Description": "The unique identifier of a Location.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceToLocationId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -109,15 +105,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceToLocationId"
 					}
 				},
 				{
 					"Name": "InvoiceToTelephoneNumber",
 					"Description": "The invoice-to contact telephone number.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceToTelephoneNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -127,15 +123,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceToTelephoneNumber"
 					}
 				},
 				{
 					"Name": "InvoiceToFaxNumber",
 					"Description": "The invoice-to contact fax number.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceToFaxNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -145,15 +141,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceToFaxNumber"
 					}
 				},
 				{
 					"Name": "InvoiceToEmailAddress",
 					"Description": "The invoice-to contact email address.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceToEmailAddress"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -162,15 +158,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceToEmailAddress"
 					}
 				},
 				{
 					"Name": "InvoiceNote",
 					"Description": "A note, comment or additional information regarding the Invoice.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -179,15 +175,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceNote"
 					}
 				},
 				{
 					"Name": "TotalInvoiceProductAmount",
 					"Description": "The invoice value amount related equal to the (number of unit products) * (unit sale price)",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "TotalInvoiceProductAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -197,15 +193,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "TotalInvoiceProductAmount"
 					}
 				},
 				{
 					"Name": "TotalInvoiceChargesAmount",
 					"Description": "The total amount of charges invoiced.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "TotalInvoiceChargesAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -215,15 +211,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "TotalInvoiceChargesAmount"
 					}
 				},
 				{
 					"Name": "TotalInvoiceAdjustmentsAmount",
 					"Description": "The total amount of adjustments invoiced.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "TotalInvoiceAdjustmentsAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -233,15 +229,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "TotalInvoiceAdjustmentsAmount"
 					}
 				},
 				{
 					"Name": "TotalInvoiceTaxesAmount",
 					"Description": "The total amount of invoiced taxes.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "TotalInvoiceTaxesAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -251,15 +247,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "TotalInvoiceTaxesAmount"
 					}
 				},
 				{
 					"Name": "TotalInvoiceAmount",
 					"Description": "The total amount invoiced.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "TotalInvoiceAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -269,15 +265,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "TotalInvoiceAmount"
 					}
 				},
 				{
 					"Name": "OrderId",
 					"Description": "The unique number that identifies an Order.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "OrderId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -285,15 +281,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "OrderId"
 					}
 				},
 				{
 					"Name": "InvoiceModeId",
 					"Description": "The unique identifier of the Invoice Mode.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceModeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -301,15 +297,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceModeId"
 					}
 				},
 				{
 					"Name": "IsoCurrencyCode",
 					"Description": "The ISO 4217 currency code.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "IsoCurrencyCode"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -318,15 +314,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "IsoCurrencyCode"
 					}
 				},
 				{
 					"Name": "InvoiceStatusId",
 					"Description": "The unique identifier of a Invoice Status.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "InvoiceStatusId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -334,15 +330,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "InvoiceStatusId"
 					}
 				},
 				{
 					"Name": "IsoLanguageId",
 					"Description": "The unique identifier of an ISO Language.",
-					"BaseAttributeReference": {
-						"Entity": "Invoice.cdm.json/Invoice",
-						"Name": "IsoLanguageId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -350,24 +346,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Invoice.cdm.json/Invoice",
+						"Name": "IsoLanguageId"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/Invoice",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -391,7 +384,7 @@
 			"Description": "A document presented to customers for products delivered or services performed.",
 			"DisplayFolderInfo": "{\"name\":\"Order\",\"colorCode\":\"#7062A8\"}",
 			"PrimaryKeys": "InvoiceId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

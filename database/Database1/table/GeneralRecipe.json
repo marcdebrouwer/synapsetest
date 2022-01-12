@@ -1,0 +1,71 @@
+{
+	"name": "GeneralRecipe",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "GeneralRecipe",
+		"Description": "The general recipe is used at the company level and is the basis for lower-level recipes. It defines raw materials and their quantities, and the required processing to make the product.  \n\nThe general recipe is usually created without specific knowledge of a particular site or the equipment that will manufacture a product; it is supposed to communicate processing requirements to multiple manufacturing locations.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "GeneralRecipe.cdm.json/GeneralRecipe",
+						"Name": "RecipeId"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/GeneralRecipe",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/GeneralRecipe",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeId\":{\"entity\":\"GeneralRecipe.cdm.json/GeneralRecipe\",\"name\":\"RecipeId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"GeneralRecipe\",\"path\":\"GeneralRecipe.cdm.json/GeneralRecipe\"},\"description\":\"The general recipe is used at the company level and is the basis for lower-level recipes. It defines raw materials and their quantities, and the required processing to make the product.  \\n\\nThe general recipe is usually created without specific knowledge of a particular site or the equipment that will manufacture a product; it is supposed to communicate processing requirements to multiple manufacturing locations.\",\"primaryKey\":[\"RecipeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"GeneralRecipe.cdm.json/GeneralRecipe\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"}]}}}",
+			"Description": "The general recipe is used at the company level and is the basis for lower-level recipes. It defines raw materials and their quantities, and the required processing to make the product.  \n\nThe general recipe is usually created without specific knowledge of a particular site or the equipment that will manufacture a product; it is supposed to communicate processing requirements to multiple manufacturing locations.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

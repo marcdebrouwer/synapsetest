@@ -1,0 +1,26 @@
+{
+	"name": "relationship-xkjxbisxqx",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-xkjxbisxqx",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Recipe",
+		"ToTableName": "ProductRecipe",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "RecipeId",
+				"ToColumnName": "RecipeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"ProductRecipe.cdm.json/ProductRecipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

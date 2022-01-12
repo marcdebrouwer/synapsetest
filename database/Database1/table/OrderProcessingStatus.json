@@ -16,10 +16,6 @@
 				{
 					"Name": "OrderProcessingStatusId",
 					"Description": "The unique identifier of an Order Processing Status.",
-					"BaseAttributeReference": {
-						"Entity": "OrderProcessingStatus.cdm.json/OrderProcessingStatus",
-						"Name": "OrderProcessingStatusId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderProcessingStatus.cdm.json/OrderProcessingStatus",
+						"Name": "OrderProcessingStatusId"
 					}
 				},
 				{
 					"Name": "OrderProcessingStatusName",
 					"Description": "The name of the Order Processing Status.",
-					"BaseAttributeReference": {
-						"Entity": "OrderProcessingStatus.cdm.json/OrderProcessingStatus",
-						"Name": "OrderProcessingStatusName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderProcessingStatus.cdm.json/OrderProcessingStatus",
+						"Name": "OrderProcessingStatusName"
 					}
 				},
 				{
 					"Name": "OrderProcessingStatusDescription",
 					"Description": "The description of the Order Processing Status.",
-					"BaseAttributeReference": {
-						"Entity": "OrderProcessingStatus.cdm.json/OrderProcessingStatus",
-						"Name": "OrderProcessingStatusDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,24 +57,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "OrderProcessingStatus.cdm.json/OrderProcessingStatus",
+						"Name": "OrderProcessingStatusDescription"
 					}
 				}
 			],
 			"Format": {
-				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-				"FormatType": "csv",
-				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
 				"Properties": {
 					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/OrderProcessingStatus",
-					"delimiter": ",",
-					"multiLine": "false",
-					"firstRowAsHeader": "false",
-					"serialization.format": "1",
-					"escape": "\\",
-					"quote": "\"",
-					"FormatTypeSetToDatabaseDefault": true,
-					"header": "false"
+					"FormatTypeSetToDatabaseDefault": true
 				}
 			},
 			"Source": {
@@ -102,7 +95,7 @@
 			"Description": "The status of the associated Order.\n\nEx:\n-  Received\n-  On Backlog\n-  Cancelled\n-  Returned\n-  Shipped\n-  Pending consolidation with other orders\n-  Rush\n-  Emergency\n-  Normal",
 			"DisplayFolderInfo": "{\"name\":\"Order\",\"colorCode\":\"#7062A8\"}",
 			"PrimaryKeys": "OrderProcessingStatusId",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "parquet"
 		},
 		"Retention": 0,
 		"Temporary": false,

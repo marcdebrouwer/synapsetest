@@ -1,0 +1,120 @@
+{
+	"name": "ProductIngredientPurpose",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "ProductIngredientPurpose",
+		"Description": "A purpose associated with the product ingredient.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ProductId",
+					"Description": "The unique identifier of a Product.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
+						"Name": "ProductId"
+					}
+				},
+				{
+					"Name": "IngredientId",
+					"Description": "The unique identifier of an Ingredient.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
+						"Name": "IngredientId"
+					}
+				},
+				{
+					"Name": "IngredientPurposeTypeId",
+					"Description": "The unique identifier of an Ingredient Purpose Type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
+						"Name": "IngredientPurposeTypeId"
+					}
+				},
+				{
+					"Name": "ProductIngredientPurposeNote",
+					"Description": "A note, comment or additional information regarding the product ingredient purpose.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "ProductIngredientPurpose.cdm.json/ProductIngredientPurpose",
+						"Name": "ProductIngredientPurposeNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductIngredientPurpose",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/ProductIngredientPurpose",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ProductId\":{\"entity\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\",\"name\":\"ProductId\"},\"IngredientId\":{\"entity\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\",\"name\":\"IngredientId\"},\"IngredientPurposeTypeId\":{\"entity\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\",\"name\":\"IngredientPurposeTypeId\"},\"ProductIngredientPurposeNote\":{\"entity\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\",\"name\":\"ProductIngredientPurposeNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ProductIngredientPurpose\",\"path\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\"},\"description\":\"A purpose associated with the product ingredient.\",\"primaryKey\":[\"ProductId\",\"IngredientId\",\"IngredientPurposeTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"ProductId\",\"attributeReference\":{\"entity\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\",\"name\":\"ProductId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"IngredientId\",\"attributeReference\":{\"entity\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\",\"name\":\"IngredientId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"IngredientPurposeTypeId\",\"attributeReference\":{\"entity\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\",\"name\":\"IngredientPurposeTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"ProductIngredientPurposeNote\",\"attributeReference\":{\"entity\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\",\"name\":\"ProductIngredientPurposeNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "A purpose associated with the product ingredient.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "ProductId,IngredientId,IngredientPurposeTypeId",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

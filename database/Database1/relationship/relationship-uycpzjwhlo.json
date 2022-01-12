@@ -1,0 +1,26 @@
+{
+	"name": "relationship-uycpzjwhlo",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-uycpzjwhlo",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "IngredientPurposeType",
+		"ToTableName": "IngredientPurpose",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "IngredientPurposeTypeId",
+				"ToColumnName": "IngredientPurposeTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\",\"toEntity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"joinPairs\":[{\"fromAttribute\":\"IngredientPurposeTypeId\",\"toAttribute\":\"IngredientPurposeTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

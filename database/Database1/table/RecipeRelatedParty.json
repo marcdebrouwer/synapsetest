@@ -1,0 +1,154 @@
+{
+	"name": "RecipeRelatedParty",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "RecipeRelatedParty",
+		"Description": "A party that has a relationship with the recipe process over the indicated period.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "RecipeId",
+					"Description": "The unique identifier of a recipe.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeRelatedParty.cdm.json/RecipeRelatedParty",
+						"Name": "RecipeId"
+					}
+				},
+				{
+					"Name": "PartyId",
+					"Description": "The unique identifier of a Party.",
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeRelatedParty.cdm.json/RecipeRelatedParty",
+						"Name": "PartyId"
+					}
+				},
+				{
+					"Name": "RecipePartyRelationshipTypeId",
+					"Description": "The unique identifier of a contract relationship type.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeRelatedParty.cdm.json/RecipeRelatedParty",
+						"Name": "RecipePartyRelationshipTypeId"
+					}
+				},
+				{
+					"Name": "PeriodStartDate",
+					"Description": "The period start date for which the associated recipe - party relationship is valid or in-effect.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeRelatedParty.cdm.json/RecipeRelatedParty",
+						"Name": "PeriodStartDate"
+					}
+				},
+				{
+					"Name": "PeriodEndDate",
+					"Description": "The period end date for which the associated recipe - party relationship is valid or in-effect.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeRelatedParty.cdm.json/RecipeRelatedParty",
+						"Name": "PeriodEndDate"
+					}
+				},
+				{
+					"Name": "RecipeRelationshipNote",
+					"Description": "A note, comment or additional information regarding the recipe - party relationship.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "RecipeRelatedParty.cdm.json/RecipeRelatedParty",
+						"Name": "RecipeRelationshipNote"
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.parquet.MapredParquetOutputFormat",
+				"FormatType": "parquet",
+				"SerializeLib": "org.apache.hadoop.hive.ql.io.parquet.serde.ParquetHiveSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeRelatedParty",
+					"FormatTypeSetToDatabaseDefault": true
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/Database1/RecipeRelatedParty",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RecipeId\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"RecipeId\"},\"PartyId\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"PartyId\"},\"RecipePartyRelationshipTypeId\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"RecipePartyRelationshipTypeId\"},\"PeriodStartDate\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"PeriodStartDate\"},\"PeriodEndDate\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"PeriodEndDate\"},\"RecipeRelationshipNote\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"RecipeRelationshipNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"RecipeRelatedParty\",\"path\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\"},\"description\":\"A party that has a relationship with the recipe process over the indicated period.\",\"primaryKey\":[\"RecipeId\",\"PartyId\",\"RecipePartyRelationshipTypeId\",\"PeriodStartDate\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"name\":\"RecipeId\",\"attributeReference\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"RecipeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PartyId\",\"attributeReference\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"PartyId\"},\"dataType\":\"long\"},{\"type\":\"Existing\",\"name\":\"RecipePartyRelationshipTypeId\",\"attributeReference\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"RecipePartyRelationshipTypeId\"},\"dataType\":\"integer\"},{\"type\":\"Existing\",\"name\":\"PeriodStartDate\",\"attributeReference\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"PeriodStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"PeriodEndDate\",\"attributeReference\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"PeriodEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\"},{\"type\":\"Existing\",\"name\":\"RecipeRelationshipNote\",\"attributeReference\":{\"entity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"name\":\"RecipeRelationshipNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024}]}}}",
+			"Description": "A party that has a relationship with the recipe process over the indicated period.",
+			"DisplayFolderInfo": "{\"name\":\"Manufacturing\",\"colorCode\":\"#000F5C\"}",
+			"PrimaryKeys": "RecipeId,PartyId,RecipePartyRelationshipTypeId,PeriodStartDate",
+			"spark.sql.sources.provider": "parquet"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

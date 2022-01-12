@@ -1,0 +1,26 @@
+{
+	"name": "relationship-tfnzhrkoat",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-tfnzhrkoat",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Recipe",
+		"ToTableName": "ProductNutrient",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "RecipeId",
+				"ToColumnName": "RecipeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

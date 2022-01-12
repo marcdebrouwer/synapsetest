@@ -1,0 +1,26 @@
+{
+	"name": "relationship-zyuexglamb",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "Database1"
+		},
+		"Name": "relationship-zyuexglamb",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "RecipeInformationType",
+		"ToTableName": "RecipeInformation",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "RecipeInformationTypeId",
+				"ToColumnName": "RecipeInformationTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RecipeInformationType.cdm.json/RecipeInformationType\",\"toEntity\":\"RecipeInformation.cdm.json/RecipeInformation\",\"joinPairs\":[{\"fromAttribute\":\"RecipeInformationTypeId\",\"toAttribute\":\"RecipeInformationTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}
