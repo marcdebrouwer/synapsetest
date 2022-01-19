@@ -1,0 +1,94 @@
+{
+	"name": "Refund",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "Refund",
+		"Description": "A type of transaction in which money is returned for the product or service.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "Refund.cdm.json/Refund",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "PartialReturnIndicator",
+					"Description": "Indicates that only a part of the original transaction was returned or refunded.",
+					"BaseAttributeReference": {
+						"Entity": "Refund.cdm.json/Refund",
+						"Name": "PartialReturnIndicator"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/Refund",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/Refund",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"Refund.cdm.json/Refund\",\"name\":\"TransactionId\"},\"PartialReturnIndicator\":{\"entity\":\"Refund.cdm.json/Refund\",\"name\":\"PartialReturnIndicator\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"Refund\",\"path\":\"Refund.cdm.json/Refund\"},\"description\":\"A type of transaction in which money is returned for the product or service.\",\"primaryKey\":[\"TransactionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Refund.cdm.json/Refund\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Refund.cdm.json/Refund\",\"name\":\"PartialReturnIndicator\"},\"dataType\":\"boolean\",\"description\":\"Indicates that only a part of the original transaction was returned or refunded.\",\"isNullable\":true,\"name\":\"PartialReturnIndicator\"}]}}}",
+			"Description": "A type of transaction in which money is returned for the product or service.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

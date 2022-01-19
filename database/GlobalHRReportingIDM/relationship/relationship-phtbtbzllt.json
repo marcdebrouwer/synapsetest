@@ -1,0 +1,30 @@
+{
+	"name": "relationship-phtbtbzllt",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-phtbtbzllt",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "TransactionLineItem",
+		"ToTableName": "TransactionLineItemPromotion",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "TransactionId",
+				"ToColumnName": "TransactionId"
+			},
+			{
+				"FromColumnName": "TransactionLineItemId",
+				"ToColumnName": "TransactionLineItemId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

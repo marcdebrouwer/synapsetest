@@ -1,0 +1,112 @@
+{
+	"name": "HoldType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "HoldType",
+		"Description": "A means of classifying Holds based on origin, type or function.\n\nEx:\n- manufacturing hold\n- transportation hold\n- inventory hold\n- customer-requested hold\n- credit hold\n\nEx:\nA 'credit hold' may be placed on an entire order.\nAn 'inventory hold' may be placed on a specific item.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "HoldTypeId",
+					"Description": "The unique identifier of a Hold Type.",
+					"BaseAttributeReference": {
+						"Entity": "HoldType.cdm.json/HoldType",
+						"Name": "HoldTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "HoldTypeName",
+					"Description": "The name of a Hold Type.",
+					"BaseAttributeReference": {
+						"Entity": "HoldType.cdm.json/HoldType",
+						"Name": "HoldTypeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "HoldTypeDescription",
+					"Description": "The description of a Hold Type.",
+					"BaseAttributeReference": {
+						"Entity": "HoldType.cdm.json/HoldType",
+						"Name": "HoldTypeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/HoldType",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/HoldType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"HoldTypeId\":{\"entity\":\"HoldType.cdm.json/HoldType\",\"name\":\"HoldTypeId\"},\"HoldTypeName\":{\"entity\":\"HoldType.cdm.json/HoldType\",\"name\":\"HoldTypeName\"},\"HoldTypeDescription\":{\"entity\":\"HoldType.cdm.json/HoldType\",\"name\":\"HoldTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"HoldType\",\"path\":\"HoldType.cdm.json/HoldType\"},\"description\":\"A means of classifying Holds based on origin, type or function.\\n\\nEx:\\n- manufacturing hold\\n- transportation hold\\n- inventory hold\\n- customer-requested hold\\n- credit hold\\n\\nEx:\\nA 'credit hold' may be placed on an entire order.\\nAn 'inventory hold' may be placed on a specific item.\",\"primaryKey\":[\"HoldTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"HoldType.cdm.json/HoldType\",\"name\":\"HoldTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Hold Type.\",\"isNullable\":false,\"name\":\"HoldTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"HoldType.cdm.json/HoldType\",\"name\":\"HoldTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Hold Type.\",\"isNullable\":true,\"name\":\"HoldTypeName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"HoldType.cdm.json/HoldType\",\"name\":\"HoldTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of a Hold Type.\",\"isNullable\":true,\"name\":\"HoldTypeDescription\"}]}}}",
+			"Description": "A means of classifying Holds based on origin, type or function.\n\nEx:\n- manufacturing hold\n- transportation hold\n- inventory hold\n- customer-requested hold\n- credit hold\n\nEx:\nA 'credit hold' may be placed on an entire order.\nAn 'inventory hold' may be placed on a specific item.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "HoldTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

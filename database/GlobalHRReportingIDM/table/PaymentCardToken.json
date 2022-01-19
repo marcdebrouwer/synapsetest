@@ -1,0 +1,267 @@
+{
+	"name": "PaymentCardToken",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "PaymentCardToken",
+		"Description": "The Payment Card(s) authorized for use to purchase Products, goods or services. THE INFORMATION STORED BY THIS ENTITY MUST RESIDE IN A SEPARATE SECURED SERVER.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PaymentCardToken",
+					"Description": "A token for a Payment Card is used to point to a secure (typically encrypted) location where details of the payment card information can be found.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentCardToken"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PaymentAccountNumber",
+					"Description": "The number of the payment card. It is also referred to as the Primary Account Number (PAN) = The number that is embossed, encoded, or both, on a plastic card that identifies the issuer and the particular cardholder account.\n\nThe account number on the card, which is unique to every cardholder. The card number is used to identify the purchaser for authorization and billing purposes.\n\nThe Payment Card Industry (PCI) Data Security Standard (DSS) requires that the PAN be stored with strong encryption at all times and masked whenever it is displayed.\n\nCredit card numbers are a special case of ISO/IEC 7812 bank card numbers.\nAn ISO/IEC 7812 number contains a single-digit Major Industry Identifier (MII), a six-digit Issuer Identification Number (IIN), an account number, and a single digit check sum calculated using the Luhn algorithm. The MII is considered to be part of the IIN.\nThe card number's prefix is the sequence of digits at the beginning of the number that determine the credit card network to which the number belongs.\n\nThe first digit of your credit card number is the Major Industry Identifier (MII), which represents the category of entity which issued your credit card. Different MII digits represent the following issuer categories:\n\nMII Digit Value Issuer Category\n\n1 Airlines\n2 Airlines and other industry assignments\n3 Travel and entertainment\n4 Banking and financial\n5 Banking and financial\n6 Merchandizing and banking\n7 Petroleum\n8 Telecommunications and other industry assignments\n9 National assignment\n\nIssuer Identification Number\nThe first 6 digits of the credit card number are known as the Issuer Identification Number (IIN). These identify the institution that issued the card to the card holder. The rest of the number is allocated by the issuer.\n\nDigits 7 to (n - 1) of your credit card number are your individual account identifier. The maximum length of a credit card number is 19 digits. Since the initial 6 digits of a credit card number are the issuer identifier, and the final digit is the check digit, this means that the maximum length of the account number field is 19 - 7, or 12 digits.\n\nCard Length\nAmerican Express = 15\nDiscover Card = 16\nMasterCard = 16\nVisa = 13 or 16",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentAccountNumber"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Precision": 16,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardCardholderName",
+					"Description": "The name of a Payment Card Cardholder.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentCardCardholderName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardExpirationDate",
+					"Description": "The last day of the designated month/year the credit card is valid.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentCardExpirationDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardServiceCode",
+					"Description": "Three-digit or four-digit value in the magnetic-stripe that follows the expiration date of the payment card on the track data. It is used for various things such as defining service attributes, differentiating between international and national interchange, or identifying usage restrictions.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentCardServiceCode"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 4,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "IssuingBankId",
+					"Description": "The unique identifier of an Issuer.\n\nThe first 6 digits of the credit card number are known as the Issuer Identification Number (IIN). These identify the institution that issued the card to the card holder.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "IssuingBankId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardFullTrackData",
+					"Description": "Also referred to as \"track data\" or \"magnetic-stripe data.\" Data encoded in the magnetic stripe or chip used for authentication and/or authorization during payment transactions. Can be the magnetic-stripe image on a chip or the data on the track 1 and/or track 2 portion of the magnetic stripe.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentCardFullTrackData"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 20,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardAffinityCardOrganizationName",
+					"Description": "The name of the organization sponsoring the card as an affinity card.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentCardAffinityCardOrganizationName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardCvc2CardValidationCode",
+					"Description": "Card Validation Code - MasterCard term for the three-digit code printed next to the card number in the signature panel and used as part of the authorization process.\n\nThe Payment Card Industry (PCI) Data Security Standard (DSS) requires that the CVC2 only be stored for the purpose of authorizing a transaction. Once a transaction has been authorized the CVC2 data must be deleted.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentCardCvc2CardValidationCode"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardCvvCardVerificationValue",
+					"Description": "Card Verification Value - Visa term for the three-digit code printed next to the card number in the signature panel and used as part of the authorization process.\n\nThe Payment Card Industry (PCI) Data Security Standard (DSS) requires that the CVV only be stored for the purpose of authorizing a transaction. Once a transaction has been authorized the CVV data must be deleted.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentCardCvvCardVerificationValue"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardPin",
+					"Description": "Acronym for \"personal identification number.\" Secret numeric password known only to the user and a system to authenticate the user to the system. The user is only granted access if the PIN the user provided matches the PIN in the system. Typical PINs are used for automated teller machines for cash advance transactions. Another type of PIN is one used in EMV chip cards where the PIN replaces the cardholder's signature.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentCardPin"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 4,
+						"Scale": 0,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardPinBlock",
+					"Description": "A block of data used to encapsulate a PIN during processing. The PIN block format defines the content of the PIN block and how it is processed to retrieve the PIN. The PIN block is composed of the PIN, the PIN length, and may contain subset of the PAN.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardToken.cdm.json/PaymentCardToken",
+						"Name": "PaymentCardPinBlock"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 20,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PaymentCardToken",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PaymentCardToken",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PaymentCardToken\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardToken\"},\"PaymentAccountNumber\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentAccountNumber\"},\"PaymentCardCardholderName\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardCardholderName\"},\"PaymentCardExpirationDate\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardExpirationDate\"},\"PaymentCardServiceCode\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardServiceCode\"},\"IssuingBankId\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"IssuingBankId\"},\"PaymentCardFullTrackData\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardFullTrackData\"},\"PaymentCardAffinityCardOrganizationName\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardAffinityCardOrganizationName\"},\"PaymentCardCvc2CardValidationCode\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardCvc2CardValidationCode\"},\"PaymentCardCvvCardVerificationValue\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardCvvCardVerificationValue\"},\"PaymentCardPin\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardPin\"},\"PaymentCardPinBlock\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardPinBlock\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PaymentCardToken\",\"path\":\"PaymentCardToken.cdm.json/PaymentCardToken\"},\"description\":\"The Payment Card(s) authorized for use to purchase Products, goods or services. THE INFORMATION STORED BY THIS ENTITY MUST RESIDE IN A SEPARATE SECURED SERVER.\",\"primaryKey\":[\"PaymentCardToken\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardToken\"},\"dataType\":\"integer\",\"description\":\"A token for a Payment Card is used to point to a secure (typically encrypted) location where details of the payment card information can be found.\",\"isNullable\":false,\"name\":\"PaymentCardToken\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentAccountNumber\"},\"dataType\":\"decimal\",\"dataTypeLength\":16,\"description\":\"The number of the payment card. It is also referred to as the Primary Account Number (PAN) = The number that is embossed, encoded, or both, on a plastic card that identifies the issuer and the particular cardholder account.\\n\\nThe account number on the card, which is unique to every cardholder. The card number is used to identify the purchaser for authorization and billing purposes.\\n\\nThe Payment Card Industry (PCI) Data Security Standard (DSS) requires that the PAN be stored with strong encryption at all times and masked whenever it is displayed.\\n\\nCredit card numbers are a special case of ISO/IEC 7812 bank card numbers.\\nAn ISO/IEC 7812 number contains a single-digit Major Industry Identifier (MII), a six-digit Issuer Identification Number (IIN), an account number, and a single digit check sum calculated using the Luhn algorithm. The MII is considered to be part of the IIN.\\nThe card number's prefix is the sequence of digits at the beginning of the number that determine the credit card network to which the number belongs.\\n\\nThe first digit of your credit card number is the Major Industry Identifier (MII), which represents the category of entity which issued your credit card. Different MII digits represent the following issuer categories:\\n\\nMII Digit Value Issuer Category\\n\\n1 Airlines\\n2 Airlines and other industry assignments\\n3 Travel and entertainment\\n4 Banking and financial\\n5 Banking and financial\\n6 Merchandizing and banking\\n7 Petroleum\\n8 Telecommunications and other industry assignments\\n9 National assignment\\n\\nIssuer Identification Number\\nThe first 6 digits of the credit card number are known as the Issuer Identification Number (IIN). These identify the institution that issued the card to the card holder. The rest of the number is allocated by the issuer.\\n\\nDigits 7 to (n - 1) of your credit card number are your individual account identifier. The maximum length of a credit card number is 19 digits. Since the initial 6 digits of a credit card number are the issuer identifier, and the final digit is the check digit, this means that the maximum length of the account number field is 19 - 7, or 12 digits.\\n\\nCard Length\\nAmerican Express = 15\\nDiscover Card = 16\\nMasterCard = 16\\nVisa = 13 or 16\",\"isNullable\":false,\"scale\":0,\"name\":\"PaymentAccountNumber\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardCardholderName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Payment Card Cardholder.\",\"isNullable\":true,\"name\":\"PaymentCardCardholderName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardExpirationDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"The last day of the designated month/year the credit card is valid.\",\"isNullable\":true,\"name\":\"PaymentCardExpirationDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardServiceCode\"},\"dataType\":\"decimal\",\"dataTypeLength\":4,\"description\":\"Three-digit or four-digit value in the magnetic-stripe that follows the expiration date of the payment card on the track data. It is used for various things such as defining service attributes, differentiating between international and national interchange, or identifying usage restrictions.\",\"isNullable\":true,\"scale\":0,\"name\":\"PaymentCardServiceCode\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"IssuingBankId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of an Issuer.\\n\\nThe first 6 digits of the credit card number are known as the Issuer Identification Number (IIN). These identify the institution that issued the card to the card holder.\",\"isNullable\":true,\"name\":\"IssuingBankId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardFullTrackData\"},\"dataType\":\"string\",\"dataTypeLength\":20,\"description\":\"Also referred to as \\\"track data\\\" or \\\"magnetic-stripe data.\\\" Data encoded in the magnetic stripe or chip used for authentication and/or authorization during payment transactions. Can be the magnetic-stripe image on a chip or the data on the track 1 and/or track 2 portion of the magnetic stripe.\",\"isNullable\":true,\"name\":\"PaymentCardFullTrackData\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardAffinityCardOrganizationName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of the organization sponsoring the card as an affinity card.\",\"isNullable\":true,\"name\":\"PaymentCardAffinityCardOrganizationName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardCvc2CardValidationCode\"},\"dataType\":\"string\",\"dataTypeLength\":3,\"description\":\"Card Validation Code - MasterCard term for the three-digit code printed next to the card number in the signature panel and used as part of the authorization process.\\n\\nThe Payment Card Industry (PCI) Data Security Standard (DSS) requires that the CVC2 only be stored for the purpose of authorizing a transaction. Once a transaction has been authorized the CVC2 data must be deleted.\",\"isNullable\":true,\"name\":\"PaymentCardCvc2CardValidationCode\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardCvvCardVerificationValue\"},\"dataType\":\"string\",\"dataTypeLength\":3,\"description\":\"Card Verification Value - Visa term for the three-digit code printed next to the card number in the signature panel and used as part of the authorization process.\\n\\nThe Payment Card Industry (PCI) Data Security Standard (DSS) requires that the CVV only be stored for the purpose of authorizing a transaction. Once a transaction has been authorized the CVV data must be deleted.\",\"isNullable\":true,\"name\":\"PaymentCardCvvCardVerificationValue\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardPin\"},\"dataType\":\"decimal\",\"dataTypeLength\":4,\"description\":\"Acronym for \\\"personal identification number.\\\" Secret numeric password known only to the user and a system to authenticate the user to the system. The user is only granted access if the PIN the user provided matches the PIN in the system. Typical PINs are used for automated teller machines for cash advance transactions. Another type of PIN is one used in EMV chip cards where the PIN replaces the cardholder's signature.\",\"isNullable\":true,\"scale\":0,\"name\":\"PaymentCardPin\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"name\":\"PaymentCardPinBlock\"},\"dataType\":\"string\",\"dataTypeLength\":20,\"description\":\"A block of data used to encapsulate a PIN during processing. The PIN block format defines the content of the PIN block and how it is processed to retrieve the PIN. The PIN block is composed of the PIN, the PIN length, and may contain subset of the PAN.\",\"isNullable\":true,\"name\":\"PaymentCardPinBlock\"}]}}}",
+			"Description": "The Payment Card(s) authorized for use to purchase Products, goods or services. THE INFORMATION STORED BY THIS ENTITY MUST RESIDE IN A SEPARATE SECURED SERVER.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "PaymentCardToken",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

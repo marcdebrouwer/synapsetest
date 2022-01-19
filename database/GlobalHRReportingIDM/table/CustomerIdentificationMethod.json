@@ -1,0 +1,112 @@
+{
+	"name": "CustomerIdentificationMethod",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "CustomerIdentificationMethod",
+		"Description": "The method by which customers are identified.   Customers in many industries are anonymous unless they are the paying customer and pay by credit card, coupon etc.\n\nEx:\n- Account Holder\n- Credit Card\n- Loyalty Card\n- Promotion\n- Coupon\n- Anonymous Customer\n- Known Customer",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "CustomerIdentificationMethodId",
+					"Description": "The unique identifier of a customer identification method.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod",
+						"Name": "CustomerIdentificationMethodId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "CustomerIdentificationMethodName",
+					"Description": "The name of a customer identification method.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod",
+						"Name": "CustomerIdentificationMethodName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "CustomerIdentificationMethodDescription",
+					"Description": "The description of a customer identification method.",
+					"BaseAttributeReference": {
+						"Entity": "CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod",
+						"Name": "CustomerIdentificationMethodDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/CustomerIdentificationMethod",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/CustomerIdentificationMethod",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"CustomerIdentificationMethodId\":{\"entity\":\"CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod\",\"name\":\"CustomerIdentificationMethodId\"},\"CustomerIdentificationMethodName\":{\"entity\":\"CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod\",\"name\":\"CustomerIdentificationMethodName\"},\"CustomerIdentificationMethodDescription\":{\"entity\":\"CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod\",\"name\":\"CustomerIdentificationMethodDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"CustomerIdentificationMethod\",\"path\":\"CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod\"},\"description\":\"The method by which customers are identified.   Customers in many industries are anonymous unless they are the paying customer and pay by credit card, coupon etc.\\n\\nEx:\\n- Account Holder\\n- Credit Card\\n- Loyalty Card\\n- Promotion\\n- Coupon\\n- Anonymous Customer\\n- Known Customer\",\"primaryKey\":[\"CustomerIdentificationMethodId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod\",\"name\":\"CustomerIdentificationMethodId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a customer identification method.\",\"isNullable\":false,\"name\":\"CustomerIdentificationMethodId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod\",\"name\":\"CustomerIdentificationMethodName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a customer identification method.\",\"isNullable\":true,\"name\":\"CustomerIdentificationMethodName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod\",\"name\":\"CustomerIdentificationMethodDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of a customer identification method.\",\"isNullable\":true,\"name\":\"CustomerIdentificationMethodDescription\"}]}}}",
+			"Description": "The method by which customers are identified.   Customers in many industries are anonymous unless they are the paying customer and pay by credit card, coupon etc.\n\nEx:\n- Account Holder\n- Credit Card\n- Loyalty Card\n- Promotion\n- Coupon\n- Anonymous Customer\n- Known Customer",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "CustomerIdentificationMethodId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

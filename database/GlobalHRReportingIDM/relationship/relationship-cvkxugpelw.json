@@ -1,0 +1,30 @@
+{
+	"name": "relationship-cvkxugpelw",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-cvkxugpelw",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "TransactionLineItem",
+		"ToTableName": "TransactionLineItemHold",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "TransactionId",
+				"ToColumnName": "TransactionId"
+			},
+			{
+				"FromColumnName": "TransactionLineItemId",
+				"ToColumnName": "TransactionLineItemId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

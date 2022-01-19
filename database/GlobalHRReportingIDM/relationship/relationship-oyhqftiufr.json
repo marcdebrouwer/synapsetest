@@ -1,0 +1,30 @@
+{
+	"name": "relationship-oyhqftiufr",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-oyhqftiufr",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "TransactionLineItem",
+		"ToTableName": "TransactionLineItemCharge",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "TransactionId",
+				"ToColumnName": "TransactionId"
+			},
+			{
+				"FromColumnName": "TransactionLineItemId",
+				"ToColumnName": "TransactionLineItemId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItemCharge.cdm.json/TransactionLineItemCharge\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

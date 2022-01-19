@@ -1,0 +1,144 @@
+{
+	"name": "TransactionLineItemStatus",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionLineItemStatus",
+		"Description": "The status of a transaction line item at a point in time.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemStatus.cdm.json/TransactionLineItemStatus",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemId",
+					"Description": "The unique identifier that identifies the Transaction Line Item.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemStatus.cdm.json/TransactionLineItemStatus",
+						"Name": "TransactionLineItemId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemStatusTimestamp",
+					"Description": "The timestamp that the transaction line item status was effective.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemStatus.cdm.json/TransactionLineItemStatus",
+						"Name": "TransactionLineItemStatusTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemStatusTypeId",
+					"Description": "The unique identifier of a Transaction Line Item Status Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemStatus.cdm.json/TransactionLineItemStatus",
+						"Name": "TransactionLineItemStatusTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemStatusNote",
+					"Description": "A note, comment or additional information regarding the Transaction Line Item Status.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemStatus.cdm.json/TransactionLineItemStatus",
+						"Name": "TransactionLineItemStatusNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineItemStatus",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineItemStatus",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"name\":\"TransactionId\"},\"TransactionLineItemId\":{\"entity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"name\":\"TransactionLineItemId\"},\"TransactionLineItemStatusTimestamp\":{\"entity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"name\":\"TransactionLineItemStatusTimestamp\"},\"TransactionLineItemStatusTypeId\":{\"entity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"name\":\"TransactionLineItemStatusTypeId\"},\"TransactionLineItemStatusNote\":{\"entity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"name\":\"TransactionLineItemStatusNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionLineItemStatus\",\"path\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\"},\"description\":\"The status of a transaction line item at a point in time.\",\"primaryKey\":[\"TransactionId\",\"TransactionLineItemId\",\"TransactionLineItemStatusTimestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"name\":\"TransactionLineItemId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier that identifies the Transaction Line Item.\",\"isNullable\":false,\"name\":\"TransactionLineItemId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"name\":\"TransactionLineItemStatusTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp that the transaction line item status was effective.\",\"isNullable\":false,\"name\":\"TransactionLineItemStatusTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"name\":\"TransactionLineItemStatusTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Transaction Line Item Status Type.\",\"isNullable\":true,\"name\":\"TransactionLineItemStatusTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"name\":\"TransactionLineItemStatusNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the Transaction Line Item Status.\",\"isNullable\":true,\"name\":\"TransactionLineItemStatusNote\"}]}}}",
+			"Description": "The status of a transaction line item at a point in time.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,TransactionLineItemId,TransactionLineItemStatusTimestamp",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

@@ -1,0 +1,127 @@
+{
+	"name": "RelatedTransaction",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "RelatedTransaction",
+		"Description": "The relationship of two or more transactions.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "RelatedTransaction.cdm.json/RelatedTransaction",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "RelatedTransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "RelatedTransaction.cdm.json/RelatedTransaction",
+						"Name": "RelatedTransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "TransactionRelationshipTypeId",
+					"Description": "The unique identifier of a Transaction Relationship Type.",
+					"BaseAttributeReference": {
+						"Entity": "RelatedTransaction.cdm.json/RelatedTransaction",
+						"Name": "TransactionRelationshipTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionRelationshipNote",
+					"Description": "A note, comment or additional information regarding the Related Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "RelatedTransaction.cdm.json/RelatedTransaction",
+						"Name": "TransactionRelationshipNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/RelatedTransaction",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/RelatedTransaction",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"RelatedTransaction.cdm.json/RelatedTransaction\",\"name\":\"TransactionId\"},\"RelatedTransactionId\":{\"entity\":\"RelatedTransaction.cdm.json/RelatedTransaction\",\"name\":\"RelatedTransactionId\"},\"TransactionRelationshipTypeId\":{\"entity\":\"RelatedTransaction.cdm.json/RelatedTransaction\",\"name\":\"TransactionRelationshipTypeId\"},\"TransactionRelationshipNote\":{\"entity\":\"RelatedTransaction.cdm.json/RelatedTransaction\",\"name\":\"TransactionRelationshipNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"RelatedTransaction\",\"path\":\"RelatedTransaction.cdm.json/RelatedTransaction\"},\"description\":\"The relationship of two or more transactions.\",\"primaryKey\":[\"TransactionId\",\"RelatedTransactionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"RelatedTransaction.cdm.json/RelatedTransaction\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"RelatedTransaction.cdm.json/RelatedTransaction\",\"name\":\"RelatedTransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"RelatedTransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"RelatedTransaction.cdm.json/RelatedTransaction\",\"name\":\"TransactionRelationshipTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Transaction Relationship Type.\",\"isNullable\":true,\"name\":\"TransactionRelationshipTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"RelatedTransaction.cdm.json/RelatedTransaction\",\"name\":\"TransactionRelationshipNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the Related Transaction.\",\"isNullable\":true,\"name\":\"TransactionRelationshipNote\"}]}}}",
+			"Description": "The relationship of two or more transactions.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,RelatedTransactionId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

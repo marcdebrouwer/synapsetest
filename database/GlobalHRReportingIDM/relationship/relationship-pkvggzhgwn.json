@@ -1,0 +1,26 @@
+{
+	"name": "relationship-pkvggzhgwn",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-pkvggzhgwn",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PosDevice",
+		"ToTableName": "TransactionLineItem",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PosDeviceId",
+				"ToColumnName": "PosDeviceId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PosDevice.cdm.json/PosDevice\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"PosDeviceId\",\"toAttribute\":\"PosDeviceId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

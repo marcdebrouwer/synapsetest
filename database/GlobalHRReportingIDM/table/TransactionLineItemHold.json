@@ -1,0 +1,161 @@
+{
+	"name": "TransactionLineItemHold",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionLineItemHold",
+		"Description": "A Hold placed on one or more Transaction Line Item(s).\n\nEx:\nAn 'inventory hold' may be applied to an transaction line item.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemHold.cdm.json/TransactionLineItemHold",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemId",
+					"Description": "The number that identifies the Transaction Line Item.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemHold.cdm.json/TransactionLineItemHold",
+						"Name": "TransactionLineItemId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemHoldPlacedTimestamp",
+					"Description": "The timestamp that the Hold was placed.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemHold.cdm.json/TransactionLineItemHold",
+						"Name": "TransactionLineItemHoldPlacedTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemHoldReleasedTimestamp",
+					"Description": "The timestamp that the Hold was released.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemHold.cdm.json/TransactionLineItemHold",
+						"Name": "TransactionLineItemHoldReleasedTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemHoldNote",
+					"Description": "A note, comment or additional information regarding the Transaction Line Item Hold.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemHold.cdm.json/TransactionLineItemHold",
+						"Name": "TransactionLineItemHoldNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "HoldTypeId",
+					"Description": "The unique identifier of a Hold Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemHold.cdm.json/TransactionLineItemHold",
+						"Name": "HoldTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineItemHold",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineItemHold",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"TransactionId\"},\"TransactionLineItemId\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"TransactionLineItemId\"},\"TransactionLineItemHoldPlacedTimestamp\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"TransactionLineItemHoldPlacedTimestamp\"},\"TransactionLineItemHoldReleasedTimestamp\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"TransactionLineItemHoldReleasedTimestamp\"},\"TransactionLineItemHoldNote\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"TransactionLineItemHoldNote\"},\"HoldTypeId\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"HoldTypeId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionLineItemHold\",\"path\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\"},\"description\":\"A Hold placed on one or more Transaction Line Item(s).\\n\\nEx:\\nAn 'inventory hold' may be applied to an transaction line item.\",\"primaryKey\":[\"TransactionId\",\"TransactionLineItemId\",\"TransactionLineItemHoldPlacedTimestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"TransactionLineItemId\"},\"dataType\":\"integer\",\"description\":\"The number that identifies the Transaction Line Item.\",\"isNullable\":false,\"name\":\"TransactionLineItemId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"TransactionLineItemHoldPlacedTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp that the Hold was placed.\",\"isNullable\":false,\"name\":\"TransactionLineItemHoldPlacedTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"TransactionLineItemHoldReleasedTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp that the Hold was released.\",\"isNullable\":true,\"name\":\"TransactionLineItemHoldReleasedTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"TransactionLineItemHoldNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the Transaction Line Item Hold.\",\"isNullable\":true,\"name\":\"TransactionLineItemHoldNote\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"name\":\"HoldTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Hold Type.\",\"isNullable\":true,\"name\":\"HoldTypeId\"}]}}}",
+			"Description": "A Hold placed on one or more Transaction Line Item(s).\n\nEx:\nAn 'inventory hold' may be applied to an transaction line item.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,TransactionLineItemId,TransactionLineItemHoldPlacedTimestamp",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

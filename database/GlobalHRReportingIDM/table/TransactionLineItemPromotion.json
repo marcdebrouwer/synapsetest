@@ -1,0 +1,163 @@
+{
+	"name": "TransactionLineItemPromotion",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionLineItemPromotion",
+		"Description": "A promotion that is applicable to the associated transaction line item.\n\nEx:\n- Senior citizen discount",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemId",
+					"Description": "The unique identifier that identifies the Transaction Line Item.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion",
+						"Name": "TransactionLineItemId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PromotionId",
+					"Description": "The unique identifier of a Promotion.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion",
+						"Name": "PromotionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TotalPromotionCost",
+					"Description": "The total costs associated with the promotion for this transaction line item.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion",
+						"Name": "TotalPromotionCost"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "UnitsReceived",
+					"Description": "The number of units received due to the promotion.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion",
+						"Name": "UnitsReceived"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "Note",
+					"Description": "A note, comment or additional information regarding the transaction promotion.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion",
+						"Name": "Note"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineItemPromotion",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineItemPromotion",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"TransactionId\"},\"TransactionLineItemId\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"TransactionLineItemId\"},\"PromotionId\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"PromotionId\"},\"TotalPromotionCost\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"TotalPromotionCost\"},\"UnitsReceived\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"UnitsReceived\"},\"Note\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"Note\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionLineItemPromotion\",\"path\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\"},\"description\":\"A promotion that is applicable to the associated transaction line item.\\n\\nEx:\\n- Senior citizen discount\",\"primaryKey\":[\"TransactionId\",\"TransactionLineItemId\",\"PromotionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"TransactionLineItemId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier that identifies the Transaction Line Item.\",\"isNullable\":false,\"name\":\"TransactionLineItemId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"PromotionId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Promotion.\",\"isNullable\":false,\"name\":\"PromotionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"TotalPromotionCost\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The total costs associated with the promotion for this transaction line item.\",\"isNullable\":true,\"scale\":2,\"name\":\"TotalPromotionCost\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"UnitsReceived\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The number of units received due to the promotion.\",\"isNullable\":true,\"scale\":2,\"name\":\"UnitsReceived\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"name\":\"Note\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the transaction promotion.\",\"isNullable\":true,\"name\":\"Note\"}]}}}",
+			"Description": "A promotion that is applicable to the associated transaction line item.\n\nEx:\n- Senior citizen discount",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,TransactionLineItemId,PromotionId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

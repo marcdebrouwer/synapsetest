@@ -1,0 +1,144 @@
+{
+	"name": "TransactionLocation",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionLocation",
+		"Description": "The locations associated with a Transaction.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLocation.cdm.json/TransactionLocation",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLocationTypeId",
+					"Description": "The unique identifier of a Transaction Location Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLocation.cdm.json/TransactionLocation",
+						"Name": "TransactionLocationTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLocationTimestamp",
+					"Description": "The timestamp associated with the Transaction Location.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLocation.cdm.json/TransactionLocation",
+						"Name": "TransactionLocationTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "LocationId",
+					"Description": "The unique identifier of a Location.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLocation.cdm.json/TransactionLocation",
+						"Name": "LocationId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLocationNote",
+					"Description": "A note, comment or additional information regarding the Transaction Location.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLocation.cdm.json/TransactionLocation",
+						"Name": "TransactionLocationNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLocation",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLocation",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"name\":\"TransactionId\"},\"TransactionLocationTypeId\":{\"entity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"name\":\"TransactionLocationTypeId\"},\"TransactionLocationTimestamp\":{\"entity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"name\":\"TransactionLocationTimestamp\"},\"LocationId\":{\"entity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"name\":\"LocationId\"},\"TransactionLocationNote\":{\"entity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"name\":\"TransactionLocationNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionLocation\",\"path\":\"TransactionLocation.cdm.json/TransactionLocation\"},\"description\":\"The locations associated with a Transaction.\",\"primaryKey\":[\"TransactionId\",\"TransactionLocationTypeId\",\"TransactionLocationTimestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"name\":\"TransactionLocationTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Transaction Location Type.\",\"isNullable\":false,\"name\":\"TransactionLocationTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"name\":\"TransactionLocationTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp associated with the Transaction Location.\",\"isNullable\":false,\"name\":\"TransactionLocationTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"name\":\"TransactionLocationNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the Transaction Location.\",\"isNullable\":true,\"name\":\"TransactionLocationNote\"}]}}}",
+			"Description": "The locations associated with a Transaction.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,TransactionLocationTypeId,TransactionLocationTimestamp",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

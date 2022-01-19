@@ -1,0 +1,112 @@
+{
+	"name": "PaymentCardAcquisitionMethod",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "PaymentCardAcquisitionMethod",
+		"Description": "The method by which the payment card information was obtained from the payment card presented by the individual.\n\nEx.:\n- Swipe\n- Dip\n- Tap\n- Manual\n- Impression\n\nwhere: \n- Swipe occurs when the payment card is swiped and the magnetic stripe along the side of the card is read to obtain the payment card information\n- Dip occurs when the payment card is inserted, usually, at the bottom of the card so that payment card information can be obtained from the chip embedded in the payment card\n- Tap occurs when the payment card is tapped for the payment card information to be obtained. Payment card information is generally obtained using RFID technology, for devices such as smart phones using apple pay, google pay or similar applications the payment card information is obtained using NFC technology which belongs to a small subset of the RFID technology family.\n- Manual occurs when payment card information was provided over the phone or in person\n- Impression occurs when an impression of the payment card was taken",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PaymentCardAcquisitionMethodId",
+					"Description": "The unique identifier of a Payment Card Acquisition Method.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod",
+						"Name": "PaymentCardAcquisitionMethodId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardAcquisitionMethodName",
+					"Description": "The name of the Payment Card Acquisition Method.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod",
+						"Name": "PaymentCardAcquisitionMethodName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PaymentCardAcquisitionMethodDescription",
+					"Description": "The description of the Payment Card Acquisition Method.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod",
+						"Name": "PaymentCardAcquisitionMethodDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PaymentCardAcquisitionMethod",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PaymentCardAcquisitionMethod",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PaymentCardAcquisitionMethodId\":{\"entity\":\"PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod\",\"name\":\"PaymentCardAcquisitionMethodId\"},\"PaymentCardAcquisitionMethodName\":{\"entity\":\"PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod\",\"name\":\"PaymentCardAcquisitionMethodName\"},\"PaymentCardAcquisitionMethodDescription\":{\"entity\":\"PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod\",\"name\":\"PaymentCardAcquisitionMethodDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PaymentCardAcquisitionMethod\",\"path\":\"PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod\"},\"description\":\"The method by which the payment card information was obtained from the payment card presented by the individual.\\n\\nEx.:\\n- Swipe\\n- Dip\\n- Tap\\n- Manual\\n- Impression\\n\\nwhere: \\n- Swipe occurs when the payment card is swiped and the magnetic stripe along the side of the card is read to obtain the payment card information\\n- Dip occurs when the payment card is inserted, usually, at the bottom of the card so that payment card information can be obtained from the chip embedded in the payment card\\n- Tap occurs when the payment card is tapped for the payment card information to be obtained. Payment card information is generally obtained using RFID technology, for devices such as smart phones using apple pay, google pay or similar applications the payment card information is obtained using NFC technology which belongs to a small subset of the RFID technology family.\\n- Manual occurs when payment card information was provided over the phone or in person\\n- Impression occurs when an impression of the payment card was taken\",\"primaryKey\":[\"PaymentCardAcquisitionMethodId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod\",\"name\":\"PaymentCardAcquisitionMethodId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Payment Card Acquisition Method.\",\"isNullable\":false,\"name\":\"PaymentCardAcquisitionMethodId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod\",\"name\":\"PaymentCardAcquisitionMethodName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of the Payment Card Acquisition Method.\",\"isNullable\":true,\"name\":\"PaymentCardAcquisitionMethodName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod\",\"name\":\"PaymentCardAcquisitionMethodDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of the Payment Card Acquisition Method.\",\"isNullable\":true,\"name\":\"PaymentCardAcquisitionMethodDescription\"}]}}}",
+			"Description": "The method by which the payment card information was obtained from the payment card presented by the individual.\n\nEx.:\n- Swipe\n- Dip\n- Tap\n- Manual\n- Impression\n\nwhere: \n- Swipe occurs when the payment card is swiped and the magnetic stripe along the side of the card is read to obtain the payment card information\n- Dip occurs when the payment card is inserted, usually, at the bottom of the card so that payment card information can be obtained from the chip embedded in the payment card\n- Tap occurs when the payment card is tapped for the payment card information to be obtained. Payment card information is generally obtained using RFID technology, for devices such as smart phones using apple pay, google pay or similar applications the payment card information is obtained using NFC technology which belongs to a small subset of the RFID technology family.\n- Manual occurs when payment card information was provided over the phone or in person\n- Impression occurs when an impression of the payment card was taken",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "PaymentCardAcquisitionMethodId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

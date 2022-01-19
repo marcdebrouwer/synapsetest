@@ -1,0 +1,112 @@
+{
+	"name": "PaymentStatusType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "PaymentStatusType",
+		"Description": "The status of the associated Payment.\n\nEx:\n-  Transmitted\n-  Successful\n-  Rejected (Negated)\n-  Returned Check\n-  Reimbursed",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PaymentStatusTypeId",
+					"Description": "The unique identifier of a Payment Status Type.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentStatusType.cdm.json/PaymentStatusType",
+						"Name": "PaymentStatusTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PaymentStatusTypeName",
+					"Description": "The name of the Payment Status Type.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentStatusType.cdm.json/PaymentStatusType",
+						"Name": "PaymentStatusTypeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PaymentStatusTypeDescription",
+					"Description": "The description of the Payment Status Type.",
+					"BaseAttributeReference": {
+						"Entity": "PaymentStatusType.cdm.json/PaymentStatusType",
+						"Name": "PaymentStatusTypeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PaymentStatusType",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PaymentStatusType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PaymentStatusTypeId\":{\"entity\":\"PaymentStatusType.cdm.json/PaymentStatusType\",\"name\":\"PaymentStatusTypeId\"},\"PaymentStatusTypeName\":{\"entity\":\"PaymentStatusType.cdm.json/PaymentStatusType\",\"name\":\"PaymentStatusTypeName\"},\"PaymentStatusTypeDescription\":{\"entity\":\"PaymentStatusType.cdm.json/PaymentStatusType\",\"name\":\"PaymentStatusTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PaymentStatusType\",\"path\":\"PaymentStatusType.cdm.json/PaymentStatusType\"},\"description\":\"The status of the associated Payment.\\n\\nEx:\\n-  Transmitted\\n-  Successful\\n-  Rejected (Negated)\\n-  Returned Check\\n-  Reimbursed\",\"primaryKey\":[\"PaymentStatusTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentStatusType.cdm.json/PaymentStatusType\",\"name\":\"PaymentStatusTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Payment Status Type.\",\"isNullable\":false,\"name\":\"PaymentStatusTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentStatusType.cdm.json/PaymentStatusType\",\"name\":\"PaymentStatusTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of the Payment Status Type.\",\"isNullable\":true,\"name\":\"PaymentStatusTypeName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PaymentStatusType.cdm.json/PaymentStatusType\",\"name\":\"PaymentStatusTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of the Payment Status Type.\",\"isNullable\":true,\"name\":\"PaymentStatusTypeDescription\"}]}}}",
+			"Description": "The status of the associated Payment.\n\nEx:\n-  Transmitted\n-  Successful\n-  Rejected (Negated)\n-  Returned Check\n-  Reimbursed",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "PaymentStatusTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

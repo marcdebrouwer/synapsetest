@@ -1,0 +1,112 @@
+{
+	"name": "PosDeviceType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "PosDeviceType",
+		"Description": "A type of POS device.\n\nEx:\n- Workstation\n- Cash register\n- Scanner\n- Till\n- Scale\n- Pin Pad\n- Check reader\n- Payment Card Reader",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PosDeviceTypeId",
+					"Description": "The unique identifier of a POS Device Type.",
+					"BaseAttributeReference": {
+						"Entity": "PosDeviceType.cdm.json/PosDeviceType",
+						"Name": "PosDeviceTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PosDeviceTypeName",
+					"Description": "The name of a POS Device Type.",
+					"BaseAttributeReference": {
+						"Entity": "PosDeviceType.cdm.json/PosDeviceType",
+						"Name": "PosDeviceTypeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PosDeviceTypeDescription",
+					"Description": "The description of a POS Device Type.",
+					"BaseAttributeReference": {
+						"Entity": "PosDeviceType.cdm.json/PosDeviceType",
+						"Name": "PosDeviceTypeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PosDeviceType",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PosDeviceType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PosDeviceTypeId\":{\"entity\":\"PosDeviceType.cdm.json/PosDeviceType\",\"name\":\"PosDeviceTypeId\"},\"PosDeviceTypeName\":{\"entity\":\"PosDeviceType.cdm.json/PosDeviceType\",\"name\":\"PosDeviceTypeName\"},\"PosDeviceTypeDescription\":{\"entity\":\"PosDeviceType.cdm.json/PosDeviceType\",\"name\":\"PosDeviceTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PosDeviceType\",\"path\":\"PosDeviceType.cdm.json/PosDeviceType\"},\"description\":\"A type of POS device.\\n\\nEx:\\n- Workstation\\n- Cash register\\n- Scanner\\n- Till\\n- Scale\\n- Pin Pad\\n- Check reader\\n- Payment Card Reader\",\"primaryKey\":[\"PosDeviceTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDeviceType.cdm.json/PosDeviceType\",\"name\":\"PosDeviceTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a POS Device Type.\",\"isNullable\":false,\"name\":\"PosDeviceTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDeviceType.cdm.json/PosDeviceType\",\"name\":\"PosDeviceTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a POS Device Type.\",\"isNullable\":true,\"name\":\"PosDeviceTypeName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDeviceType.cdm.json/PosDeviceType\",\"name\":\"PosDeviceTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of a POS Device Type.\",\"isNullable\":true,\"name\":\"PosDeviceTypeDescription\"}]}}}",
+			"Description": "A type of POS device.\n\nEx:\n- Workstation\n- Cash register\n- Scanner\n- Till\n- Scale\n- Pin Pad\n- Check reader\n- Payment Card Reader",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "PosDeviceTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

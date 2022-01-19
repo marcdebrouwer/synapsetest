@@ -1,0 +1,26 @@
+{
+	"name": "relationship-qaznocjimr",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-qaznocjimr",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "ConfirmationMethod",
+		"ToTableName": "TransactionCustomerAccountConfirmationMethod",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "ConfirmationMethodId",
+				"ToColumnName": "ConfirmationMethodId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"ConfirmationMethod.cdm.json/ConfirmationMethod\",\"toEntity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"joinPairs\":[{\"fromAttribute\":\"ConfirmationMethodId\",\"toAttribute\":\"ConfirmationMethodId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

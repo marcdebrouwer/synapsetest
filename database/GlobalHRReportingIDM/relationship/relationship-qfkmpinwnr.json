@@ -1,0 +1,26 @@
+{
+	"name": "relationship-qfkmpinwnr",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-qfkmpinwnr",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PosDevice",
+		"ToTableName": "Payment",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PosDeviceId",
+				"ToColumnName": "PosDeviceId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PosDevice.cdm.json/PosDevice\",\"toEntity\":\"Payment.cdm.json/Payment\",\"joinPairs\":[{\"fromAttribute\":\"PosDeviceId\",\"toAttribute\":\"PosDeviceId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

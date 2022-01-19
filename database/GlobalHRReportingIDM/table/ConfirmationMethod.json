@@ -1,0 +1,112 @@
+{
+	"name": "ConfirmationMethod",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "ConfirmationMethod",
+		"Description": "The means by which transactions are confirmed to the account.\n\nEx:\n- Phone\n- Fax\n- Email\n- Public Mail\n- FedEx\n- Courier",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ConfirmationMethodId",
+					"Description": "The unique identifier of a Confirmation Method.",
+					"BaseAttributeReference": {
+						"Entity": "ConfirmationMethod.cdm.json/ConfirmationMethod",
+						"Name": "ConfirmationMethodId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ConfirmationMethodName",
+					"Description": "The name of a Confirmation Method.",
+					"BaseAttributeReference": {
+						"Entity": "ConfirmationMethod.cdm.json/ConfirmationMethod",
+						"Name": "ConfirmationMethodName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ConfirmationMethodDescription",
+					"Description": "The description of a Confirmation Method.",
+					"BaseAttributeReference": {
+						"Entity": "ConfirmationMethod.cdm.json/ConfirmationMethod",
+						"Name": "ConfirmationMethodDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/ConfirmationMethod",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/ConfirmationMethod",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ConfirmationMethodId\":{\"entity\":\"ConfirmationMethod.cdm.json/ConfirmationMethod\",\"name\":\"ConfirmationMethodId\"},\"ConfirmationMethodName\":{\"entity\":\"ConfirmationMethod.cdm.json/ConfirmationMethod\",\"name\":\"ConfirmationMethodName\"},\"ConfirmationMethodDescription\":{\"entity\":\"ConfirmationMethod.cdm.json/ConfirmationMethod\",\"name\":\"ConfirmationMethodDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"ConfirmationMethod\",\"path\":\"ConfirmationMethod.cdm.json/ConfirmationMethod\"},\"description\":\"The means by which transactions are confirmed to the account.\\n\\nEx:\\n- Phone\\n- Fax\\n- Email\\n- Public Mail\\n- FedEx\\n- Courier\",\"primaryKey\":[\"ConfirmationMethodId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"ConfirmationMethod.cdm.json/ConfirmationMethod\",\"name\":\"ConfirmationMethodId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Confirmation Method.\",\"isNullable\":false,\"name\":\"ConfirmationMethodId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"ConfirmationMethod.cdm.json/ConfirmationMethod\",\"name\":\"ConfirmationMethodName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Confirmation Method.\",\"isNullable\":true,\"name\":\"ConfirmationMethodName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"ConfirmationMethod.cdm.json/ConfirmationMethod\",\"name\":\"ConfirmationMethodDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of a Confirmation Method.\",\"isNullable\":true,\"name\":\"ConfirmationMethodDescription\"}]}}}",
+			"Description": "The means by which transactions are confirmed to the account.\n\nEx:\n- Phone\n- Fax\n- Email\n- Public Mail\n- FedEx\n- Courier",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "ConfirmationMethodId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

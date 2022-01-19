@@ -1,0 +1,112 @@
+{
+	"name": "TransactionLineEntryMethod",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionLineEntryMethod",
+		"Description": "The method by which the Transaction Line Entry is achieved.\n\nEx.:\n- Manual \n- Scanner",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionLineEntryMethodId",
+					"Description": "The unique identifier of a Transaction Line Entry Method.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod",
+						"Name": "TransactionLineEntryMethodId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineEntryMethodName",
+					"Description": "The name of the Transaction Line Entry Method.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod",
+						"Name": "TransactionLineEntryMethodName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineEntryMethodDescription",
+					"Description": "The description of the Transaction Line Entry Method.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod",
+						"Name": "TransactionLineEntryMethodDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineEntryMethod",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineEntryMethod",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionLineEntryMethodId\":{\"entity\":\"TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod\",\"name\":\"TransactionLineEntryMethodId\"},\"TransactionLineEntryMethodName\":{\"entity\":\"TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod\",\"name\":\"TransactionLineEntryMethodName\"},\"TransactionLineEntryMethodDescription\":{\"entity\":\"TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod\",\"name\":\"TransactionLineEntryMethodDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionLineEntryMethod\",\"path\":\"TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod\"},\"description\":\"The method by which the Transaction Line Entry is achieved.\\n\\nEx.:\\n- Manual \\n- Scanner\",\"primaryKey\":[\"TransactionLineEntryMethodId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod\",\"name\":\"TransactionLineEntryMethodId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Transaction Line Entry Method.\",\"isNullable\":false,\"name\":\"TransactionLineEntryMethodId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod\",\"name\":\"TransactionLineEntryMethodName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of the Transaction Line Entry Method.\",\"isNullable\":true,\"name\":\"TransactionLineEntryMethodName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod\",\"name\":\"TransactionLineEntryMethodDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of the Transaction Line Entry Method.\",\"isNullable\":true,\"name\":\"TransactionLineEntryMethodDescription\"}]}}}",
+			"Description": "The method by which the Transaction Line Entry is achieved.\n\nEx.:\n- Manual \n- Scanner",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionLineEntryMethodId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

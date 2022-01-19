@@ -1,0 +1,162 @@
+{
+	"name": "TransactionRelatedCustomerAccount",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionRelatedCustomerAccount",
+		"Description": "The one or more Customer Account(s) involved in or related to a transaction, the amount and the currency.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "CustomerAccountId",
+					"Description": "The unique identifier of a Customer Account.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount",
+						"Name": "CustomerAccountId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "TransactionAccountRelationshipTypeId",
+					"Description": "The unique identifier of a Transaction Account Relationship Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount",
+						"Name": "TransactionAccountRelationshipTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "Amount",
+					"Description": "The amount of the Customer Account-related Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount",
+						"Name": "Amount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "IsoCurrencyCode",
+					"Description": "The ISO 4217 currency code.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount",
+						"Name": "IsoCurrencyCode"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 3,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "TransactionAccountRelationshipNote",
+					"Description": "A note, comment or additional information regarding the transaction account relationship.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount",
+						"Name": "TransactionAccountRelationshipNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionRelatedCustomerAccount",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionRelatedCustomerAccount",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"TransactionId\"},\"CustomerAccountId\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"CustomerAccountId\"},\"TransactionAccountRelationshipTypeId\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"TransactionAccountRelationshipTypeId\"},\"Amount\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"Amount\"},\"IsoCurrencyCode\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"IsoCurrencyCode\"},\"TransactionAccountRelationshipNote\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"TransactionAccountRelationshipNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionRelatedCustomerAccount\",\"path\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\"},\"description\":\"The one or more Customer Account(s) involved in or related to a transaction, the amount and the currency.\",\"primaryKey\":[\"TransactionId\",\"CustomerAccountId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"CustomerAccountId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Customer Account.\",\"isNullable\":false,\"name\":\"CustomerAccountId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"TransactionAccountRelationshipTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Transaction Account Relationship Type.\",\"isNullable\":true,\"name\":\"TransactionAccountRelationshipTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"Amount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The amount of the Customer Account-related Transaction.\",\"isNullable\":true,\"scale\":2,\"name\":\"Amount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"IsoCurrencyCode\"},\"dataType\":\"string\",\"dataTypeLength\":3,\"description\":\"The ISO 4217 currency code.\",\"isNullable\":true,\"name\":\"IsoCurrencyCode\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"name\":\"TransactionAccountRelationshipNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the transaction account relationship.\",\"isNullable\":true,\"name\":\"TransactionAccountRelationshipNote\"}]}}}",
+			"Description": "The one or more Customer Account(s) involved in or related to a transaction, the amount and the currency.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,CustomerAccountId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

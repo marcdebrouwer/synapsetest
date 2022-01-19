@@ -1,0 +1,128 @@
+{
+	"name": "TransactionStatus",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionStatus",
+		"Description": "The execution status of the transaction as of the associated timestamp.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionStatus.cdm.json/TransactionStatus",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "Timestamp",
+					"Description": "The timestamp for which the associated transaction status is identified.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionStatus.cdm.json/TransactionStatus",
+						"Name": "Timestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "TransactionStatusTypeId",
+					"Description": "The unique identifier of a Transaction Status Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionStatus.cdm.json/TransactionStatus",
+						"Name": "TransactionStatusTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionStatusNote",
+					"Description": "A note, comment or additional information regarding the transaction execution status.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionStatus.cdm.json/TransactionStatus",
+						"Name": "TransactionStatusNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionStatus",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionStatus",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionStatus.cdm.json/TransactionStatus\",\"name\":\"TransactionId\"},\"Timestamp\":{\"entity\":\"TransactionStatus.cdm.json/TransactionStatus\",\"name\":\"Timestamp\"},\"TransactionStatusTypeId\":{\"entity\":\"TransactionStatus.cdm.json/TransactionStatus\",\"name\":\"TransactionStatusTypeId\"},\"TransactionStatusNote\":{\"entity\":\"TransactionStatus.cdm.json/TransactionStatus\",\"name\":\"TransactionStatusNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionStatus\",\"path\":\"TransactionStatus.cdm.json/TransactionStatus\"},\"description\":\"The execution status of the transaction as of the associated timestamp.\",\"primaryKey\":[\"TransactionId\",\"Timestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionStatus.cdm.json/TransactionStatus\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionStatus.cdm.json/TransactionStatus\",\"name\":\"Timestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp for which the associated transaction status is identified.\",\"isNullable\":false,\"name\":\"Timestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionStatus.cdm.json/TransactionStatus\",\"name\":\"TransactionStatusTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Transaction Status Type.\",\"isNullable\":false,\"name\":\"TransactionStatusTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionStatus.cdm.json/TransactionStatus\",\"name\":\"TransactionStatusNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the transaction execution status.\",\"isNullable\":true,\"name\":\"TransactionStatusNote\"}]}}}",
+			"Description": "The execution status of the transaction as of the associated timestamp.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,Timestamp",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

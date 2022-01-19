@@ -1,0 +1,26 @@
+{
+	"name": "relationship-kehbwbmsbl",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-kehbwbmsbl",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PosDeviceType",
+		"ToTableName": "PosDevice",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PosDeviceTypeId",
+				"ToColumnName": "PosDeviceTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PosDeviceType.cdm.json/PosDeviceType\",\"toEntity\":\"PosDevice.cdm.json/PosDevice\",\"joinPairs\":[{\"fromAttribute\":\"PosDeviceTypeId\",\"toAttribute\":\"PosDeviceTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

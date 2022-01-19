@@ -1,0 +1,279 @@
+{
+	"name": "PosDevice",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "PosDevice",
+		"Description": "A POS Device.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PosDeviceId",
+					"Description": "The unique identifier of a POS Device.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "PosDeviceId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PosDeviceName",
+					"Description": "The name of a POS Device.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "PosDeviceName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PosDeviceDescription",
+					"Description": "The description of a POS Device.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "PosDeviceDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PosDeviceSerialNumber",
+					"Description": "The serial number of a POS device.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "PosDeviceSerialNumber"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 30,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ManufacturerSerialNumber",
+					"Description": "The manufacturer's serial number of the Asset.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "ManufacturerSerialNumber"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 30,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "OrganizationAssignedSerialNumber",
+					"Description": "The serial number assigned to the Asset by the organization holding it.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "OrganizationAssignedSerialNumber"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 30,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ElectronicSerialNumber",
+					"Description": "The electronic serial number is a unique identification number embedded by manufacturers on a microchip in their product. While the ESN was first commonly used in wireless phones it has found traction in other electronic products.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "ElectronicSerialNumber"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "GlobalIndividualAssetIdentifier",
+					"Description": "The Global Individual Asset Identifier (GIAI) is a simple tool used to identify an asset by type, uniquely where required. The GIAI is part of the GS1 system of standards.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "GlobalIndividualAssetIdentifier"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 30,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "GlobalReturnableAssetIdentifier",
+					"Description": "The Global Returnable Asset Identifier (GRAI) was developed by GS1 to be used to identify assets by type. It can also be used to uniquely identify assets by including the serial number. \n\nThe GRAI is used to identify Returnable Transport Items (RTI) such as pallets, roll container, crates. The GRAI identifies the type of returnable asset.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "GlobalReturnableAssetIdentifier"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 29,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PosDeviceInstalledTimestamp",
+					"Description": "The timestamp that the POS device was installed.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "PosDeviceInstalledTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "PosDeviceTypeId",
+					"Description": "The unique identifier of a POS Device Type.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "PosDeviceTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PosDeviceNote",
+					"Description": "A note, comment or additional information regarding the POS Device.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "PosDeviceNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "AssetId",
+					"Description": "The unique identifier of an Asset.",
+					"BaseAttributeReference": {
+						"Entity": "PosDevice.cdm.json/PosDevice",
+						"Name": "AssetId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PosDevice",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PosDevice",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PosDeviceId\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceId\"},\"PosDeviceName\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceName\"},\"PosDeviceDescription\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceDescription\"},\"PosDeviceSerialNumber\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceSerialNumber\"},\"ManufacturerSerialNumber\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"ManufacturerSerialNumber\"},\"OrganizationAssignedSerialNumber\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"OrganizationAssignedSerialNumber\"},\"ElectronicSerialNumber\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"ElectronicSerialNumber\"},\"GlobalIndividualAssetIdentifier\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"GlobalIndividualAssetIdentifier\"},\"GlobalReturnableAssetIdentifier\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"GlobalReturnableAssetIdentifier\"},\"PosDeviceInstalledTimestamp\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceInstalledTimestamp\"},\"PosDeviceTypeId\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceTypeId\"},\"PosDeviceNote\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceNote\"},\"AssetId\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"AssetId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PosDevice\",\"path\":\"PosDevice.cdm.json/PosDevice\"},\"description\":\"A POS Device.\",\"primaryKey\":[\"PosDeviceId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a POS Device.\",\"isNullable\":false,\"name\":\"PosDeviceId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a POS Device.\",\"isNullable\":true,\"name\":\"PosDeviceName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of a POS Device.\",\"isNullable\":true,\"name\":\"PosDeviceDescription\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceSerialNumber\"},\"dataType\":\"string\",\"dataTypeLength\":30,\"description\":\"The serial number of a POS device.\",\"isNullable\":true,\"name\":\"PosDeviceSerialNumber\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"ManufacturerSerialNumber\"},\"dataType\":\"string\",\"dataTypeLength\":30,\"description\":\"The manufacturer's serial number of the Asset.\",\"isNullable\":true,\"name\":\"ManufacturerSerialNumber\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"OrganizationAssignedSerialNumber\"},\"dataType\":\"string\",\"dataTypeLength\":30,\"description\":\"The serial number assigned to the Asset by the organization holding it.\",\"isNullable\":true,\"name\":\"OrganizationAssignedSerialNumber\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"ElectronicSerialNumber\"},\"dataType\":\"integer\",\"description\":\"The electronic serial number is a unique identification number embedded by manufacturers on a microchip in their product. While the ESN was first commonly used in wireless phones it has found traction in other electronic products.\",\"isNullable\":true,\"name\":\"ElectronicSerialNumber\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"GlobalIndividualAssetIdentifier\"},\"dataType\":\"string\",\"dataTypeLength\":30,\"description\":\"The Global Individual Asset Identifier (GIAI) is a simple tool used to identify an asset by type, uniquely where required. The GIAI is part of the GS1 system of standards.\",\"isNullable\":true,\"name\":\"GlobalIndividualAssetIdentifier\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"GlobalReturnableAssetIdentifier\"},\"dataType\":\"string\",\"dataTypeLength\":29,\"description\":\"The Global Returnable Asset Identifier (GRAI) was developed by GS1 to be used to identify assets by type. It can also be used to uniquely identify assets by including the serial number. \\n\\nThe GRAI is used to identify Returnable Transport Items (RTI) such as pallets, roll container, crates. The GRAI identifies the type of returnable asset.\",\"isNullable\":true,\"name\":\"GlobalReturnableAssetIdentifier\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceInstalledTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp that the POS device was installed.\",\"isNullable\":true,\"name\":\"PosDeviceInstalledTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a POS Device Type.\",\"isNullable\":true,\"name\":\"PosDeviceTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"PosDeviceNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the POS Device.\",\"isNullable\":true,\"name\":\"PosDeviceNote\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PosDevice.cdm.json/PosDevice\",\"name\":\"AssetId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of an Asset.\",\"isNullable\":true,\"name\":\"AssetId\"}]}}}",
+			"Description": "A POS Device.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "PosDeviceId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

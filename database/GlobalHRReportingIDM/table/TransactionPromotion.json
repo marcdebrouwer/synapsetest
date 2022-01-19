@@ -1,0 +1,129 @@
+{
+	"name": "TransactionPromotion",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionPromotion",
+		"Description": "A promotion that is applicable to the associated transaction.\n\nEx:\n- Senior citizen discount",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionPromotion.cdm.json/TransactionPromotion",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "PromotionId",
+					"Description": "The unique identifier of a Promotion.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionPromotion.cdm.json/TransactionPromotion",
+						"Name": "PromotionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "Amount",
+					"Description": "The amount associated with the transaction promotion.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionPromotion.cdm.json/TransactionPromotion",
+						"Name": "Amount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "Note",
+					"Description": "A note, comment or additional information regarding the transaction promotion.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionPromotion.cdm.json/TransactionPromotion",
+						"Name": "Note"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionPromotion",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionPromotion",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionPromotion.cdm.json/TransactionPromotion\",\"name\":\"TransactionId\"},\"PromotionId\":{\"entity\":\"TransactionPromotion.cdm.json/TransactionPromotion\",\"name\":\"PromotionId\"},\"Amount\":{\"entity\":\"TransactionPromotion.cdm.json/TransactionPromotion\",\"name\":\"Amount\"},\"Note\":{\"entity\":\"TransactionPromotion.cdm.json/TransactionPromotion\",\"name\":\"Note\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionPromotion\",\"path\":\"TransactionPromotion.cdm.json/TransactionPromotion\"},\"description\":\"A promotion that is applicable to the associated transaction.\\n\\nEx:\\n- Senior citizen discount\",\"primaryKey\":[\"TransactionId\",\"PromotionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionPromotion.cdm.json/TransactionPromotion\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionPromotion.cdm.json/TransactionPromotion\",\"name\":\"PromotionId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Promotion.\",\"isNullable\":false,\"name\":\"PromotionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionPromotion.cdm.json/TransactionPromotion\",\"name\":\"Amount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The amount associated with the transaction promotion.\",\"isNullable\":true,\"scale\":2,\"name\":\"Amount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionPromotion.cdm.json/TransactionPromotion\",\"name\":\"Note\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the transaction promotion.\",\"isNullable\":true,\"name\":\"Note\"}]}}}",
+			"Description": "A promotion that is applicable to the associated transaction.\n\nEx:\n- Senior citizen discount",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,PromotionId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

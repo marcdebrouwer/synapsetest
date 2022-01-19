@@ -1,0 +1,112 @@
+{
+	"name": "TransactionLineItemType",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionLineItemType",
+		"Description": "The type of Transaction Line Item.\n\nEx:\n- Purchased Product\n- Returned Product\n- Refund for Product\n- Rebate for Product\n- Exchanged Product",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionLineItemTypeId",
+					"Description": "The unique identifier of a Transaction Line Item Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemType.cdm.json/TransactionLineItemType",
+						"Name": "TransactionLineItemTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemTypeName",
+					"Description": "The name of a Transaction Line Item Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemType.cdm.json/TransactionLineItemType",
+						"Name": "TransactionLineItemTypeName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemTypeDescription",
+					"Description": "The description of a Transaction Line Item Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemType.cdm.json/TransactionLineItemType",
+						"Name": "TransactionLineItemTypeDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineItemType",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineItemType",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionLineItemTypeId\":{\"entity\":\"TransactionLineItemType.cdm.json/TransactionLineItemType\",\"name\":\"TransactionLineItemTypeId\"},\"TransactionLineItemTypeName\":{\"entity\":\"TransactionLineItemType.cdm.json/TransactionLineItemType\",\"name\":\"TransactionLineItemTypeName\"},\"TransactionLineItemTypeDescription\":{\"entity\":\"TransactionLineItemType.cdm.json/TransactionLineItemType\",\"name\":\"TransactionLineItemTypeDescription\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionLineItemType\",\"path\":\"TransactionLineItemType.cdm.json/TransactionLineItemType\"},\"description\":\"The type of Transaction Line Item.\\n\\nEx:\\n- Purchased Product\\n- Returned Product\\n- Refund for Product\\n- Rebate for Product\\n- Exchanged Product\",\"primaryKey\":[\"TransactionLineItemTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemType.cdm.json/TransactionLineItemType\",\"name\":\"TransactionLineItemTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Transaction Line Item Type.\",\"isNullable\":false,\"name\":\"TransactionLineItemTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemType.cdm.json/TransactionLineItemType\",\"name\":\"TransactionLineItemTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Transaction Line Item Type.\",\"isNullable\":true,\"name\":\"TransactionLineItemTypeName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemType.cdm.json/TransactionLineItemType\",\"name\":\"TransactionLineItemTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of a Transaction Line Item Type.\",\"isNullable\":true,\"name\":\"TransactionLineItemTypeDescription\"}]}}}",
+			"Description": "The type of Transaction Line Item.\n\nEx:\n- Purchased Product\n- Returned Product\n- Refund for Product\n- Rebate for Product\n- Exchanged Product",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionLineItemTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

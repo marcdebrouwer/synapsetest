@@ -1,0 +1,26 @@
+{
+	"name": "relationship-wepsadnbli",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-wepsadnbli",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PointOfSale",
+		"ToTableName": "Transaction",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PointOfSaleId",
+				"ToColumnName": "PointOfSaleId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PointOfSale.cdm.json/PointOfSale\",\"toEntity\":\"Transaction.cdm.json/Transaction\",\"joinPairs\":[{\"fromAttribute\":\"PointOfSaleId\",\"toAttribute\":\"PointOfSaleId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

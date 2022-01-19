@@ -1,0 +1,143 @@
+{
+	"name": "TransactionCustomerAccountConfirmationMethod",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionCustomerAccountConfirmationMethod",
+		"Description": "The confirmation method(s) used to confirm the transaction to the customer account for the associated transaction in the indicated language.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "CustomerAccountId",
+					"Description": "The unique identifier of a Customer Account.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod",
+						"Name": "CustomerAccountId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "ConfirmationMethodId",
+					"Description": "The unique identifier of a Confirmation Method.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod",
+						"Name": "ConfirmationMethodId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "IsoLanguageId",
+					"Description": "The unique identifier of an ISO Language.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod",
+						"Name": "IsoLanguageId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ConfirmationNote",
+					"Description": "A note, comment or additional information regarding the Transaction Account Confirmation Method.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod",
+						"Name": "ConfirmationNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionCustomerAccountConfirmationMethod",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionCustomerAccountConfirmationMethod",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"name\":\"TransactionId\"},\"CustomerAccountId\":{\"entity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"name\":\"CustomerAccountId\"},\"ConfirmationMethodId\":{\"entity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"name\":\"ConfirmationMethodId\"},\"IsoLanguageId\":{\"entity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"name\":\"IsoLanguageId\"},\"ConfirmationNote\":{\"entity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"name\":\"ConfirmationNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionCustomerAccountConfirmationMethod\",\"path\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\"},\"description\":\"The confirmation method(s) used to confirm the transaction to the customer account for the associated transaction in the indicated language.\",\"primaryKey\":[\"TransactionId\",\"CustomerAccountId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"name\":\"CustomerAccountId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Customer Account.\",\"isNullable\":false,\"name\":\"CustomerAccountId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"name\":\"ConfirmationMethodId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Confirmation Method.\",\"isNullable\":false,\"name\":\"ConfirmationMethodId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"name\":\"IsoLanguageId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of an ISO Language.\",\"isNullable\":true,\"name\":\"IsoLanguageId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"name\":\"ConfirmationNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the Transaction Account Confirmation Method.\",\"isNullable\":true,\"name\":\"ConfirmationNote\"}]}}}",
+			"Description": "The confirmation method(s) used to confirm the transaction to the customer account for the associated transaction in the indicated language.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,CustomerAccountId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

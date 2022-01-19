@@ -1,0 +1,26 @@
+{
+	"name": "relationship-sydkylflxz",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-sydkylflxz",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "HoldType",
+		"ToTableName": "TransactionLineItemHold",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "HoldTypeId",
+				"ToColumnName": "HoldTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"HoldType.cdm.json/HoldType\",\"toEntity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"joinPairs\":[{\"fromAttribute\":\"HoldTypeId\",\"toAttribute\":\"HoldTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

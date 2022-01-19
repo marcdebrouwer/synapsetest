@@ -1,0 +1,26 @@
+{
+	"name": "relationship-okmbxkfozl",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-okmbxkfozl",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "TransactionLineEntryMethod",
+		"ToTableName": "TransactionLineItem",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "TransactionLineEntryMethodId",
+				"ToColumnName": "TransactionLineEntryMethodId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"TransactionLineEntryMethodId\",\"toAttribute\":\"TransactionLineEntryMethodId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

@@ -1,0 +1,94 @@
+{
+	"name": "PromotionTransactionCollateral",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "PromotionTransactionCollateral",
+		"Description": "The individual collateral that are associated with the transaction.\n\nEx:\n - Coupons",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "PromotionTransactionCollateral.cdm.json/PromotionTransactionCollateral",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "PromotionCollateralId",
+					"Description": "The unique identifier of a Promotion Collateral.",
+					"BaseAttributeReference": {
+						"Entity": "PromotionTransactionCollateral.cdm.json/PromotionTransactionCollateral",
+						"Name": "PromotionCollateralId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PromotionTransactionCollateral",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/PromotionTransactionCollateral",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"PromotionTransactionCollateral.cdm.json/PromotionTransactionCollateral\",\"name\":\"TransactionId\"},\"PromotionCollateralId\":{\"entity\":\"PromotionTransactionCollateral.cdm.json/PromotionTransactionCollateral\",\"name\":\"PromotionCollateralId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"PromotionTransactionCollateral\",\"path\":\"PromotionTransactionCollateral.cdm.json/PromotionTransactionCollateral\"},\"description\":\"The individual collateral that are associated with the transaction.\\n\\nEx:\\n - Coupons\",\"primaryKey\":[\"TransactionId\",\"PromotionCollateralId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PromotionTransactionCollateral.cdm.json/PromotionTransactionCollateral\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PromotionTransactionCollateral.cdm.json/PromotionTransactionCollateral\",\"name\":\"PromotionCollateralId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Promotion Collateral.\",\"isNullable\":false,\"name\":\"PromotionCollateralId\"}]}}}",
+			"Description": "The individual collateral that are associated with the transaction.\n\nEx:\n - Coupons",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,PromotionCollateralId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

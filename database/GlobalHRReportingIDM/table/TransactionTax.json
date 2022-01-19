@@ -1,0 +1,145 @@
+{
+	"name": "TransactionTax",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionTax",
+		"Description": "The taxes associated with a Transaction.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionTax.cdm.json/TransactionTax",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "TaxId",
+					"Description": "The unique identifier of a Tax.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionTax.cdm.json/TransactionTax",
+						"Name": "TaxId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionTaxAmount",
+					"Description": "The amount of the associated tax.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionTax.cdm.json/TransactionTax",
+						"Name": "TransactionTaxAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "TransactionTaxNote",
+					"Description": "A note or description regarding the transaction tax detail.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionTax.cdm.json/TransactionTax",
+						"Name": "TransactionTaxNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "TaxExemptionCertificateId",
+					"Description": "The unique identifier of a Tax Exemption Certificate.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionTax.cdm.json/TransactionTax",
+						"Name": "TaxExemptionCertificateId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionTax",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionTax",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionTax.cdm.json/TransactionTax\",\"name\":\"TransactionId\"},\"TaxId\":{\"entity\":\"TransactionTax.cdm.json/TransactionTax\",\"name\":\"TaxId\"},\"TransactionTaxAmount\":{\"entity\":\"TransactionTax.cdm.json/TransactionTax\",\"name\":\"TransactionTaxAmount\"},\"TransactionTaxNote\":{\"entity\":\"TransactionTax.cdm.json/TransactionTax\",\"name\":\"TransactionTaxNote\"},\"TaxExemptionCertificateId\":{\"entity\":\"TransactionTax.cdm.json/TransactionTax\",\"name\":\"TaxExemptionCertificateId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionTax\",\"path\":\"TransactionTax.cdm.json/TransactionTax\"},\"description\":\"The taxes associated with a Transaction.\",\"primaryKey\":[\"TransactionId\",\"TaxId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionTax.cdm.json/TransactionTax\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionTax.cdm.json/TransactionTax\",\"name\":\"TaxId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Tax.\",\"isNullable\":false,\"name\":\"TaxId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionTax.cdm.json/TransactionTax\",\"name\":\"TransactionTaxAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The amount of the associated tax.\",\"isNullable\":true,\"scale\":2,\"name\":\"TransactionTaxAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionTax.cdm.json/TransactionTax\",\"name\":\"TransactionTaxNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note or description regarding the transaction tax detail.\",\"isNullable\":true,\"name\":\"TransactionTaxNote\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionTax.cdm.json/TransactionTax\",\"name\":\"TaxExemptionCertificateId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Tax Exemption Certificate.\",\"isNullable\":true,\"name\":\"TaxExemptionCertificateId\"}]}}}",
+			"Description": "The taxes associated with a Transaction.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,TaxId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

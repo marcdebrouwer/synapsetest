@@ -1,0 +1,111 @@
+{
+	"name": "TransactionTypeTransactionRestriction",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionTypeTransactionRestriction",
+		"Description": "Transaction Restrictions that are by default applied to the associated Transaction Type.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionTypeId",
+					"Description": "The unique identifier of a Transaction Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction",
+						"Name": "TransactionTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionRestrictionTypeId",
+					"Description": "The unique identifier of a Transaction Restriction Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction",
+						"Name": "TransactionRestrictionTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionTypeRestrictionNote",
+					"Description": "A note, comment or additional information regarding  a Transaction Type Transaction Restriction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction",
+						"Name": "TransactionTypeRestrictionNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionTypeTransactionRestriction",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionTypeTransactionRestriction",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionTypeId\":{\"entity\":\"TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction\",\"name\":\"TransactionTypeId\"},\"TransactionRestrictionTypeId\":{\"entity\":\"TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction\",\"name\":\"TransactionRestrictionTypeId\"},\"TransactionTypeRestrictionNote\":{\"entity\":\"TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction\",\"name\":\"TransactionTypeRestrictionNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionTypeTransactionRestriction\",\"path\":\"TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction\"},\"description\":\"Transaction Restrictions that are by default applied to the associated Transaction Type.\",\"primaryKey\":[\"TransactionTypeId\",\"TransactionRestrictionTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction\",\"name\":\"TransactionTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Transaction Type.\",\"isNullable\":false,\"name\":\"TransactionTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction\",\"name\":\"TransactionRestrictionTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Transaction Restriction Type.\",\"isNullable\":false,\"name\":\"TransactionRestrictionTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction\",\"name\":\"TransactionTypeRestrictionNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding  a Transaction Type Transaction Restriction.\",\"isNullable\":true,\"name\":\"TransactionTypeRestrictionNote\"}]}}}",
+			"Description": "Transaction Restrictions that are by default applied to the associated Transaction Type.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionTypeId,TransactionRestrictionTypeId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

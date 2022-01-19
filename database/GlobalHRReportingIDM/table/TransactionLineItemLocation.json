@@ -1,0 +1,160 @@
+{
+	"name": "TransactionLineItemLocation",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionLineItemLocation",
+		"Description": "The locations associated with a Transaction Line Item.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemLocation.cdm.json/TransactionLineItemLocation",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemId",
+					"Description": "The unique identifier that identifies the Transaction Line Item.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemLocation.cdm.json/TransactionLineItemLocation",
+						"Name": "TransactionLineItemId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLocationTypeId",
+					"Description": "The unique identifier of a Transaction Location Type.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemLocation.cdm.json/TransactionLineItemLocation",
+						"Name": "TransactionLocationTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemLocationTimestamp",
+					"Description": "The timestamp associated with the Transaction Line Item Location.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemLocation.cdm.json/TransactionLineItemLocation",
+						"Name": "TransactionLineItemLocationTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "LocationId",
+					"Description": "The unique identifier of a Location.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemLocation.cdm.json/TransactionLineItemLocation",
+						"Name": "LocationId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemLocationNote",
+					"Description": "A note, comment or additional information regarding the Transaction Line Item Location.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineItemLocation.cdm.json/TransactionLineItemLocation",
+						"Name": "TransactionLineItemLocationNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineItemLocation",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineItemLocation",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"TransactionId\"},\"TransactionLineItemId\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"TransactionLineItemId\"},\"TransactionLocationTypeId\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"TransactionLocationTypeId\"},\"TransactionLineItemLocationTimestamp\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"TransactionLineItemLocationTimestamp\"},\"LocationId\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"LocationId\"},\"TransactionLineItemLocationNote\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"TransactionLineItemLocationNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionLineItemLocation\",\"path\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\"},\"description\":\"The locations associated with a Transaction Line Item.\",\"primaryKey\":[\"TransactionId\",\"TransactionLineItemId\",\"TransactionLocationTypeId\",\"TransactionLineItemLocationTimestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"TransactionLineItemId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier that identifies the Transaction Line Item.\",\"isNullable\":false,\"name\":\"TransactionLineItemId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"TransactionLocationTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Transaction Location Type.\",\"isNullable\":false,\"name\":\"TransactionLocationTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"TransactionLineItemLocationTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The timestamp associated with the Transaction Line Item Location.\",\"isNullable\":false,\"name\":\"TransactionLineItemLocationTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"name\":\"TransactionLineItemLocationNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the Transaction Line Item Location.\",\"isNullable\":true,\"name\":\"TransactionLineItemLocationNote\"}]}}}",
+			"Description": "The locations associated with a Transaction Line Item.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,TransactionLineItemId,TransactionLocationTypeId,TransactionLineItemLocationTimestamp",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

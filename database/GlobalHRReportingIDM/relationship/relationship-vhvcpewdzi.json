@@ -1,0 +1,26 @@
+{
+	"name": "relationship-vhvcpewdzi",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-vhvcpewdzi",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "TransactionLineItemType",
+		"ToTableName": "TransactionLineItem",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "TransactionLineItemTypeId",
+				"ToColumnName": "TransactionLineItemTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItemType.cdm.json/TransactionLineItemType\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"TransactionLineItemTypeId\",\"toAttribute\":\"TransactionLineItemTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

@@ -1,0 +1,161 @@
+{
+	"name": "TransactionLineTax",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionLineTax",
+		"Description": "The taxes associated with a Transaction Line Item.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineTax.cdm.json/TransactionLineTax",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineItemId",
+					"Description": "The unique identifier that identifies the Transaction Line Item.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineTax.cdm.json/TransactionLineTax",
+						"Name": "TransactionLineItemId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TaxId",
+					"Description": "The unique identifier of a Tax.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineTax.cdm.json/TransactionLineTax",
+						"Name": "TaxId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineTaxAmount",
+					"Description": "The amount of the associated tax.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineTax.cdm.json/TransactionLineTax",
+						"Name": "TransactionLineTaxAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLineTaxNote",
+					"Description": "A note or description regarding the transaction line tax detail.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineTax.cdm.json/TransactionLineTax",
+						"Name": "TransactionLineTaxNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "TaxExemptionCertificateId",
+					"Description": "The unique identifier of a Tax Exemption Certificate.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLineTax.cdm.json/TransactionLineTax",
+						"Name": "TaxExemptionCertificateId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineTax",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLineTax",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TransactionId\"},\"TransactionLineItemId\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TransactionLineItemId\"},\"TaxId\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TaxId\"},\"TransactionLineTaxAmount\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TransactionLineTaxAmount\"},\"TransactionLineTaxNote\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TransactionLineTaxNote\"},\"TaxExemptionCertificateId\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TaxExemptionCertificateId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionLineTax\",\"path\":\"TransactionLineTax.cdm.json/TransactionLineTax\"},\"description\":\"The taxes associated with a Transaction Line Item.\",\"primaryKey\":[\"TransactionId\",\"TransactionLineItemId\",\"TaxId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TransactionLineItemId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier that identifies the Transaction Line Item.\",\"isNullable\":false,\"name\":\"TransactionLineItemId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TaxId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Tax.\",\"isNullable\":false,\"name\":\"TaxId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TransactionLineTaxAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The amount of the associated tax.\",\"isNullable\":true,\"scale\":2,\"name\":\"TransactionLineTaxAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TransactionLineTaxNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note or description regarding the transaction line tax detail.\",\"isNullable\":true,\"name\":\"TransactionLineTaxNote\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"name\":\"TaxExemptionCertificateId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Tax Exemption Certificate.\",\"isNullable\":true,\"name\":\"TaxExemptionCertificateId\"}]}}}",
+			"Description": "The taxes associated with a Transaction Line Item.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,TransactionLineItemId,TaxId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

@@ -1,0 +1,26 @@
+{
+	"name": "relationship-fltmxfazmq",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-fltmxfazmq",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Payment",
+		"ToTableName": "TransactionPayment",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PaymentId",
+				"ToColumnName": "PaymentId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Payment.cdm.json/Payment\",\"toEntity\":\"TransactionPayment.cdm.json/TransactionPayment\",\"joinPairs\":[{\"fromAttribute\":\"PaymentId\",\"toAttribute\":\"PaymentId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

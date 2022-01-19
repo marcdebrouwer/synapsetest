@@ -1,0 +1,145 @@
+{
+	"name": "TransactionLoyaltyAccount",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionLoyaltyAccount",
+		"Description": "The one or more Loyalty Account(s) involved in or related to a transaction.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyProgramId",
+					"Description": "The unique identifier of a Loyalty Program.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount",
+						"Name": "LoyaltyProgramId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyAccountId",
+					"Description": "The unique identifier of a Loyalty Account.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount",
+						"Name": "LoyaltyAccountId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "LoyaltyUnitsUsed",
+					"Description": "The number of loyalty of the loyalty units used for the Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount",
+						"Name": "LoyaltyUnitsUsed"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "TransactionLoyaltyAccountNote",
+					"Description": "A note, comment or additional information regarding  a Transaction Loyalty Account.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount",
+						"Name": "TransactionLoyaltyAccountNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLoyaltyAccount",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionLoyaltyAccount",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"name\":\"TransactionId\"},\"LoyaltyProgramId\":{\"entity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"name\":\"LoyaltyProgramId\"},\"LoyaltyAccountId\":{\"entity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"name\":\"LoyaltyAccountId\"},\"LoyaltyUnitsUsed\":{\"entity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"name\":\"LoyaltyUnitsUsed\"},\"TransactionLoyaltyAccountNote\":{\"entity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"name\":\"TransactionLoyaltyAccountNote\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionLoyaltyAccount\",\"path\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\"},\"description\":\"The one or more Loyalty Account(s) involved in or related to a transaction.\",\"primaryKey\":[\"TransactionId\",\"LoyaltyProgramId\",\"LoyaltyAccountId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"name\":\"LoyaltyProgramId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Loyalty Program.\",\"isNullable\":false,\"name\":\"LoyaltyProgramId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"name\":\"LoyaltyAccountId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Loyalty Account.\",\"isNullable\":false,\"name\":\"LoyaltyAccountId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"name\":\"LoyaltyUnitsUsed\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The number of loyalty of the loyalty units used for the Transaction.\",\"isNullable\":true,\"scale\":2,\"name\":\"LoyaltyUnitsUsed\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"name\":\"TransactionLoyaltyAccountNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding  a Transaction Loyalty Account.\",\"isNullable\":true,\"name\":\"TransactionLoyaltyAccountNote\"}]}}}",
+			"Description": "The one or more Loyalty Account(s) involved in or related to a transaction.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,LoyaltyProgramId,LoyaltyAccountId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

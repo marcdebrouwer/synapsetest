@@ -1,0 +1,26 @@
+{
+	"name": "relationship-fsgrmtcyhj",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "relationship-fsgrmtcyhj",
+		"EntityType": "RELATIONSHIP",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PaymentCardToken",
+		"ToTableName": "PaymentCard",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PaymentCardToken",
+				"ToColumnName": "PaymentCardToken"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"toEntity\":\"PaymentCard.cdm.json/PaymentCard\",\"joinPairs\":[{\"fromAttribute\":\"PaymentCardToken\",\"toAttribute\":\"PaymentCardToken\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

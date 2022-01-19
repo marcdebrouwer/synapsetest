@@ -1,0 +1,130 @@
+{
+	"name": "TransactionCoupon",
+	"properties": {
+		"Namespace": {
+			"DatabaseName": "GlobalHRReportingIDM"
+		},
+		"Name": "TransactionCoupon",
+		"Description": "The coupon(s) used during the associated Transaction.",
+		"EntityType": "TABLE",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "TransactionId",
+					"Description": "The unique identifier of a Transaction.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionCoupon.cdm.json/TransactionCoupon",
+						"Name": "TransactionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "long",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "long"
+						}
+					}
+				},
+				{
+					"Name": "CouponId",
+					"Description": "The unique identifier of a coupon.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionCoupon.cdm.json/TransactionCoupon",
+						"Name": "CouponId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TransactionCouponDiscountAmount",
+					"Description": "The amount of discount applied to the Transaction as a result of the coupon.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionCoupon.cdm.json/TransactionCoupon",
+						"Name": "TransactionCouponDiscountAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "TransactionCouponDiscountPercentage",
+					"Description": "The percentage of discount applied to the Transaction as a result of the coupon.",
+					"BaseAttributeReference": {
+						"Entity": "TransactionCoupon.cdm.json/TransactionCoupon",
+						"Name": "TransactionCouponDiscountPercentage"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 8,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionCoupon",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReportingIDM/TransactionCoupon",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"TransactionId\":{\"entity\":\"TransactionCoupon.cdm.json/TransactionCoupon\",\"name\":\"TransactionId\"},\"CouponId\":{\"entity\":\"TransactionCoupon.cdm.json/TransactionCoupon\",\"name\":\"CouponId\"},\"TransactionCouponDiscountAmount\":{\"entity\":\"TransactionCoupon.cdm.json/TransactionCoupon\",\"name\":\"TransactionCouponDiscountAmount\"},\"TransactionCouponDiscountPercentage\":{\"entity\":\"TransactionCoupon.cdm.json/TransactionCoupon\",\"name\":\"TransactionCouponDiscountPercentage\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"TransactionCoupon\",\"path\":\"TransactionCoupon.cdm.json/TransactionCoupon\"},\"description\":\"The coupon(s) used during the associated Transaction.\",\"primaryKey\":[\"TransactionId\",\"CouponId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionCoupon.cdm.json/TransactionCoupon\",\"name\":\"TransactionId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Transaction.\",\"isNullable\":false,\"name\":\"TransactionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionCoupon.cdm.json/TransactionCoupon\",\"name\":\"CouponId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a coupon.\",\"isNullable\":false,\"name\":\"CouponId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionCoupon.cdm.json/TransactionCoupon\",\"name\":\"TransactionCouponDiscountAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The amount of discount applied to the Transaction as a result of the coupon.\",\"isNullable\":true,\"scale\":2,\"name\":\"TransactionCouponDiscountAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"TransactionCoupon.cdm.json/TransactionCoupon\",\"name\":\"TransactionCouponDiscountPercentage\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The percentage of discount applied to the Transaction as a result of the coupon.\",\"isNullable\":true,\"scale\":8,\"name\":\"TransactionCouponDiscountPercentage\"}]}}}",
+			"Description": "The coupon(s) used during the associated Transaction.",
+			"DisplayFolderInfo": "{\"name\":\"Transaction\",\"colorCode\":\"#5F538F\"}",
+			"PrimaryKeys": "TransactionId,CouponId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}
