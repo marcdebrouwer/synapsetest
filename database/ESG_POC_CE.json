@@ -7,7 +7,8 @@
 			"Type": "SPARK"
 		},
 		"Properties": {
-			"IsSyMSCDMDatabase": true
+			"IsSyMSCDMDatabase": true,
+			"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"Retail\",\"Version\":\"0.1.0\"}}}"
 		},
 		"Description": "Proof of concept data model for ESG Reporting. Includes Carbon Emissions scope 1 + 2 and water consumption. ",
 		"Source": {

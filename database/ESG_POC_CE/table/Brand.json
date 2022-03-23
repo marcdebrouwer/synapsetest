@@ -1,0 +1,107 @@
+{
+	"name": "Brand",
+	"properties": {
+		"Name": "Brand",
+		"EntityType": "TABLE",
+		"Namespace": {
+			"DatabaseName": "ESG_POC_CE"
+		},
+		"Description": "A brand is a distinctive name that is used for identifying a product, service or organization. ",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "BrandId",
+					"Description": "The unique identifier of a Brand.",
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "BrandName",
+					"Description": "The name of a Brand.",
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "OrganizationId",
+					"Description": "The unique identifier of the organization behind a brand",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/Brand",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/Brand",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"BrandId\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"BrandName\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Brand\",\"description\":\"A brand is a distinctive name that is used for identifying a product, service or organization. \",\"baseEntityReference\":{\"name\":\"Brand\",\"path\":\"Brand.cdm.json/Brand\"},\"primaryKey\":[\"BrandId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Brand.\",\"isNullable\":false,\"name\":\"BrandId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Brand.\",\"isNullable\":true,\"name\":\"BrandName\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of the organization behind a brand\",\"isNullable\":false,\"name\":\"OrganizationId\"}]}}}",
+			"Description": "A brand is a distinctive name that is used for identifying a product, service or organization. ",
+			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
+			"PrimaryKeys": "BrandId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

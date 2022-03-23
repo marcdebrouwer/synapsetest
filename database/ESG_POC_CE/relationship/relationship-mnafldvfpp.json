@@ -1,0 +1,23 @@
+{
+	"name": "relationship-mnafldvfpp",
+	"properties": {
+		"Name": "relationship-mnafldvfpp",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESG_POC_CE"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Organization",
+		"ToTableName": "Brand",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "OrganizationId",
+				"ToColumnName": "OrganizationId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
