@@ -1,0 +1,26 @@
+{
+	"name": "relationship-qyvahpwfqu",
+	"properties": {
+		"Name": "relationship-qyvahpwfqu",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESG_POC_CE"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "StoreType",
+		"ToTableName": "Store",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "StoreTypeId",
+				"ToColumnName": "StoreTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"StoreType.cdm.json/StoreType\",\"toEntity\":\"Store.cdm.json/Store\",\"joinPairs\":[{\"fromAttribute\":\"StoreTypeId\",\"toAttribute\":\"StoreTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}
