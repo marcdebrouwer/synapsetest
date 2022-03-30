@@ -1,7 +1,7 @@
 {
-	"name": "relationship-ktwcmtsudl",
+	"name": "relationship-lyxhabyjpt",
 	"properties": {
-		"Name": "relationship-ktwcmtsudl",
+		"Name": "relationship-lyxhabyjpt",
 		"EntityType": "RELATIONSHIP",
 		"Namespace": {
 			"DatabaseName": "ESG_POC_CE"
@@ -9,12 +9,12 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "DimLocation",
-		"ToTableName": "DimFacility",
+		"FromTableName": "DimEmissionFactor",
+		"ToTableName": "FactEmissions",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "LocationId",
-				"ToColumnName": "LocationId"
+				"FromColumnName": "EmissionFactorId",
+				"ToColumnName": "EmissionType"
 			}
 		],
 		"RelationshipType": 0

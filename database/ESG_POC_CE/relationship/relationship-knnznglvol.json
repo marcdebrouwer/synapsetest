@@ -1,7 +1,7 @@
 {
-	"name": "relationship-ktwcmtsudl",
+	"name": "relationship-knnznglvol",
 	"properties": {
-		"Name": "relationship-ktwcmtsudl",
+		"Name": "relationship-knnznglvol",
 		"EntityType": "RELATIONSHIP",
 		"Namespace": {
 			"DatabaseName": "ESG_POC_CE"
@@ -9,12 +9,12 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "DimLocation",
-		"ToTableName": "DimFacility",
+		"FromTableName": "DimFacility",
+		"ToTableName": "FactEmissions",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "LocationId",
-				"ToColumnName": "LocationId"
+				"FromColumnName": "FacilityId",
+				"ToColumnName": "FacilityId"
 			}
 		],
 		"RelationshipType": 0

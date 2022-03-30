@@ -16,34 +16,34 @@
 				{
 					"Name": "BannerId",
 					"Description": "The unique identifier of a Brand.",
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					},
 					"BaseAttributeReference": {
 						"Entity": "Brand.cdm.json/Brand",
 						"Name": "BrandId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
 					}
 				},
 				{
 					"Name": "BannerName",
 					"Description": "The name of a Brand.",
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 128,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandName"
 					}
 				},
 				{
@@ -86,7 +86,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"BannerId\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"BannerName\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"}}}"
 			},
 			"Compressed": false,
