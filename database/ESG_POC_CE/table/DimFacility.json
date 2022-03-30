@@ -1,7 +1,7 @@
 {
-	"name": "Facility",
+	"name": "DimFacility",
 	"properties": {
-		"Name": "Facility",
+		"Name": "DimFacility",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "ESG_POC_CE"
@@ -16,10 +16,6 @@
 				{
 					"Name": "FacilityId",
 					"Description": "The unique identifier of a Facility.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreId"
 					}
 				},
 				{
 					"Name": "FacilityName",
 					"Description": "The business name of the facility.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,47 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
-				},
-				{
-					"Name": "LocationId",
-					"Description": "The unique identifier of a Location.",
+					},
 					"BaseAttributeReference": {
 						"Entity": "Store.cdm.json/Store",
-						"Name": "LocationId"
-					},
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					}
-				},
-				{
-					"Name": "OperatedByPartyId",
-					"Description": "The unique identifier of a Party.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "OperatedByPartyId"
-					},
-					"OriginDataTypeName": {
-						"TypeName": "long",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "long"
-						}
+						"Name": "StoreName"
 					}
 				},
 				{
 					"Name": "NonsellingArea",
 					"Description": "The total non-selling square footage of the associated Store.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "NonsellingArea"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -92,15 +56,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "NonsellingArea"
 					}
 				},
 				{
 					"Name": "AvailableSellingArea",
 					"Description": "The total selling area within the Store expressed in square footage.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "AvailableSellingArea"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -108,15 +72,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "AvailableSellingArea"
 					}
 				},
 				{
 					"Name": "FacilityTypeId",
 					"Description": "The unique identifier of a Store Type.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -124,15 +88,31 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreTypeId"
 					}
 				},
 				{
-					"Name": "BrandId",
-					"Description": "The unique identifier of a Brand.",
+					"Name": "BannerId",
+					"Description": "The banner behind the ",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "Store.cdm.json/Store",
 						"Name": "BrandId"
-					},
+					}
+				},
+				{
+					"Name": "LocationId",
+					"Description": "The unique identifier of the location",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -149,7 +129,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/Facility",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/DimFacility",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -162,7 +142,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/Facility",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/DimFacility",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -170,14 +150,14 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
-				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"LocationId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"OperatedByPartyId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"OperatedByPartyId\"},\"NonsellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NonsellingArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"FacilityTypeId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"BrandId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"}}}"
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"NonsellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NonsellingArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"FacilityTypeId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"BannerId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"}}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Facility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers. \",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Facility.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the facility.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"OperatedByPartyId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Party.\",\"isNullable\":true,\"name\":\"OperatedByPartyId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NonsellingArea\"},\"dataType\":\"integer\",\"description\":\"The total non-selling square footage of the associated Store.\",\"isNullable\":true,\"name\":\"NonsellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"integer\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"FacilityTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Brand.\",\"isNullable\":true,\"name\":\"BrandId\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimFacility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Facility.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the facility.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NonsellingArea\"},\"dataType\":\"integer\",\"description\":\"The total non-selling square footage of the associated Store.\",\"isNullable\":true,\"name\":\"NonsellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"integer\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"FacilityTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The banner behind the \",\"isNullable\":true,\"name\":\"BannerId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of the location\",\"isNullable\":true,\"name\":\"LocationId\"}]}}}",
 			"Description": "A retail/channel location where products, goods and services are sold to consumers.",
 			"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
 			"PrimaryKeys": "FacilityId",

@@ -1,7 +1,7 @@
 {
-	"name": "relationship-mnafldvfpp",
+	"name": "relationship-hpbfyrryhq",
 	"properties": {
-		"Name": "relationship-mnafldvfpp",
+		"Name": "relationship-hpbfyrryhq",
 		"EntityType": "RELATIONSHIP",
 		"Namespace": {
 			"DatabaseName": "ESG_POC_CE"
@@ -9,12 +9,12 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "DimOrganization",
-		"ToTableName": "DimBanner",
+		"FromTableName": "DimBanner",
+		"ToTableName": "DimFacility",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "OrganizationId",
-				"ToColumnName": "OrganizationId"
+				"FromColumnName": "BannerId",
+				"ToColumnName": "BannerId"
 			}
 		],
 		"RelationshipType": 0

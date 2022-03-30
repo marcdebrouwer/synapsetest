@@ -9,8 +9,8 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "FacilityType",
-		"ToTableName": "Facility",
+		"FromTableName": "DimFacilityType",
+		"ToTableName": "DimFacility",
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "FacilityTypeId",

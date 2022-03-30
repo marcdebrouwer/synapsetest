@@ -1,7 +1,7 @@
 {
-	"name": "Brand",
+	"name": "DimBanner",
 	"properties": {
-		"Name": "Brand",
+		"Name": "DimBanner",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "ESG_POC_CE"
@@ -14,36 +14,36 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "BrandId",
+					"Name": "BannerId",
 					"Description": "The unique identifier of a Brand.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandId"
 					}
 				},
 				{
-					"Name": "BrandName",
+					"Name": "BannerName",
 					"Description": "The name of a Brand.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": true,
+						"IsComplexType": false,
 						"Length": 128,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandName"
 					}
 				},
 				{
@@ -51,8 +51,8 @@
 					"Description": "The unique identifier of the organization behind a brand",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -65,7 +65,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/Brand",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/DimBanner",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -78,7 +78,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/Brand",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/DimBanner",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -87,16 +87,16 @@
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
 				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"BrandId\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"BrandName\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"}}}"
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"BannerId\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"BannerName\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"}}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Brand\",\"description\":\"A brand is a distinctive name that is used for identifying a product, service or organization. \",\"baseEntityReference\":{\"name\":\"Brand\",\"path\":\"Brand.cdm.json/Brand\"},\"primaryKey\":[\"BrandId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Brand.\",\"isNullable\":false,\"name\":\"BrandId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Brand.\",\"isNullable\":true,\"name\":\"BrandName\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of the organization behind a brand\",\"isNullable\":false,\"name\":\"OrganizationId\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimBanner\",\"description\":\"A brand is a distinctive name that is used for identifying a product, service or organization. \",\"baseEntityReference\":{\"name\":\"Brand\",\"path\":\"Brand.cdm.json/Brand\"},\"primaryKey\":[\"BannerId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Brand.\",\"isNullable\":false,\"name\":\"BannerId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Brand.\",\"isNullable\":true,\"name\":\"BannerName\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of the organization behind a brand\",\"isNullable\":false,\"name\":\"OrganizationId\"}]}}}",
 			"Description": "A brand is a distinctive name that is used for identifying a product, service or organization. ",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
-			"PrimaryKeys": "BrandId",
+			"PrimaryKeys": "BannerId",
 			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,

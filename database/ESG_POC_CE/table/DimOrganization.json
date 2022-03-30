@@ -1,7 +1,7 @@
 {
-	"name": "Organization",
+	"name": "DimOrganization",
 	"properties": {
-		"Name": "Organization",
+		"Name": "DimOrganization",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "ESG_POC_CE"
@@ -18,8 +18,8 @@
 					"Description": "Unique identifier of an organization",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -30,8 +30,8 @@
 					"Description": "The name of an organization",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -45,7 +45,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/Organization",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/DimOrganization",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -58,7 +58,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/Organization",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/DimOrganization",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
