@@ -1,0 +1,23 @@
+{
+	"name": "relationship-gioioucolt",
+	"properties": {
+		"Name": "relationship-gioioucolt",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESG_POC_CE"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "DimDate",
+		"ToTableName": "FactEmissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "DimDate",
+				"ToColumnName": "PeriodStartTimestamp"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
