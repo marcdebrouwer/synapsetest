@@ -14,7 +14,7 @@
 			"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_staging",
 			"Properties": {
 				"FormatType": "parquet",
-				"LinkedServiceName": "lsDataTable"
+				"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage"
 			}
 		}
 	},
