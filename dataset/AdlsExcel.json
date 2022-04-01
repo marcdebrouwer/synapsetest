@@ -1,0 +1,74 @@
+{
+	"name": "AdlsExcel",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lsAdls",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Excel",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Name",
+					"type": "Expression"
+				},
+				"folderPath": "ESG_SoureFiles",
+				"fileSystem": "fsgdmsdevweeu01"
+			},
+			"firstRowAsHeader": true
+		},
+		"schema": [
+			{
+				"name": "Country",
+				"type": "String"
+			},
+			{
+				"name": "CarbonScope",
+				"type": "String"
+			},
+			{
+				"name": "EmissionCategory",
+				"type": "String"
+			},
+			{
+				"name": "EmissionType",
+				"type": "String"
+			},
+			{
+				"name": "EmissionFactorLocationBased",
+				"type": "String"
+			},
+			{
+				"name": "EmissionFactorMarketBased",
+				"type": "String"
+			},
+			{
+				"name": "UnitOfMeasure",
+				"type": "String"
+			},
+			{
+				"name": "StartDate",
+				"type": "String"
+			},
+			{
+				"name": "EndDate",
+				"type": "String"
+			},
+			{
+				"name": "Region",
+				"type": "String"
+			},
+			{
+				"name": "HasMarketBasedFactor",
+				"type": "String"
+			}
+		]
+	}
+}
