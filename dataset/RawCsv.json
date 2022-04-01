@@ -1,0 +1,32 @@
+{
+	"name": "RawCsv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lsAdlsCsv",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"Name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().Name",
+					"type": "Expression"
+				},
+				"folderPath": "ESG_staging",
+				"fileSystem": "fsgdmsdevweeu01"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
