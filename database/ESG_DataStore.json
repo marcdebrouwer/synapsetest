@@ -1,0 +1,22 @@
+{
+	"name": "ESG_DataStore",
+	"properties": {
+		"Name": "ESG_DataStore",
+		"EntityType": "DATABASE",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_staging",
+			"Properties": {
+				"FormatType": "parquet",
+				"LinkedServiceName": "lsDataTable"
+			}
+		}
+	},
+	"type": "DATABASE"
+}
