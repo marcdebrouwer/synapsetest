@@ -16,10 +16,6 @@
 				{
 					"Name": "BannerId",
 					"Description": "The unique identifier of a Brand.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandId"
 					}
 				},
 				{
 					"Name": "BannerName",
 					"Description": "The name of a Brand.",
-					"BaseAttributeReference": {
-						"Entity": "Brand.cdm.json/Brand",
-						"Name": "BrandName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,6 +40,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Brand.cdm.json/Brand",
+						"Name": "BrandName"
 					}
 				},
 				{
@@ -55,6 +55,19 @@
 						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "aaaaa",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
 						}
 					}
 				}
@@ -86,14 +99,14 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"BannerId\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"BannerName\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"}}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimBanner\",\"description\":\"A brand is a distinctive name that is used for identifying a product, service or organization. \",\"baseEntityReference\":{\"name\":\"Brand\",\"path\":\"Brand.cdm.json/Brand\"},\"primaryKey\":[\"BannerId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Brand.\",\"isNullable\":false,\"name\":\"BannerId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Brand.\",\"isNullable\":true,\"name\":\"BannerName\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of the organization behind a brand\",\"isNullable\":false,\"name\":\"OrganizationId\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimBanner\",\"description\":\"A brand is a distinctive name that is used for identifying a product, service or organization. \",\"baseEntityReference\":{\"name\":\"Brand\",\"path\":\"Brand.cdm.json/Brand\"},\"primaryKey\":[\"BannerId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Brand.\",\"isNullable\":false,\"name\":\"BannerId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Brand.\",\"isNullable\":true,\"name\":\"BannerName\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of the organization behind a brand\",\"isNullable\":false,\"name\":\"OrganizationId\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"aaaaa\"}]}}}",
 			"Description": "A brand is a distinctive name that is used for identifying a product, service or organization. ",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
 			"PrimaryKeys": "BannerId",
