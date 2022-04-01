@@ -59,7 +59,7 @@
 					}
 				},
 				{
-					"Name": "aaaaa",
+					"Name": "ColumnTest",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
@@ -106,7 +106,7 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimBanner\",\"description\":\"A brand is a distinctive name that is used for identifying a product, service or organization. \",\"baseEntityReference\":{\"name\":\"Brand\",\"path\":\"Brand.cdm.json/Brand\"},\"primaryKey\":[\"BannerId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Brand.\",\"isNullable\":false,\"name\":\"BannerId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Brand.\",\"isNullable\":true,\"name\":\"BannerName\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of the organization behind a brand\",\"isNullable\":false,\"name\":\"OrganizationId\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"aaaaa\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimBanner\",\"description\":\"A brand is a distinctive name that is used for identifying a product, service or organization. \",\"baseEntityReference\":{\"name\":\"Brand\",\"path\":\"Brand.cdm.json/Brand\"},\"primaryKey\":[\"BannerId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Brand.\",\"isNullable\":false,\"name\":\"BannerId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Brand.cdm.json/Brand\",\"name\":\"BrandName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Brand.\",\"isNullable\":true,\"name\":\"BannerName\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of the organization behind a brand\",\"isNullable\":false,\"name\":\"OrganizationId\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"ColumnTest\"}]}}}",
 			"Description": "A brand is a distinctive name that is used for identifying a product, service or organization. ",
 			"DisplayFolderInfo": "{\"name\":\"Product\",\"colorCode\":\"#BD4B37\"}",
 			"PrimaryKeys": "BannerId",
