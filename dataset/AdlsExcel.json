@@ -5,20 +5,13 @@
 			"referenceName": "lsAdls",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"Name": {
-				"type": "string"
-			}
-		},
 		"annotations": [],
 		"type": "Excel",
 		"typeProperties": {
+			"sheetName": "Sheet1",
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": {
-					"value": "@dataset().Name",
-					"type": "Expression"
-				},
+				"fileName": "EmissionFactors.xlsx",
 				"folderPath": "ESG_SoureFiles",
 				"fileSystem": "fsgdmsdevweeu01"
 			},

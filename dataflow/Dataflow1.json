@@ -40,8 +40,8 @@
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
 				"     format: 'table',",
-				"     database: '',",
-				"     tableName: '') ~> sink1"
+				"     database: 'ESG_DataStore',",
+				"     tableName: 'Dim_EmissionFactors') ~> sink1"
 			]
 		}
 	}
