@@ -16,34 +16,34 @@
 				{
 					"Name": "EmissionFactorId",
 					"Description": "The unique identifier of a fuel type.",
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					},
 					"BaseAttributeReference": {
 						"Entity": "FuelType.cdm.json/FuelType",
 						"Name": "FuelTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
 					}
 				},
 				{
 					"Name": "EmissionFactorName",
 					"Description": "The name of a fuel type.",
+					"BaseAttributeReference": {
+						"Entity": "FuelType.cdm.json/FuelType",
+						"Name": "FuelTypeName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 128,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "FuelType.cdm.json/FuelType",
-						"Name": "FuelTypeName"
 					}
 				},
 				{
@@ -51,8 +51,8 @@
 					"Description": "The name of the country where the emission factor is valid",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -64,8 +64,8 @@
 					"Description": "The name of the eGrid region for emissions ",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -77,8 +77,8 @@
 					"Description": "The start period of an emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"DateFormat": "dd/MM/yyyy",
 							"HIVE_TYPE_STRING": "date"
@@ -90,8 +90,8 @@
 					"Description": "The end period of an emission",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"DateFormat": "dd/MM/yyyy",
 							"HIVE_TYPE_STRING": "date"
@@ -103,8 +103,8 @@
 					"Description": "The unique identifier of an emission scope",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -116,8 +116,8 @@
 					"Description": "The unique indentifier of an emission factor value",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -151,7 +151,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmissionFactorId\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeId\"},\"EmissionFactorName\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeName\"}}}"
 			},
 			"Compressed": false,

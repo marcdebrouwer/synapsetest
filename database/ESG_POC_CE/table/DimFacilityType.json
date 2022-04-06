@@ -16,6 +16,10 @@
 				{
 					"Name": "FacilityTypeId",
 					"Description": "The unique identifier of a Store Type.",
+					"BaseAttributeReference": {
+						"Entity": "StoreType.cdm.json/StoreType",
+						"Name": "StoreTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -23,15 +27,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "StoreType.cdm.json/StoreType",
-						"Name": "StoreTypeId"
 					}
 				},
 				{
 					"Name": "FacilityTypeName",
 					"Description": "The name of a Store Type.",
+					"BaseAttributeReference": {
+						"Entity": "StoreType.cdm.json/StoreType",
+						"Name": "StoreTypeName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -40,15 +44,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "StoreType.cdm.json/StoreType",
-						"Name": "StoreTypeName"
 					}
 				},
 				{
 					"Name": "FacilityTypeDescription",
 					"Description": "The description of a Store Type.",
+					"BaseAttributeReference": {
+						"Entity": "StoreType.cdm.json/StoreType",
+						"Name": "StoreTypeDescription"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -57,10 +61,6 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "StoreType.cdm.json/StoreType",
-						"Name": "StoreTypeDescription"
 					}
 				}
 			],
@@ -91,7 +91,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityTypeId\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeId\"},\"FacilityTypeName\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeName\"},\"FacilityTypeDescription\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeDescription\"}}}"
 			},
 			"Compressed": false,

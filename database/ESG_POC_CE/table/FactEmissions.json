@@ -16,17 +16,17 @@
 				{
 					"Name": "EmissionId",
 					"Description": "The unique identifier of a Legal Entity.",
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					},
 					"BaseAttributeReference": {
 						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
 						"Name": "ReportingLegalEntityId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
 					}
 				},
 				{
@@ -83,8 +83,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -96,8 +96,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -108,8 +108,8 @@
 					"Description": "The unique identifier of a facility",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -120,8 +120,8 @@
 					"Description": "The emission linked to an emission Fact",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -155,7 +155,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmissionId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"ReportingLegalEntityId\"},\"PeriodStartTimestamp\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodStartTimestamp\"},\"TotalCo2EEmissionsUnits\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUnits\"},\"TotalCo2EEmissionsUomId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUomId\"}}}"
 			},
 			"Compressed": false,
