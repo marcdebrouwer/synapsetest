@@ -9,7 +9,7 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "UnitOfMeasure",
+		"FromTableName": "DimUnitOfMeasure",
 		"ToTableName": "FactEmissions",
 		"ColumnRelationshipInformations": [
 			{
