@@ -16,10 +16,6 @@
 				{
 					"Name": "EmissionFactorId",
 					"Description": "The unique identifier of a fuel type.",
-					"BaseAttributeReference": {
-						"Entity": "FuelType.cdm.json/FuelType",
-						"Name": "FuelTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FuelType.cdm.json/FuelType",
+						"Name": "FuelTypeId"
 					}
 				},
 				{
 					"Name": "EmissionFactorName",
 					"Description": "The name of a fuel type.",
-					"BaseAttributeReference": {
-						"Entity": "FuelType.cdm.json/FuelType",
-						"Name": "FuelTypeName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,6 +40,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FuelType.cdm.json/FuelType",
+						"Name": "FuelTypeName"
 					}
 				},
 				{
@@ -99,12 +99,12 @@
 					}
 				},
 				{
-					"Name": "ScopeId",
+					"Name": "EmissionScope",
 					"Description": "The unique identifier of an emission scope",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -112,12 +112,52 @@
 					}
 				},
 				{
-					"Name": "EmissionFactorValueId",
+					"Name": "EmissionFactorLocationBased",
 					"Description": "The unique indentifier of an emission factor value",
 					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
+						"TypeName": "decimal",
 						"IsNullable": false,
+						"IsComplexType": false,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "EmissionFactorMarketBased",
+					"Description": "The unique indentifier of an emission factor value",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "EmissionFactorLocationBasedUoM",
+					"Description": "The uom of the location based factor",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "EmissionFactorMarketBasedUoM",
+					"Description": "The uom of the market based factor",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -151,14 +191,14 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmissionFactorId\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeId\"},\"EmissionFactorName\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeName\"}}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimEmissionFactor\",\"description\":\"The emissions factor linked to a specific emission\",\"baseEntityReference\":{\"name\":\"FuelType\",\"path\":\"FuelType.cdm.json/FuelType\"},\"primaryKey\":[\"EmissionFactorId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a fuel type.\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a fuel type.\",\"isNullable\":true,\"name\":\"EmissionFactorName\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The name of the country where the emission factor is valid\",\"isNullable\":false,\"name\":\"Country\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The name of the eGrid region for emissions \",\"isNullable\":false,\"name\":\"EgridRegion\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd/MM/yyyy\",\"description\":\"The start period of an emission factor\",\"isNullable\":false,\"name\":\"PeriodStartEmission\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd/MM/yyyy\",\"description\":\"The end period of an emission\",\"isNullable\":false,\"name\":\"PeriodEndEmission\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of an emission scope\",\"isNullable\":false,\"name\":\"ScopeId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique indentifier of an emission factor value\",\"isNullable\":false,\"name\":\"EmissionFactorValueId\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimEmissionFactor\",\"description\":\"The emissions factor linked to a specific emission\",\"baseEntityReference\":{\"name\":\"FuelType\",\"path\":\"FuelType.cdm.json/FuelType\"},\"primaryKey\":[\"EmissionFactorId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a fuel type.\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a fuel type.\",\"isNullable\":true,\"name\":\"EmissionFactorName\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The name of the country where the emission factor is valid\",\"isNullable\":false,\"name\":\"Country\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The name of the eGrid region for emissions \",\"isNullable\":false,\"name\":\"EgridRegion\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd/MM/yyyy\",\"description\":\"The start period of an emission factor\",\"isNullable\":false,\"name\":\"PeriodStartEmission\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd/MM/yyyy\",\"description\":\"The end period of an emission\",\"isNullable\":false,\"name\":\"PeriodEndEmission\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of an emission scope\",\"isNullable\":false,\"name\":\"EmissionScope\"},{\"type\":\"New\",\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The unique indentifier of an emission factor value\",\"isNullable\":false,\"scale\":2,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The unique indentifier of an emission factor value\",\"isNullable\":false,\"scale\":2,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The uom of the location based factor\",\"isNullable\":false,\"name\":\"EmissionFactorLocationBasedUoM\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The uom of the market based factor\",\"isNullable\":false,\"name\":\"EmissionFactorMarketBasedUoM\"}]}}}",
 			"Description": "The emissions factor linked to a specific emission",
 			"DisplayFolderInfo": "{\"name\":\"Network\",\"colorCode\":\"#7062A8\"}",
 			"PrimaryKeys": "EmissionFactorId",
