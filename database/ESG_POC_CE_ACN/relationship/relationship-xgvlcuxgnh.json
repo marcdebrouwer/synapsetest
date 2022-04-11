@@ -1,0 +1,23 @@
+{
+	"name": "relationship-xgvlcuxgnh",
+	"properties": {
+		"Name": "relationship-xgvlcuxgnh",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESG_POC_CE_ACN"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "DimDate",
+		"ToTableName": "FactEmissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EmissionDate",
+				"ToColumnName": "EmissionDate"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

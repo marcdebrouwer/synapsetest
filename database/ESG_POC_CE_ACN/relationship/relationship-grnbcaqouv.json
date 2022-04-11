@@ -1,0 +1,23 @@
+{
+	"name": "relationship-grnbcaqouv",
+	"properties": {
+		"Name": "relationship-grnbcaqouv",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESG_POC_CE_ACN"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "DimFacility",
+		"ToTableName": "FactEmissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "FacilityId",
+				"ToColumnName": "FacilityId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

@@ -1,0 +1,23 @@
+{
+	"name": "relationship-eljsodbbhk",
+	"properties": {
+		"Name": "relationship-eljsodbbhk",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESG_POC_CE_ACN"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "DimEmissionFactor",
+		"ToTableName": "FactEmissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EmissionFactorId",
+				"ToColumnName": "EmissionFactorId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

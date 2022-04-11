@@ -14,82 +14,147 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "ReportingLegalEntityId",
-					"Description": "The unique identifier of a Legal Entity.",
+					"Name": "EmissionId",
+					"Description": "The unique identifier of an emission",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
 						"Name": "ReportingLegalEntityId"
-					},
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": false,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
 					}
 				},
 				{
-					"Name": "PeriodStartTimestamp",
+					"Name": "EmissionDate",
 					"Description": "The period start timestamp.",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"DateFormat": "dd-MM-yyyy",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
 						"Name": "PeriodStartTimestamp"
-					},
-					"OriginDataTypeName": {
-						"TypeName": "timestamp",
-						"IsComplexType": false,
-						"IsNullable": false,
-						"Properties": {
-							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
-							"HIVE_TYPE_STRING": "timestamp"
-						}
 					}
 				},
 				{
-					"Name": "PeriodEndTimestamp",
-					"Description": "The period end timestamp.",
+					"Name": "FacilityId",
+					"Description": "The unique indentifier of a facility linked to an emission",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
 						"Name": "PeriodEndTimestamp"
-					},
+					}
+				},
+				{
+					"Name": "Units",
+					"Description": "The total CO2e emission units.",
 					"OriginDataTypeName": {
-						"TypeName": "timestamp",
-						"IsComplexType": false,
+						"TypeName": "decimal",
 						"IsNullable": true,
+						"IsComplexType": false,
+						"Precision": 18,
+						"Scale": 2,
 						"Properties": {
-							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
-							"HIVE_TYPE_STRING": "timestamp"
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "TotalCo2EEmissionsUnits"
+					}
+				},
+				{
+					"Name": "UnitsUomId",
+					"Description": "The emission factor UOM.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "TotalCo2EEmissionsUomId"
+					}
+				},
+				{
+					"Name": "UnitsMarketBased",
+					"Description": "The market based number",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
 						}
 					}
 				},
 				{
-					"Name": "TotalCo2EEmissionsUnits",
-					"Description": "The total CO2e emission units.",
-					"BaseAttributeReference": {
-						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
-						"Name": "TotalCo2EEmissionsUnits"
-					},
+					"Name": "UnitsMarketBasedUomId",
+					"Description": "The market based Uom ",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": true,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				},
 				{
-					"Name": "TotalCo2EEmissionsUomId",
-					"Description": "The emission factor UOM.",
-					"BaseAttributeReference": {
-						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
-						"Name": "TotalCo2EEmissionsUomId"
-					},
+					"Name": "UnitsLocationBased",
+					"Description": "The location based units",
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "UnitsLocationBasedUomId",
+					"Description": "The location based Uom ",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "EmissionFactorId",
+					"Description": "The unique identifier of an emission factor",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": true,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -124,16 +189,16 @@
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
 				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ReportingLegalEntityId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"ReportingLegalEntityId\"},\"PeriodStartTimestamp\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodStartTimestamp\"},\"PeriodEndTimestamp\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodEndTimestamp\"},\"TotalCo2EEmissionsUnits\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUnits\"},\"TotalCo2EEmissionsUomId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUomId\"}}}"
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmissionId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"ReportingLegalEntityId\"},\"EmissionDate\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodStartTimestamp\"},\"FacilityId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodEndTimestamp\"},\"Units\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUnits\"},\"UnitsUomId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUomId\"}}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"FactEmissions\",\"description\":\"Scope 1 emissions are direct greenhouse (GHG) emissions that occur from sources that are controlled or owned by an organization (e.g., emissions associated with fuel combustion in boilers, furnaces, vehicles).\\n\\nDirect emissions from owned or controlled sources\\n\\n- e.g., on-site electricity generation, heating, cooling, university owned\\nvehicles, fugitive emissions (e.g. refrigerants), agricultural emissions\",\"baseEntityReference\":{\"name\":\"Scope1LegalEntityDirectEmissionsSummary\",\"path\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\"},\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"ReportingLegalEntityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The period start timestamp.\",\"isNullable\":false,\"name\":\"PeriodStartTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"}]},\"primaryKey\":[\"ReportingLegalEntityId\",\"PeriodStartTimestamp\"]}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"FactEmissions\",\"description\":\"Scope 1 emissions are direct greenhouse (GHG) emissions that occur from sources that are controlled or owned by an organization (e.g., emissions associated with fuel combustion in boilers, furnaces, vehicles).\\n\\nDirect emissions from owned or controlled sources\\n\\n- e.g., on-site electricity generation, heating, cooling, university owned\\nvehicles, fugitive emissions (e.g. refrigerants), agricultural emissions\",\"baseEntityReference\":{\"name\":\"Scope1LegalEntityDirectEmissionsSummary\",\"path\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\"},\"primaryKey\":[\"EmissionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of an emission\",\"isNullable\":false,\"name\":\"EmissionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":false,\"name\":\"EmissionDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"integer\",\"description\":\"The unique indentifier of a facility linked to an emission\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"scale\":2,\"name\":\"Units\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"UnitsUomId\"},{\"type\":\"New\",\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The market based number\",\"isNullable\":true,\"scale\":2,\"name\":\"UnitsMarketBased\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The market based Uom \",\"isNullable\":true,\"name\":\"UnitsMarketBasedUomId\"},{\"type\":\"New\",\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The location based units\",\"isNullable\":true,\"scale\":2,\"name\":\"UnitsLocationBased\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The location based Uom \",\"isNullable\":true,\"name\":\"UnitsLocationBasedUomId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of an emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorId\"}]}}}",
 			"Description": "Scope 1 emissions are direct greenhouse (GHG) emissions that occur from sources that are controlled or owned by an organization (e.g., emissions associated with fuel combustion in boilers, furnaces, vehicles).\n\nDirect emissions from owned or controlled sources\n\n- e.g., on-site electricity generation, heating, cooling, university owned\nvehicles, fugitive emissions (e.g. refrigerants), agricultural emissions",
 			"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#001475\"}",
-			"PrimaryKeys": "ReportingLegalEntityId,PeriodStartTimestamp",
+			"PrimaryKeys": "EmissionId",
 			"spark.sql.sources.provider": "csv",
 			"sql:IsAppendOnly": false
 		},
