@@ -1,0 +1,31 @@
+{
+	"name": "EmissionFactorMap_DimEmissionFactor_DataFlow1",
+	"properties": {
+		"folder": {
+			"name": "EmissionFactorMap"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "lsAdls",
+						"type": "LinkedServiceReference"
+					},
+					"name": "EmissionFactorscsvSource"
+				}
+			],
+			"sinks": [
+				{
+					"name": "DimEmissionFactorSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectDimEmissionFactor"
+				}
+			],
+			"script": "source(output(\n\t\tCountry as string,\n\t\tCarbonScope as string,\n\t\tEmissionCategory as string,\n\t\tEmissionType as string,\n\t\tEmissionFactorLocationBased as double '000,000,000.000',\n\t\tEmissionFactorMarketBased as double '000,000,000.000',\n\t\tUnitOfMeasure as string,\n\t\tStartDate as date 'dd-MM-yyyy',\n\t\tEndDate as date 'dd-MM-yyyy',\n\t\tRegion as string,\n\t\tHasMarketBasedFactor as boolean\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delimited',\n\tfileSystem: 'fsgdmsdevweeu01',\n\tfolderPath: 'ESG_MAPDATA',\n\tfileName: 'EmissionFactors.csv',\n\tcolumnDelimiter: ';',\n\tescapeChar: '\\\\',\n\tquoteChar: '\\\"',\n\tcolumnNamesAsHeader: true) ~> EmissionFactorscsvSource\nEmissionFactorscsvSource select(mapColumn(\n\t\tEmissionType,\n\t\tEmissionCategory,\n\t\tEmissionScope = CarbonScope,\n\t\tEmissionFactorLocationBased,\n\t\tEmissionFactorMarketBased,\n\t\tEmissionFactorStartDate = StartDate,\n\t\tEmissionFactorEndDate = EndDate,\n\t\tEmissionCountry = Country,\n\t\tEmissionEgridRegion = Region,\n\t\tUnitOfMeasure\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectDimEmissionFactor\nSelectDimEmissionFactor sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tstore: 'synapse',\n\tdatabaseType: 'spark',\n\tformat: 'table',\n\tdatabase: 'ESG_POC_CE_ACN',\n\ttableName: 'DimEmissionFactor',\n\tinput(\n\t\tEmissionFactorId as integer,\n\t\tEmissionType as string,\n\t\tEmissionScope as string,\n\t\tEmissionFactorLocationBased as double,\n\t\tEmissionFactorMarketBased as double,\n\t\tEmissionFactorVirtualBased as double,\n\t\tEmissionCountry as string,\n\t\tEmissionEgridRegion as string,\n\t\tEmissionBanner as string,\n\t\tEmissionName as string,\n\t\tEmissionCategory as string,\n\t\tEmissionFactorStartDate as date,\n\t\tEmissionFactorEndDate as date,\n\t\tUnitOfMeasure as string\n\t)) ~> DimEmissionFactorSink"
+		}
+	}
+}

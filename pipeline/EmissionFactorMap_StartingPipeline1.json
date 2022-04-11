@@ -1,0 +1,24 @@
+{
+	"name": "EmissionFactorMap_StartingPipeline1",
+	"properties": {
+		"activities": [
+			{
+				"name": "C0_EmissionFactorMap",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "C0_EmissionFactorMap1",
+						"type": "PipelineReference"
+					}
+				}
+			}
+		],
+		"concurrency": 1,
+		"folder": {
+			"name": "EmissionFactorMap"
+		},
+		"annotations": []
+	}
+}
