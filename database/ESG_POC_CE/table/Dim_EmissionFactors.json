@@ -17,8 +17,8 @@
 					"Name": "Country",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -30,8 +30,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -43,8 +43,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -56,8 +56,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -69,8 +69,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "double",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
@@ -81,8 +81,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "double",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
@@ -93,8 +93,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -106,8 +106,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
@@ -119,8 +119,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
@@ -132,8 +132,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -145,8 +145,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
@@ -155,7 +155,7 @@
 			],
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
 			},
 			"Compressed": false,
