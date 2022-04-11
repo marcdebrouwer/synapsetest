@@ -47,55 +47,6 @@
 					}
 				},
 				{
-					"Name": "StoreShortName",
-					"Description": "The business name of the store.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreShortName"
-					},
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Length": 128,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "LocationId",
-					"Description": "The unique identifier of a Location.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "LocationId"
-					},
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					}
-				},
-				{
-					"Name": "OperatedByPartyId",
-					"Description": "The unique identifier of a Party.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "OperatedByPartyId"
-					},
-					"OriginDataTypeName": {
-						"TypeName": "long",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "long"
-						}
-					}
-				},
-				{
 					"Name": "GrossFloorArea",
 					"Description": "The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.",
 					"BaseAttributeReference": {
@@ -144,34 +95,127 @@
 					}
 				},
 				{
-					"Name": "StoreTypeId",
-					"Description": "The unique identifier of a Store Type.",
+					"Name": "FacilityType",
+					"Description": "The type of facility (store, warehouse, office)",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "Store.cdm.json/Store",
 						"Name": "StoreTypeId"
-					},
+					}
+				},
+				{
+					"Name": "Banner",
+					"Description": "The banner of Ahold Delhaize (e.g. Hannaford)",
 					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
+						"TypeName": "string",
 						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
 						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "BrandId"
+					}
+				},
+				{
+					"Name": "Organization",
+					"Description": "The organization within Ahold Delhaize (.e.g. ADUSA)",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
 						}
 					}
 				},
 				{
-					"Name": "BrandId",
-					"Description": "The unique identifier of a Brand.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "BrandId"
-					},
+					"Name": "LocationAdressLine",
+					"Description": "The adress of a location",
 					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
+						"TypeName": "string",
 						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
 						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LocationZipcode",
+					"Description": "The zipcode of a location",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LocationCity",
+					"Description": "The city of the location",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LocationCountry",
+					"Description": "The country of the location",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LocationState",
+					"Description": "The state of a location",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "LocationEgridRegion",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
 						}
 					}
 				}
@@ -204,13 +248,13 @@
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
 				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"StoreShortName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreShortName\"},\"LocationId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"OperatedByPartyId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"OperatedByPartyId\"},\"GrossFloorArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"NonsellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NonsellingArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"StoreTypeId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"BrandId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"}}}"
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"GrossFloorArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"NonsellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NonsellingArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"FacilityType\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"Banner\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"}}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Facility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreShortName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"StoreShortName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"OperatedByPartyId\"},\"dataType\":\"long\",\"description\":\"The unique identifier of a Party.\",\"isNullable\":true,\"name\":\"OperatedByPartyId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"dataType\":\"integer\",\"description\":\"The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.\",\"isNullable\":true,\"name\":\"GrossFloorArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NonsellingArea\"},\"dataType\":\"integer\",\"description\":\"The total non-selling square footage of the associated Store.\",\"isNullable\":true,\"name\":\"NonsellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"integer\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"StoreTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Brand.\",\"isNullable\":true,\"name\":\"BrandId\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimFacility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"dataType\":\"integer\",\"description\":\"The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.\",\"isNullable\":true,\"name\":\"GrossFloorArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NonsellingArea\"},\"dataType\":\"integer\",\"description\":\"The total non-selling square footage of the associated Store.\",\"isNullable\":true,\"name\":\"NonsellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"integer\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The type of facility (store, warehouse, office)\",\"isNullable\":true,\"name\":\"FacilityType\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The banner of Ahold Delhaize (e.g. Hannaford)\",\"isNullable\":true,\"name\":\"Banner\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The organization within Ahold Delhaize (.e.g. ADUSA)\",\"isNullable\":true,\"name\":\"Organization\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The adress of a location\",\"isNullable\":true,\"name\":\"LocationAdressLine\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The zipcode of a location\",\"isNullable\":true,\"name\":\"LocationZipcode\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The city of the location\",\"isNullable\":true,\"name\":\"LocationCity\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The country of the location\",\"isNullable\":true,\"name\":\"LocationCountry\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The state of a location\",\"isNullable\":true,\"name\":\"LocationState\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"LocationEgridRegion\"}]}}}",
 			"Description": "A retail/channel location where products, goods and services are sold to consumers.",
 			"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
 			"PrimaryKeys": "FacilityId",
