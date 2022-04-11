@@ -1,0 +1,34 @@
+{
+	"name": "EmissionFactor_DimEmissionFactor_DataFlow",
+	"properties": {
+		"folder": {
+			"name": "EmissionFactor"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "lsAdls",
+						"type": "LinkedServiceReference"
+					},
+					"name": "EmissionFactorscsvSource"
+				}
+			],
+			"sinks": [
+				{
+					"name": "DimEmissionFactorSink"
+				}
+			],
+			"transformations": [
+				{
+					"name": "SelectDimEmissionFactor"
+				},
+				{
+					"name": "parse1"
+				}
+			],
+			"script": "source(output(\n\t\tCountry as string,\n\t\tCarbonScope as string,\n\t\tEmissionCategory as string,\n\t\tEmissionType as string,\n\t\tEmissionFactorLocationBased as string,\n\t\tEmissionFactorMarketBased as string,\n\t\tUnitOfMeasure as string,\n\t\tStartDate as date 'dd-MM-yyyy',\n\t\tEndDate as date 'dd-MM-yyyy',\n\t\tRegion as string,\n\t\tHasMarketBasedFactor as boolean\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delimited',\n\tfileSystem: 'fsgdmsdevweeu01',\n\tfolderPath: 'ESG_MAPDATA',\n\tfileName: 'EmissionFactors.csv',\n\tcolumnDelimiter: ';',\n\tescapeChar: '\\\\',\n\tquoteChar: '\\\"',\n\tcolumnNamesAsHeader: true) ~> EmissionFactorscsvSource\nparse1 select(mapColumn(\n\t\tEmissionType,\n\t\tEmissionScope = CarbonScope,\n\t\tUnitOfMeasure,\n\t\tEmissionCountry = Country,\n\t\tEmissionEgridRegion = Region,\n\t\tEmissionCategory,\n\t\tEmissionFactorStartDate = StartDate,\n\t\tEmissionFactorEndDate = EndDate,\n\t\tEmissionFactorLocationBased,\n\t\tEmissionFactorMarketBased,\n\t\tEmissionName = EmissionType\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectDimEmissionFactor\nEmissionFactorscsvSource parse(EmissionFactorLocationBased = toDouble(replace(replace(EmissionFactorLocationBased, '.', ''), ',', '.')) ? string,\n\tformat: 'json',\n\tdocumentForm: 'documentPerLine') ~> parse1\nSelectDimEmissionFactor sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tstore: 'synapse',\n\tdatabaseType: 'spark',\n\tformat: 'table',\n\tdatabase: 'ESG_POC_CE_ACN',\n\ttableName: 'DimEmissionFactor',\n\tinput(\n\t\tEmissionFactorId as integer,\n\t\tEmissionType as string,\n\t\tEmissionScope as string,\n\t\tEmissionFactorLocationBased as decimal(18,2),\n\t\tEmissionFactorMarketBased as decimal(18,2),\n\t\tEmissionFactorVirtualBased as decimal(18,2),\n\t\tEmissionCountry as string,\n\t\tEmissionEgridRegion as string,\n\t\tEmissionBanner as string,\n\t\tEmissionName as string,\n\t\tEmissionCategory as string,\n\t\tEmissionFactorStartDate as date,\n\t\tEmissionFactorEndDate as date,\n\t\tUnitOfMeasure as string\n\t)) ~> DimEmissionFactorSink"
+		}
+	}
+}
