@@ -81,13 +81,11 @@
 					"Name": "EmissionFactorMarketBased",
 					"Description": "The market based emission factor",
 					"OriginDataTypeName": {
-						"TypeName": "decimal",
+						"TypeName": "double",
 						"IsNullable": true,
 						"IsComplexType": false,
-						"Precision": 18,
-						"Scale": 2,
 						"Properties": {
-							"HIVE_TYPE_STRING": "decimal"
+							"HIVE_TYPE_STRING": "double"
 						}
 					}
 				},
@@ -95,13 +93,11 @@
 					"Name": "EmissionFactorVirtualBased",
 					"Description": "The virtual based emission factor",
 					"OriginDataTypeName": {
-						"TypeName": "decimal",
+						"TypeName": "double",
 						"IsNullable": true,
 						"IsComplexType": false,
-						"Precision": 18,
-						"Scale": 2,
 						"Properties": {
-							"HIVE_TYPE_STRING": "decimal"
+							"HIVE_TYPE_STRING": "double"
 						}
 					}
 				},
@@ -244,7 +240,7 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimEmissionFactor\",\"description\":\"The type of greenhouse gas:\\n\\n- CO2\\n- CH4 \\n- N2O\\n- HFC\\n- CO2\",\"baseEntityReference\":{\"name\":\"GreenhouseGasType\",\"path\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\"},\"primaryKey\":[\"EmissionFactorId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a greenhouse gas type.\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The type of an emission (cooling, refrigerant type)\",\"isNullable\":true,\"name\":\"EmissionType\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The scope of the emission\",\"isNullable\":true,\"name\":\"EmissionScope\"},{\"type\":\"New\",\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The location based emission factor\",\"isNullable\":true,\"scale\":2,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The market based emission factor\",\"isNullable\":true,\"scale\":2,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The virtual based emission factor\",\"isNullable\":true,\"scale\":2,\"name\":\"EmissionFactorVirtualBased\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The country of the emission\",\"isNullable\":true,\"name\":\"EmissionCountry\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The e grid region of the emission\",\"isNullable\":true,\"name\":\"EmissionEgridRegion\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The banner from the emission\",\"isNullable\":true,\"name\":\"EmissionBanner\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The name of the emission \",\"isNullable\":true,\"name\":\"EmissionName\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The category of the emission\",\"isNullable\":true,\"name\":\"EmissionCategory\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The start date of the emission\",\"isNullable\":true,\"name\":\"EmissionFactorStartDate\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The end date of an emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorEndDate\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The Uom in text\",\"isNullable\":true,\"name\":\"UnitOfMeasure\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimEmissionFactor\",\"description\":\"The type of greenhouse gas:\\n\\n- CO2\\n- CH4 \\n- N2O\\n- HFC\\n- CO2\",\"baseEntityReference\":{\"name\":\"GreenhouseGasType\",\"path\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\"},\"primaryKey\":[\"EmissionFactorId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a greenhouse gas type.\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The type of an emission (cooling, refrigerant type)\",\"isNullable\":true,\"name\":\"EmissionType\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The scope of the emission\",\"isNullable\":true,\"name\":\"EmissionScope\"},{\"type\":\"New\",\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The location based emission factor\",\"isNullable\":true,\"scale\":2,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The market based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The virtual based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorVirtualBased\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The country of the emission\",\"isNullable\":true,\"name\":\"EmissionCountry\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The e grid region of the emission\",\"isNullable\":true,\"name\":\"EmissionEgridRegion\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The banner from the emission\",\"isNullable\":true,\"name\":\"EmissionBanner\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The name of the emission \",\"isNullable\":true,\"name\":\"EmissionName\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The category of the emission\",\"isNullable\":true,\"name\":\"EmissionCategory\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The start date of the emission\",\"isNullable\":true,\"name\":\"EmissionFactorStartDate\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The end date of an emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorEndDate\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The Uom in text\",\"isNullable\":true,\"name\":\"UnitOfMeasure\"}]}}}",
 			"Description": "The type of greenhouse gas:\n\n- CO2\n- CH4 \n- N2O\n- HFC\n- CO2",
 			"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#001475\"}",
 			"PrimaryKeys": "EmissionFactorId",
