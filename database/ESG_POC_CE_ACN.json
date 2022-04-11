@@ -1,0 +1,24 @@
+{
+	"name": "ESG_POC_CE_ACN",
+	"properties": {
+		"Name": "ESG_POC_CE_ACN",
+		"EntityType": "DATABASE",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true,
+			"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"Retail\",\"Version\":\"0.1.0\"}}}"
+		},
+		"Description": "The ESG data model for carbon emissions",
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "lsAdls"
+			}
+		}
+	},
+	"type": "DATABASE"
+}
