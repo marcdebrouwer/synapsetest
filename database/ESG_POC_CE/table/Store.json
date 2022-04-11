@@ -16,10 +16,6 @@
 				{
 					"Name": "StoreId",
 					"Description": "The unique identifier of a Store.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreId"
 					}
 				},
 				{
 					"Name": "StoreName",
 					"Description": "The business name of the store.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreName"
 					}
 				},
 				{
 					"Name": "StoreShortName",
 					"Description": "The business name of the store.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreShortName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreShortName"
 					}
 				},
 				{
 					"Name": "LocationId",
 					"Description": "The unique identifier of a Location.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "LocationId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -77,15 +73,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "LocationId"
 					}
 				},
 				{
 					"Name": "OperatedByPartyId",
 					"Description": "The unique identifier of a Party.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "OperatedByPartyId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -93,15 +89,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "OperatedByPartyId"
 					}
 				},
 				{
 					"Name": "StoreOpenDate",
 					"Description": "The date that the store was first opened.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreOpenDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -110,15 +106,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreOpenDate"
 					}
 				},
 				{
 					"Name": "StoreCloseDate",
 					"Description": "The date that the store was permanently closed.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreCloseDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -127,15 +123,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreCloseDate"
 					}
 				},
 				{
 					"Name": "StoreTelephoneNumber",
 					"Description": "The Store telephone number.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreTelephoneNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -145,15 +141,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreTelephoneNumber"
 					}
 				},
 				{
 					"Name": "StoreFaxNumber",
 					"Description": "The Store fax number.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreFaxNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -163,15 +159,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreFaxNumber"
 					}
 				},
 				{
 					"Name": "StoreEmailAddress",
 					"Description": "The Store email address.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreEmailAddress"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -180,15 +176,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreEmailAddress"
 					}
 				},
 				{
 					"Name": "ChannelId",
 					"Description": "The unique identifier of a Channel.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "ChannelId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -196,15 +192,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "ChannelId"
 					}
 				},
 				{
 					"Name": "GrossFloorArea",
 					"Description": "The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "GrossFloorArea"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -212,15 +208,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "GrossFloorArea"
 					}
 				},
 				{
 					"Name": "BuildingFunctionsArea",
 					"Description": "The total building functions square footage, which includes air conditioning, heating and dockage.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "BuildingFunctionsArea"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -228,15 +224,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "BuildingFunctionsArea"
 					}
 				},
 				{
 					"Name": "NonsellingArea",
 					"Description": "The total non-selling square footage of the associated Store.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "NonsellingArea"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -244,15 +240,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "NonsellingArea"
 					}
 				},
 				{
 					"Name": "AvailableSellingArea",
 					"Description": "The total selling area within the Store expressed in square footage.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "AvailableSellingArea"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -260,15 +256,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "AvailableSellingArea"
 					}
 				},
 				{
 					"Name": "NumberOfFloors",
 					"Description": "The number of floors of the Store.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "NumberOfFloors"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -276,15 +272,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "NumberOfFloors"
 					}
 				},
 				{
 					"Name": "TerritoryId",
 					"Description": "The unique identifier of a Territory.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "TerritoryId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -292,15 +288,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "TerritoryId"
 					}
 				},
 				{
 					"Name": "AreaId",
 					"Description": "The unique identifier of a Territory.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "AreaId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -308,15 +304,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "AreaId"
 					}
 				},
 				{
 					"Name": "RegionId",
 					"Description": "The unique identifier of a Territory.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "RegionId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -324,15 +320,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "RegionId"
 					}
 				},
 				{
 					"Name": "DistrictId",
 					"Description": "The unique identifier of a Territory.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "DistrictId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -340,15 +336,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "DistrictId"
 					}
 				},
 				{
 					"Name": "StoreTypeId",
 					"Description": "The unique identifier of a Store Type.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -356,15 +352,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreTypeId"
 					}
 				},
 				{
 					"Name": "StoreCategoryId",
 					"Description": "The unique identifier of a Store Category.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreCategoryId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -372,15 +368,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreCategoryId"
 					}
 				},
 				{
 					"Name": "StorePartyId",
 					"Description": "The unique identifier of a Party.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StorePartyId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -388,15 +384,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StorePartyId"
 					}
 				},
 				{
 					"Name": "MerchantId",
 					"Description": "The Merchant Identification (MID) is a unique number that identifies your merchant account to payment processing networks and to your payment software.\n\nA series or group of digits that uniquely identifies the merchant to the merchant signing bank for account and billing purposes. \n\nWhen a merchant retains the services of a credit card processor, it is issued a merchant ID.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "MerchantId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -404,15 +400,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "MerchantId"
 					}
 				},
 				{
 					"Name": "BrandId",
 					"Description": "The unique identifier of a Brand.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "BrandId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -420,15 +416,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "BrandId"
 					}
 				},
 				{
 					"Name": "FranchiseeId",
 					"Description": "The unique identifier of a Franchisee.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "FranchiseeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -436,6 +432,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "FranchiseeId"
 					}
 				}
 			],
@@ -466,7 +466,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"StoreId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"StoreName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"StoreShortName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreShortName\"},\"LocationId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"OperatedByPartyId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"OperatedByPartyId\"},\"StoreOpenDate\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreOpenDate\"},\"StoreCloseDate\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreCloseDate\"},\"StoreTelephoneNumber\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTelephoneNumber\"},\"StoreFaxNumber\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreFaxNumber\"},\"StoreEmailAddress\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreEmailAddress\"},\"ChannelId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"ChannelId\"},\"GrossFloorArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"BuildingFunctionsArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BuildingFunctionsArea\"},\"NonsellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NonsellingArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"NumberOfFloors\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NumberOfFloors\"},\"TerritoryId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"TerritoryId\"},\"AreaId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AreaId\"},\"RegionId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"RegionId\"},\"DistrictId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"DistrictId\"},\"StoreTypeId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"StoreCategoryId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreCategoryId\"},\"StorePartyId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StorePartyId\"},\"MerchantId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"MerchantId\"},\"BrandId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"},\"FranchiseeId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"FranchiseeId\"}}}"
 			},
 			"Compressed": false,
