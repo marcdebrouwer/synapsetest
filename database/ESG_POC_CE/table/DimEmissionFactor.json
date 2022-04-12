@@ -52,7 +52,7 @@
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -65,7 +65,7 @@
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -78,7 +78,7 @@
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Properties": {
 							"DateFormat": "dd-MM-yyyy",
 							"HIVE_TYPE_STRING": "date"
@@ -91,7 +91,7 @@
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Properties": {
 							"DateFormat": "dd-MM-yyyy",
 							"HIVE_TYPE_STRING": "date"
@@ -104,7 +104,7 @@
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -117,7 +117,7 @@
 					"OriginDataTypeName": {
 						"TypeName": "double",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
@@ -129,7 +129,7 @@
 					"OriginDataTypeName": {
 						"TypeName": "double",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
@@ -140,7 +140,7 @@
 					"Description": "The uom of the market and location based factor",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
+						"IsNullable": true,
 						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
@@ -152,10 +152,23 @@
 					"Description": "The virtual based emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "double",
-						"IsNullable": false,
+						"IsNullable": true,
 						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
+						}
+					}
+				},
+				{
+					"Name": "Banner",
+					"Description": "The banner related to the emission factor",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
 						}
 					}
 				}
@@ -194,7 +207,7 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimEmissionFactor\",\"description\":\"The emissions factor linked to a specific emission\",\"baseEntityReference\":{\"name\":\"FuelType\",\"path\":\"FuelType.cdm.json/FuelType\"},\"primaryKey\":[\"EmissionFactorId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a fuel type.\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a fuel type.\",\"isNullable\":true,\"name\":\"EmissionFactorName\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The name of the country where the emission factor is valid\",\"isNullable\":false,\"name\":\"Country\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The name of the eGrid region for emissions \",\"isNullable\":false,\"name\":\"EgridRegion\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The start period of an emission factor\",\"isNullable\":false,\"name\":\"PeriodStartEmission\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The end period of an emission\",\"isNullable\":false,\"name\":\"PeriodEndEmission\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of an emission scope\",\"isNullable\":false,\"name\":\"EmissionScope\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The location based emission factor\",\"isNullable\":false,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The market based emission factor\",\"isNullable\":false,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The uom of the market and location based factor\",\"isNullable\":false,\"name\":\"EmissionFactorUom\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The virtual based emission factor\",\"isNullable\":false,\"name\":\"EmissionFactorVirtualBased\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimEmissionFactor\",\"description\":\"The emissions factor linked to a specific emission\",\"baseEntityReference\":{\"name\":\"FuelType\",\"path\":\"FuelType.cdm.json/FuelType\"},\"primaryKey\":[\"EmissionFactorId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a fuel type.\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a fuel type.\",\"isNullable\":true,\"name\":\"EmissionFactorName\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The name of the country where the emission factor is valid\",\"isNullable\":true,\"name\":\"Country\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The name of the eGrid region for emissions \",\"isNullable\":true,\"name\":\"EgridRegion\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The start period of an emission factor\",\"isNullable\":true,\"name\":\"PeriodStartEmission\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The end period of an emission\",\"isNullable\":true,\"name\":\"PeriodEndEmission\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of an emission scope\",\"isNullable\":true,\"name\":\"EmissionScope\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The location based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The market based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The uom of the market and location based factor\",\"isNullable\":true,\"name\":\"EmissionFactorUom\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The virtual based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorVirtualBased\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The banner related to the emission factor\",\"isNullable\":true,\"name\":\"Banner\"}]}}}",
 			"Description": "The emissions factor linked to a specific emission",
 			"DisplayFolderInfo": "{\"name\":\"Network\",\"colorCode\":\"#7062A8\"}",
 			"PrimaryKeys": "EmissionFactorId",
