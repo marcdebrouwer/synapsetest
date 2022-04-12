@@ -103,8 +103,8 @@
 					"Description": "The unique identifier of an emission scope",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -116,8 +116,8 @@
 					"Description": "The unique indentifier of an emission factor value",
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
@@ -130,8 +130,8 @@
 					"Description": "The unique indentifier of an emission factor value",
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Precision": 18,
 						"Scale": 2,
 						"Properties": {
@@ -144,8 +144,8 @@
 					"Description": "The uom of the location based factor",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -156,8 +156,8 @@
 					"Description": "The uom of the market based factor",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -170,7 +170,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/DimEmissionFactor",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/DimEmissionFactor",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -183,9 +183,9 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE/DimEmissionFactor",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/DimEmissionFactor",
 				"Properties": {
-					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LinkedServiceName": "AzureDataLakeStorage1",
 					"LocationSetToDatabaseDefault": true
 				}
 			},
