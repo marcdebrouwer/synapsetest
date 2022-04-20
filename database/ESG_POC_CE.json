@@ -16,7 +16,7 @@
 			"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/",
 			"Properties": {
 				"FormatType": "csv",
-				"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage"
+				"LinkedServiceName": "AzureDataLakeStorage1"
 			}
 		}
 	},
