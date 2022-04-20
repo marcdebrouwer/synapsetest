@@ -1,0 +1,26 @@
+{
+	"name": "relationship-pkmsatyxyy",
+	"properties": {
+		"Name": "relationship-pkmsatyxyy",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESG_POC_CE_test"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "DimUnitOfMeasure",
+		"ToTableName": "FactEmissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UnitOfMeasureId",
+				"ToColumnName": "TotalCo2EEmissionsUomId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"UnitOfMeasure.cdm.json/UnitOfMeasure\",\"toEntity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"joinPairs\":[{\"fromAttribute\":\"UnitOfMeasureId\",\"toAttribute\":\"TotalCo2EEmissionsUomId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

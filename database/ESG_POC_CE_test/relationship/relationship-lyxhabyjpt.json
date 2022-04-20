@@ -1,0 +1,23 @@
+{
+	"name": "relationship-lyxhabyjpt",
+	"properties": {
+		"Name": "relationship-lyxhabyjpt",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESG_POC_CE_test"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "DimEmissionFactor",
+		"ToTableName": "FactEmissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EmissionFactorId",
+				"ToColumnName": "EmissionType"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
