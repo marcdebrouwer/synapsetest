@@ -1,0 +1,48 @@
+{
+	"name": "Dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Excel1",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          Country as string,",
+				"          CarbonScope as string,",
+				"          EmissionCategory as string,",
+				"          EmissionType as string,",
+				"          EmissionFactorLocationBased as string,",
+				"          EmissionFactorMarketBased as string,",
+				"          UnitOfMeasure as string,",
+				"          StartDate as string,",
+				"          EndDate as string,",
+				"          Region as string,",
+				"          HasMarketBasedFactor as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESG_POC_CE',",
+				"     tableName: 'DimEmissionFactor') ~> sink1"
+			]
+		}
+	}
+}
