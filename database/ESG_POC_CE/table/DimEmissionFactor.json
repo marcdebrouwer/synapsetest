@@ -140,8 +140,8 @@
 					"Description": "The uom of the market and location based factor",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -153,8 +153,8 @@
 					"Description": "The virtual based emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "double",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
@@ -165,8 +165,8 @@
 					"Description": "The banner related to the emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -195,7 +195,7 @@
 				"Provider": "ADLS",
 				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/DimEmissionFactor",
 				"Properties": {
-					"LinkedServiceName": "AzureDataLakeStorage1",
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
 				}
 			},

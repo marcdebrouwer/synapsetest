@@ -122,7 +122,7 @@
 				"Provider": "ADLS",
 				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/DimDate",
 				"Properties": {
-					"LinkedServiceName": "AzureDataLakeStorage1",
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
 				}
 			},
