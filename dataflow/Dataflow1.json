@@ -41,7 +41,7 @@
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESG_POC_CE',",
-				"     tableName: 'Dim_EmissionFactors') ~> sink1"
+				"     tableName: 'DimEmissionFactor') ~> sink1"
 			]
 		}
 	}
