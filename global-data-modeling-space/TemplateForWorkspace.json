@@ -7,9 +7,17 @@
 			"metadata": "Workspace name",
 			"defaultValue": "global-data-modeling-space"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
 		"global-data-modeling-space-WorkspaceDefaultSqlServer_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'global-data-modeling-space-WorkspaceDefaultSqlServer'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://stgdmsdevweeu01.dfs.core.windows.net"
 		},
 		"global-data-modeling-space-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"type": "string",
@@ -20,6 +28,233 @@
 		"workspaceId": "[concat('Microsoft.Synapse/workspaces/', parameters('workspaceName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('workspaceName'), '/C0_EmissionFactors')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "EmissionFactors_DimEmissionFactor_DataFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "EmissionFactors_DimEmissionFactor_DataFlow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"EmissionFactorscsvSource": {},
+									"DimEmissionFactorSink": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"concurrency": 1,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "EmissionFactors"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/EmissionFactors_DimEmissionFactor_DataFlow')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/EmissionFactors_StartingPipeline')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "C0_EmissionFactors",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "C0_EmissionFactors",
+								"type": "PipelineReference"
+							},
+							"parameters": {}
+						}
+					}
+				],
+				"concurrency": 1,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "EmissionFactors"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/pipelines/C0_EmissionFactors')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Pipeline 1')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"source1": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/Dataflow1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Excel1')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Excel",
+				"typeProperties": {
+					"sheetName": "Sheet1",
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "EmissionFactors.xlsx",
+						"folderPath": "ESG_SoureFiles",
+						"fileSystem": "fsgdmsdevweeu01"
+					},
+					"firstRowAsHeader": true
+				},
+				"schema": [
+					{
+						"name": "Country",
+						"type": "String"
+					},
+					{
+						"name": "CarbonScope",
+						"type": "String"
+					},
+					{
+						"name": "EmissionCategory",
+						"type": "String"
+					},
+					{
+						"name": "EmissionType",
+						"type": "String"
+					},
+					{
+						"name": "EmissionFactorLocationBased",
+						"type": "String"
+					},
+					{
+						"name": "EmissionFactorMarketBased",
+						"type": "String"
+					},
+					{
+						"name": "UnitOfMeasure",
+						"type": "String"
+					},
+					{
+						"name": "StartDate",
+						"type": "String"
+					},
+					{
+						"name": "EndDate",
+						"type": "String"
+					},
+					{
+						"name": "Region",
+						"type": "String"
+					},
+					{
+						"name": "HasMarketBasedFactor",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/AzureDataLakeStorage1')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					}
+				},
+				"connectVia": {
+					"referenceName": "AutoResolveIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/global-data-modeling-space-WorkspaceDefaultSqlServer')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
@@ -83,12 +318,224 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/Dataflow1')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"dataset": {
+								"referenceName": "Excel1",
+								"type": "DatasetReference"
+							},
+							"name": "source1"
+						}
+					],
+					"sinks": [
+						{
+							"name": "sink1"
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          Country as string,",
+						"          CarbonScope as string,",
+						"          EmissionCategory as string,",
+						"          EmissionType as string,",
+						"          EmissionFactorLocationBased as double,",
+						"          EmissionFactorMarketBased as double,",
+						"          UnitOfMeasure as string,",
+						"          StartDate as date,",
+						"          EndDate as date,",
+						"          Region as string,",
+						"          HasMarketBasedFactor as boolean",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false) ~> source1",
+						"source1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESG_POC_CE',",
+						"     tableName: 'DimEmissionFactor') ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/datasets/Excel1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/EmissionFactors_DimEmissionFactor_DataFlow')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"folder": {
+					"name": "EmissionFactors"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "AzureDataLakeStorage1",
+								"type": "LinkedServiceReference"
+							},
+							"name": "EmissionFactorscsvSource"
+						}
+					],
+					"sinks": [
+						{
+							"name": "DimEmissionFactorSink"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectDimEmissionFactor"
+						},
+						{
+							"name": "CreateEmissionId"
+						}
+					],
+					"script": "source(output(\n\t\tCountry as string,\n\t\tCarbonScope as string,\n\t\tEmissionCategory as string,\n\t\tEmissionType as string,\n\t\tEmissionFactorLocationBased as double '000,000,000.000',\n\t\tEmissionFactorMarketBased as double '000,000,000.000',\n\t\tUnitOfMeasure as string,\n\t\tStartDate as date 'dd-MM-yyyy',\n\t\tEndDate as date 'dd-MM-yyyy',\n\t\tRegion as string,\n\t\tHasMarketBasedFactor as boolean\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delimited',\n\tfileSystem: 'fsgdmsdevweeu01',\n\tfolderPath: 'ESG_MAPDATA',\n\tfileName: 'EmissionFactors.csv',\n\tcolumnDelimiter: ';',\n\tescapeChar: '\\\\',\n\tquoteChar: '\\\"',\n\tcolumnNamesAsHeader: true) ~> EmissionFactorscsvSource\nCreateEmissionId select(mapColumn(\n\t\tCountry,\n\t\tEgridRegion = Region,\n\t\tPeriodStartEmission = StartDate,\n\t\tPeriodEndEmission = EndDate,\n\t\tEmissionFactorLocationBased,\n\t\tEmissionFactorMarketBased,\n\t\tEmissionScope = CarbonScope,\n\t\tEmissionFactorUom = UnitOfMeasure,\n\t\tEmissionFactorName = EmissionType,\n\t\tEmissionFactorId\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectDimEmissionFactor\nEmissionFactorscsvSource keyGenerate(output(EmissionFactorId as long),\n\tstartAt: 1L,\n\tstepValue: 1L) ~> CreateEmissionId\nSelectDimEmissionFactor sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tstore: 'synapse',\n\tdatabaseType: 'spark',\n\tformat: 'table',\n\tdatabase: 'ESG_POC_CE',\n\ttableName: 'DimEmissionFactor',\n\tinput(\n\t\tEmissionFactorId as integer,\n\t\tEmissionFactorName as string,\n\t\tCountry as string,\n\t\tEgridRegion as string,\n\t\tPeriodStartEmission as date,\n\t\tPeriodEndEmission as date,\n\t\tEmissionScope as string,\n\t\tEmissionFactorLocationBased as double,\n\t\tEmissionFactorMarketBased as double,\n\t\tEmissionFactorUom as string,\n\t\tEmissionFactorVirtualBased as double,\n\t\tBanner as string\n\t)) ~> DimEmissionFactorSink"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/WorkspaceSystemIdentity')]",
 			"type": "Microsoft.Synapse/workspaces/credentials",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"type": "ManagedIdentity",
 				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 1')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [EmissionFactorId]\n,[EmissionFactorName]\n,[Country]\n,[EgridRegion]\n,[PeriodStartEmission]\n,[PeriodEndEmission]\n,[EmissionScope]\n,[EmissionFactorLocationBased]\n,[EmissionFactorMarketBased]\n,[EmissionFactorUom]\n,[EmissionFactorVirtualBased]\n,[Banner]\n FROM [ESG_POC_CE].[dbo].[DimEmissionFactor]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESG_POC_CE",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 2')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [EmissionFactorId]\n,[EmissionFactorName]\n,[Country]\n,[EgridRegion]\n,[PeriodStartEmission]\n,[PeriodEndEmission]\n,[EmissionScope]\n,[EmissionFactorLocationBased]\n,[EmissionFactorMarketBased]\n,[EmissionFactorUom]\n,[EmissionFactorVirtualBased]\n,[Banner]\n FROM [ESG_POC_CE_test].[dbo].[DimEmissionFactor]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESG_POC_CE",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 3')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [EmissionFactorId]\n,[EmissionFactorName]\n,[Country]\n,[EgridRegion]\n,[PeriodStartEmission]\n,[PeriodEndEmission]\n,[EmissionScope]\n,[EmissionFactorLocationBased]\n,[EmissionFactorMarketBased]\n,[EmissionFactorUom]\n,[EmissionFactorVirtualBased]\n,[Banner]\n FROM [ESG_POC_CE].[dbo].[DimEmissionFactor]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESG_POC_CE",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 4')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESG_POC_CE_test",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 5')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [EmissionFactorId]\n,[EmissionFactorName]\n,[Country]\n,[EgridRegion]\n,[PeriodStartEmission]\n,[PeriodEndEmission]\n,[EmissionScope]\n,[EmissionFactorLocationBased]\n,[EmissionFactorMarketBased]\n,[EmissionFactorUom]\n,[EmissionFactorVirtualBased]\n,[Banner]\n FROM [ESG_POC_CE].[dbo].[DimEmissionFactor]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESG_POC_CE",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 6')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESG_POC_CE_test",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
 			},
 			"dependsOn": []
 		},
@@ -13525,6 +13972,7 @@
 									"ToColumnName": "OrderLineNumber"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"OrderLine.cdm.json/OrderLine\",\"toEntity\":\"OrderLineStatus.cdm.json/OrderLineStatus\",\"joinPairs\":[{\"fromAttribute\":\"OrderId\",\"toAttribute\":\"OrderId\"},{\"fromAttribute\":\"OrderLineNumber\",\"toAttribute\":\"OrderLineNumber\"}]}}"
 							}
@@ -13553,6 +14001,7 @@
 									"ToColumnName": "OrderTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"OrderType.cdm.json/OrderType\",\"toEntity\":\"Order.cdm.json/Order\",\"joinPairs\":[{\"fromAttribute\":\"OrderTypeId\",\"toAttribute\":\"OrderTypeId\"}]}}"
 							}
@@ -13581,6 +14030,7 @@
 									"ToColumnName": "EnvironmentalParameterId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"EnvironmentalParameter.cdm.json/EnvironmentalParameter\",\"toEntity\":\"FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter\",\"joinPairs\":[{\"fromAttribute\":\"EnvironmentalParameterId\",\"toAttribute\":\"EnvironmentalParameterId\"}]}}"
 							}
@@ -13609,6 +14059,7 @@
 									"ToColumnName": "PackageComponentTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackageComponentType.cdm.json/PackageComponentType\",\"toEntity\":\"ProductPackagingItem.cdm.json/ProductPackagingItem\",\"joinPairs\":[{\"fromAttribute\":\"PackageComponentTypeId\",\"toAttribute\":\"PackageComponentTypeId\"}]}}"
 							}
@@ -13637,6 +14088,7 @@
 									"ToColumnName": "OrderId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Order.cdm.json/Order\",\"toEntity\":\"OrderLine.cdm.json/OrderLine\",\"joinPairs\":[{\"fromAttribute\":\"OrderId\",\"toAttribute\":\"OrderId\"}]}}"
 							}
@@ -13665,6 +14117,7 @@
 									"ToColumnName": "IngredientId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Ingredient.cdm.json/Ingredient\",\"toEntity\":\"RecipeResultingIngredients.cdm.json/RecipeResultingIngredients\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"}]}}"
 							}
@@ -13693,6 +14146,7 @@
 									"ToColumnName": "OrderId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Order.cdm.json/Order\",\"toEntity\":\"Invoice.cdm.json/Invoice\",\"joinPairs\":[{\"fromAttribute\":\"OrderId\",\"toAttribute\":\"OrderId\"}]}}"
 							}
@@ -13721,6 +14175,7 @@
 									"ToColumnName": "PackageMaterialTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackageMaterialType.cdm.json/PackageMaterialType\",\"toEntity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"joinPairs\":[{\"fromAttribute\":\"PackageMaterialTypeId\",\"toAttribute\":\"PackageMaterialTypeId\"}]}}"
 							}
@@ -13749,6 +14204,7 @@
 									"ToColumnName": "IngredientId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Ingredient.cdm.json/Ingredient\",\"toEntity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"}]}}"
 							}
@@ -13777,6 +14233,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"ManufacturingSiteProductProduction.cdm.json/ManufacturingSiteProductProduction\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -13805,6 +14262,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"ProductItemQuantity.cdm.json/ProductItemQuantity\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -13833,6 +14291,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -13861,6 +14320,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -13889,6 +14349,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"ProductDescription.cdm.json/ProductDescription\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -13917,6 +14378,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"ProductRecipe.cdm.json/ProductRecipe\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -13945,6 +14407,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -13973,6 +14436,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"BrandProduct.cdm.json/BrandProduct\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -14001,6 +14465,7 @@
 									"ToColumnName": "PrimaryBrandId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Brand.cdm.json/Brand\",\"toEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"joinPairs\":[{\"fromAttribute\":\"BrandId\",\"toAttribute\":\"PrimaryBrandId\"}]}}"
 							}
@@ -14029,6 +14494,7 @@
 									"ToColumnName": "PackageTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackageType.cdm.json/PackageType\",\"toEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"joinPairs\":[{\"fromAttribute\":\"PackageTypeId\",\"toAttribute\":\"PackageTypeId\"}]}}"
 							}
@@ -14057,6 +14523,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"OrderLine.cdm.json/OrderLine\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -14085,6 +14552,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"BrandRecipe.cdm.json/BrandRecipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -14113,6 +14581,7 @@
 									"ToColumnName": "IngredientPropertyTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"IngredientPropertyType.cdm.json/IngredientPropertyType\",\"toEntity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"joinPairs\":[{\"fromAttribute\":\"IngredientPropertyTypeId\",\"toAttribute\":\"IngredientPropertyTypeId\"}]}}"
 							}
@@ -14145,6 +14614,7 @@
 									"ToColumnName": "PackagingHierarchyLevelId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"toEntity\":\"PackagedItem.cdm.json/PackagedItem\",\"joinPairs\":[{\"fromAttribute\":\"PackagingHierarchyId\",\"toAttribute\":\"PackagingHierarchyId\"},{\"fromAttribute\":\"PackagingHierarchyLevelId\",\"toAttribute\":\"PackagingHierarchyLevelId\"}]}}"
 							}
@@ -14173,6 +14643,7 @@
 									"ToColumnName": "IngredientId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Ingredient.cdm.json/Ingredient\",\"toEntity\":\"IngredientProperty.cdm.json/IngredientProperty\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"}]}}"
 							}
@@ -14201,6 +14672,7 @@
 									"ToColumnName": "BrandId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Brand.cdm.json/Brand\",\"toEntity\":\"BrandProduct.cdm.json/BrandProduct\",\"joinPairs\":[{\"fromAttribute\":\"BrandId\",\"toAttribute\":\"BrandId\"}]}}"
 							}
@@ -14229,6 +14701,7 @@
 									"ToColumnName": "IngredientPurposeTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\",\"toEntity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"joinPairs\":[{\"fromAttribute\":\"IngredientPurposeTypeId\",\"toAttribute\":\"IngredientPurposeTypeId\"}]}}"
 							}
@@ -14257,6 +14730,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"RecipeInformation.cdm.json/RecipeInformation\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -14293,6 +14767,7 @@
 									"ToColumnName": "SequenceNumber"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"toEntity\":\"FormulaEnvironmentalParameter.cdm.json/FormulaEnvironmentalParameter\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"},{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"},{\"fromAttribute\":\"SequenceNumber\",\"toAttribute\":\"SequenceNumber\"}]}}"
 							}
@@ -14321,6 +14796,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"RecipeProcedure.cdm.json/RecipeProcedure\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -14349,6 +14825,7 @@
 									"ToColumnName": "ManufacturerId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Manufacturer.cdm.json/Manufacturer\",\"toEntity\":\"ManufacturerLot.cdm.json/ManufacturerLot\",\"joinPairs\":[{\"fromAttribute\":\"ManufacturerId\",\"toAttribute\":\"ManufacturerId\"}]}}"
 							}
@@ -14377,6 +14854,7 @@
 									"ToColumnName": "IngredientPropertyTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"IngredientPropertyType.cdm.json/IngredientPropertyType\",\"toEntity\":\"IngredientProperty.cdm.json/IngredientProperty\",\"joinPairs\":[{\"fromAttribute\":\"IngredientPropertyTypeId\",\"toAttribute\":\"IngredientPropertyTypeId\"}]}}"
 							}
@@ -14405,6 +14883,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"ProductBillOfMaterial.cdm.json/ProductBillOfMaterial\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -14433,6 +14912,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"ItemRecipe.cdm.json/ItemRecipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -14461,6 +14941,7 @@
 									"ToColumnName": "IngredientId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Ingredient.cdm.json/Ingredient\",\"toEntity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"}]}}"
 							}
@@ -14489,6 +14970,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"GeneralRecipe.cdm.json/GeneralRecipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -14517,6 +14999,7 @@
 									"ToColumnName": "OrderId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Order.cdm.json/Order\",\"toEntity\":\"OrderPayment.cdm.json/OrderPayment\",\"joinPairs\":[{\"fromAttribute\":\"OrderId\",\"toAttribute\":\"OrderId\"}]}}"
 							}
@@ -14545,6 +15028,7 @@
 									"ToColumnName": "RecipeTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RecipeType.cdm.json/RecipeType\",\"toEntity\":\"Recipe.cdm.json/Recipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeTypeId\",\"toAttribute\":\"RecipeTypeId\"}]}}"
 							}
@@ -14573,6 +15057,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -14605,6 +15090,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"toEntity\":\"ProductIngredientDeclaration.cdm.json/ProductIngredientDeclaration\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"},{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -14633,6 +15119,7 @@
 									"ToColumnName": "PackageMaterialTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackageMaterialType.cdm.json/PackageMaterialType\",\"toEntity\":\"ProductPackagingItem.cdm.json/ProductPackagingItem\",\"joinPairs\":[{\"fromAttribute\":\"PackageMaterialTypeId\",\"toAttribute\":\"PackageMaterialTypeId\"}]}}"
 							}
@@ -14661,6 +15148,7 @@
 									"ToColumnName": "RelatedRecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RelatedRecipeId\"}]}}"
 							}
@@ -14689,6 +15177,7 @@
 									"ToColumnName": "OrderProcessingStatusId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"OrderProcessingStatus.cdm.json/OrderProcessingStatus\",\"toEntity\":\"Order.cdm.json/Order\",\"joinPairs\":[{\"fromAttribute\":\"OrderProcessingStatusId\",\"toAttribute\":\"OrderProcessingStatusId\"}]}}"
 							}
@@ -14717,6 +15206,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"MasterRecipe.cdm.json/MasterRecipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -14745,6 +15235,7 @@
 									"ToColumnName": "PackageComponentTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackageComponentType.cdm.json/PackageComponentType\",\"toEntity\":\"ItemPackagingItem.cdm.json/ItemPackagingItem\",\"joinPairs\":[{\"fromAttribute\":\"PackageComponentTypeId\",\"toAttribute\":\"PackageComponentTypeId\"}]}}"
 							}
@@ -14773,6 +15264,7 @@
 									"ToColumnName": "PackagingHierarchyLevelTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackagingHierarchyLevelType.cdm.json/PackagingHierarchyLevelType\",\"toEntity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"joinPairs\":[{\"fromAttribute\":\"PackagingHierarchyLevelTypeId\",\"toAttribute\":\"PackagingHierarchyLevelTypeId\"}]}}"
 							}
@@ -14801,6 +15293,7 @@
 									"ToColumnName": "PackageComponentTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackageComponentType.cdm.json/PackageComponentType\",\"toEntity\":\"PackagedItemRelatedItem.cdm.json/PackagedItemRelatedItem\",\"joinPairs\":[{\"fromAttribute\":\"PackageComponentTypeId\",\"toAttribute\":\"PackageComponentTypeId\"}]}}"
 							}
@@ -14833,6 +15326,7 @@
 									"ToColumnName": "PackagedItemVersionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackagedItem.cdm.json/PackagedItem\",\"toEntity\":\"PackagedItemRelatedItem.cdm.json/PackagedItemRelatedItem\",\"joinPairs\":[{\"fromAttribute\":\"ItemSku\",\"toAttribute\":\"ItemSku\"},{\"fromAttribute\":\"PackagedItemVersionId\",\"toAttribute\":\"PackagedItemVersionId\"}]}}"
 							}
@@ -14861,6 +15355,7 @@
 									"ToColumnName": "PackagingHierarchyId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PackagingHierarchy.cdm.json/PackagingHierarchy\",\"toEntity\":\"PackagingHierarchyLevel.cdm.json/PackagingHierarchyLevel\",\"joinPairs\":[{\"fromAttribute\":\"PackagingHierarchyId\",\"toAttribute\":\"PackagingHierarchyId\"}]}}"
 							}
@@ -14893,6 +15388,7 @@
 									"ToColumnName": "ReturnOrderLineNumber"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"OrderLine.cdm.json/OrderLine\",\"toEntity\":\"OrderLine.cdm.json/OrderLine\",\"joinPairs\":[{\"fromAttribute\":\"OrderId\",\"toAttribute\":\"ReturnOrderId\"},{\"fromAttribute\":\"OrderLineNumber\",\"toAttribute\":\"ReturnOrderLineNumber\"}]}}"
 							}
@@ -14921,6 +15417,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"ProductGtin.cdm.json/ProductGtin\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -14949,6 +15446,7 @@
 									"ToColumnName": "OrderId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Order.cdm.json/Order\",\"toEntity\":\"OrderStatus.cdm.json/OrderStatus\",\"joinPairs\":[{\"fromAttribute\":\"OrderId\",\"toAttribute\":\"OrderId\"}]}}"
 							}
@@ -14977,6 +15475,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -15005,6 +15504,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"RecipeFormulaProductProduction.cdm.json/RecipeFormulaProductProduction\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -15033,6 +15533,7 @@
 									"ToColumnName": "IngredientId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Ingredient.cdm.json/Ingredient\",\"toEntity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"}]}}"
 							}
@@ -15069,6 +15570,7 @@
 									"ToColumnName": "SequenceNumber"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"toEntity\":\"RecipeFormulaIngredientPurpose.cdm.json/RecipeFormulaIngredientPurpose\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"},{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"},{\"fromAttribute\":\"SequenceNumber\",\"toAttribute\":\"SequenceNumber\"}]}}"
 							}
@@ -15097,6 +15599,7 @@
 									"ToColumnName": "InvoiceId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Invoice.cdm.json/Invoice\",\"toEntity\":\"InvoiceLine.cdm.json/InvoiceLine\",\"joinPairs\":[{\"fromAttribute\":\"InvoiceId\",\"toAttribute\":\"InvoiceId\"}]}}"
 							}
@@ -15125,6 +15628,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"RecipeRelatedParty.cdm.json/RecipeRelatedParty\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -15153,6 +15657,7 @@
 									"ToColumnName": "BrandCategoryId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"BrandCategory.cdm.json/BrandCategory\",\"toEntity\":\"Brand.cdm.json/Brand\",\"joinPairs\":[{\"fromAttribute\":\"BrandCategoryId\",\"toAttribute\":\"BrandCategoryId\"}]}}"
 							}
@@ -15181,6 +15686,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"ProductNutrient.cdm.json/ProductNutrient\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -15209,6 +15715,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"ProductDocument.cdm.json/ProductDocument\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -15237,6 +15744,7 @@
 									"ToColumnName": "IngredientPurposeTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"IngredientPurposeType.cdm.json/IngredientPurposeType\",\"toEntity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"joinPairs\":[{\"fromAttribute\":\"IngredientPurposeTypeId\",\"toAttribute\":\"IngredientPurposeTypeId\"}]}}"
 							}
@@ -15269,6 +15777,7 @@
 									"ToColumnName": "OrderLineNumber"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"OrderLine.cdm.json/OrderLine\",\"toEntity\":\"InvoiceLine.cdm.json/InvoiceLine\",\"joinPairs\":[{\"fromAttribute\":\"OrderId\",\"toAttribute\":\"OrderId\"},{\"fromAttribute\":\"OrderLineNumber\",\"toAttribute\":\"OrderLineNumber\"}]}}"
 							}
@@ -15297,6 +15806,7 @@
 									"ToColumnName": "InvoiceLineTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"InvoiceLineType.cdm.json/InvoiceLineType\",\"toEntity\":\"InvoiceLine.cdm.json/InvoiceLine\",\"joinPairs\":[{\"fromAttribute\":\"InvoiceLineTypeId\",\"toAttribute\":\"InvoiceLineTypeId\"}]}}"
 							}
@@ -15325,6 +15835,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"ProductIngredient.cdm.json/ProductIngredient\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -15357,6 +15868,7 @@
 									"ToColumnName": "IngredientPurposeTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"IngredientPurpose.cdm.json/IngredientPurpose\",\"toEntity\":\"ProductIngredientPurpose.cdm.json/ProductIngredientPurpose\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"},{\"fromAttribute\":\"IngredientPurposeTypeId\",\"toAttribute\":\"IngredientPurposeTypeId\"}]}}"
 							}
@@ -15385,6 +15897,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"ProductRecipe.cdm.json/ProductRecipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -15413,6 +15926,7 @@
 									"ToColumnName": "RecipeRelationshipTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RecipeRelationshipType.cdm.json/RecipeRelationshipType\",\"toEntity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeRelationshipTypeId\",\"toAttribute\":\"RecipeRelationshipTypeId\"}]}}"
 							}
@@ -15441,6 +15955,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"RecipeResultingIngredients.cdm.json/RecipeResultingIngredients\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -15477,6 +15992,7 @@
 									"ToColumnName": "SequenceNumber"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RecipeFormula.cdm.json/RecipeFormula\",\"toEntity\":\"RecipeFormulaIngredientProperty.cdm.json/RecipeFormulaIngredientProperty\",\"joinPairs\":[{\"fromAttribute\":\"IngredientId\",\"toAttribute\":\"IngredientId\"},{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"},{\"fromAttribute\":\"SequenceNumber\",\"toAttribute\":\"SequenceNumber\"}]}}"
 							}
@@ -15505,6 +16021,7 @@
 									"ToColumnName": "RecipeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Recipe.cdm.json/Recipe\",\"toEntity\":\"RelatedRecipe.cdm.json/RelatedRecipe\",\"joinPairs\":[{\"fromAttribute\":\"RecipeId\",\"toAttribute\":\"RecipeId\"}]}}"
 							}
@@ -15533,6 +16050,7 @@
 									"ToColumnName": "BrandId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Brand.cdm.json/Brand\",\"toEntity\":\"BrandRecipe.cdm.json/BrandRecipe\",\"joinPairs\":[{\"fromAttribute\":\"BrandId\",\"toAttribute\":\"BrandId\"}]}}"
 							}
@@ -15561,44 +16079,9 @@
 									"ToColumnName": "RecipeInformationTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RecipeInformationType.cdm.json/RecipeInformationType\",\"toEntity\":\"RecipeInformation.cdm.json/RecipeInformation\",\"joinPairs\":[{\"fromAttribute\":\"RecipeInformationTypeId\",\"toAttribute\":\"RecipeInformationTypeId\"}]}}"
-							}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/ESG_POC_CE')]",
-			"type": "Microsoft.Synapse/workspaces/databases",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"Ddls": [
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "ESG_POC_CE",
-							"EntityType": "DATABASE",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"Properties": {
-								"IsSyMSCDMDatabase": true
-							},
-							"Description": "Proof of concept data model for ESG Reporting. Includes Carbon Emissions scope 1 + 2 and water consumption. ",
-							"Source": {
-								"Provider": "ADLS",
-								"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESG_POC_CE",
-								"Properties": {
-									"FormatType": "csv",
-									"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage"
-								}
 							}
 						},
 						"Source": {
@@ -24275,6 +24758,7 @@
 									"ToColumnName": "PaymentCardTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PaymentCardType.cdm.json/PaymentCardType\",\"toEntity\":\"PaymentCard.cdm.json/PaymentCard\",\"joinPairs\":[{\"fromAttribute\":\"PaymentCardTypeId\",\"toAttribute\":\"PaymentCardTypeId\"}]}}"
 							}
@@ -24303,6 +24787,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"Refund.cdm.json/Refund\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24331,6 +24816,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionCoupon.cdm.json/TransactionCoupon\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24359,6 +24845,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"PromotionTransactionCollateral.cdm.json/PromotionTransactionCollateral\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24391,6 +24878,7 @@
 									"ToColumnName": "ReturnOfTransactionLineItemId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"ReturnOfTransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"ReturnOfTransactionLineItemId\"}]}}"
 							}
@@ -24423,6 +24911,7 @@
 									"ToColumnName": "TransactionLineItemId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
 							}
@@ -24451,6 +24940,7 @@
 									"ToColumnName": "PaymentId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Payment.cdm.json/Payment\",\"toEntity\":\"TransactionPayment.cdm.json/TransactionPayment\",\"joinPairs\":[{\"fromAttribute\":\"PaymentId\",\"toAttribute\":\"PaymentId\"}]}}"
 							}
@@ -24479,6 +24969,7 @@
 									"ToColumnName": "PaymentCardToken"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PaymentCardToken.cdm.json/PaymentCardToken\",\"toEntity\":\"PaymentCard.cdm.json/PaymentCard\",\"joinPairs\":[{\"fromAttribute\":\"PaymentCardToken\",\"toAttribute\":\"PaymentCardToken\"}]}}"
 							}
@@ -24507,6 +24998,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionPayment.cdm.json/TransactionPayment\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24535,6 +25027,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionLocation.cdm.json/TransactionLocation\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24567,6 +25060,7 @@
 									"ToColumnName": "TransactionLineItemId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItemLocation.cdm.json/TransactionLineItemLocation\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
 							}
@@ -24595,6 +25089,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionStatus.cdm.json/TransactionStatus\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24627,6 +25122,7 @@
 									"ToColumnName": "TransactionLineItemId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineCoupon.cdm.json/TransactionLineCoupon\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
 							}
@@ -24655,6 +25151,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionChannel.cdm.json/TransactionChannel\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24683,6 +25180,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"RelatedTransaction.cdm.json/RelatedTransaction\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24711,6 +25209,7 @@
 									"ToColumnName": "TransactionTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionType.cdm.json/TransactionType\",\"toEntity\":\"TransactionTypeTransactionRestriction.cdm.json/TransactionTypeTransactionRestriction\",\"joinPairs\":[{\"fromAttribute\":\"TransactionTypeId\",\"toAttribute\":\"TransactionTypeId\"}]}}"
 							}
@@ -24739,6 +25238,7 @@
 									"ToColumnName": "PaymentCardId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PaymentCard.cdm.json/PaymentCard\",\"toEntity\":\"Payment.cdm.json/Payment\",\"joinPairs\":[{\"fromAttribute\":\"PaymentCardId\",\"toAttribute\":\"PaymentCardId\"}]}}"
 							}
@@ -24767,6 +25267,7 @@
 									"ToColumnName": "PosDeviceTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PosDeviceType.cdm.json/PosDeviceType\",\"toEntity\":\"PosDevice.cdm.json/PosDevice\",\"joinPairs\":[{\"fromAttribute\":\"PosDeviceTypeId\",\"toAttribute\":\"PosDeviceTypeId\"}]}}"
 							}
@@ -24795,6 +25296,7 @@
 									"ToColumnName": "PaymentCardAcquisitionMethodId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PaymentCardAcquisitionMethod.cdm.json/PaymentCardAcquisitionMethod\",\"toEntity\":\"Payment.cdm.json/Payment\",\"joinPairs\":[{\"fromAttribute\":\"PaymentCardAcquisitionMethodId\",\"toAttribute\":\"PaymentCardAcquisitionMethodId\"}]}}"
 							}
@@ -24823,6 +25325,7 @@
 									"ToColumnName": "TransactionTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionType.cdm.json/TransactionType\",\"toEntity\":\"TransactionTypeRequiredAuthorization.cdm.json/TransactionTypeRequiredAuthorization\",\"joinPairs\":[{\"fromAttribute\":\"TransactionTypeId\",\"toAttribute\":\"TransactionTypeId\"}]}}"
 							}
@@ -24851,6 +25354,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionPromotion.cdm.json/TransactionPromotion\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24879,6 +25383,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24907,6 +25412,7 @@
 									"ToColumnName": "TransactionTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionType.cdm.json/TransactionType\",\"toEntity\":\"Transaction.cdm.json/Transaction\",\"joinPairs\":[{\"fromAttribute\":\"TransactionTypeId\",\"toAttribute\":\"TransactionTypeId\"}]}}"
 							}
@@ -24935,6 +25441,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -24963,6 +25470,7 @@
 									"ToColumnName": "TransactionLineEntryMethodId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineEntryMethod.cdm.json/TransactionLineEntryMethod\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"TransactionLineEntryMethodId\",\"toAttribute\":\"TransactionLineEntryMethodId\"}]}}"
 							}
@@ -24995,6 +25503,7 @@
 									"ToColumnName": "TransactionLineItemId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineTax.cdm.json/TransactionLineTax\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
 							}
@@ -25027,6 +25536,7 @@
 									"ToColumnName": "TransactionLineItemId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItemCharge.cdm.json/TransactionLineItemCharge\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
 							}
@@ -25059,6 +25569,7 @@
 									"ToColumnName": "TransactionLineItemId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItemPromotion.cdm.json/TransactionLineItemPromotion\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
 							}
@@ -25087,6 +25598,7 @@
 									"ToColumnName": "PosDeviceId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PosDevice.cdm.json/PosDevice\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"PosDeviceId\",\"toAttribute\":\"PosDeviceId\"}]}}"
 							}
@@ -25115,6 +25627,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionTax.cdm.json/TransactionTax\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -25143,6 +25656,7 @@
 									"ToColumnName": "ConfirmationMethodId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"ConfirmationMethod.cdm.json/ConfirmationMethod\",\"toEntity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"joinPairs\":[{\"fromAttribute\":\"ConfirmationMethodId\",\"toAttribute\":\"ConfirmationMethodId\"}]}}"
 							}
@@ -25171,6 +25685,7 @@
 									"ToColumnName": "PosDeviceId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PosDevice.cdm.json/PosDevice\",\"toEntity\":\"Payment.cdm.json/Payment\",\"joinPairs\":[{\"fromAttribute\":\"PosDeviceId\",\"toAttribute\":\"PosDeviceId\"}]}}"
 							}
@@ -25199,6 +25714,7 @@
 									"ToColumnName": "ReturnOfTransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"ReturnOfTransactionId\"}]}}"
 							}
@@ -25231,6 +25747,7 @@
 									"ToColumnName": "TransactionLineItemId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItemAdjustment.cdm.json/TransactionLineItemAdjustment\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
 							}
@@ -25259,6 +25776,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionTerm.cdm.json/TransactionTerm\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -25287,6 +25805,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionPaymentMethod.cdm.json/TransactionPaymentMethod\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -25315,6 +25834,7 @@
 									"ToColumnName": "HoldTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"HoldType.cdm.json/HoldType\",\"toEntity\":\"TransactionLineItemHold.cdm.json/TransactionLineItemHold\",\"joinPairs\":[{\"fromAttribute\":\"HoldTypeId\",\"toAttribute\":\"HoldTypeId\"}]}}"
 							}
@@ -25343,6 +25863,7 @@
 									"ToColumnName": "PaymentStatusTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PaymentStatusType.cdm.json/PaymentStatusType\",\"toEntity\":\"Payment.cdm.json/Payment\",\"joinPairs\":[{\"fromAttribute\":\"PaymentStatusTypeId\",\"toAttribute\":\"PaymentStatusTypeId\"}]}}"
 							}
@@ -25371,6 +25892,7 @@
 									"ToColumnName": "TransactionLineItemTypeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItemType.cdm.json/TransactionLineItemType\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"TransactionLineItemTypeId\",\"toAttribute\":\"TransactionLineItemTypeId\"}]}}"
 							}
@@ -25399,6 +25921,7 @@
 									"ToColumnName": "RelatedTransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"RelatedTransaction.cdm.json/RelatedTransaction\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"RelatedTransactionId\"}]}}"
 							}
@@ -25427,6 +25950,7 @@
 									"ToColumnName": "PointOfSaleId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"PointOfSale.cdm.json/PointOfSale\",\"toEntity\":\"Transaction.cdm.json/Transaction\",\"joinPairs\":[{\"fromAttribute\":\"PointOfSaleId\",\"toAttribute\":\"PointOfSaleId\"}]}}"
 							}
@@ -25455,6 +25979,7 @@
 									"ToColumnName": "CustomerIdentificationMethodId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"CustomerIdentificationMethod.cdm.json/CustomerIdentificationMethod\",\"toEntity\":\"Transaction.cdm.json/Transaction\",\"joinPairs\":[{\"fromAttribute\":\"CustomerIdentificationMethodId\",\"toAttribute\":\"CustomerIdentificationMethodId\"}]}}"
 							}
@@ -25483,6 +26008,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionRelatedCustomerAccount.cdm.json/TransactionRelatedCustomerAccount\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -25511,6 +26037,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionLoyaltyAccount.cdm.json/TransactionLoyaltyAccount\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -25543,6 +26070,7 @@
 									"ToColumnName": "TransactionLineItemId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItemStatus.cdm.json/TransactionLineItemStatus\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"TransactionLineItemId\"}]}}"
 							}
@@ -34250,6 +34778,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -34278,6 +34807,7 @@
 									"ToColumnName": "CustomerAccountId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"CustomerAccount.cdm.json/CustomerAccount\",\"toEntity\":\"Order.cdm.json/Order\",\"joinPairs\":[{\"fromAttribute\":\"CustomerAccountId\",\"toAttribute\":\"CustomerAccountId\"}]}}"
 							}
@@ -34311,7 +34841,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "f43eeddb-d8ed-4007-83ce-350eb1670ed0"
+							"ObjectId": "f43eeddb-d8ed-4007-83ce-350eb1670ed0",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34342,7 +34873,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "ce7b121f-9fb1-4681-8a71-eb7663cefa65"
+							"ObjectId": "ce7b121f-9fb1-4681-8a71-eb7663cefa65",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34373,7 +34905,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "26b50363-ca59-4099-a4a0-1ffe5c32f2af"
+							"ObjectId": "26b50363-ca59-4099-a4a0-1ffe5c32f2af",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34399,6 +34932,7 @@
 									"ToColumnName": "CustomerAccountId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"CustomerAccount.cdm.json/CustomerAccount\",\"toEntity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"joinPairs\":[{\"fromAttribute\":\"CustomerAccountId\",\"toAttribute\":\"CustomerAccountId\"}]}}"
 							}
@@ -34432,7 +34966,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "3e48faf8-482e-4510-9d7e-85628464c6ea"
+							"ObjectId": "3e48faf8-482e-4510-9d7e-85628464c6ea",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34458,6 +34993,7 @@
 									"ToColumnName": "ProductId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RetailProduct.cdm.json/RetailProduct\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"ProductId\",\"toAttribute\":\"ProductId\"}]}}"
 							}
@@ -34491,7 +35027,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "39b03aa2-0c2a-4d98-9523-6461c1735bae"
+							"ObjectId": "39b03aa2-0c2a-4d98-9523-6461c1735bae",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34517,6 +35054,7 @@
 									"ToColumnName": "ApprovedByEmployeeId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Employee.cdm.json/Employee\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"EmployeeId\",\"toAttribute\":\"ApprovedByEmployeeId\"}]}}"
 							}
@@ -34550,7 +35088,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "a28fbdd2-d5bd-4f69-908d-c4d6e9bfa191"
+							"ObjectId": "a28fbdd2-d5bd-4f69-908d-c4d6e9bfa191",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34579,6 +35118,7 @@
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
 							"ObjectId": "5ac6270e-07f2-47a1-8eba-e763ecdbfd74",
+							"RelationshipType": 0,
 							"Properties": {}
 						},
 						"Source": {
@@ -34610,7 +35150,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "dcda9e10-72bf-4a0d-b593-adb7590d0e78"
+							"ObjectId": "dcda9e10-72bf-4a0d-b593-adb7590d0e78",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34640,6 +35181,7 @@
 									"ToColumnName": "ReturnOfTransactionLineItemId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"ReturnOfTransactionId\"},{\"fromAttribute\":\"TransactionLineItemId\",\"toAttribute\":\"ReturnOfTransactionLineItemId\"}]}}"
 							}
@@ -34673,7 +35215,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "35504748-3cd3-44b4-bf12-6bcc15f4ec8e"
+							"ObjectId": "35504748-3cd3-44b4-bf12-6bcc15f4ec8e",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34704,7 +35247,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "75bc3e71-dc6a-4fe3-8007-2540cbd4fa29"
+							"ObjectId": "75bc3e71-dc6a-4fe3-8007-2540cbd4fa29",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34735,7 +35279,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "30d832e1-a5c9-40df-8634-6a0a2a8ae7c0"
+							"ObjectId": "30d832e1-a5c9-40df-8634-6a0a2a8ae7c0",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34761,6 +35306,7 @@
 									"ToColumnName": "CustomerAccountId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"CustomerAccount.cdm.json/CustomerAccount\",\"toEntity\":\"Transaction.cdm.json/Transaction\",\"joinPairs\":[{\"fromAttribute\":\"CustomerAccountId\",\"toAttribute\":\"CustomerAccountId\"}]}}"
 							}
@@ -34789,6 +35335,7 @@
 									"ToColumnName": "DistributionChannelId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Channel.cdm.json/Channel\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"ChannelId\",\"toAttribute\":\"DistributionChannelId\"}]}}"
 							}
@@ -34817,6 +35364,7 @@
 									"ToColumnName": "TransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionCustomerAccountConfirmationMethod.cdm.json/TransactionCustomerAccountConfirmationMethod\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"TransactionId\"}]}}"
 							}
@@ -34845,6 +35393,7 @@
 									"ToColumnName": "CustomerId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Customer.cdm.json/Customer\",\"toEntity\":\"CustomerAccount.cdm.json/CustomerAccount\",\"joinPairs\":[{\"fromAttribute\":\"CustomerId\",\"toAttribute\":\"CustomerId\"}]}}"
 							}
@@ -34873,6 +35422,7 @@
 									"ToColumnName": "ReturnOfTransactionId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Transaction.cdm.json/Transaction\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"TransactionId\",\"toAttribute\":\"ReturnOfTransactionId\"}]}}"
 							}
@@ -34901,6 +35451,7 @@
 									"ToColumnName": "SalesChannelId"
 								}
 							],
+							"RelationshipType": 0,
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Channel.cdm.json/Channel\",\"toEntity\":\"TransactionLineItem.cdm.json/TransactionLineItem\",\"joinPairs\":[{\"fromAttribute\":\"ChannelId\",\"toAttribute\":\"SalesChannelId\"}]}}"
 							}
@@ -34934,7 +35485,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "c1074d26-276f-4627-9d9e-3f4af8c10a3c"
+							"ObjectId": "c1074d26-276f-4627-9d9e-3f4af8c10a3c",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34965,7 +35517,8 @@
 							},
 							"PublishStatus": "PUBLISHED",
 							"ObjectVersion": 1,
-							"ObjectId": "aa95c0e7-f363-446d-9e8f-eabf1b5cbd10"
+							"ObjectId": "aa95c0e7-f363-446d-9e8f-eabf1b5cbd10",
+							"RelationshipType": 0
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -34974,6 +35527,43 @@
 				]
 			},
 			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/ESGPOC')]",
+			"type": "Microsoft.Synapse/workspaces/bigDataPools",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"autoPause": {
+					"enabled": true,
+					"delayInMinutes": 15
+				},
+				"autoScale": {
+					"enabled": true,
+					"maxNodeCount": 12,
+					"minNodeCount": 3
+				},
+				"nodeCount": 10,
+				"nodeSize": "Small",
+				"nodeSizeFamily": "MemoryOptimized",
+				"sparkVersion": "3.1",
+				"isComputeIsolationEnabled": false,
+				"sessionLevelPackagesEnabled": false,
+				"annotations": []
+			},
+			"dependsOn": [],
+			"location": "westeurope"
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/TestDedicatedSqlPool')]",
+			"type": "Microsoft.Synapse/workspaces/sqlPools",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"collation": "SQL_Latin1_General_CP1_CI_AS",
+				"maxSizeBytes": 263882790666240,
+				"annotations": []
+			},
+			"dependsOn": [],
+			"location": "westeurope"
 		}
 	]
 }

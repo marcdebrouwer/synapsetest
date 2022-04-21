@@ -5,8 +5,14 @@
 		"workspaceName": {
 			"value": "global-data-modeling-space"
 		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
 		"global-data-modeling-space-WorkspaceDefaultSqlServer_connectionString": {
 			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://stgdmsdevweeu01.dfs.core.windows.net"
 		},
 		"global-data-modeling-space-WorkspaceDefaultStorage_properties_typeProperties_url": {
 			"value": "https://stgdmsdevweeu01.dfs.core.windows.net"
