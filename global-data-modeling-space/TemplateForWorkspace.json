@@ -80,6 +80,57 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/C0_EmissionFactors1')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "EmissionFactors_DimEmissionFactor_DataFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "7.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "EmissionFactors_DimEmissionFactor_DataFlow1",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"EmissionFactorscsvSource": {},
+									"DimEmissionFactorSink": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"concurrency": 1,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "EmissionFactors"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/EmissionFactors_DimEmissionFactor_DataFlow1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/EmissionFactors_StartingPipeline')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -111,6 +162,40 @@
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/pipelines/C0_EmissionFactors')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/EmissionFactors_StartingPipeline1')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "C0_EmissionFactors",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "C0_EmissionFactors1",
+								"type": "PipelineReference"
+							},
+							"parameters": {}
+						}
+					}
+				],
+				"concurrency": 1,
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "EmissionFactors"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/pipelines/C0_EmissionFactors1')]"
 			]
 		},
 		{
@@ -407,6 +492,45 @@
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/EmissionFactors_DimEmissionFactor_DataFlow1')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"folder": {
+					"name": "EmissionFactors"
+				},
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "EmissionFactorscsvSource"
+						}
+					],
+					"sinks": [
+						{
+							"name": "DimEmissionFactorSink"
+						}
+					],
+					"transformations": [
+						{
+							"name": "SelectDimEmissionFactor"
+						},
+						{
+							"name": "surrogateKey1"
+						}
+					],
+					"script": "source(output(\n\t\tCountry as string,\n\t\tCarbonScope as string,\n\t\tEmissionCategory as string,\n\t\tEmissionType as string,\n\t\tEmissionFactorLocationBased as double '000,000,000.000',\n\t\tEmissionFactorMarketBased as double '000,000,000.000',\n\t\tUnitOfMeasure as string,\n\t\tStartDate as date 'dd-MM-yyyy',\n\t\tEndDate as date 'dd-MM-yyyy',\n\t\tRegion as string,\n\t\tHasMarketBasedFactor as boolean\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'delimited',\n\tfileSystem: 'fsgdmsdevweeu01',\n\tfolderPath: 'ESG_MAPDATA',\n\tfileName: 'EmissionFactors.csv',\n\tcolumnDelimiter: ';',\n\tescapeChar: '\\\\',\n\tquoteChar: '\\\"',\n\tcolumnNamesAsHeader: true) ~> EmissionFactorscsvSource\nsurrogateKey1 select(mapColumn(\n\t\tEmissionFactorName = EmissionType,\n\t\tEmissionFactorLocationBased,\n\t\tEmissionFactorMarketBased,\n\t\tEmissionPeriodStart = StartDate,\n\t\tEmissionPeriodEnd = EndDate,\n\t\tEmissionCountry = Country,\n\t\tEmissionFactorScope = CarbonScope,\n\t\tEmissionFactorEgridRegion = Region,\n\t\tEmissionFactorUom = UnitOfMeasure,\n\t\tEmissionFactorId\n\t),\n\tskipDuplicateMapInputs: false,\n\tskipDuplicateMapOutputs: false) ~> SelectDimEmissionFactor\nEmissionFactorscsvSource keyGenerate(output(EmissionFactorId as long),\n\tstartAt: 1L,\n\tstepValue: 1L) ~> surrogateKey1\nSelectDimEmissionFactor sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tstore: 'synapse',\n\tdatabaseType: 'spark',\n\tformat: 'table',\n\tdatabase: 'ADESGPOC',\n\ttableName: 'DimEmissionFactor',\n\tinput(\n\t\tEmissionFactorId as integer,\n\t\tEmissionFactorName as string,\n\t\tEmissionFactorLocationBased as double,\n\t\tEmissionFactorMarketBased as double,\n\t\tEmissionPeriodStart as date,\n\t\tEmissionPeriodEnd as date,\n\t\tEmissionCountry as string,\n\t\tEmissionFactorScope as string,\n\t\tEmissionFactorUom as string,\n\t\tEmissionFactorEgridRegion as string\n\t)) ~> DimEmissionFactorSink"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
 			]
 		},
 		{
@@ -844,11 +968,11 @@
 										"Name": "GrossFloorArea",
 										"Description": "The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.",
 										"OriginDataTypeName": {
-											"TypeName": "integer",
+											"TypeName": "double",
 											"IsComplexType": false,
 											"IsNullable": true,
 											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
+												"HIVE_TYPE_STRING": "double"
 											}
 										},
 										"BaseAttributeReference": {
@@ -860,11 +984,11 @@
 										"Name": "AvailableSellingArea",
 										"Description": "The total selling area within the Store expressed in square footage.",
 										"OriginDataTypeName": {
-											"TypeName": "integer",
+											"TypeName": "double",
 											"IsComplexType": false,
 											"IsNullable": true,
 											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
+												"HIVE_TYPE_STRING": "double"
 											}
 										},
 										"BaseAttributeReference": {
@@ -893,11 +1017,12 @@
 										"Name": "OpCo",
 										"Description": "The unique identifier of a Brand.",
 										"OriginDataTypeName": {
-											"TypeName": "integer",
+											"TypeName": "string",
 											"IsComplexType": false,
 											"IsNullable": true,
+											"Length": 256,
 											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
+												"HIVE_TYPE_STRING": "string"
 											}
 										},
 										"BaseAttributeReference": {
@@ -1005,7 +1130,7 @@
 								"IsStoredAsSubdirectories": false
 							},
 							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimFacility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"dataType\":\"integer\",\"description\":\"The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.\",\"isNullable\":true,\"name\":\"GrossFloorArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"integer\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"FacilityType\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Brand.\",\"isNullable\":true,\"name\":\"OpCo\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The adress of a facility\",\"isNullable\":false,\"name\":\"FacilityAdressLine\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The country of a facility\",\"isNullable\":false,\"name\":\"FacilityCountry\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The region of a facility\",\"isNullable\":false,\"name\":\"FacilityRegion\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The zipcode of a facility\",\"isNullable\":false,\"name\":\"FacilityZipcode\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The e-grid region of a facility\",\"isNullable\":false,\"name\":\"FacilityEgridRegion\"}]},\"primaryKey\":[\"FacilityId\"]}}",
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimFacility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"dataType\":\"double\",\"description\":\"The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.\",\"isNullable\":true,\"name\":\"GrossFloorArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"double\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"FacilityType\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Brand.\",\"isNullable\":true,\"name\":\"OpCo\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The adress of a facility\",\"isNullable\":false,\"name\":\"FacilityAdressLine\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The country of a facility\",\"isNullable\":false,\"name\":\"FacilityCountry\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The region of a facility\",\"isNullable\":false,\"name\":\"FacilityRegion\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The zipcode of a facility\",\"isNullable\":false,\"name\":\"FacilityZipcode\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The e-grid region of a facility\",\"isNullable\":false,\"name\":\"FacilityEgridRegion\"}]}}}",
 								"Description": "A retail/channel location where products, goods and services are sold to consumers.",
 								"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
 								"PrimaryKeys": "FacilityId",
