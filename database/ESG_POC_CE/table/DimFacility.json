@@ -16,10 +16,6 @@
 				{
 					"Name": "FacilityId",
 					"Description": "The unique identifier of a Facility.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreId"
 					}
 				},
 				{
 					"Name": "FacilityName",
 					"Description": "The business name of the facility.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreName"
 					}
 				},
 				{
 					"Name": "NonsellingArea",
 					"Description": "The total non-selling square footage of the associated Store.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "NonsellingArea"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "NonsellingArea"
 					}
 				},
 				{
 					"Name": "AvailableSellingArea",
 					"Description": "The total selling area within the Store expressed in square footage.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "AvailableSellingArea"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -76,15 +72,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "AvailableSellingArea"
 					}
 				},
 				{
 					"Name": "FacilityType",
 					"Description": "The unique identifier of a Store Type.",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "StoreTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -93,15 +89,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "StoreTypeId"
 					}
 				},
 				{
 					"Name": "Banner",
 					"Description": "The banner behind the ",
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "BrandId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -110,6 +106,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Store.cdm.json/Store",
+						"Name": "BrandId"
 					}
 				},
 				{
@@ -243,7 +243,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"NonsellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"NonsellingArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"FacilityType\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"Banner\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"}}}"
 			},
 			"Compressed": false,

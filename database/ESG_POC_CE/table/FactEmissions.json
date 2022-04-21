@@ -16,10 +16,6 @@
 				{
 					"Name": "EmissionId",
 					"Description": "The unique identifier of a Legal Entity.",
-					"BaseAttributeReference": {
-						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
-						"Name": "ReportingLegalEntityId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "ReportingLegalEntityId"
 					}
 				},
 				{
 					"Name": "PeriodStartTimestamp",
 					"Description": "The period start timestamp.",
-					"BaseAttributeReference": {
-						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
-						"Name": "PeriodStartTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 							"DateFormat": "dd/MM/yyyy",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "PeriodStartTimestamp"
 					}
 				},
 				{
 					"Name": "TotalCo2EEmissionsUnits",
 					"Description": "The total CO2e emission units.",
-					"BaseAttributeReference": {
-						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
-						"Name": "TotalCo2EEmissionsUnits"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -60,15 +56,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "TotalCo2EEmissionsUnits"
 					}
 				},
 				{
 					"Name": "TotalCo2EEmissionsUomId",
 					"Description": "The emission factor UOM.",
-					"BaseAttributeReference": {
-						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
-						"Name": "TotalCo2EEmissionsUomId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -76,6 +72,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "TotalCo2EEmissionsUomId"
 					}
 				},
 				{
@@ -155,7 +155,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmissionId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"ReportingLegalEntityId\"},\"PeriodStartTimestamp\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodStartTimestamp\"},\"TotalCo2EEmissionsUnits\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUnits\"},\"TotalCo2EEmissionsUomId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUomId\"}}}"
 			},
 			"Compressed": false,

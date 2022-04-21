@@ -16,10 +16,6 @@
 				{
 					"Name": "EmissionFactorId",
 					"Description": "The unique identifier of a fuel type.",
-					"BaseAttributeReference": {
-						"Entity": "FuelType.cdm.json/FuelType",
-						"Name": "FuelTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FuelType.cdm.json/FuelType",
+						"Name": "FuelTypeId"
 					}
 				},
 				{
 					"Name": "EmissionFactorName",
 					"Description": "The name of a fuel type.",
-					"BaseAttributeReference": {
-						"Entity": "FuelType.cdm.json/FuelType",
-						"Name": "FuelTypeName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,6 +40,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "FuelType.cdm.json/FuelType",
+						"Name": "FuelTypeName"
 					}
 				},
 				{
@@ -201,7 +201,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmissionFactorId\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeId\"},\"EmissionFactorName\":{\"entity\":\"FuelType.cdm.json/FuelType\",\"name\":\"FuelTypeName\"}}}"
 			},
 			"Compressed": false,
