@@ -1,0 +1,181 @@
+{
+	"name": "FactEmissions",
+	"properties": {
+		"Name": "FactEmissions",
+		"EntityType": "TABLE",
+		"Namespace": {
+			"DatabaseName": "ADESGPOC"
+		},
+		"Description": "Emissions summary, including scope 1 + 2",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "EmissionId",
+					"Description": "The unique identifier of a Legal Entity.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "ReportingLegalEntityId"
+					}
+				},
+				{
+					"Name": "PeriodStartTimestamp",
+					"Description": "The period start timestamp.",
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "PeriodStartTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "dd-MM-yyyy",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "PeriodEndTimestamp",
+					"Description": "The period end timestamp.",
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "PeriodEndTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "dd-MM-yyyy",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "TotalCo2EEmissionsUnits",
+					"Description": "The total CO2e emission units.",
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "TotalCo2EEmissionsUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TotalCo2EEmissionsUomId",
+					"Description": "The emission factor UOM.",
+					"BaseAttributeReference": {
+						"Entity": "Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary",
+						"Name": "TotalCo2EEmissionsUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FacilityId",
+					"Description": "The facility of an emission",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "EmissionFactorId",
+					"Description": "The unique identifier of an emission factor",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionFactorId",
+					"Description": "The unique identifier of a virtual emission factor",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/FactEmissions",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/FactEmissions",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmissionId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"ReportingLegalEntityId\"},\"PeriodStartTimestamp\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodStartTimestamp\"},\"PeriodEndTimestamp\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodEndTimestamp\"},\"TotalCo2EEmissionsUnits\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUnits\"},\"TotalCo2EEmissionsUomId\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUomId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"FactEmissions\",\"description\":\"Emissions summary, including scope 1 + 2\",\"baseEntityReference\":{\"name\":\"Scope1LegalEntityDirectEmissionsSummary\",\"path\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\"},\"primaryKey\":[\"EmissionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"EmissionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":false,\"name\":\"PeriodStartTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The facility of an emission\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of an emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of a virtual emission factor\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"}]}}}",
+			"Description": "Emissions summary, including scope 1 + 2",
+			"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#001475\"}",
+			"PrimaryKeys": "EmissionId",
+			"spark.sql.sources.provider": "csv",
+			"sql:IsAppendOnly": false
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

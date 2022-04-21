@@ -1,0 +1,23 @@
+{
+	"name": "relationship-kshwtamwow",
+	"properties": {
+		"Name": "relationship-kshwtamwow",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESGPOC"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "DimEmissionFactor",
+		"ToTableName": "FactEmissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EmissionFactorId",
+				"ToColumnName": "EmissionFactorId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

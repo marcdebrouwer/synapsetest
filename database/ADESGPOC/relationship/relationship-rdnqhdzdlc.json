@@ -1,0 +1,23 @@
+{
+	"name": "relationship-rdnqhdzdlc",
+	"properties": {
+		"Name": "relationship-rdnqhdzdlc",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESGPOC"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "DimVirtualEmissionFactor",
+		"ToTableName": "FactEmissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "VirtualEmissionFactorId",
+				"ToColumnName": "VirtualEmissionFactorId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
