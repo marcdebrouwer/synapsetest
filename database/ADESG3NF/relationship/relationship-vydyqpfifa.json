@@ -1,0 +1,26 @@
+{
+	"name": "relationship-vydyqpfifa",
+	"properties": {
+		"Name": "relationship-vydyqpfifa",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EmissionSummary",
+		"ToTableName": "DirectEmissionsFromStationaryCombustionSources",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PeriodStartTimestamp",
+				"ToColumnName": "PeriodStartTimestamp"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"toEntity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"joinPairs\":[{\"fromAttribute\":\"PeriodStartTimestamp\",\"toAttribute\":\"PeriodStartTimestamp\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

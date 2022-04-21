@@ -1,0 +1,26 @@
+{
+	"name": "relationship-xvynvpdtti",
+	"properties": {
+		"Name": "relationship-xvynvpdtti",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "UnitOfMeasure",
+		"ToTableName": "SimplifiedMaterialBalanceMethod",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UnitOfMeasureId",
+				"ToColumnName": "PurchasesOfRefrigerantUsedToChargeNewEquipmentUomId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"UnitOfMeasure.cdm.json/UnitOfMeasure\",\"toEntity\":\"SimplifiedMaterialBalanceMethod.cdm.json/SimplifiedMaterialBalanceMethod\",\"joinPairs\":[{\"fromAttribute\":\"UnitOfMeasureId\",\"toAttribute\":\"PurchasesOfRefrigerantUsedToChargeNewEquipmentUomId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

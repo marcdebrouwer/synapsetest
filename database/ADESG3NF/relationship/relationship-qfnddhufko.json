@@ -1,0 +1,23 @@
+{
+	"name": "relationship-qfnddhufko",
+	"properties": {
+		"Name": "relationship-qfnddhufko",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "BannerId",
+		"ToTableName": "Facility",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "BannerId",
+				"ToColumnName": "BannerId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

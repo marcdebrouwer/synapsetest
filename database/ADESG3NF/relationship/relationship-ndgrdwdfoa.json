@@ -1,0 +1,26 @@
+{
+	"name": "relationship-ndgrdwdfoa",
+	"properties": {
+		"Name": "relationship-ndgrdwdfoa",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "UnitOfMeasure",
+		"ToTableName": "DirectEmissionsFromMobileCombustionSources",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UnitOfMeasureId",
+				"ToColumnName": "TotalCo2EEmissionsUomId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"UnitOfMeasure.cdm.json/UnitOfMeasure\",\"toEntity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"joinPairs\":[{\"fromAttribute\":\"UnitOfMeasureId\",\"toAttribute\":\"TotalCo2EEmissionsUomId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

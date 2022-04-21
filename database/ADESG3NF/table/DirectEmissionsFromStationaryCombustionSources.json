@@ -1,0 +1,256 @@
+{
+	"name": "DirectEmissionsFromStationaryCombustionSources",
+	"properties": {
+		"Name": "DirectEmissionsFromStationaryCombustionSources",
+		"EntityType": "TABLE",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Description": "There are two main methods for estimating GHG emissions from stationary combustion sources:\n\n- Direct measurement\n- Analysis of fuel input \n\nFor both the CEMS and fuel analysis approaches, it is recommended that organizations calculate emissions by facility as opposed to aggregated entity-wide emissions only. This method increases the accuracy and credibility of the inventory.",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ReportingLegalEntityId",
+					"Description": "The unique identifier of a Legal Entity.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "ReportingLegalEntityId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PeriodStartTimestamp",
+					"Description": "The period start timestamp.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "PeriodStartTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "PeriodEndTimestamp",
+					"Description": "The period end timestamp.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "PeriodEndTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "FuelBurnedInReportingPeriodUnits",
+					"Description": "The units of fuel burned in the reporting period.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "FuelBurnedInReportingPeriodUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FuelBurnedInReportingPeriodUomId",
+					"Description": "The fuel burned in reporting period UOM.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "FuelBurnedInReportingPeriodUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FuelPurchasedInReportingPeriodUnits",
+					"Description": "The fuel purchased in the reporting period units.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "FuelPurchasedInReportingPeriodUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FuelPurchasedInReportingPeriodUomId",
+					"Description": "The fuel purchased in reporting UOM.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "FuelPurchasedInReportingPeriodUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FuelStockAtStartOfReportingPeriodUnits",
+					"Description": "The fuel stock at start of reporting period units.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "FuelStockAtStartOfReportingPeriodUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FuelStockAtEndOfReportingPeriodUnits",
+					"Description": "The fuel stock at end of reporting period units.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "FuelStockAtEndOfReportingPeriodUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FuelStockUomId",
+					"Description": "The fuel stock UOM.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "FuelStockUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TotalCo2EEmissionsUnits",
+					"Description": "The total CO2e emission units.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "TotalCo2EEmissionsUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TotalCo2EEmissionsUomId",
+					"Description": "The total CO2e emission UOM ID.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources",
+						"Name": "TotalCo2EEmissionsUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESG3NF/DirectEmissionsFromStationaryCombustionSources",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESG3NF/DirectEmissionsFromStationaryCombustionSources",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ReportingLegalEntityId\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"ReportingLegalEntityId\"},\"PeriodStartTimestamp\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"PeriodStartTimestamp\"},\"PeriodEndTimestamp\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"PeriodEndTimestamp\"},\"FuelBurnedInReportingPeriodUnits\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelBurnedInReportingPeriodUnits\"},\"FuelBurnedInReportingPeriodUomId\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelBurnedInReportingPeriodUomId\"},\"FuelPurchasedInReportingPeriodUnits\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelPurchasedInReportingPeriodUnits\"},\"FuelPurchasedInReportingPeriodUomId\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelPurchasedInReportingPeriodUomId\"},\"FuelStockAtStartOfReportingPeriodUnits\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelStockAtStartOfReportingPeriodUnits\"},\"FuelStockAtEndOfReportingPeriodUnits\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelStockAtEndOfReportingPeriodUnits\"},\"FuelStockUomId\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelStockUomId\"},\"TotalCo2EEmissionsUnits\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"TotalCo2EEmissionsUnits\"},\"TotalCo2EEmissionsUomId\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"TotalCo2EEmissionsUomId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"DirectEmissionsFromStationaryCombustionSources\",\"path\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\"},\"description\":\"There are two main methods for estimating GHG emissions from stationary combustion sources:\\n\\n- Direct measurement\\n- Analysis of fuel input \\n\\nFor both the CEMS and fuel analysis approaches, it is recommended that organizations calculate emissions by facility as opposed to aggregated entity-wide emissions only. This method increases the accuracy and credibility of the inventory.\",\"primaryKey\":[\"ReportingLegalEntityId\",\"PeriodStartTimestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"ReportingLegalEntityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The period start timestamp.\",\"isNullable\":false,\"name\":\"PeriodStartTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelBurnedInReportingPeriodUnits\"},\"dataType\":\"integer\",\"description\":\"The units of fuel burned in the reporting period.\",\"isNullable\":true,\"name\":\"FuelBurnedInReportingPeriodUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelBurnedInReportingPeriodUomId\"},\"dataType\":\"integer\",\"description\":\"The fuel burned in reporting period UOM.\",\"isNullable\":true,\"name\":\"FuelBurnedInReportingPeriodUomId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelPurchasedInReportingPeriodUnits\"},\"dataType\":\"integer\",\"description\":\"The fuel purchased in the reporting period units.\",\"isNullable\":true,\"name\":\"FuelPurchasedInReportingPeriodUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelPurchasedInReportingPeriodUomId\"},\"dataType\":\"integer\",\"description\":\"The fuel purchased in reporting UOM.\",\"isNullable\":true,\"name\":\"FuelPurchasedInReportingPeriodUomId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelStockAtStartOfReportingPeriodUnits\"},\"dataType\":\"integer\",\"description\":\"The fuel stock at start of reporting period units.\",\"isNullable\":true,\"name\":\"FuelStockAtStartOfReportingPeriodUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelStockAtEndOfReportingPeriodUnits\"},\"dataType\":\"integer\",\"description\":\"The fuel stock at end of reporting period units.\",\"isNullable\":true,\"name\":\"FuelStockAtEndOfReportingPeriodUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"FuelStockUomId\"},\"dataType\":\"integer\",\"description\":\"The fuel stock UOM.\",\"isNullable\":true,\"name\":\"FuelStockUomId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission UOM ID.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"}]}}}",
+			"Description": "There are two main methods for estimating GHG emissions from stationary combustion sources:\n\n- Direct measurement\n- Analysis of fuel input \n\nFor both the CEMS and fuel analysis approaches, it is recommended that organizations calculate emissions by facility as opposed to aggregated entity-wide emissions only. This method increases the accuracy and credibility of the inventory.",
+			"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#001475\"}",
+			"PrimaryKeys": "ReportingLegalEntityId,PeriodStartTimestamp",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

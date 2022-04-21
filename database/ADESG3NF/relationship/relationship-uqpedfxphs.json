@@ -1,0 +1,26 @@
+{
+	"name": "relationship-uqpedfxphs",
+	"properties": {
+		"Name": "relationship-uqpedfxphs",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "UnitOfMeasure",
+		"ToTableName": "SimplifiedMaterialBalanceMethod",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UnitOfMeasureId",
+				"ToColumnName": "RefrigerantRecoveredFromRetiringEquipmentUomId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"UnitOfMeasure.cdm.json/UnitOfMeasure\",\"toEntity\":\"SimplifiedMaterialBalanceMethod.cdm.json/SimplifiedMaterialBalanceMethod\",\"joinPairs\":[{\"fromAttribute\":\"UnitOfMeasureId\",\"toAttribute\":\"RefrigerantRecoveredFromRetiringEquipmentUomId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

@@ -1,0 +1,26 @@
+{
+	"name": "relationship-ksecnssydv",
+	"properties": {
+		"Name": "relationship-ksecnssydv",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "UnitOfMeasure",
+		"ToTableName": "DirectEmissionsFromStationaryCombustionSources",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UnitOfMeasureId",
+				"ToColumnName": "FuelPurchasedInReportingPeriodUomId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"UnitOfMeasure.cdm.json/UnitOfMeasure\",\"toEntity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"joinPairs\":[{\"fromAttribute\":\"UnitOfMeasureId\",\"toAttribute\":\"FuelPurchasedInReportingPeriodUomId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

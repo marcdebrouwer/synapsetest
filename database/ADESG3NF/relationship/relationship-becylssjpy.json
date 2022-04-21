@@ -1,0 +1,26 @@
+{
+	"name": "relationship-becylssjpy",
+	"properties": {
+		"Name": "relationship-becylssjpy",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "GreenhouseGasType",
+		"ToTableName": "SimplifiedMaterialBalanceMethod",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "GreenhouseGasTypeId",
+				"ToColumnName": "GreenhouseGasTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"toEntity\":\"SimplifiedMaterialBalanceMethod.cdm.json/SimplifiedMaterialBalanceMethod\",\"joinPairs\":[{\"fromAttribute\":\"GreenhouseGasTypeId\",\"toAttribute\":\"GreenhouseGasTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

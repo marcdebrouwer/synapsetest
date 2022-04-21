@@ -1,0 +1,26 @@
+{
+	"name": "relationship-zewwulubcj",
+	"properties": {
+		"Name": "relationship-zewwulubcj",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "UnitOfMeasure",
+		"ToTableName": "DirectEmissionsFromStationaryCombustionSources",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UnitOfMeasureId",
+				"ToColumnName": "TotalCo2EEmissionsUomId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"UnitOfMeasure.cdm.json/UnitOfMeasure\",\"toEntity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"joinPairs\":[{\"fromAttribute\":\"UnitOfMeasureId\",\"toAttribute\":\"TotalCo2EEmissionsUomId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

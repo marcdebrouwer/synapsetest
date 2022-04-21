@@ -1,0 +1,288 @@
+{
+	"name": "DirectEmissionsFromMobileCombustionSources",
+	"properties": {
+		"Name": "DirectEmissionsFromMobileCombustionSources",
+		"EntityType": "TABLE",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Description": "Direct Emissions from mobile combustion sources are greenhouse gas (GHG) emissions are produced by mobile sources as fuels are burned. Carbon dioxide (CO2), methane\n(CH4), and nitrous oxide (N2O) are emitted directly through the combustion of fuels in different types of mobile equipment.\n\nTo maximize the accuracy of emissions calculations, it is useful to have as much information as possible about the organization's vehicles. Ideally, a list of vehicles would be created with the following information provided for each vehicle:\n\n- Fuel type\n- Fuel use\n- Distance traveled (for on-road vehicles)\n- Fuel economy (if either fuel use or distance traveled is unavailable)\n- Vehicle type\n- Emissions control technology and/or model year\n\nIf vehicle-specific information is not available, the calculation methods can be applied to subtotaled fuel use data by fuel type, and to subtotaled distance data by vehicle type and model year.\n\nThe CO2 emissions associated with fuel combustion are a function of the volume of fuel combusted, the density of the fuel, the carbon content of the fuel, and the fraction of carbon that is oxidized to CO2. One of three equations can be used to calculate CO2 emissions for each type of fuel combusted. The appropriate equation to use depends on what is known about the characteristics of the fuel being consumed. \n\nEquation 1:\nEmissions = Fuel x EF1\nWhere:\nEmissions = Mass of CO2 emitted \nFuel = Mass or volume of fuel combusted\nEF1 = CO2 emission factor per mass or volume unit\n\nEquation 2:\nEmissions = Fuel x HHV x EF2\nWhere:\nEmissions = Mass of CO2 emitted\nFuel = Mass or volume of fuel combusted\nHHV = Fuel heat content (higher heating\nvalue), in units of energy per mass or\nvolume of fuel\nEF2 = CO2 emission factor per energy unit\n\nEquation 3:\nEmissions = Fuel x CC x 44/12\nWhere:\nEmissions = Mass of CO2 emitted\nFuel = Mass or volume of fuel combusted\nCC = Fuel carbon content, in units of mass of carbon per mass or volume of fuel\n44/12 = ratio of molecular weights of CO2 and carbon\n\nOne of two equations can be used to calculate CH4 and N2O emissions for each type of fuel combusted. Equation 4 is applicable to on-road vehicles such as cars, trucks, and buses. Equation 5 is applicable to nonroad vehicles such as construction or agricultural equipment, forklifts, ships, boats, rail vehicles, or aircraft.\n\nEquation 4:\nEmissions = Distance x EF4\nWhere:\nEmissions = Mass of CH4 or N2O emitted\nDistance = Vehicle distance traveled\nEF1 = CH4 or N2O emission factor per distance unit\n\nEquation 5:\nEmissions = Fuel x EF5\nWhere:\nEmissions = Mass of CH4 or N2O emitted\nFuel = Volume of fuel combusted\nEF5 = CH4 or N2O emission factor per volume unit",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ReportingLegalEntityId",
+					"Description": "The unique identifier of a Legal Entity.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "ReportingLegalEntityId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "MobileCombustionSourceId",
+					"Description": "The unique identifier of a mobile combustion source.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "MobileCombustionSourceId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PeriodStartTimestamp",
+					"Description": "The period start timestamp.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "PeriodStartTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "PeriodEndTimestamp",
+					"Description": "The period end timestamp.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "PeriodEndTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "FuelMassVolumeUnits",
+					"Description": "The fuel mass/volume units.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "FuelMassVolumeUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "FuelMassVolumeUomId",
+					"Description": "The fuel mass/volume UOM.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "FuelMassVolumeUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "C02EmissionsUnits",
+					"Description": "The C02 Emissions Units\n\nSource:  Direct Emissions From Stationary Combustion Sources, Section 2 Page 4",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "C02EmissionsUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "C02EmissionsUomId",
+					"Description": "The C02 emission UOM.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "C02EmissionsUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "Ch4EmissionsUnits",
+					"Description": "The CH4 Emissions Units\n\nSource:  Direct Emissions From Stationary Combustion Sources, Section 2 Page 4",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "Ch4EmissionsUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "Ch4EmissionsUomId",
+					"Description": "The CH4 emissions UOM.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "Ch4EmissionsUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "N20EmissionsUnits",
+					"Description": "The N20 Emissions Units\n\nSource:  Directd Emissions From Stationary Combustion Sources, Section 2 Page 4",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "N20EmissionsUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "N20EmissionsUomId",
+					"Description": "The N20 emission UOM.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "N20EmissionsUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TotalCo2EEmissionsUnits",
+					"Description": "The total CO2e emission units.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "TotalCo2EEmissionsUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TotalCo2EEmissionsUomId",
+					"Description": "The total CO2e emission UOM ID.",
+					"BaseAttributeReference": {
+						"Entity": "DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources",
+						"Name": "TotalCo2EEmissionsUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESG3NF/DirectEmissionsFromMobileCombustionSources",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESG3NF/DirectEmissionsFromMobileCombustionSources",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ReportingLegalEntityId\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"ReportingLegalEntityId\"},\"MobileCombustionSourceId\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"MobileCombustionSourceId\"},\"PeriodStartTimestamp\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"PeriodStartTimestamp\"},\"PeriodEndTimestamp\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"PeriodEndTimestamp\"},\"FuelMassVolumeUnits\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"FuelMassVolumeUnits\"},\"FuelMassVolumeUomId\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"FuelMassVolumeUomId\"},\"C02EmissionsUnits\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"C02EmissionsUnits\"},\"C02EmissionsUomId\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"C02EmissionsUomId\"},\"Ch4EmissionsUnits\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"Ch4EmissionsUnits\"},\"Ch4EmissionsUomId\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"Ch4EmissionsUomId\"},\"N20EmissionsUnits\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"N20EmissionsUnits\"},\"N20EmissionsUomId\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"N20EmissionsUomId\"},\"TotalCo2EEmissionsUnits\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"TotalCo2EEmissionsUnits\"},\"TotalCo2EEmissionsUomId\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"TotalCo2EEmissionsUomId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"DirectEmissionsFromMobileCombustionSources\",\"path\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\"},\"description\":\"Direct Emissions from mobile combustion sources are greenhouse gas (GHG) emissions are produced by mobile sources as fuels are burned. Carbon dioxide (CO2), methane\\n(CH4), and nitrous oxide (N2O) are emitted directly through the combustion of fuels in different types of mobile equipment.\\n\\nTo maximize the accuracy of emissions calculations, it is useful to have as much information as possible about the organization's vehicles. Ideally, a list of vehicles would be created with the following information provided for each vehicle:\\n\\n- Fuel type\\n- Fuel use\\n- Distance traveled (for on-road vehicles)\\n- Fuel economy (if either fuel use or distance traveled is unavailable)\\n- Vehicle type\\n- Emissions control technology and/or model year\\n\\nIf vehicle-specific information is not available, the calculation methods can be applied to subtotaled fuel use data by fuel type, and to subtotaled distance data by vehicle type and model year.\\n\\nThe CO2 emissions associated with fuel combustion are a function of the volume of fuel combusted, the density of the fuel, the carbon content of the fuel, and the fraction of carbon that is oxidized to CO2. One of three equations can be used to calculate CO2 emissions for each type of fuel combusted. The appropriate equation to use depends on what is known about the characteristics of the fuel being consumed. \\n\\nEquation 1:\\nEmissions = Fuel x EF1\\nWhere:\\nEmissions = Mass of CO2 emitted \\nFuel = Mass or volume of fuel combusted\\nEF1 = CO2 emission factor per mass or volume unit\\n\\nEquation 2:\\nEmissions = Fuel x HHV x EF2\\nWhere:\\nEmissions = Mass of CO2 emitted\\nFuel = Mass or volume of fuel combusted\\nHHV = Fuel heat content (higher heating\\nvalue), in units of energy per mass or\\nvolume of fuel\\nEF2 = CO2 emission factor per energy unit\\n\\nEquation 3:\\nEmissions = Fuel x CC x 44/12\\nWhere:\\nEmissions = Mass of CO2 emitted\\nFuel = Mass or volume of fuel combusted\\nCC = Fuel carbon content, in units of mass of carbon per mass or volume of fuel\\n44/12 = ratio of molecular weights of CO2 and carbon\\n\\nOne of two equations can be used to calculate CH4 and N2O emissions for each type of fuel combusted. Equation 4 is applicable to on-road vehicles such as cars, trucks, and buses. Equation 5 is applicable to nonroad vehicles such as construction or agricultural equipment, forklifts, ships, boats, rail vehicles, or aircraft.\\n\\nEquation 4:\\nEmissions = Distance x EF4\\nWhere:\\nEmissions = Mass of CH4 or N2O emitted\\nDistance = Vehicle distance traveled\\nEF1 = CH4 or N2O emission factor per distance unit\\n\\nEquation 5:\\nEmissions = Fuel x EF5\\nWhere:\\nEmissions = Mass of CH4 or N2O emitted\\nFuel = Volume of fuel combusted\\nEF5 = CH4 or N2O emission factor per volume unit\",\"primaryKey\":[\"ReportingLegalEntityId\",\"MobileCombustionSourceId\",\"PeriodStartTimestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"ReportingLegalEntityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"MobileCombustionSourceId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a mobile combustion source.\",\"isNullable\":false,\"name\":\"MobileCombustionSourceId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The period start timestamp.\",\"isNullable\":false,\"name\":\"PeriodStartTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"FuelMassVolumeUnits\"},\"dataType\":\"integer\",\"description\":\"The fuel mass/volume units.\",\"isNullable\":true,\"name\":\"FuelMassVolumeUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"FuelMassVolumeUomId\"},\"dataType\":\"integer\",\"description\":\"The fuel mass/volume UOM.\",\"isNullable\":true,\"name\":\"FuelMassVolumeUomId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"C02EmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The C02 Emissions Units\\n\\nSource:  Direct Emissions From Stationary Combustion Sources, Section 2 Page 4\",\"isNullable\":true,\"name\":\"C02EmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"C02EmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The C02 emission UOM.\",\"isNullable\":true,\"name\":\"C02EmissionsUomId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"Ch4EmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The CH4 Emissions Units\\n\\nSource:  Direct Emissions From Stationary Combustion Sources, Section 2 Page 4\",\"isNullable\":true,\"name\":\"Ch4EmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"Ch4EmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The CH4 emissions UOM.\",\"isNullable\":true,\"name\":\"Ch4EmissionsUomId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"N20EmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The N20 Emissions Units\\n\\nSource:  Directd Emissions From Stationary Combustion Sources, Section 2 Page 4\",\"isNullable\":true,\"name\":\"N20EmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"N20EmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The N20 emission UOM.\",\"isNullable\":true,\"name\":\"N20EmissionsUomId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission UOM ID.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"}]}}}",
+			"Description": "Direct Emissions from mobile combustion sources are greenhouse gas (GHG) emissions are produced by mobile sources as fuels are burned. Carbon dioxide (CO2), methane\n(CH4), and nitrous oxide (N2O) are emitted directly through the combustion of fuels in different types of mobile equipment.\n\nTo maximize the accuracy of emissions calculations, it is useful to have as much information as possible about the organization's vehicles. Ideally, a list of vehicles would be created with the following information provided for each vehicle:\n\n- Fuel type\n- Fuel use\n- Distance traveled (for on-road vehicles)\n- Fuel economy (if either fuel use or distance traveled is unavailable)\n- Vehicle type\n- Emissions control technology and/or model year\n\nIf vehicle-specific information is not available, the calculation methods can be applied to subtotaled fuel use data by fuel type, and to subtotaled distance data by vehicle type and model year.\n\nThe CO2 emissions associated with fuel combustion are a function of the volume of fuel combusted, the density of the fuel, the carbon content of the fuel, and the fraction of carbon that is oxidized to CO2. One of three equations can be used to calculate CO2 emissions for each type of fuel combusted. The appropriate equation to use depends on what is known about the characteristics of the fuel being consumed. \n\nEquation 1:\nEmissions = Fuel x EF1\nWhere:\nEmissions = Mass of CO2 emitted \nFuel = Mass or volume of fuel combusted\nEF1 = CO2 emission factor per mass or volume unit\n\nEquation 2:\nEmissions = Fuel x HHV x EF2\nWhere:\nEmissions = Mass of CO2 emitted\nFuel = Mass or volume of fuel combusted\nHHV = Fuel heat content (higher heating\nvalue), in units of energy per mass or\nvolume of fuel\nEF2 = CO2 emission factor per energy unit\n\nEquation 3:\nEmissions = Fuel x CC x 44/12\nWhere:\nEmissions = Mass of CO2 emitted\nFuel = Mass or volume of fuel combusted\nCC = Fuel carbon content, in units of mass of carbon per mass or volume of fuel\n44/12 = ratio of molecular weights of CO2 and carbon\n\nOne of two equations can be used to calculate CH4 and N2O emissions for each type of fuel combusted. Equation 4 is applicable to on-road vehicles such as cars, trucks, and buses. Equation 5 is applicable to nonroad vehicles such as construction or agricultural equipment, forklifts, ships, boats, rail vehicles, or aircraft.\n\nEquation 4:\nEmissions = Distance x EF4\nWhere:\nEmissions = Mass of CH4 or N2O emitted\nDistance = Vehicle distance traveled\nEF1 = CH4 or N2O emission factor per distance unit\n\nEquation 5:\nEmissions = Fuel x EF5\nWhere:\nEmissions = Mass of CH4 or N2O emitted\nFuel = Volume of fuel combusted\nEF5 = CH4 or N2O emission factor per volume unit",
+			"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#001475\"}",
+			"PrimaryKeys": "ReportingLegalEntityId,MobileCombustionSourceId,PeriodStartTimestamp",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

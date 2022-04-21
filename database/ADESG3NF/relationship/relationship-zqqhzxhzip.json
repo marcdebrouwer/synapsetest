@@ -1,0 +1,26 @@
+{
+	"name": "relationship-zqqhzxhzip",
+	"properties": {
+		"Name": "relationship-zqqhzxhzip",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EmissionSummary",
+		"ToTableName": "DirectEmissionsFromStationaryCombustionSources",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EmissionId",
+				"ToColumnName": "ReportingLegalEntityId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"toEntity\":\"DirectEmissionsFromStationaryCombustionSources.cdm.json/DirectEmissionsFromStationaryCombustionSources\",\"joinPairs\":[{\"fromAttribute\":\"ReportingLegalEntityId\",\"toAttribute\":\"ReportingLegalEntityId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

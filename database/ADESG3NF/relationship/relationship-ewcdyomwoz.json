@@ -1,0 +1,26 @@
+{
+	"name": "relationship-ewcdyomwoz",
+	"properties": {
+		"Name": "relationship-ewcdyomwoz",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ADESG3NF"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "UnitOfMeasure",
+		"ToTableName": "DirectEmissionsFromMobileCombustionSources",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UnitOfMeasureId",
+				"ToColumnName": "C02EmissionsUomId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"UnitOfMeasure.cdm.json/UnitOfMeasure\",\"toEntity\":\"DirectEmissionsFromMobileCombustionSources.cdm.json/DirectEmissionsFromMobileCombustionSources\",\"joinPairs\":[{\"fromAttribute\":\"UnitOfMeasureId\",\"toAttribute\":\"C02EmissionsUomId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}
