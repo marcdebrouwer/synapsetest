@@ -16,10 +16,6 @@
 				{
 					"Name": "GreenhouseGasTypeId",
 					"Description": "The unique identifier of a greenhouse gas type.",
-					"BaseAttributeReference": {
-						"Entity": "GreenhouseGasType.cdm.json/GreenhouseGasType",
-						"Name": "GreenhouseGasTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "GreenhouseGasType.cdm.json/GreenhouseGasType",
+						"Name": "GreenhouseGasTypeId"
 					}
 				},
 				{
 					"Name": "GreenhouseGasTypeName",
 					"Description": "The name of a greenhouse gas type.",
-					"BaseAttributeReference": {
-						"Entity": "GreenhouseGasType.cdm.json/GreenhouseGasType",
-						"Name": "GreenhouseGasTypeName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "GreenhouseGasType.cdm.json/GreenhouseGasType",
+						"Name": "GreenhouseGasTypeName"
 					}
 				},
 				{
 					"Name": "GreenhouseGasTypeDescription",
 					"Description": "The description of a greenhouse gas type.",
-					"BaseAttributeReference": {
-						"Entity": "GreenhouseGasType.cdm.json/GreenhouseGasType",
-						"Name": "GreenhouseGasTypeDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,6 +57,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "GreenhouseGasType.cdm.json/GreenhouseGasType",
+						"Name": "GreenhouseGasTypeDescription"
 					}
 				}
 			],
@@ -91,7 +91,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"GreenhouseGasTypeId\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"GreenhouseGasTypeName\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"GreenhouseGasTypeDescription\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeDescription\"}}}"
 			},
 			"Compressed": false,
