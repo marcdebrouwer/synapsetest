@@ -19,8 +19,34 @@
 					"name": "EgridData"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"name": "MapEgrid"
+				},
+				{
+					"name": "MapCountry"
+				},
+				{
+					"name": "MapFacilityType"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DistinctFacilityType"
+				},
+				{
+					"name": "DistinctCountry"
+				},
+				{
+					"name": "CountryKey"
+				},
+				{
+					"name": "FacilityTypeKey"
+				},
+				{
+					"name": "EgridKey"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          Company as string,",
@@ -64,7 +90,68 @@
 				"     columnDelimiter: ';',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: true) ~> EgridData"
+				"     columnNamesAsHeader: true) ~> EgridData",
+				"FacilityData aggregate(groupBy({Facility Type}),",
+				"     each(match(name != \"Facility Type\"), $$ = first($$))) ~> DistinctFacilityType",
+				"FacilityData aggregate(groupBy(Country),",
+				"     each(match(name != \"Country\"), $$ = first($$))) ~> DistinctCountry",
+				"DistinctCountry keyGenerate(output(CountryId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> CountryKey",
+				"DistinctFacilityType keyGenerate(output(FacilityTypeId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> FacilityTypeKey",
+				"EgridData keyGenerate(output(EgridDataId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> EgridKey",
+				"EgridKey sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ADESG3NF',",
+				"     tableName: 'EgridRegion',",
+				"     input(",
+				"          EgridRegionId as integer,",
+				"          EgridRegionName as string,",
+				"          EgridRegionZipcode as string",
+				"     ),",
+				"     mapColumn(",
+				"          EgridRegionId = EgridDataId,",
+				"          EgridRegionName = EgridRegion,",
+				"          EgridRegionZipcode = Zipcode",
+				"     )) ~> MapEgrid",
+				"CountryKey sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ADESG3NF',",
+				"     tableName: 'Country',",
+				"     input(",
+				"          CountryId as integer,",
+				"          IsoCountryName as string",
+				"     ),",
+				"     mapColumn(",
+				"          CountryId,",
+				"          IsoCountryName = Country",
+				"     )) ~> MapCountry",
+				"FacilityTypeKey sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ADESG3NF',",
+				"     tableName: 'FacilityType',",
+				"     input(",
+				"          FacilityTypeId as integer,",
+				"          FacilityTypeName as string,",
+				"          FacilityTypeDescription as string",
+				"     ),",
+				"     mapColumn(",
+				"          FacilityTypeId,",
+				"          FacilityTypeName = {Facility Type}",
+				"     )) ~> MapFacilityType"
 			]
 		}
 	}
