@@ -74,7 +74,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"OrganizationId\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationId\"},\"OrganizationName\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationName\"}}}"
 			},
 			"Compressed": false,
@@ -85,8 +85,7 @@
 			"Description": "A business organization such as a business unit, department etc. that has responsibility for a budget, employees or similar business functions.",
 			"DisplayFolderInfo": "{\"name\":\"Legal Entity\",\"colorCode\":\"#034736\"}",
 			"PrimaryKeys": "OrganizationId",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

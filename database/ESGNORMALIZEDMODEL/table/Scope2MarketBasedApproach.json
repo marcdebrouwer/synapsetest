@@ -1,0 +1,144 @@
+{
+	"name": "Scope2MarketBasedApproach",
+	"properties": {
+		"Name": "Scope2MarketBasedApproach",
+		"EntityType": "TABLE",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Description": "Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\n\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ReportingEntityId",
+					"Description": "The unique identifier of a Legal Entity.",
+					"BaseAttributeReference": {
+						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
+						"Name": "ReportingEntityId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PeriodStartTimestamp",
+					"Description": "The period start timestamp.",
+					"BaseAttributeReference": {
+						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
+						"Name": "PeriodStartTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "PeriodEndTimestamp",
+					"Description": "The period end timestamp.",
+					"BaseAttributeReference": {
+						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
+						"Name": "PeriodEndTimestamp"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "timestamp",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
+							"HIVE_TYPE_STRING": "timestamp"
+						}
+					}
+				},
+				{
+					"Name": "TotalCo2EEmissionsUnits",
+					"Description": "The total CO2e emission units.",
+					"BaseAttributeReference": {
+						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
+						"Name": "TotalCo2EEmissionsUnits"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "TotalCo2EEmissionsUomId",
+					"Description": "The emission factor UOM.",
+					"BaseAttributeReference": {
+						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
+						"Name": "TotalCo2EEmissionsUomId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2MarketBasedApproach",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2MarketBasedApproach",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ReportingEntityId\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"PeriodStartTimestamp\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"PeriodEndTimestamp\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodEndTimestamp\"},\"TotalCo2EEmissionsUnits\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"},\"TotalCo2EEmissionsUomId\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUomId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"Scope2MarketBasedApproach\",\"path\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\"},\"description\":\"Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\\n\\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.\",\"primaryKey\":[\"ReportingEntityId\",\"PeriodStartTimestamp\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"ReportingEntityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The period start timestamp.\",\"isNullable\":false,\"name\":\"PeriodStartTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"timestamp\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\",\"timestampFormat\":\"YYYY-MM-DD HH:MM:SS.fffffffff\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"}]}}}",
+			"Description": "Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\n\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.",
+			"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#042C59\"}",
+			"PrimaryKeys": "ReportingEntityId,PeriodStartTimestamp",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

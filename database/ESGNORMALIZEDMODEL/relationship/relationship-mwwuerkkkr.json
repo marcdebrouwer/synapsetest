@@ -1,0 +1,26 @@
+{
+	"name": "relationship-mwwuerkkkr",
+	"properties": {
+		"Name": "relationship-mwwuerkkkr",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "UnitOfMeasure",
+		"ToTableName": "Scope2MarketBasedApproach",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UnitOfMeasureId",
+				"ToColumnName": "TotalCo2EEmissionsUomId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"UnitOfMeasure.cdm.json/UnitOfMeasure\",\"toEntity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"joinPairs\":[{\"fromAttribute\":\"UnitOfMeasureId\",\"toAttribute\":\"TotalCo2EEmissionsUomId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

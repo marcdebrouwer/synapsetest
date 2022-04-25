@@ -1,7 +1,7 @@
 {
-	"name": "Banner",
+	"name": "VirtualEmissionFactor",
 	"properties": {
-		"Name": "Banner",
+		"Name": "VirtualEmissionFactor",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "ESGNORMALIZEDMODEL"
@@ -14,23 +14,11 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "BannerId",
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": false,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					}
-				},
-				{
-					"Name": "BannerName",
-					"Description": "",
+					"Name": "VirtualEmissionId",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": true,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -38,14 +26,40 @@
 					}
 				},
 				{
-					"Name": "OrganizationId",
+					"Name": "VirtualEmissionEnergyTypeId",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": true,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionStartDate",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"DateFormat": "dd-MM-yyyy",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionEndDate",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"DateFormat": "dd-MM-yyyy",
+							"HIVE_TYPE_STRING": "date"
 						}
 					}
 				}
@@ -56,7 +70,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -69,7 +83,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -77,7 +91,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
 			},
 			"Compressed": false,
@@ -86,8 +100,9 @@
 		"Properties": {
 			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "BannerId",
-			"spark.sql.sources.provider": "csv"
+			"PrimaryKeys": "",
+			"spark.sql.sources.provider": "csv",
+			"sql:IsAppendOnly": false
 		},
 		"Retention": 0,
 		"Temporary": false,

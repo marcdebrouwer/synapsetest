@@ -1,0 +1,23 @@
+{
+	"name": "relationship-jcnnjhcqgl",
+	"properties": {
+		"Name": "relationship-jcnnjhcqgl",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PurchasedGas",
+		"ToTableName": "DirectEmissionsFromRefrigeration",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PurchasedGasId",
+				"ToColumnName": "PurchasedEnergyId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

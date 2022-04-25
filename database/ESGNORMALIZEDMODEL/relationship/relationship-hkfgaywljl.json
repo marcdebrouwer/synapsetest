@@ -1,0 +1,23 @@
+{
+	"name": "relationship-hkfgaywljl",
+	"properties": {
+		"Name": "relationship-hkfgaywljl",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Facility",
+		"ToTableName": "DirectEmissionsFromRefrigeration",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "FacilityId",
+				"ToColumnName": "FacilityId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
