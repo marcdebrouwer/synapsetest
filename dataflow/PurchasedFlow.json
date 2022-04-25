@@ -14,7 +14,7 @@
 			],
 			"sinks": [
 				{
-					"name": "sink1"
+					"name": "PurchasedMapping"
 				}
 			],
 			"transformations": [
@@ -51,7 +51,15 @@
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: 'PurchasedGas') ~> sink1"
+				"     tableName: 'PurchasedGas',",
+				"     input(",
+				"          PurchasedGasId as integer,",
+				"          PurchasedGasName as string",
+				"     ),",
+				"     mapColumn(",
+				"          PurchasedGasId = PurchasedEnergyId,",
+				"          PurchasedGasName = EnergyType",
+				"     )) ~> PurchasedMapping"
 			]
 		}
 	}
