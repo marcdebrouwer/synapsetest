@@ -1,0 +1,23 @@
+{
+	"name": "relationship-zpyhviztep",
+	"properties": {
+		"Name": "relationship-zpyhviztep",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PartyOrganization",
+		"ToTableName": "Banner",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "OrganizationId",
+				"ToColumnName": "OrganizationId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

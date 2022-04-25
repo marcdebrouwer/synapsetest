@@ -1,0 +1,26 @@
+{
+	"name": "relationship-jpcyusnhum",
+	"properties": {
+		"Name": "relationship-jpcyusnhum",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Country",
+		"ToTableName": "Location",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "CountryId",
+				"ToColumnName": "CountryId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Country.cdm.json/Country\",\"toEntity\":\"Location.cdm.json/Location\",\"joinPairs\":[{\"fromAttribute\":\"CountryId\",\"toAttribute\":\"CountryId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

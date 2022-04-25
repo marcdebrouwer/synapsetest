@@ -1,0 +1,96 @@
+{
+	"name": "PartyOrganization",
+	"properties": {
+		"Name": "PartyOrganization",
+		"EntityType": "TABLE",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Description": "A business organization such as a business unit, department etc. that has responsibility for a budget, employees or similar business functions.",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "OrganizationId",
+					"Description": "The unique identifier of an organization.",
+					"BaseAttributeReference": {
+						"Entity": "PartyOrganization.cdm.json/PartyOrganization",
+						"Name": "OrganizationId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "OrganizationName",
+					"Description": "The name of an organization.",
+					"BaseAttributeReference": {
+						"Entity": "PartyOrganization.cdm.json/PartyOrganization",
+						"Name": "OrganizationName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"OrganizationId\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationId\"},\"OrganizationName\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationName\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"PartyOrganization\",\"description\":\"A business organization such as a business unit, department etc. that has responsibility for a budget, employees or similar business functions.\",\"baseEntityReference\":{\"name\":\"PartyOrganization\",\"path\":\"PartyOrganization.cdm.json/PartyOrganization\"},\"primaryKey\":[\"OrganizationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of an organization.\",\"isNullable\":false,\"name\":\"OrganizationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of an organization.\",\"isNullable\":true,\"name\":\"OrganizationName\"}]}}}",
+			"Description": "A business organization such as a business unit, department etc. that has responsibility for a budget, employees or similar business functions.",
+			"DisplayFolderInfo": "{\"name\":\"Legal Entity\",\"colorCode\":\"#034736\"}",
+			"PrimaryKeys": "OrganizationId",
+			"spark.sql.sources.provider": "csv",
+			"sql:IsAppendOnly": false
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

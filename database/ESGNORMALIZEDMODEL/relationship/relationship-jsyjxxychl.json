@@ -1,0 +1,26 @@
+{
+	"name": "relationship-jsyjxxychl",
+	"properties": {
+		"Name": "relationship-jsyjxxychl",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "FacilityType",
+		"ToTableName": "Facility",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "FacilityTypeId",
+				"ToColumnName": "FacilityTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"StoreType.cdm.json/StoreType\",\"toEntity\":\"Store.cdm.json/Store\",\"joinPairs\":[{\"fromAttribute\":\"StoreTypeId\",\"toAttribute\":\"StoreTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

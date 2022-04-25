@@ -1,0 +1,23 @@
+{
+	"name": "relationship-majaiagmbr",
+	"properties": {
+		"Name": "relationship-majaiagmbr",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Banner",
+		"ToTableName": "Facility",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "BannerId",
+				"ToColumnName": "BannerId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
