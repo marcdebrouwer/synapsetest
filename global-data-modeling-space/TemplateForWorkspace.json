@@ -186,6 +186,82 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/MapCountry')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "FacilityData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "MapData"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DistinctCountry"
+						},
+						{
+							"name": "surrogateKey1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          Company as string,",
+						"          Region as string,",
+						"          OpCo as string,",
+						"          Brand as string,",
+						"          {Facility Type} as string,",
+						"          {Facility ID} as short,",
+						"          {Facility Name} as string,",
+						"          Address as string,",
+						"          City as string,",
+						"          {State } as string,",
+						"          Country as string,",
+						"          {Postal Code} as string,",
+						"          {Gross area owned stores ft2} as integer,",
+						"          {Sales area owned stores ft2} as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'Facility.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> FacilityData",
+						"FacilityData aggregate(groupBy(Country),",
+						"     each(match(name!=\"Country\"), $$ = first($$))) ~> DistinctCountry",
+						"DistinctCountry keyGenerate(output(CountryId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> surrogateKey1",
+						"surrogateKey1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'NORMALIZED_ESG',",
+						"     tableName: 'Banner') ~> MapData"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/WorkspaceSystemIdentity')]",
 			"type": "Microsoft.Synapse/workspaces/credentials",
 			"apiVersion": "2019-06-01-preview",
@@ -16842,6 +16918,1103 @@
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"RecipeInformationType.cdm.json/RecipeInformationType\",\"toEntity\":\"RecipeInformation.cdm.json/RecipeInformation\",\"joinPairs\":[{\"fromAttribute\":\"RecipeInformationTypeId\",\"toAttribute\":\"RecipeInformationTypeId\"}]}}"
 							}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/ESGNORMALIZEDMODEL')]",
+			"type": "Microsoft.Synapse/workspaces/databases",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"Ddls": [
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "ESGNORMALIZEDMODEL",
+							"EntityType": "DATABASE",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"Properties": {
+								"IsSyMSCDMDatabase": true,
+								"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"Retail\",\"Version\":\"0.1.0\"}}}"
+							},
+							"Description": "The normalized data model for Carbon Emissions Reporting",
+							"Source": {
+								"Provider": "ADLS",
+								"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL",
+								"Properties": {
+									"FormatType": "csv",
+									"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage"
+								}
+							}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "Banner",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Description": "",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "BannerId",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										}
+									},
+									{
+										"Name": "BannerName",
+										"Description": "",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									},
+									{
+										"Name": "OrganizationId",
+										"Description": "",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
+										"delimiter": ",",
+										"firstRowAsHeader": "false",
+										"multiLine": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
+									"Properties": {
+										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"Description": "",
+								"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
+								"PrimaryKeys": "BannerId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "Country",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Description": "The Country definition is based upon ISO 3166 Country Codes:\n\nEach country or territory has three codes:\n-  a two letter code \n-  a three letter code \n-  a three digit code\n\nThe numeric code identifies a physical territory, and the letters a country name. Thus when Germany reunified, it kept DE/DEU but changed from 280 to 276, while when Southern Rhodesia was renamed Zimbabwe it stayed 716 but changed from RH/RHO to ZW/ZWE.\n\nCodes withdrawn from use may not be reused for five years. The two letter codes AA, QM to QZ, XA to XZ, and ZZ, all three letter codes beginning with those pairs, and numeric codes beginning 9, are available for individual use and will not be allocated to countries. The codes OO, OOO, and 000 are designated for use as \"escape codes\" to indicate that additional codes are being used.\n\nThe term \"country\" is perhaps a little misleading: not all the \"countries\" in ISO 3166 are actually independent.   Many of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \"country\" is used throughout. Where the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X. \n\nISO 3166 was first issued in 1974, and the three digit numbers were mostly added in 1981.\n\nChanges to ISO 3166 are managed by the ISO 3166 Maintenance Agency (ISO3166/MA).\n\nExamples of ISO 3166 codes:\n\nCA CAN 124 Canada\nUS USA 840 United States of America",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "CountryId",
+										"Description": "The unique identifier of the Country.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Country.cdm.json/Country",
+											"Name": "CountryId"
+										}
+									},
+									{
+										"Name": "IsoCountryName",
+										"Description": "The ISO country name.\n\nCountry               A 2     A 3     Number\n----------------------------------------------------------------------\nAALAND ISLANDS     AX      ALA     248\nAFGHANISTAN         AF      AFG     004\nALBANIA          AL      ALB     008\n\nThe term \"country\" is perhaps a little misleading: not all the \"countries\" in ISO 3166 are actually independent. \n\nMany of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \"country\" is used throughout. \n\nWhere the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Country.cdm.json/Country",
+											"Name": "IsoCountryName"
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
+										"delimiter": ",",
+										"firstRowAsHeader": "false",
+										"multiLine": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
+									"Properties": {
+										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"CountryId\":{\"entity\":\"Country.cdm.json/Country\",\"name\":\"CountryId\"},\"IsoCountryName\":{\"entity\":\"Country.cdm.json/Country\",\"name\":\"IsoCountryName\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Country\",\"description\":\"The Country definition is based upon ISO 3166 Country Codes:\\n\\nEach country or territory has three codes:\\n-  a two letter code \\n-  a three letter code \\n-  a three digit code\\n\\nThe numeric code identifies a physical territory, and the letters a country name. Thus when Germany reunified, it kept DE/DEU but changed from 280 to 276, while when Southern Rhodesia was renamed Zimbabwe it stayed 716 but changed from RH/RHO to ZW/ZWE.\\n\\nCodes withdrawn from use may not be reused for five years. The two letter codes AA, QM to QZ, XA to XZ, and ZZ, all three letter codes beginning with those pairs, and numeric codes beginning 9, are available for individual use and will not be allocated to countries. The codes OO, OOO, and 000 are designated for use as \\\"escape codes\\\" to indicate that additional codes are being used.\\n\\nThe term \\\"country\\\" is perhaps a little misleading: not all the \\\"countries\\\" in ISO 3166 are actually independent.   Many of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \\\"country\\\" is used throughout. Where the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X. \\n\\nISO 3166 was first issued in 1974, and the three digit numbers were mostly added in 1981.\\n\\nChanges to ISO 3166 are managed by the ISO 3166 Maintenance Agency (ISO3166/MA).\\n\\nExamples of ISO 3166 codes:\\n\\nCA CAN 124 Canada\\nUS USA 840 United States of America\",\"baseEntityReference\":{\"name\":\"Country\",\"path\":\"Country.cdm.json/Country\"},\"primaryKey\":[\"CountryId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Country.cdm.json/Country\",\"name\":\"CountryId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the Country.\",\"isNullable\":false,\"name\":\"CountryId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Country.cdm.json/Country\",\"name\":\"IsoCountryName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The ISO country name.\\n\\nCountry               A 2     A 3     Number\\n----------------------------------------------------------------------\\nAALAND ISLANDS     AX      ALA     248\\nAFGHANISTAN         AF      AFG     004\\nALBANIA          AL      ALB     008\\n\\nThe term \\\"country\\\" is perhaps a little misleading: not all the \\\"countries\\\" in ISO 3166 are actually independent. \\n\\nMany of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \\\"country\\\" is used throughout. \\n\\nWhere the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X.\",\"isNullable\":true,\"name\":\"IsoCountryName\"}]}}}",
+								"Description": "The Country definition is based upon ISO 3166 Country Codes:\n\nEach country or territory has three codes:\n-  a two letter code \n-  a three letter code \n-  a three digit code\n\nThe numeric code identifies a physical territory, and the letters a country name. Thus when Germany reunified, it kept DE/DEU but changed from 280 to 276, while when Southern Rhodesia was renamed Zimbabwe it stayed 716 but changed from RH/RHO to ZW/ZWE.\n\nCodes withdrawn from use may not be reused for five years. The two letter codes AA, QM to QZ, XA to XZ, and ZZ, all three letter codes beginning with those pairs, and numeric codes beginning 9, are available for individual use and will not be allocated to countries. The codes OO, OOO, and 000 are designated for use as \"escape codes\" to indicate that additional codes are being used.\n\nThe term \"country\" is perhaps a little misleading: not all the \"countries\" in ISO 3166 are actually independent.   Many of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \"country\" is used throughout. Where the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X. \n\nISO 3166 was first issued in 1974, and the three digit numbers were mostly added in 1981.\n\nChanges to ISO 3166 are managed by the ISO 3166 Maintenance Agency (ISO3166/MA).\n\nExamples of ISO 3166 codes:\n\nCA CAN 124 Canada\nUS USA 840 United States of America",
+								"DisplayFolderInfo": "{\"name\":\"Geography\",\"colorCode\":\"#8170C2\"}",
+								"PrimaryKeys": "CountryId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "EgridRegions",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Description": "",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "EgridRegionId",
+										"Description": "Unique identifier of an egrid region",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										}
+									},
+									{
+										"Name": "EgridRegionName",
+										"Description": "Name of the egrid region",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									},
+									{
+										"Name": "EGridRegionLongName",
+										"Description": "Long name of the egrid region",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									},
+									{
+										"Name": "EgridZipcode",
+										"Description": "Zipcode of the egrid region",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
+										"delimiter": ",",
+										"firstRowAsHeader": "false",
+										"multiLine": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
+									"Properties": {
+										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"Description": "",
+								"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
+								"PrimaryKeys": "EgridRegionId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "Facility",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Description": "A retail/channel location where products, goods and services are sold to consumers.",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "FacilityId",
+										"Description": "The unique identifier of a Store.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "StoreId"
+										}
+									},
+									{
+										"Name": "FacilityName",
+										"Description": "The business name of the store.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "StoreName"
+										}
+									},
+									{
+										"Name": "LocationId",
+										"Description": "The unique identifier of a Location.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "LocationId"
+										}
+									},
+									{
+										"Name": "GrossFloorArea",
+										"Description": "The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "GrossFloorArea"
+										}
+									},
+									{
+										"Name": "AvailableSellingArea",
+										"Description": "The total selling area within the Store expressed in square footage.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "AvailableSellingArea"
+										}
+									},
+									{
+										"Name": "RegionId",
+										"Description": "The unique identifier of a Territory.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "RegionId"
+										}
+									},
+									{
+										"Name": "FacilityTypeId",
+										"Description": "The unique identifier of a Store Type.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "StoreTypeId"
+										}
+									},
+									{
+										"Name": "BannerId",
+										"Description": "",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
+										"delimiter": ",",
+										"firstRowAsHeader": "false",
+										"multiLine": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
+									"Properties": {
+										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"LocationId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"GrossFloorArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"RegionId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"RegionId\"},\"FacilityTypeId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Facility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"dataType\":\"integer\",\"description\":\"The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.\",\"isNullable\":true,\"name\":\"GrossFloorArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"integer\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"RegionId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Territory.\",\"isNullable\":true,\"name\":\"RegionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"FacilityTypeId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"BannerId\"}]}}}",
+								"Description": "A retail/channel location where products, goods and services are sold to consumers.",
+								"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
+								"PrimaryKeys": "FacilityId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "FacilityType",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Description": "A categorization of stores based upon common characteristics or functionality.\n\nEx:\n- Central Business District\n- Community Center\n- Convenience Store\n- Discount Store\n- Discount-Anchored Center\n- Gas Station\n- Neighborhood Center\n- Pad Site \n- Power Shopping Center\n- Regional Center\n- Strip Center\n- Superstore \n- Warehouse Club\n- Warehouse Store\n\nwhere:\n\nCENTRAL BUSINESS DISTRICT\n The traditional downtown business area of a city or town.\n \nCOMMUNITY CENTER\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\n \nCONVENIENCE STORE\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\n \nDISCOUNT STORE\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\n\nEx:\n- Target \n- Kmart\n \nDISCOUNT-ANCHORED CENTER\n A shopping center that contains one or more discount stores plus smaller retail tenants.\n \nNEIGHBORHOOD CENTER\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \n\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\n \nPAD SITE\n A location for a free-standing retail building that sits in front of a mall or shopping center.\n \nPOWER SHOPPING CENTER\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \n\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\n \nREGIONAL CENTER\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \nSuper-regionals are similar but have at least four department stores.\n \nSTRIP CENTER\n A small shopping center that comprises several adjacent stores located along a major street or highway.\n \nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\n \nWAREHOUSE CLUB\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\n \nWAREHOUSE STORE\n A discount retailer offering merchandise in a no-frills environment.",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "FacilityTypeId",
+										"Description": "The unique identifier of a Store Type.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "StoreType.cdm.json/StoreType",
+											"Name": "StoreTypeId"
+										}
+									},
+									{
+										"Name": "FaciityTypeName",
+										"Description": "The name of a Store Type.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "StoreType.cdm.json/StoreType",
+											"Name": "StoreTypeName"
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
+										"delimiter": ",",
+										"firstRowAsHeader": "false",
+										"multiLine": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
+									"Properties": {
+										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityTypeId\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeId\"},\"FaciityTypeName\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeName\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"FacilityType\",\"description\":\"A categorization of stores based upon common characteristics or functionality.\\n\\nEx:\\n- Central Business District\\n- Community Center\\n- Convenience Store\\n- Discount Store\\n- Discount-Anchored Center\\n- Gas Station\\n- Neighborhood Center\\n- Pad Site \\n- Power Shopping Center\\n- Regional Center\\n- Strip Center\\n- Superstore \\n- Warehouse Club\\n- Warehouse Store\\n\\nwhere:\\n\\nCENTRAL BUSINESS DISTRICT\\n The traditional downtown business area of a city or town.\\n \\nCOMMUNITY CENTER\\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\\n \\nCONVENIENCE STORE\\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\\n \\nDISCOUNT STORE\\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\\n\\nEx:\\n- Target \\n- Kmart\\n \\nDISCOUNT-ANCHORED CENTER\\n A shopping center that contains one or more discount stores plus smaller retail tenants.\\n \\nNEIGHBORHOOD CENTER\\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \\n\\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\\n \\nPAD SITE\\n A location for a free-standing retail building that sits in front of a mall or shopping center.\\n \\nPOWER SHOPPING CENTER\\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \\n\\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\\n \\nREGIONAL CENTER\\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \\nSuper-regionals are similar but have at least four department stores.\\n \\nSTRIP CENTER\\n A small shopping center that comprises several adjacent stores located along a major street or highway.\\n \\nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\\n \\nWAREHOUSE CLUB\\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\\n \\nWAREHOUSE STORE\\n A discount retailer offering merchandise in a no-frills environment.\",\"baseEntityReference\":{\"name\":\"StoreType\",\"path\":\"StoreType.cdm.json/StoreType\"},\"primaryKey\":[\"FacilityTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":false,\"name\":\"FacilityTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Store Type.\",\"isNullable\":true,\"name\":\"FaciityTypeName\"}]}}}",
+								"Description": "A categorization of stores based upon common characteristics or functionality.\n\nEx:\n- Central Business District\n- Community Center\n- Convenience Store\n- Discount Store\n- Discount-Anchored Center\n- Gas Station\n- Neighborhood Center\n- Pad Site \n- Power Shopping Center\n- Regional Center\n- Strip Center\n- Superstore \n- Warehouse Club\n- Warehouse Store\n\nwhere:\n\nCENTRAL BUSINESS DISTRICT\n The traditional downtown business area of a city or town.\n \nCOMMUNITY CENTER\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\n \nCONVENIENCE STORE\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\n \nDISCOUNT STORE\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\n\nEx:\n- Target \n- Kmart\n \nDISCOUNT-ANCHORED CENTER\n A shopping center that contains one or more discount stores plus smaller retail tenants.\n \nNEIGHBORHOOD CENTER\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \n\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\n \nPAD SITE\n A location for a free-standing retail building that sits in front of a mall or shopping center.\n \nPOWER SHOPPING CENTER\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \n\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\n \nREGIONAL CENTER\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \nSuper-regionals are similar but have at least four department stores.\n \nSTRIP CENTER\n A small shopping center that comprises several adjacent stores located along a major street or highway.\n \nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\n \nWAREHOUSE CLUB\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\n \nWAREHOUSE STORE\n A discount retailer offering merchandise in a no-frills environment.",
+								"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
+								"PrimaryKeys": "FacilityTypeId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "Location",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Description": "A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\n\n- the address of a physical structure\n- the location of a business or service\n- the location of a component\n- the delivery location for a shipment or mail",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "LocationId",
+										"Description": "The unique identifier of a Location.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Location.cdm.json/Location",
+											"Name": "LocationId"
+										}
+									},
+									{
+										"Name": "LocationName",
+										"Description": "The name of a location.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Location.cdm.json/Location",
+											"Name": "LocationName"
+										}
+									},
+									{
+										"Name": "LocationAddressLine1",
+										"Description": "The 'street' component of a location. Includes street name, apartment, suite number or PO Box.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 512,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Location.cdm.json/Location",
+											"Name": "LocationAddressLine1"
+										}
+									},
+									{
+										"Name": "LocationCity",
+										"Description": "The 'city' component of a location.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Location.cdm.json/Location",
+											"Name": "LocationCity"
+										}
+									},
+									{
+										"Name": "LocationStateId",
+										"Description": "The unique identifier of the State = State Code.\n\nA two-digit FIPS code assigned by the NIST to identify each State and statistically equivalent entity. The NIST assigns the codes based on the alphabetic sequence of State names (Puerto Rico and the Outlying Areas appear at the end); it documents these codes in a FIPS publication (FIPS PUB 5). Also, a two-digit code assigned by the Census Bureau to identify each State within its census geographic division (Puerto Rico and the Outlying Areas appear at the end).",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Location.cdm.json/Location",
+											"Name": "LocationStateId"
+										}
+									},
+									{
+										"Name": "LocationZipCode",
+										"Description": "The unique identifier of a Zip Code.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Location.cdm.json/Location",
+											"Name": "LocationZipCode"
+										}
+									},
+									{
+										"Name": "CountryId",
+										"Description": "The unique identifier of the Country.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Location.cdm.json/Location",
+											"Name": "CountryId"
+										}
+									},
+									{
+										"Name": "EgridRegionId",
+										"Description": "",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
+										"delimiter": ",",
+										"firstRowAsHeader": "false",
+										"multiLine": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
+									"Properties": {
+										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"LocationId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"LocationName\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"LocationAddressLine1\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"LocationCity\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"LocationStateId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"LocationZipCode\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"CountryId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Location\",\"description\":\"A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\\n\\n- the address of a physical structure\\n- the location of a business or service\\n- the location of a component\\n- the delivery location for a shipment or mail\",\"baseEntityReference\":{\"name\":\"Location\",\"path\":\"Location.cdm.json/Location\"},\"primaryKey\":[\"LocationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":false,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a location.\",\"isNullable\":true,\"name\":\"LocationName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The 'street' component of a location. Includes street name, apartment, suite number or PO Box.\",\"isNullable\":true,\"name\":\"LocationAddressLine1\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The 'city' component of a location.\",\"isNullable\":true,\"name\":\"LocationCity\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the State = State Code.\\n\\nA two-digit FIPS code assigned by the NIST to identify each State and statistically equivalent entity. The NIST assigns the codes based on the alphabetic sequence of State names (Puerto Rico and the Outlying Areas appear at the end); it documents these codes in a FIPS publication (FIPS PUB 5). Also, a two-digit code assigned by the Census Bureau to identify each State within its census geographic division (Puerto Rico and the Outlying Areas appear at the end).\",\"isNullable\":true,\"name\":\"LocationStateId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Zip Code.\",\"isNullable\":true,\"name\":\"LocationZipCode\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the Country.\",\"isNullable\":true,\"name\":\"CountryId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"EgridRegionId\"}]}}}",
+								"Description": "A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\n\n- the address of a physical structure\n- the location of a business or service\n- the location of a component\n- the delivery location for a shipment or mail",
+								"DisplayFolderInfo": "{\"name\":\"Geography\",\"colorCode\":\"#8170C2\"}",
+								"PrimaryKeys": "LocationId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "PartyOrganization",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Description": "A business organization such as a business unit, department etc. that has responsibility for a budget, employees or similar business functions.",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "OrganizationId",
+										"Description": "The unique identifier of an organization.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "PartyOrganization.cdm.json/PartyOrganization",
+											"Name": "OrganizationId"
+										}
+									},
+									{
+										"Name": "OrganizationName",
+										"Description": "The name of an organization.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "PartyOrganization.cdm.json/PartyOrganization",
+											"Name": "OrganizationName"
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
+										"delimiter": ",",
+										"firstRowAsHeader": "false",
+										"multiLine": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
+									"Properties": {
+										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"OrganizationId\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationId\"},\"OrganizationName\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationName\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"PartyOrganization\",\"description\":\"A business organization such as a business unit, department etc. that has responsibility for a budget, employees or similar business functions.\",\"baseEntityReference\":{\"name\":\"PartyOrganization\",\"path\":\"PartyOrganization.cdm.json/PartyOrganization\"},\"primaryKey\":[\"OrganizationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of an organization.\",\"isNullable\":false,\"name\":\"OrganizationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of an organization.\",\"isNullable\":true,\"name\":\"OrganizationName\"}]}}}",
+								"Description": "A business organization such as a business unit, department etc. that has responsibility for a budget, employees or similar business functions.",
+								"DisplayFolderInfo": "{\"name\":\"Legal Entity\",\"colorCode\":\"#034736\"}",
+								"PrimaryKeys": "OrganizationId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-jpcyusnhum",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "Country",
+							"ToTableName": "Location",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "CountryId",
+									"ToColumnName": "CountryId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {
+								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Country.cdm.json/Country\",\"toEntity\":\"Location.cdm.json/Location\",\"joinPairs\":[{\"fromAttribute\":\"CountryId\",\"toAttribute\":\"CountryId\"}]}}"
+							}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-jsyjxxychl",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "FacilityType",
+							"ToTableName": "Facility",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "FacilityTypeId",
+									"ToColumnName": "FacilityTypeId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {
+								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"StoreType.cdm.json/StoreType\",\"toEntity\":\"Store.cdm.json/Store\",\"joinPairs\":[{\"fromAttribute\":\"StoreTypeId\",\"toAttribute\":\"StoreTypeId\"}]}}"
+							}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-majaiagmbr",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "Banner",
+							"ToTableName": "Facility",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "BannerId",
+									"ToColumnName": "BannerId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-qksyfjmcdh",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "Location",
+							"ToTableName": "Facility",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "LocationId",
+									"ToColumnName": "LocationId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {
+								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Location.cdm.json/Location\",\"toEntity\":\"Store.cdm.json/Store\",\"joinPairs\":[{\"fromAttribute\":\"LocationId\",\"toAttribute\":\"LocationId\"}]}}"
+							}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-zoixzyzcfa",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "EgridRegions",
+							"ToTableName": "Location",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "EgridRegionId",
+									"ToColumnName": "EgridRegionId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-zpyhviztep",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "PartyOrganization",
+							"ToTableName": "Banner",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "OrganizationId",
+									"ToColumnName": "OrganizationId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {}
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -36325,7 +37498,60 @@
 			"location": "westeurope"
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/MapCountry')]",
+			"name": "[concat(parameters('workspaceName'), '/NormalizedSupportingTableMappings')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"description": "Mapping of the lowest level tables in the normalized model",
+				"activities": [
+					{
+						"name": "FillSupportingTablesNormalized",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "FacilityDataMap",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"FacilityData": {},
+									"EgridData": {},
+									"MapFacilityType": {},
+									"MapCountry": {},
+									"MapOrganization": {},
+									"MapEgridRegion": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
+				"[concat(variables('workspaceId'), '/dataflows/FacilityDataMap')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/FacilityDataMap')]",
 			"type": "Microsoft.Synapse/workspaces/dataflows",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
@@ -36338,19 +37564,50 @@
 								"type": "LinkedServiceReference"
 							},
 							"name": "FacilityData"
+						},
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "EgridData"
 						}
 					],
 					"sinks": [
 						{
-							"name": "MapData"
+							"name": "MapFacilityType"
+						},
+						{
+							"name": "MapCountry"
+						},
+						{
+							"name": "MapOrganization"
+						},
+						{
+							"name": "MapEgridRegion"
 						}
 					],
 					"transformations": [
 						{
+							"name": "DistinctFacilityType"
+						},
+						{
+							"name": "CreateFacilityKey"
+						},
+						{
 							"name": "DistinctCountry"
 						},
 						{
-							"name": "surrogateKey1"
+							"name": "CreateCountryKey"
+						},
+						{
+							"name": "DistinctOrganization"
+						},
+						{
+							"name": "CreateOrganizationKey"
+						},
+						{
+							"name": "CreateEgridKey"
 						}
 					],
 					"scriptLines": [
@@ -36381,1135 +37638,110 @@
 						"     escapeChar: '\\\\',",
 						"     quoteChar: '\\\"',",
 						"     columnNamesAsHeader: true) ~> FacilityData",
+						"source(output(",
+						"          Zipcode as string,",
+						"          EgridRegion as string,",
+						"          {DimEgridRegions.eGrid Subregion_1} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'EgridRegion.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> EgridData",
+						"FacilityData aggregate(groupBy({Facility Type}),",
+						"     each(match(name!=\"Facility Type\"), $$ = first($$))) ~> DistinctFacilityType",
+						"DistinctFacilityType keyGenerate(output(FacilityTypeId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> CreateFacilityKey",
 						"FacilityData aggregate(groupBy(Country),",
 						"     each(match(name!=\"Country\"), $$ = first($$))) ~> DistinctCountry",
 						"DistinctCountry keyGenerate(output(CountryId as long),",
 						"     startAt: 1L,",
-						"     stepValue: 1L) ~> surrogateKey1",
-						"surrogateKey1 sink(allowSchemaDrift: true,",
+						"     stepValue: 1L) ~> CreateCountryKey",
+						"FacilityData aggregate(groupBy(Company),",
+						"     each(match(name!=\"Company\"), $$ = first($$))) ~> DistinctOrganization",
+						"DistinctOrganization keyGenerate(output(OrganizationId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> CreateOrganizationKey",
+						"EgridData keyGenerate(output(EgridId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> CreateEgridKey",
+						"CreateFacilityKey sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
 						"     databaseType: 'spark',",
 						"     format: 'table',",
-						"     database: 'NORMALIZED_ESG',",
-						"     tableName: 'Banner') ~> MapData"
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'FacilityType',",
+						"     input(",
+						"          FacilityTypeId as integer,",
+						"          FaciityTypeName as string",
+						"     ),",
+						"     mapColumn(",
+						"          FacilityTypeId,",
+						"          FaciityTypeName = {Facility Type}",
+						"     )) ~> MapFacilityType",
+						"CreateCountryKey sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Country',",
+						"     input(",
+						"          CountryId as integer,",
+						"          IsoCountryName as string",
+						"     ),",
+						"     mapColumn(",
+						"          CountryId,",
+						"          IsoCountryName = Country",
+						"     )) ~> MapCountry",
+						"CreateOrganizationKey sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'PartyOrganization',",
+						"     input(",
+						"          OrganizationId as integer,",
+						"          OrganizationName as string",
+						"     ),",
+						"     mapColumn(",
+						"          OrganizationId,",
+						"          OrganizationName = Company",
+						"     )) ~> MapOrganization",
+						"CreateEgridKey sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'EgridRegions',",
+						"     input(",
+						"          EgridRegionId as integer,",
+						"          EgridRegionName as string,",
+						"          EGridRegionLongName as string,",
+						"          EgridZipcode as string",
+						"     ),",
+						"     mapColumn(",
+						"          EgridRegionId = EgridId,",
+						"          EgridRegionName = EgridRegion,",
+						"          EGridRegionLongName = {DimEgridRegions.eGrid Subregion_1},",
+						"          EgridZipcode = Zipcode",
+						"     )) ~> MapEgridRegion"
 					]
 				}
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/ESGNORMALIZEDMODEL')]",
-			"type": "Microsoft.Synapse/workspaces/databases",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"Ddls": [
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "ESGNORMALIZEDMODEL",
-							"EntityType": "DATABASE",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"Properties": {
-								"IsSyMSCDMDatabase": true,
-								"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"Retail\",\"Version\":\"0.1.0\"}}}"
-							},
-							"Description": "The normalized data model for Carbon Emissions Reporting",
-							"Source": {
-								"Provider": "ADLS",
-								"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL",
-								"Properties": {
-									"FormatType": "csv",
-									"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage"
-								}
-							}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "Facility",
-							"EntityType": "TABLE",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Description": "A retail/channel location where products, goods and services are sold to consumers.",
-							"TableType": "EXTERNAL",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"StorageDescriptor": {
-								"Columns": [
-									{
-										"Name": "FacilityId",
-										"Description": "The unique identifier of a Store.",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsNullable": false,
-											"IsComplexType": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "StoreId"
-										}
-									},
-									{
-										"Name": "FacilityName",
-										"Description": "The business name of the store.",
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsNullable": true,
-											"IsComplexType": false,
-											"Length": 128,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "StoreName"
-										}
-									},
-									{
-										"Name": "LocationId",
-										"Description": "The unique identifier of a Location.",
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "LocationId"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "GrossFloorArea",
-										"Description": "The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.",
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "GrossFloorArea"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "AvailableSellingArea",
-										"Description": "The total selling area within the Store expressed in square footage.",
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "AvailableSellingArea"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "RegionId",
-										"Description": "The unique identifier of a Territory.",
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "RegionId"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "FacilityTypeId",
-										"Description": "The unique identifier of a Store Type.",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsNullable": true,
-											"IsComplexType": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "StoreTypeId"
-										}
-									},
-									{
-										"Name": "BannerId",
-										"Description": "",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsNullable": false,
-											"IsComplexType": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									}
-								],
-								"Format": {
-									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-									"FormatType": "csv",
-									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
-									"Properties": {
-										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
-										"delimiter": ",",
-										"multiLine": "false",
-										"firstRowAsHeader": "false",
-										"serialization.format": "1",
-										"escape": "\\",
-										"quote": "\"",
-										"FormatTypeSetToDatabaseDefault": true,
-										"header": "false"
-									}
-								},
-								"Source": {
-									"Provider": "ADLS",
-									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
-									"Properties": {
-										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-										"LocationSetToDatabaseDefault": true
-									}
-								},
-								"Properties": {
-									"textinputformat.record.delimiter": ",",
-									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"LocationId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"GrossFloorArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"RegionId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"RegionId\"},\"FacilityTypeId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"}}}"
-								},
-								"Compressed": false,
-								"IsStoredAsSubdirectories": false
-							},
-							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Facility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"dataType\":\"integer\",\"description\":\"The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.\",\"isNullable\":true,\"name\":\"GrossFloorArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"integer\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"RegionId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Territory.\",\"isNullable\":true,\"name\":\"RegionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"FacilityTypeId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"BannerId\"}]}}}",
-								"Description": "A retail/channel location where products, goods and services are sold to consumers.",
-								"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
-								"PrimaryKeys": "FacilityId",
-								"spark.sql.sources.provider": "csv",
-								"sql:IsAppendOnly": false
-							},
-							"Retention": 0,
-							"Temporary": false,
-							"IsRewriteEnabled": false,
-							"Partitioning": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "FacilityType",
-							"EntityType": "TABLE",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Description": "A categorization of stores based upon common characteristics or functionality.\n\nEx:\n- Central Business District\n- Community Center\n- Convenience Store\n- Discount Store\n- Discount-Anchored Center\n- Gas Station\n- Neighborhood Center\n- Pad Site \n- Power Shopping Center\n- Regional Center\n- Strip Center\n- Superstore \n- Warehouse Club\n- Warehouse Store\n\nwhere:\n\nCENTRAL BUSINESS DISTRICT\n The traditional downtown business area of a city or town.\n \nCOMMUNITY CENTER\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\n \nCONVENIENCE STORE\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\n \nDISCOUNT STORE\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\n\nEx:\n- Target \n- Kmart\n \nDISCOUNT-ANCHORED CENTER\n A shopping center that contains one or more discount stores plus smaller retail tenants.\n \nNEIGHBORHOOD CENTER\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \n\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\n \nPAD SITE\n A location for a free-standing retail building that sits in front of a mall or shopping center.\n \nPOWER SHOPPING CENTER\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \n\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\n \nREGIONAL CENTER\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \nSuper-regionals are similar but have at least four department stores.\n \nSTRIP CENTER\n A small shopping center that comprises several adjacent stores located along a major street or highway.\n \nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\n \nWAREHOUSE CLUB\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\n \nWAREHOUSE STORE\n A discount retailer offering merchandise in a no-frills environment.",
-							"TableType": "EXTERNAL",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"StorageDescriptor": {
-								"Columns": [
-									{
-										"Name": "FacilityTypeId",
-										"Description": "The unique identifier of a Store Type.",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsNullable": false,
-											"IsComplexType": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "StoreType.cdm.json/StoreType",
-											"Name": "StoreTypeId"
-										}
-									},
-									{
-										"Name": "FaciityTypeName",
-										"Description": "The name of a Store Type.",
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsNullable": true,
-											"IsComplexType": false,
-											"Length": 128,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "StoreType.cdm.json/StoreType",
-											"Name": "StoreTypeName"
-										}
-									}
-								],
-								"Format": {
-									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-									"FormatType": "csv",
-									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
-									"Properties": {
-										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
-										"delimiter": ",",
-										"multiLine": "false",
-										"firstRowAsHeader": "false",
-										"serialization.format": "1",
-										"escape": "\\",
-										"quote": "\"",
-										"FormatTypeSetToDatabaseDefault": true,
-										"header": "false"
-									}
-								},
-								"Source": {
-									"Provider": "ADLS",
-									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
-									"Properties": {
-										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-										"LocationSetToDatabaseDefault": true
-									}
-								},
-								"Properties": {
-									"textinputformat.record.delimiter": ",",
-									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityTypeId\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeId\"},\"FaciityTypeName\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeName\"}}}"
-								},
-								"Compressed": false,
-								"IsStoredAsSubdirectories": false
-							},
-							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"FacilityType\",\"description\":\"A categorization of stores based upon common characteristics or functionality.\\n\\nEx:\\n- Central Business District\\n- Community Center\\n- Convenience Store\\n- Discount Store\\n- Discount-Anchored Center\\n- Gas Station\\n- Neighborhood Center\\n- Pad Site \\n- Power Shopping Center\\n- Regional Center\\n- Strip Center\\n- Superstore \\n- Warehouse Club\\n- Warehouse Store\\n\\nwhere:\\n\\nCENTRAL BUSINESS DISTRICT\\n The traditional downtown business area of a city or town.\\n \\nCOMMUNITY CENTER\\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\\n \\nCONVENIENCE STORE\\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\\n \\nDISCOUNT STORE\\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\\n\\nEx:\\n- Target \\n- Kmart\\n \\nDISCOUNT-ANCHORED CENTER\\n A shopping center that contains one or more discount stores plus smaller retail tenants.\\n \\nNEIGHBORHOOD CENTER\\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \\n\\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\\n \\nPAD SITE\\n A location for a free-standing retail building that sits in front of a mall or shopping center.\\n \\nPOWER SHOPPING CENTER\\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \\n\\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\\n \\nREGIONAL CENTER\\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \\nSuper-regionals are similar but have at least four department stores.\\n \\nSTRIP CENTER\\n A small shopping center that comprises several adjacent stores located along a major street or highway.\\n \\nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\\n \\nWAREHOUSE CLUB\\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\\n \\nWAREHOUSE STORE\\n A discount retailer offering merchandise in a no-frills environment.\",\"baseEntityReference\":{\"name\":\"StoreType\",\"path\":\"StoreType.cdm.json/StoreType\"},\"primaryKey\":[\"FacilityTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":false,\"name\":\"FacilityTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Store Type.\",\"isNullable\":true,\"name\":\"FaciityTypeName\"}]}}}",
-								"Description": "A categorization of stores based upon common characteristics or functionality.\n\nEx:\n- Central Business District\n- Community Center\n- Convenience Store\n- Discount Store\n- Discount-Anchored Center\n- Gas Station\n- Neighborhood Center\n- Pad Site \n- Power Shopping Center\n- Regional Center\n- Strip Center\n- Superstore \n- Warehouse Club\n- Warehouse Store\n\nwhere:\n\nCENTRAL BUSINESS DISTRICT\n The traditional downtown business area of a city or town.\n \nCOMMUNITY CENTER\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\n \nCONVENIENCE STORE\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\n \nDISCOUNT STORE\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\n\nEx:\n- Target \n- Kmart\n \nDISCOUNT-ANCHORED CENTER\n A shopping center that contains one or more discount stores plus smaller retail tenants.\n \nNEIGHBORHOOD CENTER\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \n\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\n \nPAD SITE\n A location for a free-standing retail building that sits in front of a mall or shopping center.\n \nPOWER SHOPPING CENTER\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \n\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\n \nREGIONAL CENTER\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \nSuper-regionals are similar but have at least four department stores.\n \nSTRIP CENTER\n A small shopping center that comprises several adjacent stores located along a major street or highway.\n \nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\n \nWAREHOUSE CLUB\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\n \nWAREHOUSE STORE\n A discount retailer offering merchandise in a no-frills environment.",
-								"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
-								"PrimaryKeys": "FacilityTypeId",
-								"spark.sql.sources.provider": "csv",
-								"sql:IsAppendOnly": false
-							},
-							"Retention": 0,
-							"Temporary": false,
-							"IsRewriteEnabled": false,
-							"Partitioning": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "Location",
-							"EntityType": "TABLE",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Description": "A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\n\n- the address of a physical structure\n- the location of a business or service\n- the location of a component\n- the delivery location for a shipment or mail",
-							"TableType": "EXTERNAL",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"StorageDescriptor": {
-								"Columns": [
-									{
-										"Name": "LocationId",
-										"Description": "The unique identifier of a Location.",
-										"BaseAttributeReference": {
-											"Entity": "Location.cdm.json/Location",
-											"Name": "LocationId"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "LocationName",
-										"Description": "The name of a location.",
-										"BaseAttributeReference": {
-											"Entity": "Location.cdm.json/Location",
-											"Name": "LocationName"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Length": 128,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									},
-									{
-										"Name": "LocationAddressLine1",
-										"Description": "The 'street' component of a location. Includes street name, apartment, suite number or PO Box.",
-										"BaseAttributeReference": {
-											"Entity": "Location.cdm.json/Location",
-											"Name": "LocationAddressLine1"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Length": 512,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									},
-									{
-										"Name": "LocationCity",
-										"Description": "The 'city' component of a location.",
-										"BaseAttributeReference": {
-											"Entity": "Location.cdm.json/Location",
-											"Name": "LocationCity"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Length": 128,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									},
-									{
-										"Name": "LocationStateId",
-										"Description": "The unique identifier of the State = State Code.\n\nA two-digit FIPS code assigned by the NIST to identify each State and statistically equivalent entity. The NIST assigns the codes based on the alphabetic sequence of State names (Puerto Rico and the Outlying Areas appear at the end); it documents these codes in a FIPS publication (FIPS PUB 5). Also, a two-digit code assigned by the Census Bureau to identify each State within its census geographic division (Puerto Rico and the Outlying Areas appear at the end).",
-										"BaseAttributeReference": {
-											"Entity": "Location.cdm.json/Location",
-											"Name": "LocationStateId"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "LocationZipCode",
-										"Description": "The unique identifier of a Zip Code.",
-										"BaseAttributeReference": {
-											"Entity": "Location.cdm.json/Location",
-											"Name": "LocationZipCode"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Length": 256,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									},
-									{
-										"Name": "CountryId",
-										"Description": "The unique identifier of the Country.",
-										"BaseAttributeReference": {
-											"Entity": "Location.cdm.json/Location",
-											"Name": "CountryId"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "EgridRegionId",
-										"Description": "",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsNullable": false,
-											"IsComplexType": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									}
-								],
-								"Format": {
-									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-									"FormatType": "csv",
-									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
-									"Properties": {
-										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
-										"delimiter": ",",
-										"multiLine": "false",
-										"firstRowAsHeader": "false",
-										"serialization.format": "1",
-										"escape": "\\",
-										"quote": "\"",
-										"FormatTypeSetToDatabaseDefault": true,
-										"header": "false"
-									}
-								},
-								"Source": {
-									"Provider": "ADLS",
-									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
-									"Properties": {
-										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-										"LocationSetToDatabaseDefault": true
-									}
-								},
-								"Properties": {
-									"textinputformat.record.delimiter": ",",
-									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"LocationId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"LocationName\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"LocationAddressLine1\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"LocationCity\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"LocationStateId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"LocationZipCode\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"CountryId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"}}}"
-								},
-								"Compressed": false,
-								"IsStoredAsSubdirectories": false
-							},
-							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Location\",\"description\":\"A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\\n\\n- the address of a physical structure\\n- the location of a business or service\\n- the location of a component\\n- the delivery location for a shipment or mail\",\"baseEntityReference\":{\"name\":\"Location\",\"path\":\"Location.cdm.json/Location\"},\"primaryKey\":[\"LocationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":false,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a location.\",\"isNullable\":true,\"name\":\"LocationName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The 'street' component of a location. Includes street name, apartment, suite number or PO Box.\",\"isNullable\":true,\"name\":\"LocationAddressLine1\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The 'city' component of a location.\",\"isNullable\":true,\"name\":\"LocationCity\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the State = State Code.\\n\\nA two-digit FIPS code assigned by the NIST to identify each State and statistically equivalent entity. The NIST assigns the codes based on the alphabetic sequence of State names (Puerto Rico and the Outlying Areas appear at the end); it documents these codes in a FIPS publication (FIPS PUB 5). Also, a two-digit code assigned by the Census Bureau to identify each State within its census geographic division (Puerto Rico and the Outlying Areas appear at the end).\",\"isNullable\":true,\"name\":\"LocationStateId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Zip Code.\",\"isNullable\":true,\"name\":\"LocationZipCode\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the Country.\",\"isNullable\":true,\"name\":\"CountryId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"EgridRegionId\"}]}}}",
-								"Description": "A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\n\n- the address of a physical structure\n- the location of a business or service\n- the location of a component\n- the delivery location for a shipment or mail",
-								"DisplayFolderInfo": "{\"name\":\"Geography\",\"colorCode\":\"#8170C2\"}",
-								"PrimaryKeys": "LocationId",
-								"spark.sql.sources.provider": "csv",
-								"sql:IsAppendOnly": false
-							},
-							"Retention": 0,
-							"Temporary": false,
-							"IsRewriteEnabled": false,
-							"Partitioning": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "PartyOrganization",
-							"EntityType": "TABLE",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Description": "A business organization such as a business unit, department etc. that has responsibility for a budget, employees or similar business functions.",
-							"TableType": "EXTERNAL",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"StorageDescriptor": {
-								"Columns": [
-									{
-										"Name": "OrganizationId",
-										"Description": "The unique identifier of an organization.",
-										"BaseAttributeReference": {
-											"Entity": "PartyOrganization.cdm.json/PartyOrganization",
-											"Name": "OrganizationId"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "OrganizationName",
-										"Description": "The name of an organization.",
-										"BaseAttributeReference": {
-											"Entity": "PartyOrganization.cdm.json/PartyOrganization",
-											"Name": "OrganizationName"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Length": 128,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									}
-								],
-								"Format": {
-									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-									"FormatType": "csv",
-									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
-									"Properties": {
-										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
-										"delimiter": ",",
-										"multiLine": "false",
-										"firstRowAsHeader": "false",
-										"serialization.format": "1",
-										"escape": "\\",
-										"quote": "\"",
-										"FormatTypeSetToDatabaseDefault": true,
-										"header": "false"
-									}
-								},
-								"Source": {
-									"Provider": "ADLS",
-									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
-									"Properties": {
-										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-										"LocationSetToDatabaseDefault": true
-									}
-								},
-								"Properties": {
-									"textinputformat.record.delimiter": ",",
-									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"OrganizationId\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationId\"},\"OrganizationName\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationName\"}}}"
-								},
-								"Compressed": false,
-								"IsStoredAsSubdirectories": false
-							},
-							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"PartyOrganization\",\"description\":\"A business organization such as a business unit, department etc. that has responsibility for a budget, employees or similar business functions.\",\"baseEntityReference\":{\"name\":\"PartyOrganization\",\"path\":\"PartyOrganization.cdm.json/PartyOrganization\"},\"primaryKey\":[\"OrganizationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of an organization.\",\"isNullable\":false,\"name\":\"OrganizationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of an organization.\",\"isNullable\":true,\"name\":\"OrganizationName\"}]}}}",
-								"Description": "A business organization such as a business unit, department etc. that has responsibility for a budget, employees or similar business functions.",
-								"DisplayFolderInfo": "{\"name\":\"Legal Entity\",\"colorCode\":\"#034736\"}",
-								"PrimaryKeys": "OrganizationId",
-								"spark.sql.sources.provider": "csv",
-								"sql:IsAppendOnly": false
-							},
-							"Retention": 0,
-							"Temporary": false,
-							"IsRewriteEnabled": false,
-							"Partitioning": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "Country",
-							"EntityType": "TABLE",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Description": "The Country definition is based upon ISO 3166 Country Codes:\n\nEach country or territory has three codes:\n-  a two letter code \n-  a three letter code \n-  a three digit code\n\nThe numeric code identifies a physical territory, and the letters a country name. Thus when Germany reunified, it kept DE/DEU but changed from 280 to 276, while when Southern Rhodesia was renamed Zimbabwe it stayed 716 but changed from RH/RHO to ZW/ZWE.\n\nCodes withdrawn from use may not be reused for five years. The two letter codes AA, QM to QZ, XA to XZ, and ZZ, all three letter codes beginning with those pairs, and numeric codes beginning 9, are available for individual use and will not be allocated to countries. The codes OO, OOO, and 000 are designated for use as \"escape codes\" to indicate that additional codes are being used.\n\nThe term \"country\" is perhaps a little misleading: not all the \"countries\" in ISO 3166 are actually independent.   Many of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \"country\" is used throughout. Where the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X. \n\nISO 3166 was first issued in 1974, and the three digit numbers were mostly added in 1981.\n\nChanges to ISO 3166 are managed by the ISO 3166 Maintenance Agency (ISO3166/MA).\n\nExamples of ISO 3166 codes:\n\nCA CAN 124 Canada\nUS USA 840 United States of America",
-							"TableType": "EXTERNAL",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"StorageDescriptor": {
-								"Columns": [
-									{
-										"Name": "CountryId",
-										"Description": "The unique identifier of the Country.",
-										"BaseAttributeReference": {
-											"Entity": "Country.cdm.json/Country",
-											"Name": "CountryId"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "IsoCountryName",
-										"Description": "The ISO country name.\n\nCountry               A 2     A 3     Number\n----------------------------------------------------------------------\nAALAND ISLANDS     AX      ALA     248\nAFGHANISTAN         AF      AFG     004\nALBANIA          AL      ALB     008\n\nThe term \"country\" is perhaps a little misleading: not all the \"countries\" in ISO 3166 are actually independent. \n\nMany of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \"country\" is used throughout. \n\nWhere the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X.",
-										"BaseAttributeReference": {
-											"Entity": "Country.cdm.json/Country",
-											"Name": "IsoCountryName"
-										},
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Length": 128,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									}
-								],
-								"Format": {
-									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-									"FormatType": "csv",
-									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
-									"Properties": {
-										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
-										"delimiter": ",",
-										"multiLine": "false",
-										"firstRowAsHeader": "false",
-										"serialization.format": "1",
-										"escape": "\\",
-										"quote": "\"",
-										"FormatTypeSetToDatabaseDefault": true,
-										"header": "false"
-									}
-								},
-								"Source": {
-									"Provider": "ADLS",
-									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
-									"Properties": {
-										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-										"LocationSetToDatabaseDefault": true
-									}
-								},
-								"Properties": {
-									"textinputformat.record.delimiter": ",",
-									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"CountryId\":{\"entity\":\"Country.cdm.json/Country\",\"name\":\"CountryId\"},\"IsoCountryName\":{\"entity\":\"Country.cdm.json/Country\",\"name\":\"IsoCountryName\"}}}"
-								},
-								"Compressed": false,
-								"IsStoredAsSubdirectories": false
-							},
-							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Country\",\"description\":\"The Country definition is based upon ISO 3166 Country Codes:\\n\\nEach country or territory has three codes:\\n-  a two letter code \\n-  a three letter code \\n-  a three digit code\\n\\nThe numeric code identifies a physical territory, and the letters a country name. Thus when Germany reunified, it kept DE/DEU but changed from 280 to 276, while when Southern Rhodesia was renamed Zimbabwe it stayed 716 but changed from RH/RHO to ZW/ZWE.\\n\\nCodes withdrawn from use may not be reused for five years. The two letter codes AA, QM to QZ, XA to XZ, and ZZ, all three letter codes beginning with those pairs, and numeric codes beginning 9, are available for individual use and will not be allocated to countries. The codes OO, OOO, and 000 are designated for use as \\\"escape codes\\\" to indicate that additional codes are being used.\\n\\nThe term \\\"country\\\" is perhaps a little misleading: not all the \\\"countries\\\" in ISO 3166 are actually independent.   Many of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \\\"country\\\" is used throughout. Where the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X. \\n\\nISO 3166 was first issued in 1974, and the three digit numbers were mostly added in 1981.\\n\\nChanges to ISO 3166 are managed by the ISO 3166 Maintenance Agency (ISO3166/MA).\\n\\nExamples of ISO 3166 codes:\\n\\nCA CAN 124 Canada\\nUS USA 840 United States of America\",\"baseEntityReference\":{\"name\":\"Country\",\"path\":\"Country.cdm.json/Country\"},\"primaryKey\":[\"CountryId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Country.cdm.json/Country\",\"name\":\"CountryId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the Country.\",\"isNullable\":false,\"name\":\"CountryId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Country.cdm.json/Country\",\"name\":\"IsoCountryName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The ISO country name.\\n\\nCountry               A 2     A 3     Number\\n----------------------------------------------------------------------\\nAALAND ISLANDS     AX      ALA     248\\nAFGHANISTAN         AF      AFG     004\\nALBANIA          AL      ALB     008\\n\\nThe term \\\"country\\\" is perhaps a little misleading: not all the \\\"countries\\\" in ISO 3166 are actually independent. \\n\\nMany of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \\\"country\\\" is used throughout. \\n\\nWhere the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X.\",\"isNullable\":true,\"name\":\"IsoCountryName\"}]}}}",
-								"Description": "The Country definition is based upon ISO 3166 Country Codes:\n\nEach country or territory has three codes:\n-  a two letter code \n-  a three letter code \n-  a three digit code\n\nThe numeric code identifies a physical territory, and the letters a country name. Thus when Germany reunified, it kept DE/DEU but changed from 280 to 276, while when Southern Rhodesia was renamed Zimbabwe it stayed 716 but changed from RH/RHO to ZW/ZWE.\n\nCodes withdrawn from use may not be reused for five years. The two letter codes AA, QM to QZ, XA to XZ, and ZZ, all three letter codes beginning with those pairs, and numeric codes beginning 9, are available for individual use and will not be allocated to countries. The codes OO, OOO, and 000 are designated for use as \"escape codes\" to indicate that additional codes are being used.\n\nThe term \"country\" is perhaps a little misleading: not all the \"countries\" in ISO 3166 are actually independent.   Many of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \"country\" is used throughout. Where the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X. \n\nISO 3166 was first issued in 1974, and the three digit numbers were mostly added in 1981.\n\nChanges to ISO 3166 are managed by the ISO 3166 Maintenance Agency (ISO3166/MA).\n\nExamples of ISO 3166 codes:\n\nCA CAN 124 Canada\nUS USA 840 United States of America",
-								"DisplayFolderInfo": "{\"name\":\"Geography\",\"colorCode\":\"#8170C2\"}",
-								"PrimaryKeys": "CountryId",
-								"spark.sql.sources.provider": "csv",
-								"sql:IsAppendOnly": false
-							},
-							"Retention": 0,
-							"Temporary": false,
-							"IsRewriteEnabled": false,
-							"Partitioning": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "EgridRegions",
-							"EntityType": "TABLE",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Description": "",
-							"TableType": "EXTERNAL",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"StorageDescriptor": {
-								"Columns": [
-									{
-										"Name": "EgridRegionId",
-										"Description": "Unique identifier of an egrid region",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsNullable": false,
-											"IsComplexType": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "EgridRegionName",
-										"Description": "Name of the egrid region",
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsNullable": true,
-											"IsComplexType": false,
-											"Length": 256,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									},
-									{
-										"Name": "EGridRegionLongName",
-										"Description": "Long name of the egrid region",
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsNullable": true,
-											"IsComplexType": false,
-											"Length": 256,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									},
-									{
-										"Name": "EgridZipcode",
-										"Description": "Zipcode of the egrid region",
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsNullable": true,
-											"IsComplexType": false,
-											"Length": 256,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									}
-								],
-								"Format": {
-									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-									"FormatType": "csv",
-									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
-									"Properties": {
-										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
-										"delimiter": ",",
-										"multiLine": "false",
-										"firstRowAsHeader": "false",
-										"serialization.format": "1",
-										"escape": "\\",
-										"quote": "\"",
-										"FormatTypeSetToDatabaseDefault": true,
-										"header": "false"
-									}
-								},
-								"Source": {
-									"Provider": "ADLS",
-									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
-									"Properties": {
-										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-										"LocationSetToDatabaseDefault": true
-									}
-								},
-								"Properties": {
-									"textinputformat.record.delimiter": ",",
-									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
-								},
-								"Compressed": false,
-								"IsStoredAsSubdirectories": false
-							},
-							"Properties": {
-								"Description": "",
-								"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-								"PrimaryKeys": "EgridRegionId",
-								"spark.sql.sources.provider": "csv",
-								"sql:IsAppendOnly": false
-							},
-							"Retention": 0,
-							"Temporary": false,
-							"IsRewriteEnabled": false,
-							"Partitioning": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "Banner",
-							"EntityType": "TABLE",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Description": "",
-							"TableType": "EXTERNAL",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"StorageDescriptor": {
-								"Columns": [
-									{
-										"Name": "BannerId",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsNullable": false,
-											"IsComplexType": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "BannerName",
-										"Description": "",
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsNullable": true,
-											"IsComplexType": false,
-											"Length": 256,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									},
-									{
-										"Name": "OrganizationId",
-										"Description": "",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsNullable": true,
-											"IsComplexType": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									}
-								],
-								"Format": {
-									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-									"FormatType": "csv",
-									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
-									"Properties": {
-										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
-										"delimiter": ",",
-										"multiLine": "false",
-										"firstRowAsHeader": "false",
-										"serialization.format": "1",
-										"escape": "\\",
-										"quote": "\"",
-										"FormatTypeSetToDatabaseDefault": true,
-										"header": "false"
-									}
-								},
-								"Source": {
-									"Provider": "ADLS",
-									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
-									"Properties": {
-										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-										"LocationSetToDatabaseDefault": true
-									}
-								},
-								"Properties": {
-									"textinputformat.record.delimiter": ",",
-									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
-								},
-								"Compressed": false,
-								"IsStoredAsSubdirectories": false
-							},
-							"Properties": {
-								"Description": "",
-								"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-								"PrimaryKeys": "BannerId",
-								"spark.sql.sources.provider": "csv",
-								"sql:IsAppendOnly": false
-							},
-							"Retention": 0,
-							"Temporary": false,
-							"IsRewriteEnabled": false,
-							"Partitioning": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "relationship-jpcyusnhum",
-							"EntityType": "RELATIONSHIP",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"FromTableName": "Country",
-							"ToTableName": "Location",
-							"ColumnRelationshipInformations": [
-								{
-									"FromColumnName": "CountryId",
-									"ToColumnName": "CountryId"
-								}
-							],
-							"RelationshipType": 0,
-							"Properties": {
-								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Country.cdm.json/Country\",\"toEntity\":\"Location.cdm.json/Location\",\"joinPairs\":[{\"fromAttribute\":\"CountryId\",\"toAttribute\":\"CountryId\"}]}}"
-							}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "relationship-qksyfjmcdh",
-							"EntityType": "RELATIONSHIP",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"FromTableName": "Location",
-							"ToTableName": "Facility",
-							"ColumnRelationshipInformations": [
-								{
-									"FromColumnName": "LocationId",
-									"ToColumnName": "LocationId"
-								}
-							],
-							"RelationshipType": 0,
-							"Properties": {
-								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Location.cdm.json/Location\",\"toEntity\":\"Store.cdm.json/Store\",\"joinPairs\":[{\"fromAttribute\":\"LocationId\",\"toAttribute\":\"LocationId\"}]}}"
-							}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "relationship-jsyjxxychl",
-							"EntityType": "RELATIONSHIP",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"FromTableName": "FacilityType",
-							"ToTableName": "Facility",
-							"ColumnRelationshipInformations": [
-								{
-									"FromColumnName": "FacilityTypeId",
-									"ToColumnName": "FacilityTypeId"
-								}
-							],
-							"RelationshipType": 0,
-							"Properties": {
-								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"StoreType.cdm.json/StoreType\",\"toEntity\":\"Store.cdm.json/Store\",\"joinPairs\":[{\"fromAttribute\":\"StoreTypeId\",\"toAttribute\":\"StoreTypeId\"}]}}"
-							}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "relationship-zoixzyzcfa",
-							"EntityType": "RELATIONSHIP",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"FromTableName": "EgridRegions",
-							"ToTableName": "Location",
-							"ColumnRelationshipInformations": [
-								{
-									"FromColumnName": "EgridRegionId",
-									"ToColumnName": "EgridRegionId"
-								}
-							],
-							"RelationshipType": 0,
-							"Properties": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "relationship-majaiagmbr",
-							"EntityType": "RELATIONSHIP",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"FromTableName": "Banner",
-							"ToTableName": "Facility",
-							"ColumnRelationshipInformations": [
-								{
-									"FromColumnName": "BannerId",
-									"ToColumnName": "BannerId"
-								}
-							],
-							"RelationshipType": 0,
-							"Properties": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "relationship-zpyhviztep",
-							"EntityType": "RELATIONSHIP",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"FromTableName": "PartyOrganization",
-							"ToTableName": "Banner",
-							"ColumnRelationshipInformations": [
-								{
-									"FromColumnName": "OrganizationId",
-									"ToColumnName": "OrganizationId"
-								}
-							],
-							"RelationshipType": 0,
-							"Properties": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					}
-				]
-			},
-			"dependsOn": []
 		}
 	]
 }
