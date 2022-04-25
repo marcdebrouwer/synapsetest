@@ -1,5 +1,5 @@
 {
-	"name": "NormalizedSupportingTableMappings",
+	"name": "NormalizedSupporting3NF",
 	"properties": {
 		"description": "Mapping of the lowest level tables in the normalized model",
 		"activities": [
