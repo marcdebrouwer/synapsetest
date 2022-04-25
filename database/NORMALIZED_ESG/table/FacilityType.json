@@ -16,10 +16,6 @@
 				{
 					"Name": "FacilityId",
 					"Description": "The unique identifier of a Store Type.",
-					"BaseAttributeReference": {
-						"Entity": "StoreType.cdm.json/StoreType",
-						"Name": "StoreTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "StoreType.cdm.json/StoreType",
+						"Name": "StoreTypeId"
 					}
 				},
 				{
 					"Name": "FacilityTypeName",
 					"Description": "The name of a Store Type.",
-					"BaseAttributeReference": {
-						"Entity": "StoreType.cdm.json/StoreType",
-						"Name": "StoreTypeName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,6 +40,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "StoreType.cdm.json/StoreType",
+						"Name": "StoreTypeName"
 					}
 				}
 			],
@@ -74,7 +74,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeId\"},\"FacilityTypeName\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeName\"}}}"
 			},
 			"Compressed": false,
