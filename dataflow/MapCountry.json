@@ -1,0 +1,71 @@
+{
+	"name": "MapCountry",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "FacilityData"
+				}
+			],
+			"sinks": [
+				{
+					"name": "MapData"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DistinctCountry"
+				},
+				{
+					"name": "surrogateKey1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Company as string,",
+				"          Region as string,",
+				"          OpCo as string,",
+				"          Brand as string,",
+				"          {Facility Type} as string,",
+				"          {Facility ID} as short,",
+				"          {Facility Name} as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          {State } as string,",
+				"          Country as string,",
+				"          {Postal Code} as string,",
+				"          {Gross area owned stores ft2} as integer,",
+				"          {Sales area owned stores ft2} as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'Facility.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> FacilityData",
+				"FacilityData aggregate(groupBy(Country),",
+				"     each(match(name != \"Country\"), $$ = first($$))) ~> DistinctCountry",
+				"DistinctCountry keyGenerate(output(CountryId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"surrogateKey1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'NORMALIZED_ESG',",
+				"     tableName: 'Banner') ~> MapData"
+			]
+		}
+	}
+}
