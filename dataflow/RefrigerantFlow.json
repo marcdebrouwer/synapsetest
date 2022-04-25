@@ -10,6 +10,9 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "VirtualScoreData"
+				},
+				{
+					"name": "BannerData"
 				}
 			],
 			"sinks": [
@@ -19,7 +22,10 @@
 			],
 			"transformations": [
 				{
-					"name": "surrogateKey1"
+					"name": "CreateVirtualScoreKey"
+				},
+				{
+					"name": "lookupBrand"
 				}
 			],
 			"scriptLines": [
@@ -42,16 +48,45 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> VirtualScoreData",
-				"VirtualScoreData keyGenerate(output(VirtualScoreId as long),",
-				"     startAt: 1L,",
-				"     stepValue: 1L) ~> surrogateKey1",
-				"surrogateKey1 sink(allowSchemaDrift: true,",
+				"source(output(",
+				"          BannerId as integer,",
+				"          BannerName as string,",
+				"          OrganizationId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: 'Banner') ~> MapVirtualScores"
+				"     tableName: 'Banner') ~> BannerData",
+				"VirtualScoreData keyGenerate(output(VirtualScoreId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> CreateVirtualScoreKey",
+				"CreateVirtualScoreKey, BannerData lookup(Brand == BannerName,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(BannerId, true),",
+				"     broadcast: 'auto')~> lookupBrand",
+				"lookupBrand sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'VirtualEmissionFactor',",
+				"     input(",
+				"          VirtualEmissionId as string,",
+				"          VirtualEmissionEnergyTypeId as integer,",
+				"          VirtualEmissionStartDate as date,",
+				"          VirtualEmissionEndDate as date",
+				"     ),",
+				"     mapColumn(",
+				"          VirtualEmissionId = VirtualScoreId,",
+				"          VirtualEmissionEnergyTypeId = EnergyType,",
+				"          VirtualEmissionStartDate = Start_date,",
+				"          VirtualEmissionEndDate = End_date",
+				"     )) ~> MapVirtualScores"
 			]
 		}
 	}
