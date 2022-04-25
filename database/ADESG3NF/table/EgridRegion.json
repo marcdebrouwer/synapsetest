@@ -50,6 +50,19 @@
 							"HIVE_TYPE_STRING": "string"
 						}
 					}
+				},
+				{
+					"Name": "EgridRegionLongName",
+					"Description": "The long name of the egrid region",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
 				}
 			],
 			"Format": {
