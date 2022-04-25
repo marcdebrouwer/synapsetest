@@ -1,0 +1,34 @@
+{
+	"name": "Dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "LocationData"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          LocationId as integer,",
+				"          LocationName as string,",
+				"          LocationAddressLine1 as string,",
+				"          LocationCity as string,",
+				"          LocationState as string,",
+				"          LocationZipCode as string,",
+				"          CountryId as integer,",
+				"          EgridRegionId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Location') ~> LocationData"
+			]
+		}
+	}
+}
