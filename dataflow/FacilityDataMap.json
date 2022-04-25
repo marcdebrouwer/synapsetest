@@ -1,0 +1,188 @@
+{
+	"name": "FacilityDataMap",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "FacilityData"
+				},
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "EgridData"
+				}
+			],
+			"sinks": [
+				{
+					"name": "MapFacilityType"
+				},
+				{
+					"name": "MapCountry"
+				},
+				{
+					"name": "MapOrganization"
+				},
+				{
+					"name": "MapEgridRegion"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DistinctFacilityType"
+				},
+				{
+					"name": "CreateFacilityKey"
+				},
+				{
+					"name": "DistinctCountry"
+				},
+				{
+					"name": "CreateCountryKey"
+				},
+				{
+					"name": "DistinctOrganization"
+				},
+				{
+					"name": "CreateOrganizationKey"
+				},
+				{
+					"name": "CreateEgridKey"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Company as string,",
+				"          Region as string,",
+				"          OpCo as string,",
+				"          Brand as string,",
+				"          {Facility Type} as string,",
+				"          {Facility ID} as short,",
+				"          {Facility Name} as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          {State } as string,",
+				"          Country as string,",
+				"          {Postal Code} as string,",
+				"          {Gross area owned stores ft2} as integer,",
+				"          {Sales area owned stores ft2} as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'Facility.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> FacilityData",
+				"source(output(",
+				"          Zipcode as string,",
+				"          EgridRegion as string,",
+				"          {DimEgridRegions.eGrid Subregion_1} as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'EgridRegion.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> EgridData",
+				"FacilityData aggregate(groupBy({Facility Type}),",
+				"     each(match(name != \"Facility Type\"), $$ = first($$))) ~> DistinctFacilityType",
+				"DistinctFacilityType keyGenerate(output(FacilityTypeId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> CreateFacilityKey",
+				"FacilityData aggregate(groupBy(Country),",
+				"     each(match(name != \"Country\"), $$ = first($$))) ~> DistinctCountry",
+				"DistinctCountry keyGenerate(output(CountryId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> CreateCountryKey",
+				"FacilityData aggregate(groupBy(Company),",
+				"     each(match(name != \"Company\"), $$ = first($$))) ~> DistinctOrganization",
+				"DistinctOrganization keyGenerate(output(OrganizationId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> CreateOrganizationKey",
+				"EgridData keyGenerate(output(EgridId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> CreateEgridKey",
+				"CreateFacilityKey sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'FacilityType',",
+				"     input(",
+				"          FacilityTypeId as integer,",
+				"          FaciityTypeName as string",
+				"     ),",
+				"     mapColumn(",
+				"          FacilityTypeId,",
+				"          FaciityTypeName = {Facility Type}",
+				"     )) ~> MapFacilityType",
+				"CreateCountryKey sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Country',",
+				"     input(",
+				"          CountryId as integer,",
+				"          IsoCountryName as string",
+				"     ),",
+				"     mapColumn(",
+				"          CountryId,",
+				"          IsoCountryName = Country",
+				"     )) ~> MapCountry",
+				"CreateOrganizationKey sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'PartyOrganization',",
+				"     input(",
+				"          OrganizationId as integer,",
+				"          OrganizationName as string",
+				"     ),",
+				"     mapColumn(",
+				"          OrganizationId,",
+				"          OrganizationName = Company",
+				"     )) ~> MapOrganization",
+				"CreateEgridKey sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'EgridRegions',",
+				"     input(",
+				"          EgridRegionId as integer,",
+				"          EgridRegionName as string,",
+				"          EGridRegionLongName as string,",
+				"          EgridZipcode as string",
+				"     ),",
+				"     mapColumn(",
+				"          EgridRegionId = EgridId,",
+				"          EgridRegionName = EgridRegion,",
+				"          EGridRegionLongName = {DimEgridRegions.eGrid Subregion_1},",
+				"          EgridZipcode = Zipcode",
+				"     )) ~> MapEgridRegion"
+			]
+		}
+	}
+}
