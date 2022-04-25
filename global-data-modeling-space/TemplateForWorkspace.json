@@ -182,6 +182,54 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/PurchasedEnergy')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "RefrigerantFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "PurchasedFlow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"PurchasedEnergyData": {},
+									"PurchasedMapping": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/PurchasedFlow')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/Excel1')]",
 			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
@@ -959,6 +1007,77 @@
 						"          CountryId,",
 						"          EgridRegionId",
 						"     )) ~> MapLocation"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/PurchasedFlow')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PurchasedEnergyData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "PurchasedMapping"
+						}
+					],
+					"transformations": [
+						{
+							"name": "CreateEnergyKey"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          Brand as string,",
+						"          EnergyType as string,",
+						"          {virtual Market based} as double '000,000,000.000',",
+						"          {virtual Location based} as double '000,000,000.000',",
+						"          Start_date as date 'dd-MM-yyyy',",
+						"          End_date as date 'dd-MM-yyyy'",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'virtualscores.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> PurchasedEnergyData",
+						"PurchasedEnergyData keyGenerate(output(PurchasedEnergyId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> CreateEnergyKey",
+						"CreateEnergyKey sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'PurchasedGas',",
+						"     input(",
+						"          PurchasedGasId as integer,",
+						"          PurchasedGasName as string",
+						"     ),",
+						"     mapColumn(",
+						"          PurchasedGasId = PurchasedEnergyId,",
+						"          PurchasedGasName = EnergyType",
+						"     )) ~> PurchasedMapping"
 					]
 				}
 			},
@@ -17726,8 +17845,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -17823,8 +17942,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18030,8 +18149,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/DirectEmissionsFromRefrigeration",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18146,8 +18265,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18319,8 +18438,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18417,8 +18536,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18532,8 +18651,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18726,8 +18845,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18824,8 +18943,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18922,8 +19041,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PurchasedGas",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19069,8 +19188,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2MarketBasedApproach",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19203,8 +19322,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/UnitOfMeasure",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19275,8 +19394,8 @@
 										"Description": "",
 										"OriginDataTypeName": {
 											"TypeName": "integer",
-											"IsNullable": true,
 											"IsComplexType": false,
+											"IsNullable": true,
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
@@ -19313,8 +19432,8 @@
 										"Description": "",
 										"OriginDataTypeName": {
 											"TypeName": "string",
-											"IsNullable": true,
 											"IsComplexType": false,
+											"IsNullable": true,
 											"Length": 256,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
@@ -19326,8 +19445,8 @@
 										"Description": "",
 										"OriginDataTypeName": {
 											"TypeName": "integer",
-											"IsNullable": true,
 											"IsComplexType": false,
+											"IsNullable": true,
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
@@ -19338,8 +19457,8 @@
 										"Description": "",
 										"OriginDataTypeName": {
 											"TypeName": "double",
-											"IsNullable": true,
 											"IsComplexType": false,
+											"IsNullable": true,
 											"Properties": {
 												"HIVE_TYPE_STRING": "double"
 											}
@@ -19350,8 +19469,8 @@
 										"Description": "",
 										"OriginDataTypeName": {
 											"TypeName": "double",
-											"IsNullable": true,
 											"IsComplexType": false,
+											"IsNullable": true,
 											"Properties": {
 												"HIVE_TYPE_STRING": "double"
 											}
@@ -19366,8 +19485,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19399,8 +19518,7 @@
 							},
 							"Retention": 0,
 							"Temporary": false,
-							"IsRewriteEnabled": false,
-							"Partitioning": {}
+							"IsRewriteEnabled": false
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -19578,6 +19696,33 @@
 						"ActionType": "CREATE",
 						"OldEntity": null,
 						"NewEntity": {
+							"Name": "relationship-pzwkdkauwk",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "PurchasedGas",
+							"ToTableName": "VirtualEmissionFactor",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "PurchasedGasId",
+									"ToColumnName": "PurchasedGasId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
 							"Name": "relationship-qksyfjmcdh",
 							"EntityType": "RELATIONSHIP",
 							"Namespace": {
@@ -19598,6 +19743,60 @@
 							"Properties": {
 								"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Location.cdm.json/Location\",\"toEntity\":\"Store.cdm.json/Store\",\"joinPairs\":[{\"fromAttribute\":\"LocationId\",\"toAttribute\":\"LocationId\"}]}}"
 							}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-sskoulxoif",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "VirtualEmissionFactor",
+							"ToTableName": "DirectEmissionsFromRefrigeration",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "VirtualEmissionId",
+									"ToColumnName": "VirtualEmissionFactorId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-sthmgfjivs",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "Banner",
+							"ToTableName": "VirtualEmissionFactor",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "BannerId",
+									"ToColumnName": "BannerId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {}
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -19648,87 +19847,6 @@
 								{
 									"FromColumnName": "OrganizationId",
 									"ToColumnName": "OrganizationId"
-								}
-							],
-							"RelationshipType": 0,
-							"Properties": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "relationship-sskoulxoif",
-							"EntityType": "RELATIONSHIP",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"FromTableName": "VirtualEmissionFactor",
-							"ToTableName": "DirectEmissionsFromRefrigeration",
-							"ColumnRelationshipInformations": [
-								{
-									"FromColumnName": "VirtualEmissionId",
-									"ToColumnName": "VirtualEmissionFactorId"
-								}
-							],
-							"RelationshipType": 0,
-							"Properties": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "relationship-pzwkdkauwk",
-							"EntityType": "RELATIONSHIP",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"FromTableName": "PurchasedGas",
-							"ToTableName": "VirtualEmissionFactor",
-							"ColumnRelationshipInformations": [
-								{
-									"FromColumnName": "PurchasedGasId",
-									"ToColumnName": "PurchasedGasId"
-								}
-							],
-							"RelationshipType": 0,
-							"Properties": {}
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "relationship-sthmgfjivs",
-							"EntityType": "RELATIONSHIP",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"FromTableName": "Banner",
-							"ToTableName": "VirtualEmissionFactor",
-							"ColumnRelationshipInformations": [
-								{
-									"FromColumnName": "BannerId",
-									"ToColumnName": "BannerId"
 								}
 							],
 							"RelationshipType": 0,
@@ -39214,117 +39332,6 @@
 			},
 			"dependsOn": [],
 			"location": "westeurope"
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/PurchasedEnergy')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "RefrigerantFlow",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "PurchasedFlow",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"PurchasedEnergyData": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
-				"[concat(variables('workspaceId'), '/dataflows/PurchasedFlow')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/PurchasedFlow')]",
-			"type": "Microsoft.Synapse/workspaces/dataflows",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"linkedService": {
-								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-								"type": "LinkedServiceReference"
-							},
-							"name": "PurchasedEnergyData"
-						}
-					],
-					"sinks": [
-						{
-							"name": "sink1"
-						}
-					],
-					"transformations": [
-						{
-							"name": "CreateEnergyKey"
-						}
-					],
-					"scriptLines": [
-						"source(output(",
-						"          Brand as string,",
-						"          EnergyType as string,",
-						"          {virtual Market based} as double '000,000,000.000',",
-						"          {virtual Location based} as double '000,000,000.000',",
-						"          Start_date as date 'dd-MM-yyyy',",
-						"          End_date as date 'dd-MM-yyyy'",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false,",
-						"     format: 'delimited',",
-						"     fileSystem: 'fsgdmsdevweeu01',",
-						"     folderPath: 'ESG_MAPDATA',",
-						"     fileName: 'virtualscores.csv',",
-						"     columnDelimiter: ';',",
-						"     escapeChar: '\\\\',",
-						"     quoteChar: '\\\"',",
-						"     columnNamesAsHeader: true) ~> PurchasedEnergyData",
-						"PurchasedEnergyData keyGenerate(output(PurchasedEnergyId as long),",
-						"     startAt: 1L,",
-						"     stepValue: 1L) ~> CreateEnergyKey",
-						"CreateEnergyKey sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     store: 'synapse',",
-						"     databaseType: 'spark',",
-						"     format: 'table',",
-						"     database: 'ESGNORMALIZEDMODEL',",
-						"     tableName: 'PurchasedGas') ~> sink1"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
-			]
 		}
 	]
 }
