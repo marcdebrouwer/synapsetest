@@ -36399,6 +36399,42 @@
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/ESGNORMALIZEDMODEL')]",
+			"type": "Microsoft.Synapse/workspaces/databases",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"Ddls": [
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "ESGNORMALIZEDMODEL",
+							"EntityType": "DATABASE",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"Properties": {
+								"IsSyMSCDMDatabase": true
+							},
+							"Description": "The normalized data model for Carbon Emissions Reporting",
+							"Source": {
+								"Provider": "ADLS",
+								"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL",
+								"Properties": {
+									"FormatType": "csv",
+									"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage"
+								}
+							}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					}
+				]
+			},
+			"dependsOn": []
 		}
 	]
 }
