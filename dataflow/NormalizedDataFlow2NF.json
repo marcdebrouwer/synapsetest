@@ -1,0 +1,191 @@
+{
+	"name": "NormalizedDataFlow2NF",
+	"properties": {
+		"description": "Maps data to the Banner and Location tables",
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "FacilityData"
+				},
+				{
+					"name": "OrganizationData"
+				},
+				{
+					"name": "EridData"
+				},
+				{
+					"name": "CountryData"
+				}
+			],
+			"sinks": [
+				{
+					"name": "MapBanner"
+				},
+				{
+					"name": "MapLocation"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DistinctLocations"
+				},
+				{
+					"name": "DistinctBanners"
+				},
+				{
+					"name": "CreateBannerKey"
+				},
+				{
+					"name": "LookupOrganization"
+				},
+				{
+					"name": "CreateLocationKey"
+				},
+				{
+					"name": "LookupCountry"
+				},
+				{
+					"name": "LookupEgridregion"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Company as string,",
+				"          Region as string,",
+				"          OpCo as string,",
+				"          Brand as string,",
+				"          {Facility Type} as string,",
+				"          {Facility ID} as short,",
+				"          {Facility Name} as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          {State } as string,",
+				"          Country as string,",
+				"          {Postal Code} as string,",
+				"          {Gross area owned stores ft2} as integer,",
+				"          {Sales area owned stores ft2} as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'Facility.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> FacilityData",
+				"source(output(",
+				"          OrganizationId as integer,",
+				"          OrganizationName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'PartyOrganization') ~> OrganizationData",
+				"source(output(",
+				"          EgridRegionId as integer,",
+				"          EgridRegionName as string,",
+				"          EGridRegionLongName as string,",
+				"          EgridZipcode as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'EgridRegions') ~> EridData",
+				"source(output(",
+				"          CountryId as integer,",
+				"          IsoCountryName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Country') ~> CountryData",
+				"FacilityData aggregate(groupBy({Facility Name}),",
+				"     each(match(name != \"Facility Name\"), $$ = first($$))) ~> DistinctLocations",
+				"FacilityData aggregate(groupBy(OpCo),",
+				"     each(match(name != \"OpCo\"), $$ = first($$))) ~> DistinctBanners",
+				"DistinctBanners keyGenerate(output(BannerId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> CreateBannerKey",
+				"CreateBannerKey, OrganizationData lookup(Company == OrganizationName,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(OrganizationId, true),",
+				"     broadcast: 'auto')~> LookupOrganization",
+				"DistinctLocations keyGenerate(output(LocationId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> CreateLocationKey",
+				"CreateLocationKey, CountryData lookup(Country == IsoCountryName,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(CountryId, true),",
+				"     broadcast: 'auto')~> LookupCountry",
+				"LookupCountry, EridData lookup({Postal Code} == EgridZipcode,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(EgridRegionId, true),",
+				"     broadcast: 'auto')~> LookupEgridregion",
+				"LookupOrganization sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Banner',",
+				"     input(",
+				"          BannerId as integer,",
+				"          BannerName as string,",
+				"          OrganizationId as integer",
+				"     ),",
+				"     mapColumn(",
+				"          BannerId,",
+				"          BannerName = OpCo,",
+				"          OrganizationId",
+				"     )) ~> MapBanner",
+				"LookupEgridregion sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Location',",
+				"     input(",
+				"          LocationId as integer,",
+				"          LocationName as string,",
+				"          LocationAddressLine1 as string,",
+				"          LocationCity as string,",
+				"          LocationStateId as integer,",
+				"          LocationZipCode as string,",
+				"          CountryId as integer,",
+				"          EgridRegionId as integer",
+				"     ),",
+				"     mapColumn(",
+				"          LocationId,",
+				"          LocationName = {Facility Name},",
+				"          LocationAddressLine1 = Address,",
+				"          LocationCity = City,",
+				"          LocationStateId = {State },",
+				"          LocationZipCode = {Postal Code},",
+				"          CountryId,",
+				"          EgridRegionId",
+				"     )) ~> MapLocation"
+			]
+		}
+	}
+}
