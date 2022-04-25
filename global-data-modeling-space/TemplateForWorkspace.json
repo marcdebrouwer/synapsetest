@@ -17021,8 +17021,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -17118,8 +17118,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -17234,8 +17234,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -17423,8 +17423,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -17521,8 +17521,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -17645,14 +17645,15 @@
 										}
 									},
 									{
-										"Name": "LocationStateId",
+										"Name": "LocationState",
 										"Description": "The unique identifier of the State = State Code.\n\nA two-digit FIPS code assigned by the NIST to identify each State and statistically equivalent entity. The NIST assigns the codes based on the alphabetic sequence of State names (Puerto Rico and the Outlying Areas appear at the end); it documents these codes in a FIPS publication (FIPS PUB 5). Also, a two-digit code assigned by the Census Bureau to identify each State within its census geographic division (Puerto Rico and the Outlying Areas appear at the end).",
 										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
+											"TypeName": "string",
 											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 256,
 											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
+												"HIVE_TYPE_STRING": "string"
 											}
 										},
 										"BaseAttributeReference": {
@@ -17714,8 +17715,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -17734,13 +17735,13 @@
 								"Properties": {
 									"textinputformat.record.delimiter": ",",
 									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"LocationId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"LocationName\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"LocationAddressLine1\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"LocationCity\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"LocationStateId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"LocationZipCode\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"CountryId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"}}}"
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"LocationId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"LocationName\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"LocationAddressLine1\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"LocationCity\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"LocationState\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"LocationZipCode\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"CountryId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"}}}"
 								},
 								"Compressed": false,
 								"IsStoredAsSubdirectories": false
 							},
 							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Location\",\"description\":\"A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\\n\\n- the address of a physical structure\\n- the location of a business or service\\n- the location of a component\\n- the delivery location for a shipment or mail\",\"baseEntityReference\":{\"name\":\"Location\",\"path\":\"Location.cdm.json/Location\"},\"primaryKey\":[\"LocationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":false,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a location.\",\"isNullable\":true,\"name\":\"LocationName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The 'street' component of a location. Includes street name, apartment, suite number or PO Box.\",\"isNullable\":true,\"name\":\"LocationAddressLine1\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The 'city' component of a location.\",\"isNullable\":true,\"name\":\"LocationCity\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the State = State Code.\\n\\nA two-digit FIPS code assigned by the NIST to identify each State and statistically equivalent entity. The NIST assigns the codes based on the alphabetic sequence of State names (Puerto Rico and the Outlying Areas appear at the end); it documents these codes in a FIPS publication (FIPS PUB 5). Also, a two-digit code assigned by the Census Bureau to identify each State within its census geographic division (Puerto Rico and the Outlying Areas appear at the end).\",\"isNullable\":true,\"name\":\"LocationStateId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Zip Code.\",\"isNullable\":true,\"name\":\"LocationZipCode\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the Country.\",\"isNullable\":true,\"name\":\"CountryId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"EgridRegionId\"}]}}}",
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Location\",\"description\":\"A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\\n\\n- the address of a physical structure\\n- the location of a business or service\\n- the location of a component\\n- the delivery location for a shipment or mail\",\"baseEntityReference\":{\"name\":\"Location\",\"path\":\"Location.cdm.json/Location\"},\"primaryKey\":[\"LocationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":false,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a location.\",\"isNullable\":true,\"name\":\"LocationName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The 'street' component of a location. Includes street name, apartment, suite number or PO Box.\",\"isNullable\":true,\"name\":\"LocationAddressLine1\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The 'city' component of a location.\",\"isNullable\":true,\"name\":\"LocationCity\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of the State = State Code.\\n\\nA two-digit FIPS code assigned by the NIST to identify each State and statistically equivalent entity. The NIST assigns the codes based on the alphabetic sequence of State names (Puerto Rico and the Outlying Areas appear at the end); it documents these codes in a FIPS publication (FIPS PUB 5). Also, a two-digit code assigned by the Census Bureau to identify each State within its census geographic division (Puerto Rico and the Outlying Areas appear at the end).\",\"isNullable\":true,\"name\":\"LocationState\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Zip Code.\",\"isNullable\":true,\"name\":\"LocationZipCode\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the Country.\",\"isNullable\":true,\"name\":\"CountryId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"EgridRegionId\"}]}}}",
 								"Description": "A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\n\n- the address of a physical structure\n- the location of a business or service\n- the location of a component\n- the delivery location for a shipment or mail",
 								"DisplayFolderInfo": "{\"name\":\"Geography\",\"colorCode\":\"#8170C2\"}",
 								"PrimaryKeys": "LocationId",
@@ -17748,7 +17749,8 @@
 							},
 							"Retention": 0,
 							"Temporary": false,
-							"IsRewriteEnabled": false
+							"IsRewriteEnabled": false,
+							"Partitioning": {}
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -17812,8 +17814,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -37736,6 +37738,254 @@
 						"          EGridRegionLongName = {DimEgridRegions.eGrid Subregion_1},",
 						"          EgridZipcode = Zipcode",
 						"     )) ~> MapEgridRegion"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/NormalizedSupporting2NF')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Normalized2mapping",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "NormalizedDataFlow2NF",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"FacilityData": {},
+									"OrganizationData": {},
+									"EridData": {},
+									"CountryData": {},
+									"MapBanner": {},
+									"MapLocation": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
+				"[concat(variables('workspaceId'), '/dataflows/NormalizedDataFlow2NF')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/NormalizedDataFlow2NF')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"description": "Maps data to the Banner and Location tables",
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "FacilityData"
+						},
+						{
+							"name": "OrganizationData"
+						},
+						{
+							"name": "EridData"
+						},
+						{
+							"name": "CountryData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "MapBanner"
+						},
+						{
+							"name": "MapLocation"
+						}
+					],
+					"transformations": [
+						{
+							"name": "DistinctLocations"
+						},
+						{
+							"name": "DistinctBanners"
+						},
+						{
+							"name": "CreateBannerKey"
+						},
+						{
+							"name": "LookupOrganization"
+						},
+						{
+							"name": "CreateLocationKey"
+						},
+						{
+							"name": "LookupCountry"
+						},
+						{
+							"name": "LookupEgridregion"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          Company as string,",
+						"          Region as string,",
+						"          OpCo as string,",
+						"          Brand as string,",
+						"          {Facility Type} as string,",
+						"          {Facility ID} as short,",
+						"          {Facility Name} as string,",
+						"          Address as string,",
+						"          City as string,",
+						"          {State } as string,",
+						"          Country as string,",
+						"          {Postal Code} as string,",
+						"          {Gross area owned stores ft2} as integer,",
+						"          {Sales area owned stores ft2} as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'Facility.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> FacilityData",
+						"source(output(",
+						"          OrganizationId as integer,",
+						"          OrganizationName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'PartyOrganization') ~> OrganizationData",
+						"source(output(",
+						"          EgridRegionId as integer,",
+						"          EgridRegionName as string,",
+						"          EGridRegionLongName as string,",
+						"          EgridZipcode as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'EgridRegions') ~> EridData",
+						"source(output(",
+						"          CountryId as integer,",
+						"          IsoCountryName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Country') ~> CountryData",
+						"FacilityData aggregate(groupBy({Facility Name}),",
+						"     each(match(name!=\"Facility Name\"), $$ = first($$))) ~> DistinctLocations",
+						"FacilityData aggregate(groupBy(OpCo),",
+						"     each(match(name!=\"OpCo\"), $$ = first($$))) ~> DistinctBanners",
+						"DistinctBanners keyGenerate(output(BannerId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> CreateBannerKey",
+						"CreateBannerKey, OrganizationData lookup(Company == OrganizationName,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(OrganizationId, true),",
+						"     broadcast: 'auto')~> LookupOrganization",
+						"DistinctLocations keyGenerate(output(LocationId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> CreateLocationKey",
+						"CreateLocationKey, CountryData lookup(Country == IsoCountryName,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(CountryId, true),",
+						"     broadcast: 'auto')~> LookupCountry",
+						"LookupCountry, EridData lookup({Postal Code} == EgridZipcode,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(EgridRegionId, true),",
+						"     broadcast: 'auto')~> LookupEgridregion",
+						"LookupOrganization sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Banner',",
+						"     input(",
+						"          BannerId as integer,",
+						"          BannerName as string,",
+						"          OrganizationId as integer",
+						"     ),",
+						"     mapColumn(",
+						"          BannerId,",
+						"          BannerName = OpCo,",
+						"          OrganizationId",
+						"     )) ~> MapBanner",
+						"LookupEgridregion sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Location',",
+						"     input(",
+						"          LocationId as integer,",
+						"          LocationName as string,",
+						"          LocationAddressLine1 as string,",
+						"          LocationCity as string,",
+						"          LocationStateId as integer,",
+						"          LocationZipCode as string,",
+						"          CountryId as integer,",
+						"          EgridRegionId as integer",
+						"     ),",
+						"     mapColumn(",
+						"          LocationId,",
+						"          LocationName = {Facility Name},",
+						"          LocationAddressLine1 = Address,",
+						"          LocationCity = City,",
+						"          LocationStateId = {State },",
+						"          LocationZipCode = {Postal Code},",
+						"          CountryId,",
+						"          EgridRegionId",
+						"     )) ~> MapLocation"
 					]
 				}
 			},
