@@ -12,7 +12,11 @@
 					"name": "EGridData"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "surrogateKey1"
@@ -37,7 +41,24 @@
 				"     columnNamesAsHeader: true) ~> EGridData",
 				"EGridData keyGenerate(output(EgridRegionId as long),",
 				"     startAt: 1L,",
-				"     stepValue: 1L) ~> surrogateKey1"
+				"     stepValue: 1L) ~> surrogateKey1",
+				"surrogateKey1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ADESG3NF',",
+				"     tableName: 'EgridRegion',",
+				"     input(",
+				"          EgridRegionId as integer,",
+				"          EgridRegionName as string,",
+				"          EgridRegionZipcode as string",
+				"     ),",
+				"     mapColumn(",
+				"          EgridRegionId,",
+				"          EgridRegionName = EgridRegion,",
+				"          EgridRegionZipcode = Zipcode",
+				"     )) ~> sink1"
 			]
 		}
 	}
