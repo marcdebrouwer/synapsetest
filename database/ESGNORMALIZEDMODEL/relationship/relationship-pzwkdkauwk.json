@@ -1,0 +1,23 @@
+{
+	"name": "relationship-pzwkdkauwk",
+	"properties": {
+		"Name": "relationship-pzwkdkauwk",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PurchasedGas",
+		"ToTableName": "VirtualEmissionFactor",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PurchasedGasId",
+				"ToColumnName": "PurchasedGasId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

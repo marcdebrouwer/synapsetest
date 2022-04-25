@@ -16,10 +16,6 @@
 				{
 					"Name": "ReportingEntityId",
 					"Description": "The unique identifier of a Legal Entity.",
-					"BaseAttributeReference": {
-						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
-						"Name": "ReportingEntityId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
+						"Name": "ReportingEntityId"
 					}
 				},
 				{
 					"Name": "PeriodStartTimestamp",
 					"Description": "The period start timestamp.",
-					"BaseAttributeReference": {
-						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
-						"Name": "PeriodStartTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
+						"Name": "PeriodStartTimestamp"
 					}
 				},
 				{
 					"Name": "PeriodEndTimestamp",
 					"Description": "The period end timestamp.",
-					"BaseAttributeReference": {
-						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
-						"Name": "PeriodEndTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "timestamp",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 							"TimestampFormat": "YYYY-MM-DD HH:MM:SS.fffffffff",
 							"HIVE_TYPE_STRING": "timestamp"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
+						"Name": "PeriodEndTimestamp"
 					}
 				},
 				{
 					"Name": "TotalCo2EEmissionsUnits",
 					"Description": "The total CO2e emission units.",
-					"BaseAttributeReference": {
-						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
-						"Name": "TotalCo2EEmissionsUnits"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -77,15 +73,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
+						"Name": "TotalCo2EEmissionsUnits"
 					}
 				},
 				{
 					"Name": "TotalCo2EEmissionsUomId",
 					"Description": "The emission factor UOM.",
-					"BaseAttributeReference": {
-						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
-						"Name": "TotalCo2EEmissionsUomId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -93,6 +89,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
+						"Name": "TotalCo2EEmissionsUomId"
 					}
 				}
 			],
@@ -123,7 +123,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ReportingEntityId\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"PeriodStartTimestamp\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"PeriodEndTimestamp\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodEndTimestamp\"},\"TotalCo2EEmissionsUnits\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"},\"TotalCo2EEmissionsUomId\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUomId\"}}}"
 			},
 			"Compressed": false,

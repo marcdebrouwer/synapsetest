@@ -16,17 +16,16 @@
 				{
 					"Name": "VirtualEmissionId",
 					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": true,
+						"TypeName": "integer",
 						"IsComplexType": false,
-						"Length": 256,
+						"IsNullable": false,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				},
 				{
-					"Name": "VirtualEmissionEnergyTypeId",
+					"Name": "PurchasedGasId",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
@@ -42,8 +41,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"DateFormat": "dd-MM-yyyy",
 							"HIVE_TYPE_STRING": "date"
@@ -55,11 +54,60 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"DateFormat": "dd-MM-yyyy",
 							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionScope",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "BannerId",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionFactorLocation",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "double",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "double"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionFactorMarket",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "double",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "double"
 						}
 					}
 				}
@@ -100,9 +148,8 @@
 		"Properties": {
 			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"PrimaryKeys": "VirtualEmissionId",
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

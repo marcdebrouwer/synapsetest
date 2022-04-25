@@ -1,0 +1,23 @@
+{
+	"name": "relationship-sskoulxoif",
+	"properties": {
+		"Name": "relationship-sskoulxoif",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "VirtualEmissionFactor",
+		"ToTableName": "DirectEmissionsFromRefrigeration",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "VirtualEmissionId",
+				"ToColumnName": "VirtualEmissionFactorId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

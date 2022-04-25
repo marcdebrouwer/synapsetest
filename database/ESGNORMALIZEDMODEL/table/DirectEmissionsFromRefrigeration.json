@@ -16,10 +16,6 @@
 				{
 					"Name": "RefrigerantId",
 					"Description": "The unique identifier of a Legal Entity.",
-					"BaseAttributeReference": {
-						"Entity": "DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases",
-						"Name": "ReportingLegalEntityId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases",
+						"Name": "ReportingLegalEntityId"
 					}
 				},
 				{
 					"Name": "PeriodStartTimestamp",
 					"Description": "The period start timestamp.",
-					"BaseAttributeReference": {
-						"Entity": "DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases",
-						"Name": "PeriodStartTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 							"DateFormat": "dd-MM-yyyy",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases",
+						"Name": "PeriodStartTimestamp"
 					}
 				},
 				{
 					"Name": "PeriodEndTimestamp",
 					"Description": "The period end timestamp.",
-					"BaseAttributeReference": {
-						"Entity": "DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases",
-						"Name": "PeriodEndTimestamp"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 							"DateFormat": "dd-MM-yyyy",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases",
+						"Name": "PeriodEndTimestamp"
 					}
 				},
 				{
 					"Name": "FuelMassVolumeUnitsLb",
 					"Description": "The fuel mass/volume units.",
-					"BaseAttributeReference": {
-						"Entity": "DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases",
-						"Name": "FuelMassVolumeUnits"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "double",
 						"IsComplexType": false,
@@ -77,15 +73,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases",
+						"Name": "FuelMassVolumeUnits"
 					}
 				},
 				{
 					"Name": "C02EmissionsUnits",
 					"Description": "The C02 Emissions Units\n\nSource:  Direct Emissions From Stationary Combustion Sources, Section 2 Page 4",
-					"BaseAttributeReference": {
-						"Entity": "DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases",
-						"Name": "C02EmissionsUnits"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "double",
 						"IsComplexType": false,
@@ -93,6 +89,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases",
+						"Name": "C02EmissionsUnits"
 					}
 				},
 				{
@@ -100,8 +100,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -183,7 +183,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"RefrigerantId\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"ReportingLegalEntityId\"},\"PeriodStartTimestamp\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"PeriodStartTimestamp\"},\"PeriodEndTimestamp\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"PeriodEndTimestamp\"},\"FuelMassVolumeUnitsLb\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"FuelMassVolumeUnits\"},\"C02EmissionsUnits\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"C02EmissionsUnits\"}}}"
 			},
 			"Compressed": false,

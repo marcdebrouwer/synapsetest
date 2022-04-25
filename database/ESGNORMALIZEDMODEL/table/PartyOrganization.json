@@ -16,10 +16,6 @@
 				{
 					"Name": "OrganizationId",
 					"Description": "The unique identifier of an organization.",
-					"BaseAttributeReference": {
-						"Entity": "PartyOrganization.cdm.json/PartyOrganization",
-						"Name": "OrganizationId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PartyOrganization.cdm.json/PartyOrganization",
+						"Name": "OrganizationId"
 					}
 				},
 				{
 					"Name": "OrganizationName",
 					"Description": "The name of an organization.",
-					"BaseAttributeReference": {
-						"Entity": "PartyOrganization.cdm.json/PartyOrganization",
-						"Name": "OrganizationName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,6 +40,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "PartyOrganization.cdm.json/PartyOrganization",
+						"Name": "OrganizationName"
 					}
 				}
 			],
@@ -74,7 +74,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"OrganizationId\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationId\"},\"OrganizationName\":{\"entity\":\"PartyOrganization.cdm.json/PartyOrganization\",\"name\":\"OrganizationName\"}}}"
 			},
 			"Compressed": false,

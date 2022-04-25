@@ -1,0 +1,23 @@
+{
+	"name": "relationship-sthmgfjivs",
+	"properties": {
+		"Name": "relationship-sthmgfjivs",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Banner",
+		"ToTableName": "VirtualEmissionFactor",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "BannerId",
+				"ToColumnName": "BannerId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

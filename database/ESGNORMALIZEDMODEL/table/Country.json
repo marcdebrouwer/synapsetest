@@ -16,10 +16,6 @@
 				{
 					"Name": "CountryId",
 					"Description": "The unique identifier of the Country.",
-					"BaseAttributeReference": {
-						"Entity": "Country.cdm.json/Country",
-						"Name": "CountryId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Country.cdm.json/Country",
+						"Name": "CountryId"
 					}
 				},
 				{
 					"Name": "IsoCountryName",
 					"Description": "The ISO country name.\n\nCountry               A 2     A 3     Number\n----------------------------------------------------------------------\nAALAND ISLANDS     AX      ALA     248\nAFGHANISTAN         AF      AFG     004\nALBANIA          AL      ALB     008\n\nThe term \"country\" is perhaps a little misleading: not all the \"countries\" in ISO 3166 are actually independent. \n\nMany of them are geographically separate territories that are legally portions or dependencies of other countries. Nonetheless the term \"country\" is used throughout. \n\nWhere the code for a country includes territory also included in another code, a code for the exclusive part can be formed by replacing the second and third letters by X.",
-					"BaseAttributeReference": {
-						"Entity": "Country.cdm.json/Country",
-						"Name": "IsoCountryName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,6 +40,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Country.cdm.json/Country",
+						"Name": "IsoCountryName"
 					}
 				}
 			],
@@ -74,7 +74,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"CountryId\":{\"entity\":\"Country.cdm.json/Country\",\"name\":\"CountryId\"},\"IsoCountryName\":{\"entity\":\"Country.cdm.json/Country\",\"name\":\"IsoCountryName\"}}}"
 			},
 			"Compressed": false,

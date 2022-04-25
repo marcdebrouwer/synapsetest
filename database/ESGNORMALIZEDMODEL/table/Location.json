@@ -16,10 +16,6 @@
 				{
 					"Name": "LocationId",
 					"Description": "The unique identifier of a Location.",
-					"BaseAttributeReference": {
-						"Entity": "Location.cdm.json/Location",
-						"Name": "LocationId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Location.cdm.json/Location",
+						"Name": "LocationId"
 					}
 				},
 				{
 					"Name": "LocationName",
 					"Description": "The name of a location.",
-					"BaseAttributeReference": {
-						"Entity": "Location.cdm.json/Location",
-						"Name": "LocationName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Location.cdm.json/Location",
+						"Name": "LocationName"
 					}
 				},
 				{
 					"Name": "LocationAddressLine1",
 					"Description": "The 'street' component of a location. Includes street name, apartment, suite number or PO Box.",
-					"BaseAttributeReference": {
-						"Entity": "Location.cdm.json/Location",
-						"Name": "LocationAddressLine1"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Location.cdm.json/Location",
+						"Name": "LocationAddressLine1"
 					}
 				},
 				{
 					"Name": "LocationCity",
 					"Description": "The 'city' component of a location.",
-					"BaseAttributeReference": {
-						"Entity": "Location.cdm.json/Location",
-						"Name": "LocationCity"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -78,15 +74,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Location.cdm.json/Location",
+						"Name": "LocationCity"
 					}
 				},
 				{
 					"Name": "LocationState",
 					"Description": "The unique identifier of the State = State Code.\n\nA two-digit FIPS code assigned by the NIST to identify each State and statistically equivalent entity. The NIST assigns the codes based on the alphabetic sequence of State names (Puerto Rico and the Outlying Areas appear at the end); it documents these codes in a FIPS publication (FIPS PUB 5). Also, a two-digit code assigned by the Census Bureau to identify each State within its census geographic division (Puerto Rico and the Outlying Areas appear at the end).",
-					"BaseAttributeReference": {
-						"Entity": "Location.cdm.json/Location",
-						"Name": "LocationStateId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -95,15 +91,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Location.cdm.json/Location",
+						"Name": "LocationStateId"
 					}
 				},
 				{
 					"Name": "LocationZipCode",
 					"Description": "The unique identifier of a Zip Code.",
-					"BaseAttributeReference": {
-						"Entity": "Location.cdm.json/Location",
-						"Name": "LocationZipCode"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -112,15 +108,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Location.cdm.json/Location",
+						"Name": "LocationZipCode"
 					}
 				},
 				{
 					"Name": "CountryId",
 					"Description": "The unique identifier of the Country.",
-					"BaseAttributeReference": {
-						"Entity": "Location.cdm.json/Location",
-						"Name": "CountryId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -128,6 +124,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Location.cdm.json/Location",
+						"Name": "CountryId"
 					}
 				},
 				{
@@ -170,7 +170,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"LocationId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"LocationName\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"LocationAddressLine1\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"LocationCity\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"LocationState\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"LocationZipCode\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"CountryId\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"}}}"
 			},
 			"Compressed": false,
