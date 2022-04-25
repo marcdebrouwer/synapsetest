@@ -1,0 +1,68 @@
+{
+	"name": "Refrigerants",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "VirtualEmissionData"
+				},
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "RefrigerantData"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          VirtualEmissionId as integer,",
+				"          PurchasedGasId as integer,",
+				"          VirtualEmissionStartDate as date,",
+				"          VirtualEmissionEndDate as date,",
+				"          VirtualEmissionScope as string,",
+				"          BannerId as integer,",
+				"          VirtualEmissionFactorLocation as double,",
+				"          VirtualEmissionFactorMarket as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'VirtualEmissionFactor') ~> VirtualEmissionData",
+				"source(output(",
+				"          Location as string,",
+				"          {Tag ID} as string,",
+				"          {Rack Type} as string,",
+				"          {Refrigerant Type} as string,",
+				"          {Total Charge} as double '000,000,000.000',",
+				"          {Primary Trade} as string,",
+				"          Brand as string,",
+				"          {Model No.} as string,",
+				"          {Serial No.} as string,",
+				"          {Facility Name} as string,",
+				"          Deactivated as boolean,",
+				"          {Rack Id} as string,",
+				"          {Asset Type} as string,",
+				"          Banner as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'Refrigerants.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> RefrigerantData"
+			]
+		}
+	}
+}
