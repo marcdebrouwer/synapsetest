@@ -1,0 +1,23 @@
+{
+	"name": "ESGNORMALIZEDMODEL",
+	"properties": {
+		"Name": "ESGNORMALIZEDMODEL",
+		"EntityType": "DATABASE",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"IsSyMSCDMDatabase": true
+		},
+		"Description": "The normalized data model for Carbon Emissions Reporting",
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage"
+			}
+		}
+	},
+	"type": "DATABASE"
+}
