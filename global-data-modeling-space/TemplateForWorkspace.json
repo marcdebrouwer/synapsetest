@@ -81,7 +81,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/NormalizedSupportingTableMappings')]",
+			"name": "[concat(parameters('workspaceName'), '/NormalizedSupporting3NF')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
@@ -129,7 +129,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/FacilityDataMap')]"
+				"[concat(variables('workspaceId'), '/dataflows/FacilityDataMap')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
