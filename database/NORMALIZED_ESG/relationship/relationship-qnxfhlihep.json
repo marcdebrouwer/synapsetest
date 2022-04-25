@@ -1,0 +1,23 @@
+{
+	"name": "relationship-qnxfhlihep",
+	"properties": {
+		"Name": "relationship-qnxfhlihep",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "NORMALIZED_ESG"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PartyOrganization",
+		"ToTableName": "Banner",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "OrganizationId",
+				"ToColumnName": "OrganizationId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

@@ -1,0 +1,23 @@
+{
+	"name": "relationship-yvnbqxkbbq",
+	"properties": {
+		"Name": "relationship-yvnbqxkbbq",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "NORMALIZED_ESG"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EgridRegionUsa",
+		"ToTableName": "Location",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EgridRegionId",
+				"ToColumnName": "EgridRegionId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

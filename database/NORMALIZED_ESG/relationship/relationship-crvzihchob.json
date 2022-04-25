@@ -1,0 +1,23 @@
+{
+	"name": "relationship-crvzihchob",
+	"properties": {
+		"Name": "relationship-crvzihchob",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "NORMALIZED_ESG"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Banner",
+		"ToTableName": "Facility",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "BannerId",
+				"ToColumnName": "BannerId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
