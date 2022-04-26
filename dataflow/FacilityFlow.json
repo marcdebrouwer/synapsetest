@@ -1,0 +1,157 @@
+{
+	"name": "FacilityFlow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "FacilityData"
+				},
+				{
+					"name": "LocationData"
+				},
+				{
+					"name": "BannerData"
+				},
+				{
+					"name": "FacilityTypeData"
+				}
+			],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "CreateFacilityKey"
+				},
+				{
+					"name": "lookupBanner"
+				},
+				{
+					"name": "lookupLocation"
+				},
+				{
+					"name": "lookupFacilityType"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Company as string,",
+				"          Region as string,",
+				"          OpCo as string,",
+				"          Brand as string,",
+				"          {Facility Type} as string,",
+				"          {Facility ID} as short,",
+				"          {Facility Name} as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          {State } as string,",
+				"          Country as string,",
+				"          {Postal Code} as string,",
+				"          {Gross area owned stores ft2} as integer,",
+				"          {Sales area owned stores ft2} as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'Facility.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> FacilityData",
+				"source(output(",
+				"          LocationId as integer,",
+				"          LocationName as string,",
+				"          LocationAddressLine1 as string,",
+				"          LocationCity as string,",
+				"          LocationState as string,",
+				"          LocationZipCode as string,",
+				"          CountryId as integer,",
+				"          EgridRegionId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Location') ~> LocationData",
+				"source(output(",
+				"          BannerId as integer,",
+				"          BannerName as string,",
+				"          OrganizationId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Banner') ~> BannerData",
+				"source(output(",
+				"          FacilityTypeId as integer,",
+				"          FaciityTypeName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'FacilityType') ~> FacilityTypeData",
+				"FacilityData keyGenerate(output(FacilityId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> CreateFacilityKey",
+				"CreateFacilityKey, BannerData lookup(OpCo == BannerName,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(BannerId, true),",
+				"     broadcast: 'auto')~> lookupBanner",
+				"lookupBanner, LocationData lookup({Facility Name} == LocationName,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(LocationId, true),",
+				"     broadcast: 'auto')~> lookupLocation",
+				"lookupLocation, FacilityTypeData lookup({Facility Type} == FaciityTypeName,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(FacilityTypeId, true),",
+				"     broadcast: 'auto')~> lookupFacilityType",
+				"lookupFacilityType sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Facility',",
+				"     input(",
+				"          FacilityId as integer,",
+				"          FacilityName as string,",
+				"          LocationId as integer,",
+				"          GrossFloorArea as integer,",
+				"          AvailableSellingArea as integer,",
+				"          FacilityTypeId as integer,",
+				"          BannerId as integer",
+				"     ),",
+				"     mapColumn(",
+				"          FacilityId,",
+				"          FacilityName = {Facility Name},",
+				"          LocationId,",
+				"          GrossFloorArea = {Gross area owned stores ft2},",
+				"          AvailableSellingArea = {Sales area owned stores ft2},",
+				"          FacilityTypeId,",
+				"          BannerId",
+				"     )) ~> sink1"
+			]
+		}
+	}
+}
