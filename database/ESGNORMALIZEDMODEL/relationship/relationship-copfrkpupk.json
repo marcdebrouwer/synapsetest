@@ -10,7 +10,7 @@
 			"Type": "SPARK"
 		},
 		"FromTableName": "PurchasedGas",
-		"ToTableName": "EmissionFactor",
+		"ToTableName": "GreenhouseGasType",
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "PurchasedGasId",
