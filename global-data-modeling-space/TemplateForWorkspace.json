@@ -1134,7 +1134,7 @@
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> CreateEnergyKey",
 						"PurchasedEnergyData aggregate(groupBy(EmissionType),",
-						"     each(match(name != \"EmissionType\"), $$ = first($$))) ~> aggregate1",
+						"     each(match(name!=\"EmissionType\"), $$ = first($$))) ~> aggregate1",
 						"CreateEnergyKey sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -18856,12 +18856,12 @@
 							"StorageDescriptor": {
 								"Columns": [
 									{
-										"Name": "GreenhouseGasTypeId",
+										"Name": "EmissionFactorId",
 										"Description": "The unique identifier of a greenhouse gas type.",
 										"OriginDataTypeName": {
 											"TypeName": "integer",
-											"IsComplexType": false,
 											"IsNullable": false,
+											"IsComplexType": false,
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
@@ -18872,12 +18872,12 @@
 										}
 									},
 									{
-										"Name": "GreenhouseGasTypeName",
+										"Name": "EmissionFactorName",
 										"Description": "The name of a greenhouse gas type.",
 										"OriginDataTypeName": {
 											"TypeName": "string",
-											"IsComplexType": false,
 											"IsNullable": true,
+											"IsComplexType": false,
 											"Length": 128,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
@@ -18889,20 +18889,117 @@
 										}
 									},
 									{
-										"Name": "GreenhouseGasTypeDescription",
-										"Description": "The description of a greenhouse gas type.",
+										"Name": "EmissionScope",
+										"Description": "The scope of an emission factor",
 										"OriginDataTypeName": {
 											"TypeName": "string",
-											"IsComplexType": false,
 											"IsNullable": true,
-											"Length": 512,
+											"IsComplexType": false,
+											"Length": 256,
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "GreenhouseGasType.cdm.json/GreenhouseGasType",
-											"Name": "GreenhouseGasTypeDescription"
+										}
+									},
+									{
+										"Name": "EmissionCategory",
+										"Description": "The category of an emission",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									},
+									{
+										"Name": "EmissionFactorLocationBased",
+										"Description": "The location based emission factor",
+										"OriginDataTypeName": {
+											"TypeName": "double",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "double"
+											}
+										}
+									},
+									{
+										"Name": "EmissionFactorMarketBased",
+										"Description": "The market based emission factor",
+										"OriginDataTypeName": {
+											"TypeName": "double",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "double"
+											}
+										}
+									},
+									{
+										"Name": "UnitOfMeasure",
+										"Description": "The unit of measure required for the emission",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									},
+									{
+										"Name": "EmissionStartDate",
+										"Description": "Start date of an emission",
+										"OriginDataTypeName": {
+											"TypeName": "date",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Properties": {
+												"DateFormat": "dd-MM-yyyy",
+												"HIVE_TYPE_STRING": "date"
+											}
+										}
+									},
+									{
+										"Name": "EmissionEndDate",
+										"Description": "End date of an emission",
+										"OriginDataTypeName": {
+											"TypeName": "date",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Properties": {
+												"DateFormat": "dd-MM-yyyy",
+												"HIVE_TYPE_STRING": "date"
+											}
+										}
+									},
+									{
+										"Name": "EgridRegion",
+										"Description": "The Egrid region allocated to an emission",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									},
+									{
+										"Name": "PurchasedGasId",
+										"Description": "The unique identifier of a purchased gas",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsNullable": false,
+											"IsComplexType": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
 										}
 									}
 								],
@@ -18934,21 +19031,22 @@
 								"Properties": {
 									"textinputformat.record.delimiter": ",",
 									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"GreenhouseGasTypeId\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"GreenhouseGasTypeName\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"GreenhouseGasTypeDescription\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeDescription\"}}}"
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmissionFactorId\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"EmissionFactorName\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"}}}"
 								},
 								"Compressed": false,
 								"IsStoredAsSubdirectories": false
 							},
 							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"GreenhouseGasType\",\"path\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\"},\"description\":\"The type of greenhouse gas:\\n\\n- CO2\\n- CH4 \\n- N2O\\n- HFC\\n- CO2\",\"primaryKey\":[\"GreenhouseGasTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a greenhouse gas type.\",\"isNullable\":false,\"name\":\"GreenhouseGasTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a greenhouse gas type.\",\"isNullable\":true,\"name\":\"GreenhouseGasTypeName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of a greenhouse gas type.\",\"isNullable\":true,\"name\":\"GreenhouseGasTypeDescription\"}]}}}",
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"GreenhouseGasType\",\"description\":\"The type of greenhouse gas:\\n\\n- CO2\\n- CH4 \\n- N2O\\n- HFC\\n- CO2\",\"baseEntityReference\":{\"name\":\"GreenhouseGasType\",\"path\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\"},\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a greenhouse gas type.\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a greenhouse gas type.\",\"isNullable\":true,\"name\":\"EmissionFactorName\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The scope of an emission factor\",\"isNullable\":true,\"name\":\"EmissionScope\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The category of an emission\",\"isNullable\":true,\"name\":\"EmissionCategory\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The location based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The market based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unit of measure required for the emission\",\"isNullable\":true,\"name\":\"UnitOfMeasure\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"Start date of an emission\",\"isNullable\":true,\"name\":\"EmissionStartDate\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"End date of an emission\",\"isNullable\":true,\"name\":\"EmissionEndDate\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The Egrid region allocated to an emission\",\"isNullable\":true,\"name\":\"EgridRegion\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of a purchased gas\",\"isNullable\":false,\"name\":\"PurchasedGasId\"}]},\"primaryKey\":[\"EmissionFactorId\"]}}",
 								"Description": "The type of greenhouse gas:\n\n- CO2\n- CH4 \n- N2O\n- HFC\n- CO2",
 								"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#042C59\"}",
-								"PrimaryKeys": "GreenhouseGasTypeId",
+								"PrimaryKeys": "EmissionFactorId",
 								"spark.sql.sources.provider": "csv"
 							},
 							"Retention": 0,
 							"Temporary": false,
-							"IsRewriteEnabled": false
+							"IsRewriteEnabled": false,
+							"Partitioning": {}
 						},
 						"Source": {
 							"Type": "SPARK"
@@ -19443,7 +19541,7 @@
 										}
 									},
 									{
-										"Name": "GreenhouseGasTypeId",
+										"Name": "EmissionFactorId",
 										"Description": "Unique identifier of a greenhouse gas type",
 										"OriginDataTypeName": {
 											"TypeName": "integer",
@@ -19513,7 +19611,7 @@
 								"IsStoredAsSubdirectories": false
 							},
 							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Scope2Emissions\",\"description\":\"Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\\n\\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.\",\"baseEntityReference\":{\"name\":\"Scope2MarketBasedApproach\",\"path\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\"},\"primaryKey\":[\"Emisison\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"Emisison\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":true,\"name\":\"PeriodStartTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a greenhouse gas type\",\"isNullable\":true,\"name\":\"GreenhouseGasTypeId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a facility\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a virtual emission factor\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"}]}}}",
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Scope2Emissions\",\"description\":\"Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\\n\\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.\",\"baseEntityReference\":{\"name\":\"Scope2MarketBasedApproach\",\"path\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\"},\"primaryKey\":[\"Emisison\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"Emisison\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":true,\"name\":\"PeriodStartTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a greenhouse gas type\",\"isNullable\":true,\"name\":\"EmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a facility\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a virtual emission factor\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"}]}}}",
 								"Description": "Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\n\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.",
 								"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#042C59\"}",
 								"PrimaryKeys": "Emisison",
@@ -20199,8 +20297,8 @@
 							"ToTableName": "Scope2Emissions",
 							"ColumnRelationshipInformations": [
 								{
-									"FromColumnName": "GreenhouseGasTypeId",
-									"ToColumnName": "GreenhouseGasTypeId"
+									"FromColumnName": "EmissionFactorId",
+									"ToColumnName": "EmissionFactorId"
 								}
 							],
 							"RelationshipType": 0,
@@ -20228,6 +20326,33 @@
 								{
 									"FromColumnName": "VirtualEmissionId",
 									"ToColumnName": "VirtualEmissionFactorId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-copfrkpupk",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "PurchasedGas",
+							"ToTableName": "GreenhouseGasType",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "PurchasedGasId",
+									"ToColumnName": "PurchasedGasId"
 								}
 							],
 							"RelationshipType": 0,
@@ -40212,6 +40337,46 @@
 		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/SQL script 9')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [VirtualEmissionId]\n,[PurchasedGasId]\n,[VirtualEmissionStartDate]\n,[VirtualEmissionEndDate]\n,[VirtualEmissionScope]\n,[BannerId]\n,[VirtualEmissionFactorLocation]\n,[VirtualEmissionFactorMarket]\n FROM [ESGNORMALIZEDMODEL].[dbo].[VirtualEmissionFactor]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESGNORMALIZEDMODEL",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 10')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [VirtualEmissionId]\n,[PurchasedGasId]\n,[VirtualEmissionStartDate]\n,[VirtualEmissionEndDate]\n,[VirtualEmissionScope]\n,[BannerId]\n,[VirtualEmissionFactorLocation]\n,[VirtualEmissionFactorMarket]\n FROM [ESGNORMALIZEDMODEL].[dbo].[VirtualEmissionFactor]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESGNORMALIZEDMODEL",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 11')]",
 			"type": "Microsoft.Synapse/workspaces/sqlscripts",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
