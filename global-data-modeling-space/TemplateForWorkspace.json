@@ -214,7 +214,6 @@
 								"parameters": {},
 								"datasetParameters": {
 									"PurchasedEnergyData": {},
-									"PurchasedEnergy2": {},
 									"PurchasedMapping": {}
 								}
 							},
@@ -1145,13 +1144,6 @@
 								"type": "LinkedServiceReference"
 							},
 							"name": "PurchasedEnergyData"
-						},
-						{
-							"linkedService": {
-								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-								"type": "LinkedServiceReference"
-							},
-							"name": "PurchasedEnergy2"
 						}
 					],
 					"sinks": [
@@ -1164,18 +1156,22 @@
 							"name": "CreateEnergyKey"
 						},
 						{
-							"name": "Append"
-						},
-						{
 							"name": "aggregate1"
 						}
 					],
 					"scriptLines": [
 						"source(output(",
-						"          EnergyType as string,",
-						"          EmissionFactor as double '000,000,000.000',",
-						"          Start_date as date 'dd-MM-yyyy',",
-						"          End_date as date 'dd-MM-yyyy'",
+						"          Country as string,",
+						"          CarbonScope as string,",
+						"          EmissionCategory as string,",
+						"          EmissionType as string,",
+						"          EmissionFactorLocationBased as string,",
+						"          EmissionFactorMarketBased as string,",
+						"          UnitOfMeasure as string,",
+						"          StartDate as date,",
+						"          EndDate as date,",
+						"          Region as string,",
+						"          HasMarketBasedFactor as boolean",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
@@ -1183,36 +1179,16 @@
 						"     format: 'delimited',",
 						"     fileSystem: 'fsgdmsdevweeu01',",
 						"     folderPath: 'ESG_MAPDATA',",
-						"     fileName: 'VirtualRefrigerant.csv',",
+						"     fileName: 'EmissionFactors.csv',",
 						"     columnDelimiter: ';',",
 						"     escapeChar: '\\\\',",
 						"     quoteChar: '\\\"',",
 						"     columnNamesAsHeader: true) ~> PurchasedEnergyData",
-						"source(output(",
-						"          Brand as string,",
-						"          EnergyType as string,",
-						"          {virtual Market based} as double,",
-						"          {virtual Location based} as double,",
-						"          Start_date as date,",
-						"          End_date as date",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false,",
-						"     format: 'delimited',",
-						"     fileSystem: 'fsgdmsdevweeu01',",
-						"     folderPath: 'ESG_MAPDATA',",
-						"     fileName: 'virtualscores.csv',",
-						"     columnDelimiter: ';',",
-						"     escapeChar: '\\\\',",
-						"     quoteChar: '\\\"',",
-						"     columnNamesAsHeader: true) ~> PurchasedEnergy2",
 						"aggregate1 keyGenerate(output(PurchasedEnergyId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> CreateEnergyKey",
-						"PurchasedEnergyData, PurchasedEnergy2 union(byName: true)~> Append",
-						"Append aggregate(groupBy(EnergyType),",
-						"     each(match(name != \"EnergyType\"), $$ = first($$))) ~> aggregate1",
+						"PurchasedEnergyData aggregate(groupBy(EmissionType),",
+						"     each(match(name != \"EmissionType\"), $$ = first($$))) ~> aggregate1",
 						"CreateEnergyKey sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -1226,7 +1202,7 @@
 						"     ),",
 						"     mapColumn(",
 						"          PurchasedGasId = PurchasedEnergyId,",
-						"          PurchasedGasName = EnergyType",
+						"          PurchasedGasName = EmissionType",
 						"     )) ~> PurchasedMapping"
 					]
 				}
