@@ -28,6 +28,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "3NF TABLES"
+		},
 		"annotations": []
 	}
 }
