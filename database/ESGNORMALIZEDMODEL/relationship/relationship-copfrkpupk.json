@@ -1,7 +1,7 @@
 {
-	"name": "relationship-ghkkacbchf",
+	"name": "relationship-copfrkpupk",
 	"properties": {
-		"Name": "relationship-ghkkacbchf",
+		"Name": "relationship-copfrkpupk",
 		"EntityType": "RELATIONSHIP",
 		"Namespace": {
 			"DatabaseName": "ESGNORMALIZEDMODEL"
@@ -9,12 +9,12 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "EmissionFactor",
-		"ToTableName": "Scope2Emissions",
+		"FromTableName": "PurchasedGas",
+		"ToTableName": "EmissionFactor",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "EmissionFactorId",
-				"ToColumnName": "EmissionFactorId"
+				"FromColumnName": "PurchasedGasId",
+				"ToColumnName": "PurchasedGasId"
 			}
 		],
 		"RelationshipType": 0

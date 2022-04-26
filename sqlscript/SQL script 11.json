@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 11",
+	"properties": {
+		"content": {
+			"query": "SELECT TOP (100) [VirtualEmissionId]\n,[PurchasedGasId]\n,[VirtualEmissionStartDate]\n,[VirtualEmissionEndDate]\n,[VirtualEmissionScope]\n,[BannerId]\n,[VirtualEmissionFactorLocation]\n,[VirtualEmissionFactorMarket]\n FROM [ESGNORMALIZEDMODEL].[dbo].[VirtualEmissionFactor]",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ESGNORMALIZEDMODEL",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

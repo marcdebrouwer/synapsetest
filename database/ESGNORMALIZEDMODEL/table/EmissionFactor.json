@@ -1,7 +1,7 @@
 {
-	"name": "GreenhouseGasType",
+	"name": "EmissionFactor",
 	"properties": {
-		"Name": "GreenhouseGasType",
+		"Name": "EmissionFactor",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "ESGNORMALIZEDMODEL"
@@ -14,12 +14,12 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "GreenhouseGasTypeId",
+					"Name": "EmissionFactorId",
 					"Description": "The unique identifier of a greenhouse gas type.",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -30,12 +30,12 @@
 					}
 				},
 				{
-					"Name": "GreenhouseGasTypeName",
+					"Name": "EmissionFactorName",
 					"Description": "The name of a greenhouse gas type.",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": true,
+						"IsComplexType": false,
 						"Length": 128,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -47,20 +47,117 @@
 					}
 				},
 				{
-					"Name": "GreenhouseGasTypeDescription",
-					"Description": "The description of a greenhouse gas type.",
+					"Name": "EmissionScope",
+					"Description": "The scope of an emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": true,
-						"Length": 512,
+						"IsComplexType": false,
+						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "GreenhouseGasType.cdm.json/GreenhouseGasType",
-						"Name": "GreenhouseGasTypeDescription"
+					}
+				},
+				{
+					"Name": "EmissionCategory",
+					"Description": "The category of an emission",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "EmissionFactorLocationBased",
+					"Description": "The location based emission factor",
+					"OriginDataTypeName": {
+						"TypeName": "double",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "double"
+						}
+					}
+				},
+				{
+					"Name": "EmissionFactorMarketBased",
+					"Description": "The market based emission factor",
+					"OriginDataTypeName": {
+						"TypeName": "double",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "double"
+						}
+					}
+				},
+				{
+					"Name": "UnitOfMeasure",
+					"Description": "The unit of measure required for the emission",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "EmissionStartDate",
+					"Description": "Start date of an emission",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"DateFormat": "dd-MM-yyyy",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "EmissionEndDate",
+					"Description": "End date of an emission",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"DateFormat": "dd-MM-yyyy",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "EgridRegion",
+					"Description": "The Egrid region allocated to an emission",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PurchasedGasId",
+					"Description": "The unique identifier of a purchased gas",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
 					}
 				}
 			],
@@ -70,7 +167,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EmissionFactor",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -83,7 +180,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EmissionFactor",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -92,16 +189,16 @@
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
 				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"GreenhouseGasTypeId\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"GreenhouseGasTypeName\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"GreenhouseGasTypeDescription\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeDescription\"}}}"
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmissionFactorId\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"EmissionFactorName\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"}}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"GreenhouseGasType\",\"path\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\"},\"description\":\"The type of greenhouse gas:\\n\\n- CO2\\n- CH4 \\n- N2O\\n- HFC\\n- CO2\",\"primaryKey\":[\"GreenhouseGasTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a greenhouse gas type.\",\"isNullable\":false,\"name\":\"GreenhouseGasTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a greenhouse gas type.\",\"isNullable\":true,\"name\":\"GreenhouseGasTypeName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of a greenhouse gas type.\",\"isNullable\":true,\"name\":\"GreenhouseGasTypeDescription\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"EmissionFactor\",\"description\":\"The type of greenhouse gas:\\n\\n- CO2\\n- CH4 \\n- N2O\\n- HFC\\n- CO2\",\"baseEntityReference\":{\"name\":\"GreenhouseGasType\",\"path\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\"},\"primaryKey\":[\"EmissionFactorId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a greenhouse gas type.\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a greenhouse gas type.\",\"isNullable\":true,\"name\":\"EmissionFactorName\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The scope of an emission factor\",\"isNullable\":true,\"name\":\"EmissionScope\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The category of an emission\",\"isNullable\":true,\"name\":\"EmissionCategory\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The location based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The market based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unit of measure required for the emission\",\"isNullable\":true,\"name\":\"UnitOfMeasure\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"Start date of an emission\",\"isNullable\":true,\"name\":\"EmissionStartDate\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"End date of an emission\",\"isNullable\":true,\"name\":\"EmissionEndDate\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The Egrid region allocated to an emission\",\"isNullable\":true,\"name\":\"EgridRegion\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of a purchased gas\",\"isNullable\":false,\"name\":\"PurchasedGasId\"}]}}}",
 			"Description": "The type of greenhouse gas:\n\n- CO2\n- CH4 \n- N2O\n- HFC\n- CO2",
 			"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#042C59\"}",
-			"PrimaryKeys": "GreenhouseGasTypeId",
+			"PrimaryKeys": "EmissionFactorId",
 			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
