@@ -1,0 +1,122 @@
+{
+	"name": "Dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "VirtualEmissionFactorData"
+				},
+				{
+					"name": "BrandData"
+				},
+				{
+					"name": "EnergyTypesData"
+				}
+			],
+			"sinks": [
+				{
+					"name": "MapToVirtual"
+				}
+			],
+			"transformations": [
+				{
+					"name": "lookupBrand"
+				},
+				{
+					"name": "lookupEnergyType"
+				},
+				{
+					"name": "surrogateKey1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Brand as string,",
+				"          EnergyType as string,",
+				"          {virtual Market based} as double '000,000,000.000',",
+				"          {virtual Location based} as double '000,000,000.000',",
+				"          Start_date as date 'dd-MM-yyyy',",
+				"          End_date as date 'dd-MM-yyyy'",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'virtualscores.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> VirtualEmissionFactorData",
+				"source(output(",
+				"          BannerId as integer,",
+				"          BannerName as string,",
+				"          OrganizationId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Banner') ~> BrandData",
+				"source(output(",
+				"          PurchasedGasId as integer,",
+				"          PurchasedGasName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'PurchasedGas') ~> EnergyTypesData",
+				"VirtualEmissionFactorData, BrandData lookup(Brand == BannerName,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(BannerId, true),",
+				"     broadcast: 'auto')~> lookupBrand",
+				"lookupBrand, EnergyTypesData lookup(EnergyType == PurchasedGasName,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(PurchasedGasId, true),",
+				"     broadcast: 'auto')~> lookupEnergyType",
+				"lookupEnergyType keyGenerate(output(VirtualEmissionId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"surrogateKey1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'VirtualEmissionFactor',",
+				"     input(",
+				"          VirtualEmissionId as integer,",
+				"          PurchasedGasId as integer,",
+				"          VirtualEmissionStartDate as date,",
+				"          VirtualEmissionEndDate as date,",
+				"          VirtualEmissionScope as string,",
+				"          BannerId as integer,",
+				"          VirtualEmissionFactorLocation as double,",
+				"          VirtualEmissionFactorMarket as double",
+				"     ),",
+				"     mapColumn(",
+				"          VirtualEmissionId,",
+				"          PurchasedGasId,",
+				"          VirtualEmissionStartDate = Start_date,",
+				"          VirtualEmissionEndDate = End_date,",
+				"          BannerId,",
+				"          VirtualEmissionFactorLocation = {virtual Location based},",
+				"          VirtualEmissionFactorMarket = {virtual Market based}",
+				"     )) ~> MapToVirtual"
+			]
+		}
+	}
+}
