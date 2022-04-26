@@ -214,6 +214,7 @@
 								"parameters": {},
 								"datasetParameters": {
 									"PurchasedEnergyData": {},
+									"PurchasedEnergy2": {},
 									"PurchasedMapping": {}
 								}
 							},
@@ -1144,6 +1145,13 @@
 								"type": "LinkedServiceReference"
 							},
 							"name": "PurchasedEnergyData"
+						},
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "PurchasedEnergy2"
 						}
 					],
 					"sinks": [
@@ -1154,6 +1162,12 @@
 					"transformations": [
 						{
 							"name": "CreateEnergyKey"
+						},
+						{
+							"name": "Append"
+						},
+						{
+							"name": "aggregate1"
 						}
 					],
 					"scriptLines": [
@@ -1174,9 +1188,31 @@
 						"     escapeChar: '\\\\',",
 						"     quoteChar: '\\\"',",
 						"     columnNamesAsHeader: true) ~> PurchasedEnergyData",
-						"PurchasedEnergyData keyGenerate(output(PurchasedEnergyId as long),",
+						"source(output(",
+						"          Brand as string,",
+						"          EnergyType as string,",
+						"          {virtual Market based} as double,",
+						"          {virtual Location based} as double,",
+						"          Start_date as date,",
+						"          End_date as date",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'virtualscores.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> PurchasedEnergy2",
+						"aggregate1 keyGenerate(output(PurchasedEnergyId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> CreateEnergyKey",
+						"PurchasedEnergyData, PurchasedEnergy2 union(byName: true)~> Append",
+						"Append aggregate(groupBy(EnergyType),",
+						"     each(match(name != \"EnergyType\"), $$ = first($$))) ~> aggregate1",
 						"CreateEnergyKey sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -19655,6 +19691,18 @@
 												"HIVE_TYPE_STRING": "integer"
 											}
 										}
+									},
+									{
+										"Name": "VirtualEmissionFactorId",
+										"Description": "Unique identifier of a virtual emission factor",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsNullable": true,
+											"IsComplexType": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										}
 									}
 								],
 								"Format": {
@@ -19691,7 +19739,7 @@
 								"IsStoredAsSubdirectories": false
 							},
 							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Scope2Emissions\",\"description\":\"Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\\n\\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.\",\"baseEntityReference\":{\"name\":\"Scope2MarketBasedApproach\",\"path\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\"},\"primaryKey\":[\"Emisison\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"Emisison\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":true,\"name\":\"PeriodStartTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a greenhouse gas type\",\"isNullable\":true,\"name\":\"GreenhouseGasTypeId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a facility\",\"isNullable\":true,\"name\":\"FacilityId\"}]}}}",
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Scope2Emissions\",\"description\":\"Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\\n\\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.\",\"baseEntityReference\":{\"name\":\"Scope2MarketBasedApproach\",\"path\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\"},\"primaryKey\":[\"Emisison\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"Emisison\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":true,\"name\":\"PeriodStartTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a greenhouse gas type\",\"isNullable\":true,\"name\":\"GreenhouseGasTypeId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a facility\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a virtual emission factor\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"}]}}}",
 								"Description": "Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\n\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.",
 								"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#042C59\"}",
 								"PrimaryKeys": "Emisison",
@@ -20379,6 +20427,33 @@
 								{
 									"FromColumnName": "GreenhouseGasTypeId",
 									"ToColumnName": "GreenhouseGasTypeId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-ldawnaajqi",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "VirtualEmissionFactor",
+							"ToTableName": "Scope2Emissions",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "VirtualEmissionId",
+									"ToColumnName": "VirtualEmissionFactorId"
 								}
 							],
 							"RelationshipType": 0,
