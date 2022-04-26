@@ -10,6 +10,13 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "PurchasedEnergyData"
+				},
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "PurchasedEnergy2"
 				}
 			],
 			"sinks": [
@@ -20,6 +27,12 @@
 			"transformations": [
 				{
 					"name": "CreateEnergyKey"
+				},
+				{
+					"name": "Append"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -40,9 +53,31 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> PurchasedEnergyData",
-				"PurchasedEnergyData keyGenerate(output(PurchasedEnergyId as long),",
+				"source(output(",
+				"          Brand as string,",
+				"          EnergyType as string,",
+				"          {virtual Market based} as double,",
+				"          {virtual Location based} as double,",
+				"          Start_date as date,",
+				"          End_date as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'virtualscores.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> PurchasedEnergy2",
+				"aggregate1 keyGenerate(output(PurchasedEnergyId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> CreateEnergyKey",
+				"PurchasedEnergyData, PurchasedEnergy2 union(byName: true)~> Append",
+				"Append aggregate(groupBy(EnergyType),",
+				"     each(match(name != \"EnergyType\"), $$ = first($$))) ~> aggregate1",
 				"CreateEnergyKey sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",

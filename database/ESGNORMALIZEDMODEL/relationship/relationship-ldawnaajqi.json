@@ -1,0 +1,23 @@
+{
+	"name": "relationship-ldawnaajqi",
+	"properties": {
+		"Name": "relationship-ldawnaajqi",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "VirtualEmissionFactor",
+		"ToTableName": "Scope2Emissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "VirtualEmissionId",
+				"ToColumnName": "VirtualEmissionFactorId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
