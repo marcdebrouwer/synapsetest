@@ -18276,8 +18276,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18373,8 +18373,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18580,8 +18580,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/DirectEmissionsFromRefrigeration",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18696,8 +18696,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18869,8 +18869,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18967,8 +18967,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19082,8 +19082,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19276,8 +19276,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19374,8 +19374,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19472,8 +19472,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PurchasedGas",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19619,8 +19619,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2MarketBasedApproach",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19753,8 +19753,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/UnitOfMeasure",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19916,8 +19916,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -39763,6 +39763,262 @@
 			},
 			"dependsOn": [],
 			"location": "westeurope"
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Facility')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "FacilityFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "FacilityFlow",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"FacilityData": {},
+									"LocationData": {},
+									"BannerData": {},
+									"FacilityTypeData": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "2NF TABLES"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
+				"[concat(variables('workspaceId'), '/dataflows/FacilityFlow')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/FacilityFlow')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "FacilityData"
+						},
+						{
+							"name": "LocationData"
+						},
+						{
+							"name": "BannerData"
+						},
+						{
+							"name": "FacilityTypeData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "CreateFacilityKey"
+						},
+						{
+							"name": "lookupBanner"
+						},
+						{
+							"name": "lookupLocation"
+						},
+						{
+							"name": "lookupFacilityType"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          Company as string,",
+						"          Region as string,",
+						"          OpCo as string,",
+						"          Brand as string,",
+						"          {Facility Type} as string,",
+						"          {Facility ID} as short,",
+						"          {Facility Name} as string,",
+						"          Address as string,",
+						"          City as string,",
+						"          {State } as string,",
+						"          Country as string,",
+						"          {Postal Code} as string,",
+						"          {Gross area owned stores ft2} as integer,",
+						"          {Sales area owned stores ft2} as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'Facility.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> FacilityData",
+						"source(output(",
+						"          LocationId as integer,",
+						"          LocationName as string,",
+						"          LocationAddressLine1 as string,",
+						"          LocationCity as string,",
+						"          LocationState as string,",
+						"          LocationZipCode as string,",
+						"          CountryId as integer,",
+						"          EgridRegionId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Location') ~> LocationData",
+						"source(output(",
+						"          BannerId as integer,",
+						"          BannerName as string,",
+						"          OrganizationId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Banner') ~> BannerData",
+						"source(output(",
+						"          FacilityTypeId as integer,",
+						"          FaciityTypeName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'FacilityType') ~> FacilityTypeData",
+						"FacilityData keyGenerate(output(FacilityId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> CreateFacilityKey",
+						"CreateFacilityKey, BannerData lookup(OpCo == BannerName,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(BannerId, true),",
+						"     broadcast: 'auto')~> lookupBanner",
+						"lookupBanner, LocationData lookup({Facility Name} == LocationName,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(LocationId, true),",
+						"     broadcast: 'auto')~> lookupLocation",
+						"lookupLocation, FacilityTypeData lookup({Facility Type} == FaciityTypeName,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(FacilityTypeId, true),",
+						"     broadcast: 'auto')~> lookupFacilityType",
+						"lookupFacilityType sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Facility',",
+						"     input(",
+						"          FacilityId as integer,",
+						"          FacilityName as string,",
+						"          LocationId as integer,",
+						"          GrossFloorArea as integer,",
+						"          AvailableSellingArea as integer,",
+						"          FacilityTypeId as integer,",
+						"          BannerId as integer",
+						"     ),",
+						"     mapColumn(",
+						"          FacilityId,",
+						"          FacilityName = {Facility Name},",
+						"          LocationId,",
+						"          GrossFloorArea = {Gross area owned stores ft2},",
+						"          AvailableSellingArea = {Sales area owned stores ft2},",
+						"          FacilityTypeId,",
+						"          BannerId",
+						"     )) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 4')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [BannerId]\n,[BannerName]\n,[OrganizationId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[Banner]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESGNORMALIZEDMODEL",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 5')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [VirtualEmissionId]\n,[PurchasedGasId]\n,[VirtualEmissionStartDate]\n,[VirtualEmissionEndDate]\n,[VirtualEmissionScope]\n,[BannerId]\n,[VirtualEmissionFactorLocation]\n,[VirtualEmissionFactorMarket]\n FROM [ESGNORMALIZEDMODEL].[dbo].[VirtualEmissionFactor]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESGNORMALIZEDMODEL",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
 		}
 	]
 }
