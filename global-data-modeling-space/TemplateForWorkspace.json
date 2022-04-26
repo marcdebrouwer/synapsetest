@@ -225,8 +225,107 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/PurchasedFlow')]",
-				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+				"[concat(variables('workspaceId'), '/dataflows/PurchasedFlow')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Refrigerant')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Refrigerantflow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Refrigerants",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"VirtualEmissionData": {},
+									"RefrigerantData": {},
+									"FacilityData": {},
+									"PurchasedGas": {},
+									"BannerData": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/Refrigerants')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/VirtualEmissionFactor')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "VirtualEmissions",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "VirtualEmissions",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"EnergyTypeData": {},
+									"VirtualEmissionData": {},
+									"BannerData": {},
+									"MapVirtualFactor": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/VirtualEmissions')]"
 			]
 		},
 		{
@@ -1042,10 +1141,8 @@
 					],
 					"scriptLines": [
 						"source(output(",
-						"          Brand as string,",
 						"          EnergyType as string,",
-						"          {virtual Market based} as double '000,000,000.000',",
-						"          {virtual Location based} as double '000,000,000.000',",
+						"          EmissionFactor as double '000,000,000.000',",
 						"          Start_date as date 'dd-MM-yyyy',",
 						"          End_date as date 'dd-MM-yyyy'",
 						"     ),",
@@ -1055,7 +1152,7 @@
 						"     format: 'delimited',",
 						"     fileSystem: 'fsgdmsdevweeu01',",
 						"     folderPath: 'ESG_MAPDATA',",
-						"     fileName: 'virtualscores.csv',",
+						"     fileName: 'VirtualRefrigerant.csv',",
 						"     columnDelimiter: ';',",
 						"     escapeChar: '\\\\',",
 						"     quoteChar: '\\\"',",
@@ -1086,12 +1183,330 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/Refrigerants')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "VirtualEmissionData"
+						},
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "RefrigerantData"
+						},
+						{
+							"name": "FacilityData"
+						},
+						{
+							"name": "PurchasedGas"
+						},
+						{
+							"name": "BannerData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "surrogateKey1"
+						},
+						{
+							"name": "derivedColumn1"
+						},
+						{
+							"name": "derivedColumn2"
+						},
+						{
+							"name": "lookupPurchased"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          VirtualEmissionId as integer,",
+						"          PurchasedGasId as integer,",
+						"          VirtualEmissionStartDate as date,",
+						"          VirtualEmissionEndDate as date,",
+						"          VirtualEmissionScope as string,",
+						"          BannerId as integer,",
+						"          VirtualEmissionFactorLocation as double,",
+						"          VirtualEmissionFactorMarket as double",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'VirtualEmissionFactor') ~> VirtualEmissionData",
+						"source(output(",
+						"          Location as string,",
+						"          {Tag ID} as string,",
+						"          {Rack Type} as string,",
+						"          {Refrigerant Type} as string,",
+						"          {Total Charge} as double '000,000,000.000',",
+						"          {Primary Trade} as string,",
+						"          Brand as string,",
+						"          {Model No.} as string,",
+						"          {Serial No.} as string,",
+						"          {Facility Name} as string,",
+						"          Deactivated as boolean,",
+						"          {Rack Id} as string,",
+						"          {Asset Type} as string,",
+						"          Banner as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'Refrigerants.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> RefrigerantData",
+						"source(output(",
+						"          FacilityId as integer,",
+						"          FacilityName as string,",
+						"          LocationId as integer,",
+						"          GrossFloorArea as integer,",
+						"          AvailableSellingArea as integer,",
+						"          FacilityTypeId as integer,",
+						"          BannerId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Facility') ~> FacilityData",
+						"source(output(",
+						"          PurchasedGasId as integer,",
+						"          PurchasedGasName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'PurchasedGas') ~> PurchasedGas",
+						"source(output(",
+						"          BannerId as integer,",
+						"          BannerName as string,",
+						"          OrganizationId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Banner') ~> BannerData",
+						"derivedColumn2 keyGenerate(output(RefrigerantId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> surrogateKey1",
+						"RefrigerantData derive(Location = replace(Location,'GF','')) ~> derivedColumn1",
+						"derivedColumn1 derive(Location = replace(Location,\"SS\",'')) ~> derivedColumn2",
+						"surrogateKey1, PurchasedGas lookup({Refrigerant Type} == PurchasedGasName,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(PurchasedGasId, true),",
+						"     broadcast: 'auto')~> lookupPurchased",
+						"lookupPurchased sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'DirectEmissionsFromRefrigeration',",
+						"     input(",
+						"          RefrigerantId as integer,",
+						"          PeriodStartTimestamp as date,",
+						"          PeriodEndTimestamp as date,",
+						"          FuelMassVolumeUnitsLb as double,",
+						"          C02EmissionsUnits as double,",
+						"          PurchasedEnergyId as integer,",
+						"          EmissionFactorId as integer,",
+						"          FacilityId as integer,",
+						"          FuelMassKg as double,",
+						"          VirtualEmissionFactorId as integer",
+						"     ),",
+						"     mapColumn(",
+						"          RefrigerantId,",
+						"          FuelMassVolumeUnitsLb = {Total Charge}",
+						"     )) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/VirtualEmissions')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "EnergyTypeData"
+						},
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "VirtualEmissionData"
+						},
+						{
+							"name": "BannerData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "MapVirtualFactor"
+						}
+					],
+					"transformations": [
+						{
+							"name": "CreateEmissionKey"
+						},
+						{
+							"name": "lookupPurchased"
+						},
+						{
+							"name": "lookupBanner"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          PurchasedGasId as integer,",
+						"          PurchasedGasName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'PurchasedGas') ~> EnergyTypeData",
+						"source(output(",
+						"          Brand as string,",
+						"          EnergyType as string,",
+						"          {virtual Market based} as double '000,000,000.000',",
+						"          {virtual Location based} as double '000,000,000.000',",
+						"          Start_date as date 'dd-MM-yyyy',",
+						"          End_date as date 'dd-MM-yyyy'",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'virtualscores.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> VirtualEmissionData",
+						"source(output(",
+						"          BannerId as integer,",
+						"          BannerName as string,",
+						"          OrganizationId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Banner') ~> BannerData",
+						"VirtualEmissionData keyGenerate(output(VirtualEmissionId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> CreateEmissionKey",
+						"CreateEmissionKey, EnergyTypeData lookup(EnergyType == PurchasedGasName,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(PurchasedGasId, true),",
+						"     broadcast: 'auto')~> lookupPurchased",
+						"lookupPurchased, BannerData lookup(Brand == BannerName,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(BannerId, true),",
+						"     broadcast: 'auto')~> lookupBanner",
+						"lookupBanner sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'VirtualEmissionFactor',",
+						"     input(",
+						"          VirtualEmissionId as integer,",
+						"          PurchasedGasId as integer,",
+						"          VirtualEmissionStartDate as date,",
+						"          VirtualEmissionEndDate as date,",
+						"          VirtualEmissionScope as string,",
+						"          BannerId as integer,",
+						"          VirtualEmissionFactorLocation as double,",
+						"          VirtualEmissionFactorMarket as double",
+						"     ),",
+						"     mapColumn(",
+						"          VirtualEmissionId,",
+						"          PurchasedGasId,",
+						"          VirtualEmissionStartDate = Start_date,",
+						"          VirtualEmissionEndDate = End_date,",
+						"          BannerId,",
+						"          VirtualEmissionFactorLocation = {virtual Location based},",
+						"          VirtualEmissionFactorMarket = {virtual Market based}",
+						"     )) ~> MapVirtualFactor"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/WorkspaceSystemIdentity')]",
 			"type": "Microsoft.Synapse/workspaces/credentials",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"type": "ManagedIdentity",
 				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 3')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseDelimitedTextFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseDelimitedTextFormat] \n\tWITH ( FORMAT_TYPE = DELIMITEDTEXT ,\n\t       FORMAT_OPTIONS (\n\t\t\t FIELD_TERMINATOR = ',',\n\t\t\t USE_TYPE_DEFAULT = FALSE\n\t\t\t))\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'fsgdmsdevweeu01_stgdmsdevweeu01_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [fsgdmsdevweeu01_stgdmsdevweeu01_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net' \n\t)\nGO\n\nCREATE EXTERNAL TABLE [Emission] (\n\t[Country] nvarchar(4000),\n\t[CarbonScope] nvarchar(4000),\n\t[EmissionCategory] nvarchar(4000),\n\t[EmissionType] nvarchar(4000),\n\t[EmissionFactorLocationBased] float,\n\t[EmissionFactorMarketBased] float,\n\t[UnitOfMeasure] nvarchar(4000),\n\t[StartDate] date,\n\t[EndDate] date,\n\t[Region] nvarchar(4000),\n\t[HasMarketBasedFactor] bigint\n\t)\n\tWITH (\n\tLOCATION = 'ESG_staging/EmissionFactors.csv',\n\tDATA_SOURCE = [fsgdmsdevweeu01_stgdmsdevweeu01_dfs_core_windows_net],\n\tFILE_FORMAT = [SynapseDelimitedTextFormat]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM [dbo].[Emission]\nGO",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "Built-in",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
 			},
 			"dependsOn": []
 		},
@@ -39332,183 +39747,6 @@
 			},
 			"dependsOn": [],
 			"location": "westeurope"
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/VirtualEmissionFactor')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "VirtualEmissions",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "VirtualEmissions",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"EnergyTypeData": {},
-									"VirtualEmissionData": {},
-									"BannerData": {},
-									"MapVirtualFactor": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]",
-				"[concat(variables('workspaceId'), '/dataflows/VirtualEmissions')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/VirtualEmissions')]",
-			"type": "Microsoft.Synapse/workspaces/dataflows",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"type": "MappingDataFlow",
-				"typeProperties": {
-					"sources": [
-						{
-							"name": "EnergyTypeData"
-						},
-						{
-							"linkedService": {
-								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-								"type": "LinkedServiceReference"
-							},
-							"name": "VirtualEmissionData"
-						},
-						{
-							"name": "BannerData"
-						}
-					],
-					"sinks": [
-						{
-							"name": "MapVirtualFactor"
-						}
-					],
-					"transformations": [
-						{
-							"name": "CreateEmissionKey"
-						},
-						{
-							"name": "lookupPurchased"
-						},
-						{
-							"name": "lookupBanner"
-						}
-					],
-					"scriptLines": [
-						"source(output(",
-						"          PurchasedGasId as integer,",
-						"          PurchasedGasName as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     store: 'synapse',",
-						"     databaseType: 'spark',",
-						"     format: 'table',",
-						"     database: 'ESGNORMALIZEDMODEL',",
-						"     tableName: 'PurchasedGas') ~> EnergyTypeData",
-						"source(output(",
-						"          Brand as string,",
-						"          EnergyType as string,",
-						"          {virtual Market based} as double '000,000,000.000',",
-						"          {virtual Location based} as double '000,000,000.000',",
-						"          Start_date as date 'dd-MM-yyyy',",
-						"          End_date as date 'dd-MM-yyyy'",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false,",
-						"     format: 'delimited',",
-						"     fileSystem: 'fsgdmsdevweeu01',",
-						"     folderPath: 'ESG_MAPDATA',",
-						"     fileName: 'virtualscores.csv',",
-						"     columnDelimiter: ';',",
-						"     escapeChar: '\\\\',",
-						"     quoteChar: '\\\"',",
-						"     columnNamesAsHeader: true) ~> VirtualEmissionData",
-						"source(output(",
-						"          BannerId as integer,",
-						"          BannerName as string,",
-						"          OrganizationId as integer",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     store: 'synapse',",
-						"     databaseType: 'spark',",
-						"     format: 'table',",
-						"     database: 'ESGNORMALIZEDMODEL',",
-						"     tableName: 'Banner') ~> BannerData",
-						"VirtualEmissionData keyGenerate(output(VirtualEmissionId as long),",
-						"     startAt: 1L,",
-						"     stepValue: 1L) ~> CreateEmissionKey",
-						"CreateEmissionKey, EnergyTypeData lookup(EnergyType == PurchasedGasName,",
-						"     multiple: false,",
-						"     pickup: 'first',",
-						"     asc(PurchasedGasId, true),",
-						"     broadcast: 'auto')~> lookupPurchased",
-						"lookupPurchased, BannerData lookup(Brand == BannerName,",
-						"     multiple: false,",
-						"     pickup: 'first',",
-						"     asc(BannerId, true),",
-						"     broadcast: 'auto')~> lookupBanner",
-						"lookupBanner sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     store: 'synapse',",
-						"     databaseType: 'spark',",
-						"     format: 'table',",
-						"     database: 'ESGNORMALIZEDMODEL',",
-						"     tableName: 'VirtualEmissionFactor',",
-						"     input(",
-						"          VirtualEmissionId as integer,",
-						"          PurchasedGasId as integer,",
-						"          VirtualEmissionStartDate as date,",
-						"          VirtualEmissionEndDate as date,",
-						"          VirtualEmissionScope as string,",
-						"          BannerId as integer,",
-						"          VirtualEmissionFactorLocation as double,",
-						"          VirtualEmissionFactorMarket as double",
-						"     ),",
-						"     mapColumn(",
-						"          VirtualEmissionId,",
-						"          PurchasedGasId,",
-						"          VirtualEmissionStartDate = Start_date,",
-						"          VirtualEmissionEndDate = End_date,",
-						"          BannerId,",
-						"          VirtualEmissionFactorLocation = {virtual Location based},",
-						"          VirtualEmissionFactorMarket = {virtual Market based}",
-						"     )) ~> MapVirtualFactor"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
-			]
 		}
 	]
 }
