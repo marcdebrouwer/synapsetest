@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Dataflow1",
+						"referenceName": "VirtualEmissionFactors2",
 						"type": "DataFlowReference"
 					},
 					"compute": {
