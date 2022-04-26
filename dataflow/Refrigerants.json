@@ -13,10 +13,36 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "RefrigerantData"
+				},
+				{
+					"name": "FacilityData"
+				},
+				{
+					"name": "PurchasedGas"
+				},
+				{
+					"name": "BannerData"
 				}
 			],
-			"sinks": [],
-			"transformations": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "surrogateKey1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "lookupPurchased"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          VirtualEmissionId as integer,",
@@ -61,7 +87,79 @@
 				"     columnDelimiter: ';',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: true) ~> RefrigerantData"
+				"     columnNamesAsHeader: true) ~> RefrigerantData",
+				"source(output(",
+				"          FacilityId as integer,",
+				"          FacilityName as string,",
+				"          LocationId as integer,",
+				"          GrossFloorArea as integer,",
+				"          AvailableSellingArea as integer,",
+				"          FacilityTypeId as integer,",
+				"          BannerId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Facility') ~> FacilityData",
+				"source(output(",
+				"          PurchasedGasId as integer,",
+				"          PurchasedGasName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'PurchasedGas') ~> PurchasedGas",
+				"source(output(",
+				"          BannerId as integer,",
+				"          BannerName as string,",
+				"          OrganizationId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Banner') ~> BannerData",
+				"derivedColumn2 keyGenerate(output(RefrigerantId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"RefrigerantData derive(Location = replace(Location,'GF','')) ~> derivedColumn1",
+				"derivedColumn1 derive(Location = replace(Location,\"SS\",'')) ~> derivedColumn2",
+				"surrogateKey1, PurchasedGas lookup({Refrigerant Type} == PurchasedGasName,",
+				"     multiple: false,",
+				"     pickup: 'first',",
+				"     asc(PurchasedGasId, true),",
+				"     broadcast: 'auto')~> lookupPurchased",
+				"lookupPurchased sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'DirectEmissionsFromRefrigeration',",
+				"     input(",
+				"          RefrigerantId as integer,",
+				"          PeriodStartTimestamp as date,",
+				"          PeriodEndTimestamp as date,",
+				"          FuelMassVolumeUnitsLb as double,",
+				"          C02EmissionsUnits as double,",
+				"          PurchasedEnergyId as integer,",
+				"          EmissionFactorId as integer,",
+				"          FacilityId as integer,",
+				"          FuelMassKg as double,",
+				"          VirtualEmissionFactorId as integer",
+				"     ),",
+				"     mapColumn(",
+				"          RefrigerantId,",
+				"          FuelMassVolumeUnitsLb = {Total Charge}",
+				"     )) ~> sink1"
 			]
 		}
 	}
