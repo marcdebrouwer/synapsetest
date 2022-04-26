@@ -1,0 +1,23 @@
+{
+	"name": "relationship-ghkkacbchf",
+	"properties": {
+		"Name": "relationship-ghkkacbchf",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "GreenhouseGasType",
+		"ToTableName": "Scope2Emissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "GreenhouseGasTypeId",
+				"ToColumnName": "GreenhouseGasTypeId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

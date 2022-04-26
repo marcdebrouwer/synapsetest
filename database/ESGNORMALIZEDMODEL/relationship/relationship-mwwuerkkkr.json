@@ -10,7 +10,7 @@
 			"Type": "SPARK"
 		},
 		"FromTableName": "UnitOfMeasure",
-		"ToTableName": "Scope2MarketBasedApproach",
+		"ToTableName": "Scope2Emissions",
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "UnitOfMeasureId",
