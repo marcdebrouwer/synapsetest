@@ -58,7 +58,7 @@
 				"     stepValue: 1L) ~> CreateEnergyKey",
 				"alterRow1 aggregate(groupBy(EmissionType),",
 				"     each(match(name!=\"EmissionType\"), $$ = first($$))) ~> aggregate1",
-				"PurchasedEnergyData alterRow(upsertIf(true())) ~> alterRow1",
+				"PurchasedEnergyData alterRow(upsertIf(isNull(EmissionType)==false())) ~> alterRow1",
 				"CreateEnergyKey sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
