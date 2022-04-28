@@ -78,7 +78,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/FacilityFlow')]"
+				"[concat(variables('workspaceId'), '/dataflows/FacilityFlow')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
@@ -126,8 +127,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/EmissionFactors')]",
-				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+				"[concat(variables('workspaceId'), '/dataflows/EmissionFactors')]"
 			]
 		},
 		{
@@ -286,7 +286,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/FacilityDataMap')]"
+				"[concat(variables('workspaceId'), '/dataflows/FacilityDataMap')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
@@ -336,7 +337,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/PurchasedFlow')]"
+				"[concat(variables('workspaceId'), '/dataflows/PurchasedFlow')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
@@ -387,7 +389,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/Refrigerants')]"
+				"[concat(variables('workspaceId'), '/dataflows/Refrigerants')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
@@ -1532,6 +1535,9 @@
 						},
 						{
 							"name": "aggregate1"
+						},
+						{
+							"name": "alterRow1"
 						}
 					],
 					"scriptLines": [
@@ -1562,8 +1568,9 @@
 						"aggregate1 keyGenerate(output(PurchasedEnergyId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> CreateEnergyKey",
-						"PurchasedEnergyData aggregate(groupBy(EmissionType),",
+						"alterRow1 aggregate(groupBy(EmissionType),",
 						"     each(match(name!=\"EmissionType\"), $$ = first($$))) ~> aggregate1",
+						"PurchasedEnergyData alterRow(upsertIf(true())) ~> alterRow1",
 						"CreateEnergyKey sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -18824,8 +18831,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -18921,8 +18928,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19128,8 +19135,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/DirectEmissionsFromRefrigeration",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19244,8 +19251,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19417,8 +19424,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19515,8 +19522,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19727,8 +19734,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19921,8 +19928,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20019,8 +20026,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20117,8 +20124,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PurchasedGas",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20300,8 +20307,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2Emissions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20434,8 +20441,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/UnitOfMeasure",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20597,8 +20604,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -40552,6 +40559,46 @@
 			},
 			"dependsOn": [],
 			"location": "westeurope"
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 12')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [RefrigerantId]\n,[PeriodStartTimestamp]\n,[PeriodEndTimestamp]\n,[FuelMassVolumeUnitsLb]\n,[C02EmissionsUnits]\n,[PurchasedEnergyId]\n,[EmissionFactorId]\n,[FacilityId]\n,[FuelMassKg]\n,[VirtualEmissionFactorId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[DirectEmissionsFromRefrigeration]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESGNORMALIZEDMODEL",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 13')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [Emisison]\n,[PeriodStartTimestamp]\n,[PeriodEndTimestamp]\n,[TotalCo2EEmissionsUnits]\n,[TotalCo2EEmissionsUomId]\n,[EmissionFactorId]\n,[FacilityId]\n,[VirtualEmissionFactorId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[Scope2Emissions]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESGNORMALIZEDMODEL",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
 		}
 	]
 }
