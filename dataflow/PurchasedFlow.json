@@ -23,9 +23,6 @@
 				},
 				{
 					"name": "aggregate1"
-				},
-				{
-					"name": "alterRow1"
 				}
 			],
 			"scriptLines": [
@@ -56,9 +53,8 @@
 				"aggregate1 keyGenerate(output(PurchasedEnergyId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> CreateEnergyKey",
-				"alterRow1 aggregate(groupBy(EmissionType),",
+				"PurchasedEnergyData aggregate(groupBy(EmissionType),",
 				"     each(match(name!=\"EmissionType\"), $$ = first($$))) ~> aggregate1",
-				"PurchasedEnergyData alterRow(upsertIf(isNull(EmissionType)==false())) ~> alterRow1",
 				"CreateEnergyKey sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
