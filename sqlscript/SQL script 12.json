@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 12",
+	"properties": {
+		"content": {
+			"query": "SELECT TOP (100) [RefrigerantId]\n,[PeriodStartTimestamp]\n,[PeriodEndTimestamp]\n,[FuelMassVolumeUnitsLb]\n,[C02EmissionsUnits]\n,[PurchasedEnergyId]\n,[EmissionFactorId]\n,[FacilityId]\n,[FuelMassKg]\n,[VirtualEmissionFactorId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[DirectEmissionsFromRefrigeration]",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ESGNORMALIZEDMODEL",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
