@@ -69,6 +69,9 @@
 				},
 				{
 					"name": "surrogateKey1"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -165,8 +168,8 @@
 				"     tableName: 'PurchasedGas') ~> PurchasedEnergyData",
 				"RefrigerantData derive(Location = replace(Location,'GF','')) ~> RemoveGF",
 				"RemoveGF derive(Location = replace(Location,'SS','')) ~> RemoveSS",
-				"RemoveSS derive(Location = toInteger(Location)) ~> LocationToInt",
-				"CalculateKG, FacilityData join(Location == FacilityId,",
+				"derivedColumn2 derive(Location = toInteger(Location)) ~> LocationToInt",
+				"CalculateKG, FacilityData join(Location === FacilityId,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinLocation",
 				"joinLocation, PurchasedEnergyData join({Refrigerant Type} == PurchasedGasName,",
@@ -224,6 +227,7 @@
 				"select3 keyGenerate(output(RefrigerantId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
+				"RemoveSS derive(Location = trim(Location)) ~> derivedColumn2",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
