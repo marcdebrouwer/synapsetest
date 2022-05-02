@@ -1,0 +1,104 @@
+{
+	"name": "Dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "source1"
+				},
+				{
+					"name": "source2"
+				},
+				{
+					"name": "source3"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {Facility Name} as string,",
+				"          {Location ID} as short,",
+				"          {Selling m2} as string,",
+				"          {Facility Type} as string,",
+				"          Electric as string,",
+				"          {Natural Gas} as string,",
+				"          Propane as string,",
+				"          {Fuel Oil} as string,",
+				"          {Solar Used On-Site} as string,",
+				"          EFEC as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_SoureFiles',",
+				"     fileName: 'AholdDelhaizeEnergy.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> source1",
+				"source(output(",
+				"          FacilityId as integer,",
+				"          FacilityName as string,",
+				"          LocationId as integer,",
+				"          GrossFloorArea as integer,",
+				"          AvailableSellingArea as integer,",
+				"          FacilityTypeId as integer,",
+				"          BannerId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Facility') ~> source2",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'GreenhouseGasType') ~> source3",
+				"source1, source2 join({Facility Name} == FacilityName,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          {Facility Name},",
+				"          {Location ID},",
+				"          {Selling m2},",
+				"          {Facility Type},",
+				"          Electric,",
+				"          {Natural Gas},",
+				"          Propane,",
+				"          {Fuel Oil},",
+				"          {Solar Used On-Site},",
+				"          EFEC,",
+				"          FacilityId,",
+				"          FacilityName,",
+				"          LocationId,",
+				"          GrossFloorArea,",
+				"          AvailableSellingArea,",
+				"          FacilityTypeId,",
+				"          BannerId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
+			]
+		}
+	}
+}
