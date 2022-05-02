@@ -14,14 +14,13 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "Column_1",
+					"Name": "VirtualEmissionFactorId",
 					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
+						"TypeName": "integer",
 						"IsNullable": true,
-						"Length": 256,
+						"IsComplexType": false,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				}
@@ -63,8 +62,7 @@
 			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,
