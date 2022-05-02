@@ -150,7 +150,8 @@
 				"          GrossFloorArea as integer,",
 				"          AvailableSellingArea as integer,",
 				"          FacilityTypeId as integer,",
-				"          BannerId as integer",
+				"          BannerId as integer,",
+				"          FacilityNumber as integer",
 				"     ),",
 				"     mapColumn(",
 				"          FacilityId,",
@@ -159,7 +160,8 @@
 				"          GrossFloorArea = {Gross area owned stores ft2},",
 				"          AvailableSellingArea = {Sales area owned stores ft2},",
 				"          FacilityTypeId,",
-				"          BannerId",
+				"          BannerId,",
+				"          FacilityNumber = {Facility ID_2}",
 				"     )) ~> sink1"
 			]
 		}
