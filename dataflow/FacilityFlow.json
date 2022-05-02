@@ -119,7 +119,7 @@
 				"     pickup: 'first',",
 				"     asc(BannerId, true),",
 				"     broadcast: 'auto')~> lookupBanner",
-				"lookupBanner, LocationData lookup({Facility Name} == LocationName,",
+				"lookupBanner, LocationData lookup({Facility Name} === LocationName,",
 				"     multiple: false,",
 				"     pickup: 'first',",
 				"     asc(LocationId, true),",
