@@ -25,13 +25,13 @@
 			],
 			"transformations": [
 				{
-					"name": "lookupBrand"
-				},
-				{
-					"name": "lookupEnergyType"
-				},
-				{
 					"name": "surrogateKey1"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "join2"
 				}
 			],
 			"scriptLines": [
@@ -77,19 +77,15 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'PurchasedGas') ~> EnergyTypesData",
-				"VirtualEmissionFactorData, BrandData lookup(Brand == BannerName,",
-				"     multiple: false,",
-				"     pickup: 'first',",
-				"     asc(BannerId, true),",
-				"     broadcast: 'auto')~> lookupBrand",
-				"lookupBrand, EnergyTypesData lookup(EnergyType == PurchasedGasName,",
-				"     multiple: false,",
-				"     pickup: 'first',",
-				"     asc(PurchasedGasId, true),",
-				"     broadcast: 'auto')~> lookupEnergyType",
-				"lookupEnergyType keyGenerate(output(VirtualEmissionId as long),",
+				"join2 keyGenerate(output(VirtualEmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
+				"VirtualEmissionFactorData, BrandData join(Brand == BannerName,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join1",
+				"join1, EnergyTypesData join(EnergyType == PurchasedGasName,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join2",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
@@ -100,8 +96,7 @@
 				"     input(",
 				"          VirtualEmissionId as integer,",
 				"          PurchasedGasId as integer,",
-				"          VirtualEmissionStartDate as date,",
-				"          VirtualEmissionEndDate as date,",
+				"          Date as date,",
 				"          VirtualEmissionScope as string,",
 				"          BannerId as integer,",
 				"          VirtualEmissionFactorLocation as double,",
@@ -110,8 +105,7 @@
 				"     mapColumn(",
 				"          VirtualEmissionId,",
 				"          PurchasedGasId,",
-				"          VirtualEmissionStartDate = Start_date,",
-				"          VirtualEmissionEndDate = End_date,",
+				"          Date = Start_date,",
 				"          BannerId,",
 				"          VirtualEmissionFactorLocation = {virtual Location based},",
 				"          VirtualEmissionFactorMarket = {virtual Market based}",
