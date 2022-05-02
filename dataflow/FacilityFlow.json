@@ -112,7 +112,7 @@
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'FacilityType') ~> FacilityTypeData",
 				"join2, LocationData join({Facility Name} == LocationName,",
-				"     joinType:'left',",
+				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join1",
 				"FacilityData, BannerData join(OpCo == BannerName,",
 				"     joinType:'left',",
