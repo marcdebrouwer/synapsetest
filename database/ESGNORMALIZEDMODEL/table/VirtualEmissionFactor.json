@@ -29,33 +29,20 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				},
 				{
-					"Name": "VirtualEmissionStartDate",
+					"Name": "Date",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsComplexType": false,
 						"IsNullable": true,
-						"Properties": {
-							"DateFormat": "dd-MM-yyyy",
-							"HIVE_TYPE_STRING": "date"
-						}
-					}
-				},
-				{
-					"Name": "VirtualEmissionEndDate",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "date",
 						"IsComplexType": false,
-						"IsNullable": true,
 						"Properties": {
 							"DateFormat": "dd-MM-yyyy",
 							"HIVE_TYPE_STRING": "date"
@@ -67,8 +54,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -80,8 +67,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -92,8 +79,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "double",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
@@ -104,8 +91,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "double",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}

@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 15",
+	"properties": {
+		"content": {
+			"query": "SELECT TOP (100) [EmissionFactorId]\n,[EmissionFactorName]\n,[EmissionScope]\n,[EmissionCategory]\n,[EmissionFactorLocationBased]\n,[EmissionFactorMarketBased]\n,[UnitOfMeasure]\n,[EmissionStartDate]\n,[EmissionEndDate]\n,[EgridRegion]\n,[PurchasedGasId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[GreenhouseGasType]",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ESGNORMALIZEDMODEL",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
