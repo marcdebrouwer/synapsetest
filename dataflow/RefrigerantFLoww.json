@@ -107,9 +107,6 @@
 					"name": "join1"
 				},
 				{
-					"name": "joinVirtualEmissionFactor2"
-				},
-				{
 					"name": "joinEmissionFactor2"
 				},
 				{
@@ -334,9 +331,6 @@
 				"     && select3@PurchasedGasId == VirtualEmissionFactorData@PurchasedGasId,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join1",
-				"VirtualEmissionFactorData join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     joinType:'inner',",
-				"     broadcast: 'auto')~> joinVirtualEmissionFactor2",
 				"join1, EmissionFactorData join(CreateCategory2@Date == EmissionStartDate",
 				"     && select3@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
 				"     joinType:'inner',",
