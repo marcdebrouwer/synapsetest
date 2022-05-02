@@ -1877,7 +1877,16 @@
 							"name": "derivedColumn2"
 						},
 						{
+							"name": "joinVirtualEmissionFactor"
+						},
+						{
 							"name": "join1"
+						},
+						{
+							"name": "select2"
+						},
+						{
+							"name": "surrogateKey1"
 						}
 					],
 					"scriptLines": [
@@ -1997,8 +2006,27 @@
 						"derivedColumn1, VirtualEmissionFactorData join(derivedColumn1@Date == VirtualEmissionFactorData@Date",
 						"     && select1@PurchasedGasId == VirtualEmissionFactorData@PurchasedGasId,",
 						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinVirtualEmissionFactor",
+						"joinVirtualEmissionFactor, EmissionFactorData join(derivedColumn1@Date == EmissionStartDate",
+						"     && select1@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
+						"     joinType:'inner',",
 						"     broadcast: 'auto')~> join1",
-						"join1 sink(allowSchemaDrift: true,",
+						"join1 select(mapColumn(",
+						"          {Total Charge},",
+						"          CalculateKG,",
+						"          FacilityId,",
+						"          PurchasedGasId = select1@PurchasedGasId,",
+						"          Date = derivedColumn1@Date,",
+						"          VirtualEmissionId,",
+						"          PurchasedGasId = VirtualEmissionFactorData@PurchasedGasId,",
+						"          EmissionFactorId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select2",
+						"select2 keyGenerate(output(RefrigerantId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> surrogateKey1",
+						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
 						"     databaseType: 'spark',",
@@ -2018,7 +2046,14 @@
 						"          VirtualEmissionFactorId as integer",
 						"     ),",
 						"     mapColumn(",
-						"          FacilityId",
+						"          RefrigerantId,",
+						"          FacilityId,",
+						"          PeriodStart = Date,",
+						"          PurchasedEnergyId = PurchasedGasId,",
+						"          EmissionFactorId,",
+						"          VirtualEmissionFactorId = VirtualEmissionId,",
+						"          FuelMassKg = CalculateKG,",
+						"          FuelMassVolumeUnitsLb = {Total Charge}",
 						"     )) ~> sink1"
 					]
 				}
