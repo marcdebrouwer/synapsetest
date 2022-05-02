@@ -65,7 +65,7 @@
 					"name": "joinVirtualEmissionFactor"
 				},
 				{
-					"name": "join1"
+					"name": "joinEmissionFactor"
 				},
 				{
 					"name": "select2"
@@ -102,6 +102,18 @@
 				},
 				{
 					"name": "select3"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "joinVirtualEmissionFactor2"
+				},
+				{
+					"name": "joinEmissionFactor2"
+				},
+				{
+					"name": "FinalSelection2"
 				}
 			],
 			"scriptLines": [
@@ -255,8 +267,8 @@
 				"joinVirtualEmissionFactor, EmissionFactorData join(derivedColumn1@Date == EmissionStartDate",
 				"     && select1@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
 				"     joinType:'inner',",
-				"     broadcast: 'auto')~> join1",
-				"join1 select(mapColumn(",
+				"     broadcast: 'auto')~> joinEmissionFactor",
+				"joinEmissionFactor select(mapColumn(",
 				"          {Total Charge},",
 				"          CalculateKG,",
 				"          FacilityId,",
@@ -277,7 +289,8 @@
 				"RemoveSS2 derive(LeakageKG = {Quantity added(lbs)}*0.4536) ~> derivedColumn3",
 				"derivedColumn3 derive(StoreId = toInteger(StoreId)) ~> ToInteger2",
 				"select2 derive(Category = \"Charge\") ~> CreateCategory",
-				"select3 derive(Category = \"Leakage\") ~> CreateCategory2",
+				"select3 derive(Category = \"Leakage\",",
+				"          Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateCategory2",
 				"CreateCategory select(mapColumn(",
 				"          Units = {Total Charge},",
 				"          UnitsKG = CalculateKG,",
@@ -299,35 +312,39 @@
 				"     broadcast: 'auto')~> joinPurchasedEnergy2",
 				"joinPurchasedEnergy2 select(mapColumn(",
 				"          StoreId,",
-				"          {Tag ID},",
 				"          {Quantity added(lbs)},",
 				"          {Refrigerant type},",
-				"          {REFRIG TYPE},",
-				"          {Tracking number},",
 				"          Vendor,",
-				"          {Part use date},",
-				"          {Refrigerant Use Reason},",
-				"          {Leak event date},",
-				"          {Inventory LocationId},",
-				"          AssetId,",
-				"          LeakId,",
-				"          Banner,",
-				"          charge,",
-				"          R134A,",
 				"          LeakageKG,",
 				"          FacilityId,",
-				"          FacilityName,",
-				"          LocationId,",
-				"          GrossFloorArea,",
-				"          AvailableSellingArea,",
-				"          FacilityTypeId,",
-				"          BannerId,",
-				"          FacilityNumber,",
-				"          PurchasedGasId,",
-				"          PurchasedGasName",
+				"          PurchasedGasId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
+				"CreateCategory2, VirtualEmissionFactorData join(CreateCategory2@Date == VirtualEmissionFactorData@Date",
+				"     && select3@PurchasedGasId == VirtualEmissionFactorData@PurchasedGasId,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join1",
+				"VirtualEmissionFactorData join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> joinVirtualEmissionFactor2",
+				"join1, EmissionFactorData join(CreateCategory2@Date == EmissionStartDate",
+				"     && select3@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> joinEmissionFactor2",
+				"joinEmissionFactor2 select(mapColumn(",
+				"          StoreId,",
+				"          Units = {Quantity added(lbs)},",
+				"          UnitsKG = LeakageKG,",
+				"          FacilityId,",
+				"          PurchasedGasId = select3@PurchasedGasId,",
+				"          Category,",
+				"          Date = CreateCategory2@Date,",
+				"          VirtualEmissionId,",
+				"          EmissionFactorId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> FinalSelection2",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
