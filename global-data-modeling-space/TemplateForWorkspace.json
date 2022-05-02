@@ -418,7 +418,7 @@
 									"VirtualEmissionFactorData": {},
 									"EmissionFactorData": {},
 									"PurchasedEnergyData": {},
-									"RefrigerentDataMap": {}
+									"sink1": {}
 								}
 							},
 							"staging": {},
@@ -1848,7 +1848,7 @@
 					],
 					"sinks": [
 						{
-							"name": "RefrigerentDataMap"
+							"name": "sink1"
 						}
 					],
 					"transformations": [
@@ -1865,13 +1865,7 @@
 							"name": "joinPurchasedEnergy"
 						},
 						{
-							"name": "joinVirtualEmission"
-						},
-						{
 							"name": "derivedColumn1"
-						},
-						{
-							"name": "joinEmissionFactor"
 						},
 						{
 							"name": "CalculateKG"
@@ -1880,16 +1874,10 @@
 							"name": "select1"
 						},
 						{
-							"name": "select2"
-						},
-						{
-							"name": "select3"
+							"name": "derivedColumn2"
 						},
 						{
 							"name": "surrogateKey1"
-						},
-						{
-							"name": "derivedColumn2"
 						}
 					],
 					"scriptLines": [
@@ -1991,15 +1979,7 @@
 						"joinLocation, PurchasedEnergyData join({Refrigerant Type} == PurchasedGasName,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinPurchasedEnergy",
-						"derivedColumn1, VirtualEmissionFactorData join(select1@PurchasedGasId == VirtualEmissionFactorData@PurchasedGasId",
-						"     && derivedColumn1@Date == VirtualEmissionFactorData@Date,",
-						"     joinType:'left',",
-						"     broadcast: 'auto')~> joinVirtualEmission",
 						"select1 derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> derivedColumn1",
-						"select2, EmissionFactorData join(Date == EmissionStartDate",
-						"     && select2@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
-						"     joinType:'inner',",
-						"     broadcast: 'auto')~> joinEmissionFactor",
 						"RemoveSS derive(CalculateKG = {Total Charge}*0.4536) ~> CalculateKG",
 						"joinPurchasedEnergy select(mapColumn(",
 						"          {Refrigerant Type},",
@@ -2013,37 +1993,10 @@
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> select1",
-						"joinVirtualEmission select(mapColumn(",
-						"          Location,",
-						"          {Refrigerant Type},",
-						"          {Total Charge},",
-						"          Banner,",
-						"          CalculateKG,",
-						"          FacilityId,",
-						"          PurchasedGasId = select1@PurchasedGasId,",
-						"          Date = derivedColumn1@Date,",
-						"          VirtualEmissionId",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> select2",
-						"joinEmissionFactor select(mapColumn(",
-						"          Location,",
-						"          {Refrigerant Type},",
-						"          {Total Charge},",
-						"          Banner,",
-						"          CalculateKG,",
-						"          FacilityId,",
-						"          PurchasedGasId = select2@PurchasedGasId,",
-						"          Date,",
-						"          VirtualEmissionId,",
-						"          EmissionFactorId",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> select3",
-						"select3 keyGenerate(output(RefrigerantId as long),",
+						"CalculateKG derive(Location = toInteger(Location)) ~> derivedColumn2",
+						"derivedColumn1 keyGenerate(output(refrigerantId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
-						"CalculateKG derive(Location = toInteger(Location)) ~> derivedColumn2",
 						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -2053,8 +2006,8 @@
 						"     tableName: 'DirectEmissionsFromRefrigeration',",
 						"     input(",
 						"          RefrigerantId as integer,",
-						"          PeriodStartTimestamp as date,",
-						"          PeriodEndTimestamp as date,",
+						"          PeriodStart as date,",
+						"          PeriodEnd as date,",
 						"          FuelMassVolumeUnitsLb as double,",
 						"          C02EmissionsUnits as double,",
 						"          PurchasedEnergyId as integer,",
@@ -2064,15 +2017,9 @@
 						"          VirtualEmissionFactorId as integer",
 						"     ),",
 						"     mapColumn(",
-						"          PeriodStartTimestamp = Date,",
-						"          FuelMassVolumeUnitsLb = {Total Charge},",
-						"          PurchasedEnergyId = PurchasedGasId,",
-						"          EmissionFactorId,",
-						"          FacilityId,",
-						"          VirtualEmissionFactorId = VirtualEmissionId,",
-						"          FuelMassKg = CalculateKG,",
-						"          RefrigerantId",
-						"     )) ~> RefrigerentDataMap"
+						"          RefrigerantId = refrigerantId,",
+						"          FacilityId",
+						"     )) ~> sink1"
 					]
 				}
 			},
@@ -2287,14 +2234,20 @@
 						},
 						{
 							"name": "join2"
+						},
+						{
+							"name": "CommaToPoint"
+						},
+						{
+							"name": "FromTextToInt"
 						}
 					],
 					"scriptLines": [
 						"source(output(",
 						"          Brand as string,",
 						"          EnergyType as string,",
-						"          {virtual Market based} as double '000,000,000.000',",
-						"          {virtual Location based} as double '000,000,000.000',",
+						"          {virtual Market based} as string,",
+						"          {virtual Location based} as string,",
 						"          Start_date as date 'dd-MM-yyyy',",
 						"          End_date as date 'dd-MM-yyyy'",
 						"     ),",
@@ -2335,12 +2288,16 @@
 						"join2 keyGenerate(output(VirtualEmissionId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
-						"VirtualEmissionFactorData, BrandData join(Brand == BannerName,",
+						"FromTextToInt, BrandData join(Brand == BannerName,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> join1",
 						"join1, EnergyTypesData join(EnergyType == PurchasedGasName,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> join2",
+						"VirtualEmissionFactorData derive({virtual Location based} = replace({virtual Location based},',','.'),",
+						"          {virtual Market based} = replace({virtual Market based},',','.')) ~> CommaToPoint",
+						"CommaToPoint derive({virtual Market based} = toDouble({virtual Market based}),",
+						"          {virtual Location based} = toDouble({virtual Location based})) ~> FromTextToInt",
 						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -2384,26 +2341,6 @@
 		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/SQL script 10')]",
-			"type": "Microsoft.Synapse/workspaces/sqlscripts",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"content": {
-					"query": "SELECT TOP (100) [VirtualEmissionId]\n,[PurchasedGasId]\n,[VirtualEmissionStartDate]\n,[VirtualEmissionEndDate]\n,[VirtualEmissionScope]\n,[BannerId]\n,[VirtualEmissionFactorLocation]\n,[VirtualEmissionFactorMarket]\n FROM [ESGNORMALIZEDMODEL].[dbo].[VirtualEmissionFactor]",
-					"metadata": {
-						"language": "sql"
-					},
-					"currentConnection": {
-						"databaseName": "ESGNORMALIZEDMODEL",
-						"poolName": "Built-in"
-					},
-					"resultLimit": 5000
-				},
-				"type": "SqlQuery"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/SQL script 11')]",
 			"type": "Microsoft.Synapse/workspaces/sqlscripts",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
@@ -2509,6 +2446,26 @@
 			"properties": {
 				"content": {
 					"query": "SELECT TOP (100) [RefrigerantId]\n,[PeriodStart]\n,[PeriodEnd]\n,[FuelMassVolumeUnitsLb]\n,[C02EmissionsUnits]\n,[PurchasedEnergyId]\n,[EmissionFactorId]\n,[FacilityId]\n,[FuelMassKg]\n,[VirtualEmissionFactorId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[DirectEmissionsFromRefrigeration]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESGNORMALIZEDMODEL",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 17')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [VirtualEmissionId]\n,[PurchasedGasId]\n,[Date]\n,[VirtualEmissionScope]\n,[BannerId]\n,[VirtualEmissionFactorLocation]\n,[VirtualEmissionFactorMarket]\n FROM [ESGNORMALIZEDMODEL].[dbo].[VirtualEmissionFactor]",
 					"metadata": {
 						"language": "sql"
 					},
