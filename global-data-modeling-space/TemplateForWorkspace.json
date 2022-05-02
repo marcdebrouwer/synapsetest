@@ -386,7 +386,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/Refrigerants')]"
+				"[concat(variables('workspaceId'), '/dataflows/Refrigerants')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
@@ -441,7 +442,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/RefrigerantFLoww')]"
+				"[concat(variables('workspaceId'), '/dataflows/RefrigerantFLoww')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
@@ -1884,19 +1886,61 @@
 							"name": "select1"
 						},
 						{
-							"name": "derivedColumn2"
+							"name": "ToInteger"
 						},
 						{
 							"name": "joinVirtualEmissionFactor"
 						},
 						{
-							"name": "join1"
+							"name": "joinEmissionFactor"
 						},
 						{
 							"name": "select2"
 						},
 						{
 							"name": "surrogateKey1"
+						},
+						{
+							"name": "RemoveGF2"
+						},
+						{
+							"name": "RemoveSS2"
+						},
+						{
+							"name": "derivedColumn3"
+						},
+						{
+							"name": "ToInteger2"
+						},
+						{
+							"name": "CreateCategory"
+						},
+						{
+							"name": "CreateCategory2"
+						},
+						{
+							"name": "FinalSelectBeforeAppend"
+						},
+						{
+							"name": "joinLocation2"
+						},
+						{
+							"name": "joinPurchasedEnergy2"
+						},
+						{
+							"name": "select3"
+						},
+						{
+							"name": "join1"
+						},
+						{
+							"name": "joinEmissionFactor2"
+						},
+						{
+							"name": "FinalSelection2"
+						},
+						{
+							"name": "union1"
 						}
 					],
 					"scriptLines": [
@@ -1994,7 +2038,7 @@
 						"source(output(",
 						"          StoreId as string,",
 						"          {Tag ID} as string,",
-						"          {Quantity added(lbs)} as string,",
+						"          {Quantity added(lbs)} as integer,",
 						"          {Refrigerant type} as string,",
 						"          {REFRIG TYPE} as string,",
 						"          {Tracking number} as integer,",
@@ -2022,7 +2066,7 @@
 						"     columnNamesAsHeader: true) ~> RefrigerantLeakageData",
 						"RefrigerantChargeData derive(Location = replace(Location,'GF','')) ~> RemoveGF",
 						"RemoveGF derive(Location = replace(Location,'SS','')) ~> RemoveSS",
-						"derivedColumn2, FacilityData join(Location === FacilityNumber,",
+						"ToInteger, FacilityData join(Location === FacilityNumber,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinLocation",
 						"joinLocation, PurchasedEnergyData join({Refrigerant Type} == PurchasedGasName,",
@@ -2042,7 +2086,7 @@
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> select1",
-						"CalculateKG derive(Location = toInteger(Location)) ~> derivedColumn2",
+						"CalculateKG derive(Location = toInteger(Location)) ~> ToInteger",
 						"derivedColumn1, VirtualEmissionFactorData join(derivedColumn1@Date == VirtualEmissionFactorData@Date",
 						"     && select1@PurchasedGasId == VirtualEmissionFactorData@PurchasedGasId,",
 						"     joinType:'inner',",
@@ -2050,8 +2094,8 @@
 						"joinVirtualEmissionFactor, EmissionFactorData join(derivedColumn1@Date == EmissionStartDate",
 						"     && select1@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
 						"     joinType:'inner',",
-						"     broadcast: 'auto')~> join1",
-						"join1 select(mapColumn(",
+						"     broadcast: 'auto')~> joinEmissionFactor",
+						"joinEmissionFactor select(mapColumn(",
 						"          {Total Charge},",
 						"          CalculateKG,",
 						"          FacilityId,",
@@ -2064,9 +2108,76 @@
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> select2",
-						"select2 keyGenerate(output(RefrigerantId as long),",
+						"union1 keyGenerate(output(RefrigerantId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
+						"RefrigerantLeakageData derive(StoreId = replace(StoreId,'GF','')) ~> RemoveGF2",
+						"RemoveGF2 derive(StoreId = replace(StoreId,'SS','')) ~> RemoveSS2",
+						"RemoveSS2 derive(LeakageKG = {Quantity added(lbs)}*0.4536) ~> derivedColumn3",
+						"derivedColumn3 derive(StoreId = toInteger(StoreId)) ~> ToInteger2",
+						"select2 derive(Category = \"Charge\",",
+						"          Status = \"\",",
+						"          Vendor = \"\") ~> CreateCategory",
+						"select3 derive(Category = \"Leakage\",",
+						"          Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateCategory2",
+						"CreateCategory select(mapColumn(",
+						"          Units = {Total Charge},",
+						"          UnitsKG = CalculateKG,",
+						"          FacilityId,",
+						"          PurchasedGasId,",
+						"          Date,",
+						"          VirtualEmissionId,",
+						"          EmissionFactorId,",
+						"          Location,",
+						"          Category,",
+						"          Status,",
+						"          Vendor",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> FinalSelectBeforeAppend",
+						"ToInteger2, FacilityData join(StoreId == FacilityNumber,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinLocation2",
+						"joinLocation2, PurchasedEnergyData join({Refrigerant type} == PurchasedGasName,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinPurchasedEnergy2",
+						"joinPurchasedEnergy2 select(mapColumn(",
+						"          StoreId,",
+						"          {Quantity added(lbs)},",
+						"          Status = {Refrigerant Use Reason},",
+						"          {Refrigerant type},",
+						"          Vendor,",
+						"          LeakageKG,",
+						"          FacilityId,",
+						"          PurchasedGasId,",
+						"          Vendor",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select3",
+						"CreateCategory2, VirtualEmissionFactorData join(CreateCategory2@Date == VirtualEmissionFactorData@Date",
+						"     && select3@PurchasedGasId == VirtualEmissionFactorData@PurchasedGasId,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> join1",
+						"join1, EmissionFactorData join(CreateCategory2@Date == EmissionStartDate",
+						"     && select3@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinEmissionFactor2",
+						"joinEmissionFactor2 select(mapColumn(",
+						"          Location = StoreId,",
+						"          Units = {Quantity added(lbs)},",
+						"          UnitsKG = LeakageKG,",
+						"          FacilityId,",
+						"          PurchasedGasId = select3@PurchasedGasId,",
+						"          Category,",
+						"          Date = CreateCategory2@Date,",
+						"          VirtualEmissionId,",
+						"          EmissionFactorId,",
+						"          Vendor,",
+						"          Status",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> FinalSelection2",
+						"FinalSelectBeforeAppend, FinalSelection2 union(byName: true)~> union1",
 						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -2085,7 +2196,10 @@
 						"          FacilityId as integer,",
 						"          FuelMassKg as double,",
 						"          VirtualEmissionFactorId as integer,",
-						"          RefrigerantNumber as integer",
+						"          RefrigerantNumber as integer,",
+						"          LeakageStatus as string,",
+						"          LeakageVendor as string,",
+						"          RefrigerantCategory as string",
 						"     ),",
 						"     mapColumn(",
 						"          RefrigerantId,",
@@ -2094,9 +2208,12 @@
 						"          PurchasedEnergyId = PurchasedGasId,",
 						"          EmissionFactorId,",
 						"          VirtualEmissionFactorId = VirtualEmissionId,",
-						"          FuelMassKg = CalculateKG,",
-						"          FuelMassVolumeUnitsLb = {Total Charge},",
-						"          RefrigerantNumber = Location",
+						"          FuelMassKg = UnitsKG,",
+						"          FuelMassVolumeUnitsLb = Units,",
+						"          RefrigerantNumber = Location,",
+						"          LeakageVendor = Vendor,",
+						"          RefrigerantCategory = Category,",
+						"          LeakageStatus = Status",
 						"     )) ~> sink1"
 					]
 				}
@@ -19357,8 +19474,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19454,8 +19571,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19712,8 +19829,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/DirectEmissionsFromRefrigeration",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19828,8 +19945,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20013,8 +20130,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20111,8 +20228,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20323,8 +20440,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20517,8 +20634,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20615,8 +20732,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20713,8 +20830,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PurchasedGas",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20879,8 +20996,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2Emissions",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21013,8 +21130,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/UnitOfMeasure",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21163,8 +21280,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -41083,18 +41200,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/TestDedicatedSqlPool')]",
-			"type": "Microsoft.Synapse/workspaces/sqlPools",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"collation": "SQL_Latin1_General_CP1_CI_AS",
-				"maxSizeBytes": 263882790666240,
-				"annotations": []
-			},
-			"dependsOn": [],
-			"location": "westeurope"
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/ESGPOC')]",
 			"type": "Microsoft.Synapse/workspaces/bigDataPools",
 			"apiVersion": "2019-06-01-preview",
@@ -41114,6 +41219,18 @@
 				"sparkVersion": "3.1",
 				"isComputeIsolationEnabled": false,
 				"sessionLevelPackagesEnabled": false,
+				"annotations": []
+			},
+			"dependsOn": [],
+			"location": "westeurope"
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/TestDedicatedSqlPool')]",
+			"type": "Microsoft.Synapse/workspaces/sqlPools",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"collation": "SQL_Latin1_General_CP1_CI_AS",
+				"maxSizeBytes": 263882790666240,
 				"annotations": []
 			},
 			"dependsOn": [],
