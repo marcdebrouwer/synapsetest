@@ -87,7 +87,7 @@
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
 				"FromTextToInt, BrandData join(Brand == BannerName,",
-				"     joinType:'inner',",
+				"     joinType:'left',",
 				"     broadcast: 'auto')~> join1",
 				"join1, EnergyTypesData join(EnergyType == PurchasedGasName,",
 				"     joinType:'inner',",
