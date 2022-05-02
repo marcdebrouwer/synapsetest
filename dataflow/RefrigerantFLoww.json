@@ -196,7 +196,6 @@
 				"          VirtualEmissionFactorId as integer",
 				"     ),",
 				"     mapColumn(",
-				"          RefrigerantId = refrigerantId,",
 				"          FacilityId",
 				"     )) ~> sink1"
 			]
