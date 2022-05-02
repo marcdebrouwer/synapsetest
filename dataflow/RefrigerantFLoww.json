@@ -198,7 +198,8 @@
 				"          Date = derivedColumn1@Date,",
 				"          VirtualEmissionId,",
 				"          PurchasedGasId = VirtualEmissionFactorData@PurchasedGasId,",
-				"          EmissionFactorId",
+				"          EmissionFactorId,",
+				"          Location",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
@@ -222,7 +223,8 @@
 				"          EmissionFactorId as integer,",
 				"          FacilityId as integer,",
 				"          FuelMassKg as double,",
-				"          VirtualEmissionFactorId as integer",
+				"          VirtualEmissionFactorId as integer,",
+				"          RefrigerantNumber as integer",
 				"     ),",
 				"     mapColumn(",
 				"          RefrigerantId,",
@@ -232,7 +234,8 @@
 				"          EmissionFactorId,",
 				"          VirtualEmissionFactorId = VirtualEmissionId,",
 				"          FuelMassKg = CalculateKG,",
-				"          FuelMassVolumeUnitsLb = {Total Charge}",
+				"          FuelMassVolumeUnitsLb = {Total Charge},",
+				"          RefrigerantNumber = Location",
 				"     )) ~> sink1"
 			]
 		}
