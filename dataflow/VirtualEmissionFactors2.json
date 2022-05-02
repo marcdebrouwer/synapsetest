@@ -32,14 +32,20 @@
 				},
 				{
 					"name": "join2"
+				},
+				{
+					"name": "CommaToPoint"
+				},
+				{
+					"name": "FromTextToInt"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
 				"          Brand as string,",
 				"          EnergyType as string,",
-				"          {virtual Market based} as double '000,000,000.000',",
-				"          {virtual Location based} as double '000,000,000.000',",
+				"          {virtual Market based} as string,",
+				"          {virtual Location based} as string,",
 				"          Start_date as date 'dd-MM-yyyy',",
 				"          End_date as date 'dd-MM-yyyy'",
 				"     ),",
@@ -80,12 +86,16 @@
 				"join2 keyGenerate(output(VirtualEmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
-				"VirtualEmissionFactorData, BrandData join(Brand == BannerName,",
+				"FromTextToInt, BrandData join(Brand == BannerName,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join1",
 				"join1, EnergyTypesData join(EnergyType == PurchasedGasName,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join2",
+				"VirtualEmissionFactorData derive({virtual Location based} = replace({virtual Location based},',','.'),",
+				"          {virtual Market based} = replace({virtual Market based},',','.')) ~> CommaToPoint",
+				"CommaToPoint derive({virtual Market based} = toDouble({virtual Market based}),",
+				"          {virtual Location based} = toDouble({virtual Location based})) ~> FromTextToInt",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
