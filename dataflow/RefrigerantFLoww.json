@@ -9,7 +9,7 @@
 						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 						"type": "LinkedServiceReference"
 					},
-					"name": "RefrigerantData"
+					"name": "RefrigerantChargeData"
 				},
 				{
 					"name": "FacilityData"
@@ -22,6 +22,13 @@
 				},
 				{
 					"name": "PurchasedEnergyData"
+				},
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "RefrigerantLeakageData"
 				}
 			],
 			"sinks": [
@@ -94,7 +101,7 @@
 				"     columnDelimiter: ';',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: true) ~> RefrigerantData",
+				"     columnNamesAsHeader: true) ~> RefrigerantChargeData",
 				"source(output(",
 				"          FacilityId as integer,",
 				"          FacilityName as string,",
@@ -159,7 +166,36 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'PurchasedGas') ~> PurchasedEnergyData",
-				"RefrigerantData derive(Location = replace(Location,'GF','')) ~> RemoveGF",
+				"source(output(",
+				"          StoreId as string,",
+				"          {Tag ID} as string,",
+				"          {Quantity added(lbs)} as string,",
+				"          {Refrigerant type} as string,",
+				"          {REFRIG TYPE} as string,",
+				"          {Tracking number} as integer,",
+				"          Vendor as string,",
+				"          {Part use date} as string,",
+				"          {Refrigerant Use Reason} as string,",
+				"          {Leak event date} as string,",
+				"          {Inventory LocationId} as integer,",
+				"          AssetId as integer,",
+				"          LeakId as integer,",
+				"          Banner as string,",
+				"          charge as string,",
+				"          R134A as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'RefrigerantLeakage.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> RefrigerantLeakageData",
+				"RefrigerantChargeData derive(Location = replace(Location,'GF','')) ~> RemoveGF",
 				"RemoveGF derive(Location = replace(Location,'SS','')) ~> RemoveSS",
 				"derivedColumn2, FacilityData join(Location === FacilityNumber,",
 				"     joinType:'inner',",
