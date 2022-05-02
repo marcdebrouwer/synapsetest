@@ -55,7 +55,7 @@
 					"name": "derivedColumn2"
 				},
 				{
-					"name": "lookup1"
+					"name": "surrogateKey1"
 				}
 			],
 			"scriptLines": [
@@ -172,18 +172,32 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"CalculateKG derive(Location = toInteger(Location)) ~> derivedColumn2",
-				"derivedColumn1, VirtualEmissionFactorData lookup(select1@PurchasedGasId == VirtualEmissionFactorData@PurchasedGasId,",
-				"     multiple: false,",
-				"     pickup: 'first',",
-				"     asc(VirtualEmissionId, true),",
-				"     broadcast: 'auto')~> lookup1",
-				"lookup1 sink(allowSchemaDrift: true,",
+				"derivedColumn1 keyGenerate(output(refrigerantId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: 'DirectEmissionsFromRefrigeration') ~> sink1"
+				"     tableName: 'DirectEmissionsFromRefrigeration',",
+				"     input(",
+				"          RefrigerantId as integer,",
+				"          PeriodStart as date,",
+				"          PeriodEnd as date,",
+				"          FuelMassVolumeUnitsLb as double,",
+				"          C02EmissionsUnits as double,",
+				"          PurchasedEnergyId as integer,",
+				"          EmissionFactorId as integer,",
+				"          FacilityId as integer,",
+				"          FuelMassKg as double,",
+				"          VirtualEmissionFactorId as integer",
+				"     ),",
+				"     mapColumn(",
+				"          RefrigerantId = refrigerantId,",
+				"          FacilityId",
+				"     )) ~> sink1"
 			]
 		}
 	}
