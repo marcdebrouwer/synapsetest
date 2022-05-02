@@ -38,6 +38,9 @@
 				},
 				{
 					"name": "lookupFacilityType"
+				},
+				{
+					"name": "alterRow1"
 				}
 			],
 			"scriptLines": [
@@ -126,7 +129,8 @@
 				"     pickup: 'first',",
 				"     asc(FacilityTypeId, true),",
 				"     broadcast: 'auto')~> lookupFacilityType",
-				"lookupFacilityType sink(allowSchemaDrift: true,",
+				"lookupFacilityType alterRow(updateIf(true())) ~> alterRow1",
+				"alterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",

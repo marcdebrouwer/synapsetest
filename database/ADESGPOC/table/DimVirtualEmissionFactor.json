@@ -6,7 +6,7 @@
 		"Namespace": {
 			"DatabaseName": "ADESGPOC"
 		},
-		"Description": "The virtual emission factor",
+		"Description": "",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -14,100 +14,11 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "VirtualEmissionFactorId",
-					"Description": "The unique identifier of a virtual emission factor",
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					}
-				},
-				{
-					"Name": "VirtualEmissionFactorName",
-					"Description": "The name of a virtual emission factor",
+					"Name": "Column_1",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "VirtualEmissionFactorLocationBased",
-					"Description": "The location based virtual emission factor",
-					"OriginDataTypeName": {
-						"TypeName": "double",
 						"IsNullable": true,
-						"IsComplexType": false,
-						"Properties": {
-							"HIVE_TYPE_STRING": "double"
-						}
-					}
-				},
-				{
-					"Name": "VirtualEmissionFactorMarketBased",
-					"Description": "The location based virtual emission factor",
-					"OriginDataTypeName": {
-						"TypeName": "double",
-						"IsNullable": true,
-						"IsComplexType": false,
-						"Properties": {
-							"HIVE_TYPE_STRING": "double"
-						}
-					}
-				},
-				{
-					"Name": "VirtualEmissionPeriodStart",
-					"Description": "The virtual emission period start date",
-					"OriginDataTypeName": {
-						"TypeName": "date",
-						"IsNullable": true,
-						"IsComplexType": false,
-						"Properties": {
-							"DateFormat": "dd-MM-yyyy",
-							"HIVE_TYPE_STRING": "date"
-						}
-					}
-				},
-				{
-					"Name": "VirtualEmissionPeriodEnd",
-					"Description": "The virtual emission period end date",
-					"OriginDataTypeName": {
-						"TypeName": "date",
-						"IsNullable": true,
-						"IsComplexType": false,
-						"Properties": {
-							"DateFormat": "dd-MM-yyyy",
-							"HIVE_TYPE_STRING": "date"
-						}
-					}
-				},
-				{
-					"Name": "VirtualEmissionFactorScope",
-					"Description": "The emission factor scope",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": true,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "VirtualEmissionFactorBrand",
-					"Description": "The brand allocated to the virtual emission factor",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": true,
-						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -149,9 +60,9 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "The virtual emission factor",
+			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "VirtualEmissionFactorId",
+			"PrimaryKeys": "",
 			"spark.sql.sources.provider": "csv",
 			"sql:IsAppendOnly": false
 		},
