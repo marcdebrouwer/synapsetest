@@ -114,6 +114,9 @@
 				},
 				{
 					"name": "FinalSelection2"
+				},
+				{
+					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -281,7 +284,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select2",
-				"FinalSelectBeforeAppend keyGenerate(output(RefrigerantId as long),",
+				"union1 keyGenerate(output(RefrigerantId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
 				"RefrigerantLeakageData derive(StoreId = replace(StoreId,'GF','')) ~> RemoveGF2",
@@ -313,11 +316,13 @@
 				"joinPurchasedEnergy2 select(mapColumn(",
 				"          StoreId,",
 				"          {Quantity added(lbs)},",
+				"          Status = {Refrigerant Use Reason},",
 				"          {Refrigerant type},",
 				"          Vendor,",
 				"          LeakageKG,",
 				"          FacilityId,",
-				"          PurchasedGasId",
+				"          PurchasedGasId,",
+				"          Vendor",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
@@ -333,7 +338,7 @@
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> joinEmissionFactor2",
 				"joinEmissionFactor2 select(mapColumn(",
-				"          StoreId,",
+				"          Location = StoreId,",
 				"          Units = {Quantity added(lbs)},",
 				"          UnitsKG = LeakageKG,",
 				"          FacilityId,",
@@ -341,10 +346,13 @@
 				"          Category,",
 				"          Date = CreateCategory2@Date,",
 				"          VirtualEmissionId,",
-				"          EmissionFactorId",
+				"          EmissionFactorId,",
+				"          Vendor,",
+				"          Status",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> FinalSelection2",
+				"FinalSelectBeforeAppend, FinalSelection2 union(byName: true)~> union1",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
@@ -363,7 +371,10 @@
 				"          FacilityId as integer,",
 				"          FuelMassKg as double,",
 				"          VirtualEmissionFactorId as integer,",
-				"          RefrigerantNumber as integer",
+				"          RefrigerantNumber as integer,",
+				"          LeakageStatus as string,",
+				"          LeakageVendor as string,",
+				"          RefrigerantCategory as string",
 				"     ),",
 				"     mapColumn(",
 				"          RefrigerantId,",
@@ -374,7 +385,10 @@
 				"          VirtualEmissionFactorId = VirtualEmissionId,",
 				"          FuelMassKg = UnitsKG,",
 				"          FuelMassVolumeUnitsLb = Units,",
-				"          RefrigerantNumber = Location",
+				"          RefrigerantNumber = Location,",
+				"          LeakageVendor = Vendor,",
+				"          RefrigerantCategory = Category,",
+				"          LeakageStatus = Status",
 				"     )) ~> sink1"
 			]
 		}
