@@ -28,9 +28,6 @@
 			],
 			"transformations": [
 				{
-					"name": "CreateFacilityKey"
-				},
-				{
 					"name": "join1"
 				},
 				{
@@ -38,6 +35,12 @@
 				},
 				{
 					"name": "join3"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "surrogateKey1"
 				}
 			],
 			"scriptLines": [
@@ -108,19 +111,32 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'FacilityType') ~> FacilityTypeData",
-				"FacilityData keyGenerate(output(FacilityId as long),",
-				"     startAt: 1L,",
-				"     stepValue: 1L) ~> CreateFacilityKey",
 				"join2, LocationData join({Facility Name} == LocationName,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join1",
-				"CreateFacilityKey, BannerData join(OpCo == BannerName,",
+				"FacilityData, BannerData join(OpCo == BannerName,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join2",
 				"join1, FacilityTypeData join({Facility Type} == FaciityTypeName,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join3",
-				"join3 sink(allowSchemaDrift: true,",
+				"join3 select(mapColumn(",
+				"          {Facility ID},",
+				"          {Facility Name},",
+				"          BannerId,",
+				"          OrganizationId,",
+				"          LocationId,",
+				"          CountryId,",
+				"          FacilityTypeId,",
+				"          {Gross area owned stores ft2},",
+				"          {Sales area owned stores ft2}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 keyGenerate(output(FacilityId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
