@@ -55,9 +55,6 @@
 					"name": "derivedColumn2"
 				},
 				{
-					"name": "surrogateKey1"
-				},
-				{
 					"name": "join1"
 				}
 			],
@@ -175,14 +172,11 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"CalculateKG derive(Location = toInteger(Location)) ~> derivedColumn2",
-				"join1 keyGenerate(output(refrigerantId as long),",
-				"     startAt: 1L,",
-				"     stepValue: 1L) ~> surrogateKey1",
 				"derivedColumn1, VirtualEmissionFactorData join(derivedColumn1@Date == VirtualEmissionFactorData@Date",
 				"     && select1@PurchasedGasId == VirtualEmissionFactorData@PurchasedGasId,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join1",
-				"surrogateKey1 sink(allowSchemaDrift: true,",
+				"join1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
