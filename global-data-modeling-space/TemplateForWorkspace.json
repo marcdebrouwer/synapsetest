@@ -19317,8 +19317,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19414,8 +19414,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19611,6 +19611,18 @@
 												"HIVE_TYPE_STRING": "integer"
 											}
 										}
+									},
+									{
+										"Name": "RefrigerantNumber",
+										"Description": "",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										}
 									}
 								],
 								"Format": {
@@ -19621,8 +19633,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/DirectEmissionsFromRefrigeration",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19647,7 +19659,7 @@
 								"IsStoredAsSubdirectories": false
 							},
 							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DirectEmissionsFromRefrigeration\",\"description\":\"This guidance document addresses the following:\\n\\n- Emissions from users of refrigeration and air conditioning equipment including household refrigeration, domestic air conditioning and heat pumps, mobile air conditioning, chillers, retail food refrigeration, cold storage warehouses, refrigerated transport, industrial process refrigeration, and commercial unitary air conditioning systems.\\n\\n- Emissions from fixed and portable fire suppression equipment.\\n\\n- Direct emissions from purchased industrial gases. These gases can be used in processes such as manufacturing, testing, or laboratory applications.\\n\\nEmissions from the refrigeration and air conditioning sector result from the manufacturing process, from leakage and service over the operational life of the equipment, and from disposal at the end of the useful life of the equipment.\\n\\nThis only applies to scope 1 GHG emissions resulting from operations at the reporting organization's facilities.\\n\\nFor refrigeration, air conditioning, and fire suppression equipment, these emissions may take place during the installation, use, or disposal. Refrigerants and fire suppressants may be released from equipment leaks throughout their operating life or from catastrophic leaks. Also, when equipment is installed, repaired, or removed, refrigerants and fire suppressants may be released if proper recovery processes are not used. Fire suppressants are also emitted to extinguish fires. Emissions that occur during the manufacturing or disposal of equipment or purchased gases are scope 3 indirect emissions, and are not included in an organization's scope 1 emissions. \\n\\nFour methods with varying levels of accuracy and data collection required are outlined in this guidance to calculate GHG emissions. Organizations may calculate fugitive GHG emissions from refrigeration and air conditioning equipment, fire suppression systems, or purchased industrial gases with one of the following methods.\",\"baseEntityReference\":{\"name\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"path\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\"},\"primaryKey\":[\"RefrigerantId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"RefrigerantId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":true,\"name\":\"PeriodStart\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEnd\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"FuelMassVolumeUnits\"},\"dataType\":\"double\",\"description\":\"The fuel mass/volume units.\",\"isNullable\":true,\"name\":\"FuelMassVolumeUnitsLb\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"C02EmissionsUnits\"},\"dataType\":\"double\",\"description\":\"The C02 Emissions Units\\n\\nSource:  Direct Emissions From Stationary Combustion Sources, Section 2 Page 4\",\"isNullable\":true,\"name\":\"C02EmissionsUnits\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"PurchasedEnergyId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"EmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"\",\"isNullable\":true,\"name\":\"FuelMassKg\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"}]}}}",
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DirectEmissionsFromRefrigeration\",\"description\":\"This guidance document addresses the following:\\n\\n- Emissions from users of refrigeration and air conditioning equipment including household refrigeration, domestic air conditioning and heat pumps, mobile air conditioning, chillers, retail food refrigeration, cold storage warehouses, refrigerated transport, industrial process refrigeration, and commercial unitary air conditioning systems.\\n\\n- Emissions from fixed and portable fire suppression equipment.\\n\\n- Direct emissions from purchased industrial gases. These gases can be used in processes such as manufacturing, testing, or laboratory applications.\\n\\nEmissions from the refrigeration and air conditioning sector result from the manufacturing process, from leakage and service over the operational life of the equipment, and from disposal at the end of the useful life of the equipment.\\n\\nThis only applies to scope 1 GHG emissions resulting from operations at the reporting organization's facilities.\\n\\nFor refrigeration, air conditioning, and fire suppression equipment, these emissions may take place during the installation, use, or disposal. Refrigerants and fire suppressants may be released from equipment leaks throughout their operating life or from catastrophic leaks. Also, when equipment is installed, repaired, or removed, refrigerants and fire suppressants may be released if proper recovery processes are not used. Fire suppressants are also emitted to extinguish fires. Emissions that occur during the manufacturing or disposal of equipment or purchased gases are scope 3 indirect emissions, and are not included in an organization's scope 1 emissions. \\n\\nFour methods with varying levels of accuracy and data collection required are outlined in this guidance to calculate GHG emissions. Organizations may calculate fugitive GHG emissions from refrigeration and air conditioning equipment, fire suppression systems, or purchased industrial gases with one of the following methods.\",\"baseEntityReference\":{\"name\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"path\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\"},\"primaryKey\":[\"RefrigerantId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"RefrigerantId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":true,\"name\":\"PeriodStart\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEnd\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"FuelMassVolumeUnits\"},\"dataType\":\"double\",\"description\":\"The fuel mass/volume units.\",\"isNullable\":true,\"name\":\"FuelMassVolumeUnitsLb\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"C02EmissionsUnits\"},\"dataType\":\"double\",\"description\":\"The C02 Emissions Units\\n\\nSource:  Direct Emissions From Stationary Combustion Sources, Section 2 Page 4\",\"isNullable\":true,\"name\":\"C02EmissionsUnits\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"PurchasedEnergyId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"EmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"\",\"isNullable\":true,\"name\":\"FuelMassKg\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"RefrigerantNumber\"}]}}}",
 								"Description": "This guidance document addresses the following:\n\n- Emissions from users of refrigeration and air conditioning equipment including household refrigeration, domestic air conditioning and heat pumps, mobile air conditioning, chillers, retail food refrigeration, cold storage warehouses, refrigerated transport, industrial process refrigeration, and commercial unitary air conditioning systems.\n\n- Emissions from fixed and portable fire suppression equipment.\n\n- Direct emissions from purchased industrial gases. These gases can be used in processes such as manufacturing, testing, or laboratory applications.\n\nEmissions from the refrigeration and air conditioning sector result from the manufacturing process, from leakage and service over the operational life of the equipment, and from disposal at the end of the useful life of the equipment.\n\nThis only applies to scope 1 GHG emissions resulting from operations at the reporting organization's facilities.\n\nFor refrigeration, air conditioning, and fire suppression equipment, these emissions may take place during the installation, use, or disposal. Refrigerants and fire suppressants may be released from equipment leaks throughout their operating life or from catastrophic leaks. Also, when equipment is installed, repaired, or removed, refrigerants and fire suppressants may be released if proper recovery processes are not used. Fire suppressants are also emitted to extinguish fires. Emissions that occur during the manufacturing or disposal of equipment or purchased gases are scope 3 indirect emissions, and are not included in an organization's scope 1 emissions. \n\nFour methods with varying levels of accuracy and data collection required are outlined in this guidance to calculate GHG emissions. Organizations may calculate fugitive GHG emissions from refrigeration and air conditioning equipment, fire suppression systems, or purchased industrial gases with one of the following methods.",
 								"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#042C59\"}",
 								"PrimaryKeys": "RefrigerantId",
@@ -19737,8 +19749,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -19922,8 +19934,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20020,8 +20032,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20232,8 +20244,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20426,8 +20438,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20524,8 +20536,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20622,8 +20634,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PurchasedGas",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20788,8 +20800,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2Emissions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20922,8 +20934,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/UnitOfMeasure",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21072,8 +21084,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
