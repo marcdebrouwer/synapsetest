@@ -121,7 +121,7 @@
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join3",
 				"join3 select(mapColumn(",
-				"          {Facility ID},",
+				"          {Facility ID_2} = {Facility ID},",
 				"          {Facility Name},",
 				"          BannerId,",
 				"          OrganizationId,",
