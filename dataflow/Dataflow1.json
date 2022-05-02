@@ -108,7 +108,7 @@
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: '') ~> sink1"
+				"     tableName: 'Scope2Emissions') ~> sink1"
 			]
 		}
 	}
