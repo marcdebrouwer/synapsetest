@@ -386,8 +386,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/Refrigerants')]",
-				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+				"[concat(variables('workspaceId'), '/dataflows/Refrigerants')]"
 			]
 		},
 		{
@@ -420,6 +419,7 @@
 									"EmissionFactorData": {},
 									"PurchasedEnergyData": {},
 									"RefrigerantLeakageData": {},
+									"BannerData": {},
 									"sink1": {}
 								}
 							},
@@ -442,8 +442,7 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/RefrigerantFLoww')]",
-				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
+				"[concat(variables('workspaceId'), '/dataflows/RefrigerantFLoww')]"
 			]
 		},
 		{
@@ -1856,6 +1855,9 @@
 								"type": "LinkedServiceReference"
 							},
 							"name": "RefrigerantLeakageData"
+						},
+						{
+							"name": "BannerData"
 						}
 					],
 					"sinks": [
@@ -1880,13 +1882,7 @@
 							"name": "derivedColumn1"
 						},
 						{
-							"name": "CalculateKG"
-						},
-						{
 							"name": "select1"
-						},
-						{
-							"name": "ToInteger"
 						},
 						{
 							"name": "joinVirtualEmissionFactor"
@@ -1905,9 +1901,6 @@
 						},
 						{
 							"name": "RemoveSS2"
-						},
-						{
-							"name": "derivedColumn3"
 						},
 						{
 							"name": "ToInteger2"
@@ -1941,6 +1934,60 @@
 						},
 						{
 							"name": "union1"
+						},
+						{
+							"name": "JoinWithBanner"
+						},
+						{
+							"name": "split1"
+						},
+						{
+							"name": "CalculatesKG"
+						},
+						{
+							"name": "ToInteger"
+						},
+						{
+							"name": "toInteger3"
+						},
+						{
+							"name": "Replace"
+						},
+						{
+							"name": "JoinLocation3"
+						},
+						{
+							"name": "NoGiantOrSS"
+						},
+						{
+							"name": "select4"
+						},
+						{
+							"name": "select5"
+						},
+						{
+							"name": "union2"
+						},
+						{
+							"name": "split2"
+						},
+						{
+							"name": "ToInteger4"
+						},
+						{
+							"name": "joinLocation4"
+						},
+						{
+							"name": "select6"
+						},
+						{
+							"name": "select7"
+						},
+						{
+							"name": "union3"
+						},
+						{
+							"name": "CalculateToKG"
 						}
 					],
 					"scriptLines": [
@@ -2064,21 +2111,31 @@
 						"     escapeChar: '\\\\',",
 						"     quoteChar: '\\\"',",
 						"     columnNamesAsHeader: true) ~> RefrigerantLeakageData",
-						"RefrigerantChargeData derive(Location = replace(Location,'GF','')) ~> RemoveGF",
+						"source(output(",
+						"          BannerId as integer,",
+						"          BannerName as string,",
+						"          OrganizationId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Banner') ~> BannerData",
+						"split1@WithDoubleId derive(Location = replace(Location,'GF','')) ~> RemoveGF",
 						"RemoveGF derive(Location = replace(Location,'SS','')) ~> RemoveSS",
-						"ToInteger, FacilityData join(Location === FacilityNumber,",
+						"Replace, JoinWithBanner join(Location == FacilityNumber",
+						"     && BannerNames == BannerName,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinLocation",
-						"joinLocation, PurchasedEnergyData join({Refrigerant Type} == PurchasedGasName,",
+						"CalculatesKG, PurchasedEnergyData join({Refrigerant Type} == PurchasedGasName,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinPurchasedEnergy",
 						"select1 derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> derivedColumn1",
-						"RemoveSS derive(CalculateKG = {Total Charge}*0.4536) ~> CalculateKG",
 						"joinPurchasedEnergy select(mapColumn(",
 						"          {Refrigerant Type},",
 						"          {Total Charge},",
-						"          {Facility Name},",
-						"          Banner,",
 						"          CalculateKG,",
 						"          FacilityId,",
 						"          PurchasedGasId,",
@@ -2086,7 +2143,6 @@
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> select1",
-						"CalculateKG derive(Location = toInteger(Location)) ~> ToInteger",
 						"derivedColumn1, VirtualEmissionFactorData join(derivedColumn1@Date == VirtualEmissionFactorData@Date",
 						"     && select1@PurchasedGasId == VirtualEmissionFactorData@PurchasedGasId,",
 						"     joinType:'inner',",
@@ -2099,7 +2155,7 @@
 						"          {Total Charge},",
 						"          CalculateKG,",
 						"          FacilityId,",
-						"          PurchasedGasId = select1@PurchasedGasId,",
+						"          PurchasedGasId = VirtualEmissionFactorData@PurchasedGasId,",
 						"          Date = derivedColumn1@Date,",
 						"          VirtualEmissionId,",
 						"          PurchasedGasId = VirtualEmissionFactorData@PurchasedGasId,",
@@ -2111,14 +2167,15 @@
 						"union1 keyGenerate(output(RefrigerantId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
-						"RefrigerantLeakageData derive(StoreId = replace(StoreId,'GF','')) ~> RemoveGF2",
+						"split2@SplitWithDoubleIds derive(StoreId = replace(StoreId,'GF','')) ~> RemoveGF2",
 						"RemoveGF2 derive(StoreId = replace(StoreId,'SS','')) ~> RemoveSS2",
-						"RemoveSS2 derive(LeakageKG = {Quantity added(lbs)}*0.4536) ~> derivedColumn3",
-						"derivedColumn3 derive(StoreId = toInteger(StoreId)) ~> ToInteger2",
+						"RemoveSS2 derive(StoreId = toInteger(StoreId),",
+						"          BannerNames = case({Banner} == \"SS\", \"Stop and Shop\",\r",
+						"     {Banner} == \"GF\", \"Giant\")) ~> ToInteger2",
 						"select2 derive(Category = \"Charge\",",
 						"          Status = \"\",",
 						"          Vendor = \"\") ~> CreateCategory",
-						"select3 derive(Category = \"Leakage\",",
+						"CalculateToKG derive(Category = \"Leakage\",",
 						"          Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateCategory2",
 						"CreateCategory select(mapColumn(",
 						"          Units = {Total Charge},",
@@ -2135,19 +2192,19 @@
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> FinalSelectBeforeAppend",
-						"ToInteger2, FacilityData join(StoreId == FacilityNumber,",
+						"ToInteger2, JoinWithBanner join(BannerNames == BannerName",
+						"     && StoreId == FacilityNumber,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinLocation2",
-						"joinLocation2, PurchasedEnergyData join({Refrigerant type} == PurchasedGasName,",
+						"union3, PurchasedEnergyData join({Refrigerant type} == PurchasedGasName,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinPurchasedEnergy2",
 						"joinPurchasedEnergy2 select(mapColumn(",
-						"          StoreId,",
+						"          StoreId = Locatie,",
 						"          {Quantity added(lbs)},",
 						"          Status = {Refrigerant Use Reason},",
 						"          {Refrigerant type},",
 						"          Vendor,",
-						"          LeakageKG,",
 						"          FacilityId,",
 						"          PurchasedGasId,",
 						"          Vendor",
@@ -2165,7 +2222,7 @@
 						"joinEmissionFactor2 select(mapColumn(",
 						"          Location = StoreId,",
 						"          Units = {Quantity added(lbs)},",
-						"          UnitsKG = LeakageKG,",
+						"          UnitsKG = UnitKG,",
 						"          FacilityId,",
 						"          PurchasedGasId = select3@PurchasedGasId,",
 						"          Category,",
@@ -2178,6 +2235,71 @@
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> FinalSelection2",
 						"FinalSelectBeforeAppend, FinalSelection2 union(byName: true)~> union1",
+						"FacilityData, BannerData join(FacilityData@BannerId == BannerData@BannerId,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> JoinWithBanner",
+						"RefrigerantChargeData split(case(\r",
+						"    {Facility Name} == \"SS\", true(), \r",
+						"    {Facility Name} == \"GF\", true()\r",
+						"),",
+						"     disjoint: false) ~> split1@(WithDoubleId, WithoutDoubleId)",
+						"union2 derive(CalculateKG = {Total Charge}*0.4536) ~> CalculatesKG",
+						"RemoveSS derive(Location = toInteger(Location),",
+						"          BannerNames = case(\r",
+						"    {Facility Name} == \"Stop & Shop\", \"Stop and Shop\"\r",
+						"    )) ~> ToInteger",
+						"split1@WithoutDoubleId derive(Location = toInteger({Location})) ~> toInteger3",
+						"ToInteger derive(BannerNames = case({Facility Name} == \"GF\", \"Giant\",\r",
+						"     {Facility Name} == \"Giant Food Stores LLC\", \"Giant\")) ~> Replace",
+						"toInteger3, NoGiantOrSS join(Location == FacilityNumber,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> JoinLocation3",
+						"JoinWithBanner filter(BannerName != \"Stop and Shop\" && BannerName != \"Giant\") ~> NoGiantOrSS",
+						"joinLocation select(mapColumn(",
+						"          Location,",
+						"          {Refrigerant Type},",
+						"          {Total Charge},",
+						"          FacilityId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select4",
+						"JoinLocation3 select(mapColumn(",
+						"          Location,",
+						"          {Refrigerant Type},",
+						"          {Total Charge},",
+						"          FacilityId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select5",
+						"select4, select5 union(byName: true)~> union2",
+						"RefrigerantLeakageData split(case(    {Banner} == \"SS\", true(),     {Banner} == \"GF\", true()),",
+						"     disjoint: false) ~> split2@(SplitWithDoubleIds, SplitWithoutDoubleIds)",
+						"split2@SplitWithoutDoubleIds derive(StoreId = toInteger({StoreId})) ~> ToInteger4",
+						"ToInteger4, NoGiantOrSS join(StoreId == FacilityNumber,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinLocation4",
+						"joinLocation4 select(mapColumn(",
+						"          Locatie = StoreId,",
+						"          {Quantity added(lbs)},",
+						"          {Refrigerant type},",
+						"          Vendor,",
+						"          {Refrigerant Use Reason},",
+						"          FacilityId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select6",
+						"joinLocation2 select(mapColumn(",
+						"          Locatie = StoreId,",
+						"          {Quantity added(lbs)},",
+						"          {Refrigerant type},",
+						"          Vendor,",
+						"          {Refrigerant Use Reason},",
+						"          FacilityId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select7",
+						"select7, select6 union(byName: true)~> union3",
+						"select3 derive(UnitKG = {Quantity added(lbs)}*0.4536) ~> CalculateToKG",
 						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
