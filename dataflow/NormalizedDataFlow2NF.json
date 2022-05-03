@@ -173,7 +173,8 @@
 				"          LocationState as string,",
 				"          LocationZipCode as string,",
 				"          CountryId as integer,",
-				"          EgridRegionId as integer",
+				"          EgridRegionId as integer,",
+				"          LocationNo as integer",
 				"     ),",
 				"     mapColumn(",
 				"          LocationId,",
@@ -183,7 +184,8 @@
 				"          LocationState = {State },",
 				"          LocationZipCode = {Postal Code},",
 				"          CountryId,",
-				"          EgridRegionId",
+				"          EgridRegionId,",
+				"          LocationNo = {Facility ID}",
 				"     )) ~> MapLocation"
 			]
 		}
