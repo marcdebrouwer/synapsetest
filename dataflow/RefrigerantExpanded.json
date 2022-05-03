@@ -1,5 +1,5 @@
 {
-	"name": "Dataflow2",
+	"name": "RefrigerantExpanded",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
@@ -17,6 +17,15 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "Leakage"
+				},
+				{
+					"name": "FacilitySSGF"
+				},
+				{
+					"name": "FacilityRest"
+				},
+				{
+					"name": "BannerData"
 				}
 			],
 			"sinks": [],
@@ -50,6 +59,18 @@
 				},
 				{
 					"name": "toInteger4"
+				},
+				{
+					"name": "joinSSGF"
+				},
+				{
+					"name": "joinRest"
+				},
+				{
+					"name": "filterSSGF"
+				},
+				{
+					"name": "filterRest"
 				}
 			],
 			"scriptLines": [
@@ -109,6 +130,52 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> Leakage",
+				"source(output(",
+				"          FacilityId as integer,",
+				"          FacilityName as string,",
+				"          LocationId as integer,",
+				"          GrossFloorArea as integer,",
+				"          AvailableSellingArea as integer,",
+				"          FacilityTypeId as integer,",
+				"          BannerId as integer,",
+				"          FacilityNumber as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Facility') ~> FacilitySSGF",
+				"source(output(",
+				"          FacilityId as integer,",
+				"          FacilityName as string,",
+				"          LocationId as integer,",
+				"          GrossFloorArea as integer,",
+				"          AvailableSellingArea as integer,",
+				"          FacilityTypeId as integer,",
+				"          BannerId as integer,",
+				"          FacilityNumber as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Facility') ~> FacilityRest",
+				"source(output(",
+				"          BannerId as integer,",
+				"          BannerName as string,",
+				"          OrganizationId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Banner') ~> BannerData",
 				"Charge split(case(    {Banner} == \"Giant\", true(),     {Banner} == \"Stop and Shop\", true()),",
 				"     disjoint: false) ~> split@(SSandGiant, Rest)",
 				"Leakage split(case(    Banner == \"SS\", true(),     Banner == \"GF\", true()),",
@@ -120,7 +187,15 @@
 				"derivedColumn2 derive(Location = toInteger({Location})) ~> toInteger1",
 				"split@Rest derive(Location = toInteger({Location})) ~> toInteger2",
 				"derivedColumn4 derive(StoreId = toInteger(StoreId)) ~> toInteger3",
-				"split2@Therest2 derive(StoreId = toInteger(StoreId)) ~> toInteger4"
+				"split2@Therest2 derive(StoreId = toInteger(StoreId)) ~> toInteger4",
+				"FacilitySSGF, BannerData join(FacilitySSGF@BannerId == BannerData@BannerId,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> joinSSGF",
+				"FacilityRest, BannerData join(FacilityRest@BannerId == BannerData@BannerId,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> joinRest",
+				"joinSSGF filter(BannerName == \"Stop and Shop\"|| BannerName == \"Giant\") ~> filterSSGF",
+				"joinRest filter(BannerName != \"Stop and Shop\" && BannerName != \"Giant\") ~> filterRest"
 			]
 		}
 	}

@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Dataflow2",
+						"referenceName": "RefrigerantExpanded",
 						"type": "DataFlowReference"
 					},
 					"compute": {
