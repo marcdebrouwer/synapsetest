@@ -437,6 +437,9 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
+				"folder": {
+					"name": "1NF TABLES"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -2257,15 +2260,15 @@
 						"AdditionalColumns, AdditionalColumns2 union(byName: true)~> union3",
 						"union3 derive(UnitsKG = UnitsLBS*0.4536) ~> derivedColumn5",
 						"derivedColumn5, PurchasedGasData join(RefrigerantType == PurchasedGasName,",
-						"     joinType:'left',",
+						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinPurchasedGas",
 						"joinPurchasedGas, VirtualEmissionsData join(union3@Date == VirtualEmissionsData@Date",
 						"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
-						"     joinType:'left',",
+						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinVirtualEmissionFactor",
 						"joinVirtualEmissionFactor, EmissionFactorData join(VirtualEmissionsData@Date == EmissionStartDate",
 						"     && PurchasedGasData@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
-						"     joinType:'left',",
+						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinEmissionFactor",
 						"joinEmissionFactor select(mapColumn(",
 						"          Location,",
