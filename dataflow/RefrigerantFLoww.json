@@ -128,9 +128,6 @@
 					"name": "JoinLocation3"
 				},
 				{
-					"name": "NoGiantOrSS"
-				},
-				{
 					"name": "select4"
 				},
 				{
@@ -417,10 +414,9 @@
 				"union2 derive(CalculateKG = {Total Charge}*0.4536) ~> CalculatesKG",
 				"RemoveSS derive(Location = toInteger(Location)) ~> ToInteger",
 				"split1@WithoutDoubleId derive(Location = toInteger({Location})) ~> toInteger3",
-				"toInteger3, NoGiantOrSS join(Location == FacilityNumber,",
+				"toInteger3, JoinWithBanner join(Location == FacilityNumber,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> JoinLocation3",
-				"JoinWithBanner filter(BannerName != \"Stop and Shop\" && BannerName != \"Giant\") ~> NoGiantOrSS",
 				"joinLocation select(mapColumn(",
 				"          Location,",
 				"          {Refrigerant Type},",
@@ -441,7 +437,7 @@
 				"RefrigerantLeakageData split(case(    {Banner} == \"SS\", true(),     {Banner} == \"GF\", true()),",
 				"     disjoint: false) ~> split2@(SplitWithDoubleIds, SplitWithoutDoubleIds)",
 				"split2@SplitWithoutDoubleIds derive(StoreId = toInteger({StoreId})) ~> ToInteger4",
-				"ToInteger4, NoGiantOrSS join(StoreId == FacilityNumber,",
+				"ToInteger4, JoinWithBanner join(StoreId == FacilityNumber,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> joinLocation4",
 				"joinLocation4 select(mapColumn(",
