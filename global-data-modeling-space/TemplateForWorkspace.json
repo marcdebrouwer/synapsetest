@@ -390,6 +390,60 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/Refrigerant2')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Data flow1",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "RefrigerantExpanded",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"Charge": {},
+									"Leakage": {},
+									"FacilitySSGF": {},
+									"FacilityRest": {},
+									"BannerData": {},
+									"PurchasedGasData": {},
+									"VirtualEmissionsData": {},
+									"EmissionFactorData": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/RefrigerantExpanded')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/RefrigerantPipeline')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -1816,6 +1870,455 @@
 						"          PurchasedGasId = PurchasedEnergyId,",
 						"          PurchasedGasName = EmissionType",
 						"     )) ~> PurchasedMapping"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/RefrigerantExpanded')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "Charge"
+						},
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "Leakage"
+						},
+						{
+							"name": "FacilitySSGF"
+						},
+						{
+							"name": "FacilityRest"
+						},
+						{
+							"name": "BannerData"
+						},
+						{
+							"name": "PurchasedGasData"
+						},
+						{
+							"name": "VirtualEmissionsData"
+						},
+						{
+							"name": "EmissionFactorData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "split"
+						},
+						{
+							"name": "split2"
+						},
+						{
+							"name": "derivedColumn1"
+						},
+						{
+							"name": "derivedColumn2"
+						},
+						{
+							"name": "derivedColumn3"
+						},
+						{
+							"name": "derivedColumn4"
+						},
+						{
+							"name": "toInteger1"
+						},
+						{
+							"name": "toInteger2"
+						},
+						{
+							"name": "toInteger3"
+						},
+						{
+							"name": "toInteger4"
+						},
+						{
+							"name": "joinSSGF"
+						},
+						{
+							"name": "joinRest"
+						},
+						{
+							"name": "filterSSGF"
+						},
+						{
+							"name": "filterRest"
+						},
+						{
+							"name": "joinFacility1"
+						},
+						{
+							"name": "joinFacility2"
+						},
+						{
+							"name": "joinFacility3"
+						},
+						{
+							"name": "joinFacility4"
+						},
+						{
+							"name": "select1"
+						},
+						{
+							"name": "select2"
+						},
+						{
+							"name": "union1"
+						},
+						{
+							"name": "select3"
+						},
+						{
+							"name": "select4"
+						},
+						{
+							"name": "union2"
+						},
+						{
+							"name": "AdditionalColumns"
+						},
+						{
+							"name": "AdditionalColumns2"
+						},
+						{
+							"name": "union3"
+						},
+						{
+							"name": "derivedColumn5"
+						},
+						{
+							"name": "joinPurchasedGas"
+						},
+						{
+							"name": "joinVirtualEmissionFactor"
+						},
+						{
+							"name": "joinEmissionFactor"
+						},
+						{
+							"name": "select5"
+						},
+						{
+							"name": "surrogateKey1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          Location as string,",
+						"          {Tag ID} as string,",
+						"          {Rack Type} as string,",
+						"          {Refrigerant Type} as string,",
+						"          {Total Charge} as double '000,000,000.000',",
+						"          {Primary Trade} as string,",
+						"          Brand as string,",
+						"          {Model No.} as string,",
+						"          {Serial No.} as string,",
+						"          {Facility Name} as string,",
+						"          Deactivated as boolean,",
+						"          {Rack Id} as string,",
+						"          {Asset Type} as string,",
+						"          Banner as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'Refrigerants.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> Charge",
+						"source(output(",
+						"          StoreId as string,",
+						"          {Tag ID} as string,",
+						"          {Quantity added(lbs)} as double '000,000,000.000',",
+						"          {Refrigerant type} as string,",
+						"          {REFRIG TYPE} as string,",
+						"          {Tracking number} as integer,",
+						"          Vendor as string,",
+						"          {Part use date} as string,",
+						"          {Refrigerant Use Reason} as string,",
+						"          {Leak event date} as string,",
+						"          {Inventory LocationId} as integer,",
+						"          AssetId as integer,",
+						"          LeakId as integer,",
+						"          Banner as string,",
+						"          charge as string,",
+						"          R134A as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'RefrigerantLeakage.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> Leakage",
+						"source(output(",
+						"          FacilityId as integer,",
+						"          FacilityName as string,",
+						"          LocationId as integer,",
+						"          GrossFloorArea as integer,",
+						"          AvailableSellingArea as integer,",
+						"          FacilityTypeId as integer,",
+						"          BannerId as integer,",
+						"          FacilityNumber as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Facility') ~> FacilitySSGF",
+						"source(output(",
+						"          FacilityId as integer,",
+						"          FacilityName as string,",
+						"          LocationId as integer,",
+						"          GrossFloorArea as integer,",
+						"          AvailableSellingArea as integer,",
+						"          FacilityTypeId as integer,",
+						"          BannerId as integer,",
+						"          FacilityNumber as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Facility') ~> FacilityRest",
+						"source(output(",
+						"          BannerId as integer,",
+						"          BannerName as string,",
+						"          OrganizationId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Banner') ~> BannerData",
+						"source(output(",
+						"          PurchasedGasId as integer,",
+						"          PurchasedGasName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'PurchasedGas') ~> PurchasedGasData",
+						"source(output(",
+						"          VirtualEmissionId as integer,",
+						"          PurchasedGasId as integer,",
+						"          Date as date,",
+						"          VirtualEmissionScope as string,",
+						"          BannerId as integer,",
+						"          VirtualEmissionFactorLocation as double,",
+						"          VirtualEmissionFactorMarket as double",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'VirtualEmissionFactor') ~> VirtualEmissionsData",
+						"source(output(",
+						"          EmissionFactorId as integer,",
+						"          EmissionFactorName as string,",
+						"          EmissionScope as string,",
+						"          EmissionCategory as string,",
+						"          EmissionFactorLocationBased as double,",
+						"          EmissionFactorMarketBased as double,",
+						"          UnitOfMeasure as string,",
+						"          EmissionStartDate as date,",
+						"          EmissionEndDate as date,",
+						"          EgridRegion as string,",
+						"          PurchasedGasId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'GreenhouseGasType') ~> EmissionFactorData",
+						"Charge split(case(    Banner == \"Giant\", true(),     Banner == \"Stop and Shop\", true()),",
+						"     disjoint: false) ~> split@(SSandGiant, Rest)",
+						"Leakage split(case(    Banner == \"SS\", true(),     Banner == \"GF\", true()),",
+						"     disjoint: false) ~> split2@(SSandGiant2, Therest2)",
+						"split@SSandGiant derive(Location = replace(Location,\"SS\",'')) ~> derivedColumn1",
+						"derivedColumn1 derive(Location = replace(Location,\"GF\",'')) ~> derivedColumn2",
+						"split2@SSandGiant2 derive(StoreId = replace(StoreId,\"SS\",'')) ~> derivedColumn3",
+						"derivedColumn3 derive(StoreId = replace(StoreId,\"GF\",'')) ~> derivedColumn4",
+						"derivedColumn2 derive(Location = toInteger(Location)) ~> toInteger1",
+						"split@Rest derive(Location = toInteger({Location})) ~> toInteger2",
+						"derivedColumn4 derive(StoreId = toInteger(StoreId)) ~> toInteger3",
+						"split2@Therest2 derive(StoreId = toInteger(StoreId)) ~> toInteger4",
+						"FacilitySSGF, BannerData join(FacilitySSGF@BannerId == BannerData@BannerId,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinSSGF",
+						"FacilityRest, BannerData join(FacilityRest@BannerId == BannerData@BannerId,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinRest",
+						"joinSSGF filter(BannerName == \"Stop and Shop\"|| BannerName == \"Giant\") ~> filterSSGF",
+						"joinRest filter(BannerName != \"Stop and Shop\" && BannerName != \"Giant\") ~> filterRest",
+						"toInteger1, filterSSGF join(Location == FacilityNumber,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinFacility1",
+						"toInteger2, filterRest join(Location == FacilityNumber,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinFacility2",
+						"toInteger3, filterSSGF join(StoreId == FacilityNumber,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinFacility3",
+						"toInteger4, filterRest join(StoreId == FacilityNumber,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinFacility4",
+						"joinFacility1 select(mapColumn(",
+						"          Location,",
+						"          RefrigerantType = {Refrigerant Type},",
+						"          FacilityId,",
+						"          BannerName,",
+						"          UnitsLBS = {Total Charge}",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select1",
+						"joinFacility2 select(mapColumn(",
+						"          Location,",
+						"          RefrigerantType = {Refrigerant Type},",
+						"          UnitsLBS = {Total Charge},",
+						"          FacilityId,",
+						"          BannerName",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select2",
+						"select1, select2 union(byName: true)~> union1",
+						"joinFacility3 select(mapColumn(",
+						"          Location = StoreId,",
+						"          UnitsLBS = {Quantity added(lbs)},",
+						"          RefrigerantType = {REFRIG TYPE},",
+						"          Vendor,",
+						"          Status = {Refrigerant Use Reason},",
+						"          FacilityId,",
+						"          BannerName",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select3",
+						"joinFacility4 select(mapColumn(",
+						"          Location = StoreId,",
+						"          UnitsLBS = {Quantity added(lbs)},",
+						"          RefrigerantType = {REFRIG TYPE},",
+						"          Vendor,",
+						"          Status = {Refrigerant Use Reason},",
+						"          FacilityId,",
+						"          BannerName",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select4",
+						"select3, select4 union(byName: true)~> union2",
+						"union1 derive(Category = \"Charge\",",
+						"          Date = toDate(\"01-10-2021\",'dd-MM-yyyy'),",
+						"          Status = \"\",",
+						"          Vendor = \"\") ~> AdditionalColumns",
+						"union2 derive(Category = \"Leakage\",",
+						"          Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> AdditionalColumns2",
+						"AdditionalColumns, AdditionalColumns2 union(byName: true)~> union3",
+						"union3 derive(UnitsKG = UnitsLBS*0.4536) ~> derivedColumn5",
+						"derivedColumn5, PurchasedGasData join(RefrigerantType == PurchasedGasName,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinPurchasedGas",
+						"joinPurchasedGas, VirtualEmissionsData join(union3@Date == VirtualEmissionsData@Date",
+						"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinVirtualEmissionFactor",
+						"joinVirtualEmissionFactor, EmissionFactorData join(VirtualEmissionsData@Date == EmissionStartDate",
+						"     && PurchasedGasData@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> joinEmissionFactor",
+						"joinEmissionFactor select(mapColumn(",
+						"          Location,",
+						"          RefrigerantType,",
+						"          FacilityId,",
+						"          BannerName,",
+						"          UnitsLBS,",
+						"          Category,",
+						"          Date = union3@Date,",
+						"          Status,",
+						"          Vendor,",
+						"          UnitsKG,",
+						"          PurchasedGasId = PurchasedGasData@PurchasedGasId,",
+						"          PurchasedGasName,",
+						"          VirtualEmissionId,",
+						"          EmissionFactorId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select5",
+						"select5 keyGenerate(output(RefrigerantId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> surrogateKey1",
+						"surrogateKey1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'DirectEmissionsFromRefrigeration',",
+						"     input(",
+						"          RefrigerantId as integer,",
+						"          PeriodStart as date,",
+						"          PeriodEnd as date,",
+						"          FuelMassVolumeUnitsLb as double,",
+						"          C02EmissionsUnits as double,",
+						"          PurchasedEnergyId as integer,",
+						"          EmissionFactorId as integer,",
+						"          FacilityId as integer,",
+						"          FuelMassKg as double,",
+						"          VirtualEmissionFactorId as integer,",
+						"          RefrigerantNumber as integer,",
+						"          LeakageStatus as string,",
+						"          LeakageVendor as string,",
+						"          RefrigerantCategory as string",
+						"     ),",
+						"     mapColumn(",
+						"          RefrigerantId,",
+						"          FuelMassVolumeUnitsLb = UnitsLBS,",
+						"          FuelMassKg = UnitsKG,",
+						"          PurchasedEnergyId = PurchasedGasId,",
+						"          EmissionFactorId,",
+						"          VirtualEmissionFactorId = VirtualEmissionId",
+						"     )) ~> sink1"
 					]
 				}
 			},
@@ -19960,6 +20463,19 @@
 												"HIVE_TYPE_STRING": "string"
 											}
 										}
+									},
+									{
+										"Name": "EnergyText",
+										"Description": "",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
 									}
 								],
 								"Format": {
@@ -19996,7 +20512,7 @@
 								"IsStoredAsSubdirectories": false
 							},
 							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DirectEmissionsFromRefrigeration\",\"description\":\"This guidance document addresses the following:\\n\\n- Emissions from users of refrigeration and air conditioning equipment including household refrigeration, domestic air conditioning and heat pumps, mobile air conditioning, chillers, retail food refrigeration, cold storage warehouses, refrigerated transport, industrial process refrigeration, and commercial unitary air conditioning systems.\\n\\n- Emissions from fixed and portable fire suppression equipment.\\n\\n- Direct emissions from purchased industrial gases. These gases can be used in processes such as manufacturing, testing, or laboratory applications.\\n\\nEmissions from the refrigeration and air conditioning sector result from the manufacturing process, from leakage and service over the operational life of the equipment, and from disposal at the end of the useful life of the equipment.\\n\\nThis only applies to scope 1 GHG emissions resulting from operations at the reporting organization's facilities.\\n\\nFor refrigeration, air conditioning, and fire suppression equipment, these emissions may take place during the installation, use, or disposal. Refrigerants and fire suppressants may be released from equipment leaks throughout their operating life or from catastrophic leaks. Also, when equipment is installed, repaired, or removed, refrigerants and fire suppressants may be released if proper recovery processes are not used. Fire suppressants are also emitted to extinguish fires. Emissions that occur during the manufacturing or disposal of equipment or purchased gases are scope 3 indirect emissions, and are not included in an organization's scope 1 emissions. \\n\\nFour methods with varying levels of accuracy and data collection required are outlined in this guidance to calculate GHG emissions. Organizations may calculate fugitive GHG emissions from refrigeration and air conditioning equipment, fire suppression systems, or purchased industrial gases with one of the following methods.\",\"baseEntityReference\":{\"name\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"path\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\"},\"primaryKey\":[\"RefrigerantId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"RefrigerantId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":true,\"name\":\"PeriodStart\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEnd\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"FuelMassVolumeUnits\"},\"dataType\":\"double\",\"description\":\"The fuel mass/volume units.\",\"isNullable\":true,\"name\":\"FuelMassVolumeUnitsLb\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"C02EmissionsUnits\"},\"dataType\":\"double\",\"description\":\"The C02 Emissions Units\\n\\nSource:  Direct Emissions From Stationary Combustion Sources, Section 2 Page 4\",\"isNullable\":true,\"name\":\"C02EmissionsUnits\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"PurchasedEnergyId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"EmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"\",\"isNullable\":true,\"name\":\"FuelMassKg\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"RefrigerantNumber\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"LeakageStatus\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"LeakageVendor\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"RefrigerantCategory\"}]}}}",
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DirectEmissionsFromRefrigeration\",\"description\":\"This guidance document addresses the following:\\n\\n- Emissions from users of refrigeration and air conditioning equipment including household refrigeration, domestic air conditioning and heat pumps, mobile air conditioning, chillers, retail food refrigeration, cold storage warehouses, refrigerated transport, industrial process refrigeration, and commercial unitary air conditioning systems.\\n\\n- Emissions from fixed and portable fire suppression equipment.\\n\\n- Direct emissions from purchased industrial gases. These gases can be used in processes such as manufacturing, testing, or laboratory applications.\\n\\nEmissions from the refrigeration and air conditioning sector result from the manufacturing process, from leakage and service over the operational life of the equipment, and from disposal at the end of the useful life of the equipment.\\n\\nThis only applies to scope 1 GHG emissions resulting from operations at the reporting organization's facilities.\\n\\nFor refrigeration, air conditioning, and fire suppression equipment, these emissions may take place during the installation, use, or disposal. Refrigerants and fire suppressants may be released from equipment leaks throughout their operating life or from catastrophic leaks. Also, when equipment is installed, repaired, or removed, refrigerants and fire suppressants may be released if proper recovery processes are not used. Fire suppressants are also emitted to extinguish fires. Emissions that occur during the manufacturing or disposal of equipment or purchased gases are scope 3 indirect emissions, and are not included in an organization's scope 1 emissions. \\n\\nFour methods with varying levels of accuracy and data collection required are outlined in this guidance to calculate GHG emissions. Organizations may calculate fugitive GHG emissions from refrigeration and air conditioning equipment, fire suppression systems, or purchased industrial gases with one of the following methods.\",\"baseEntityReference\":{\"name\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"path\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\"},\"primaryKey\":[\"RefrigerantId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"RefrigerantId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":true,\"name\":\"PeriodStart\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEnd\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"FuelMassVolumeUnits\"},\"dataType\":\"double\",\"description\":\"The fuel mass/volume units.\",\"isNullable\":true,\"name\":\"FuelMassVolumeUnitsLb\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases.cdm.json/DirectFugitiveEmissionsFromRefrigerationAirConditioningFireSuppressionAndIndustrialGases\",\"name\":\"C02EmissionsUnits\"},\"dataType\":\"double\",\"description\":\"The C02 Emissions Units\\n\\nSource:  Direct Emissions From Stationary Combustion Sources, Section 2 Page 4\",\"isNullable\":true,\"name\":\"C02EmissionsUnits\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"PurchasedEnergyId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"EmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"\",\"isNullable\":true,\"name\":\"FuelMassKg\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"RefrigerantNumber\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"LeakageStatus\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"LeakageVendor\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"RefrigerantCategory\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"EnergyText\"}]}}}",
 								"Description": "This guidance document addresses the following:\n\n- Emissions from users of refrigeration and air conditioning equipment including household refrigeration, domestic air conditioning and heat pumps, mobile air conditioning, chillers, retail food refrigeration, cold storage warehouses, refrigerated transport, industrial process refrigeration, and commercial unitary air conditioning systems.\n\n- Emissions from fixed and portable fire suppression equipment.\n\n- Direct emissions from purchased industrial gases. These gases can be used in processes such as manufacturing, testing, or laboratory applications.\n\nEmissions from the refrigeration and air conditioning sector result from the manufacturing process, from leakage and service over the operational life of the equipment, and from disposal at the end of the useful life of the equipment.\n\nThis only applies to scope 1 GHG emissions resulting from operations at the reporting organization's facilities.\n\nFor refrigeration, air conditioning, and fire suppression equipment, these emissions may take place during the installation, use, or disposal. Refrigerants and fire suppressants may be released from equipment leaks throughout their operating life or from catastrophic leaks. Also, when equipment is installed, repaired, or removed, refrigerants and fire suppressants may be released if proper recovery processes are not used. Fire suppressants are also emitted to extinguish fires. Emissions that occur during the manufacturing or disposal of equipment or purchased gases are scope 3 indirect emissions, and are not included in an organization's scope 1 emissions. \n\nFour methods with varying levels of accuracy and data collection required are outlined in this guidance to calculate GHG emissions. Organizations may calculate fugitive GHG emissions from refrigeration and air conditioning equipment, fire suppression systems, or purchased industrial gases with one of the following methods.",
 								"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#042C59\"}",
 								"PrimaryKeys": "RefrigerantId",
