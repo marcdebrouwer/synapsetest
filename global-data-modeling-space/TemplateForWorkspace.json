@@ -1385,19 +1385,19 @@
 					],
 					"transformations": [
 						{
-							"name": "join1"
-						},
-						{
-							"name": "join2"
-						},
-						{
-							"name": "join3"
-						},
-						{
 							"name": "select1"
 						},
 						{
 							"name": "surrogateKey1"
+						},
+						{
+							"name": "lookup1"
+						},
+						{
+							"name": "lookup2"
+						},
+						{
+							"name": "lookup3"
 						}
 					],
 					"scriptLines": [
@@ -1468,16 +1468,7 @@
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
 						"     tableName: 'FacilityType') ~> FacilityTypeData",
-						"join2, LocationData join({Facility Name} == LocationName,",
-						"     joinType:'inner',",
-						"     broadcast: 'auto')~> join1",
-						"FacilityData, BannerData join(OpCo == BannerName,",
-						"     joinType:'left',",
-						"     broadcast: 'auto')~> join2",
-						"join1, FacilityTypeData join({Facility Type} == FaciityTypeName,",
-						"     joinType:'left',",
-						"     broadcast: 'auto')~> join3",
-						"join3 select(mapColumn(",
+						"lookup3 select(mapColumn(",
 						"          {Facility ID_2} = {Facility ID},",
 						"          {Facility Name},",
 						"          BannerId,",
@@ -1493,6 +1484,19 @@
 						"select1 keyGenerate(output(FacilityId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
+						"FacilityData, BannerData lookup(OpCo == BannerName,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookup1",
+						"lookup1, LocationData lookup({Facility Name} == LocationName,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(LocationId, true),",
+						"     broadcast: 'auto')~> lookup2",
+						"lookup2, FacilityTypeData lookup({Facility Type} == FaciityTypeName,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookup3",
 						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -3341,6 +3345,26 @@
 			"properties": {
 				"content": {
 					"query": "SELECT TOP (100) [PurchasedGasId]\n,[PurchasedGasName]\n FROM [ESGNORMALIZEDMODEL].[dbo].[PurchasedGas]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESGNORMALIZEDMODEL",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 19')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [LocationId]\n,[LocationName]\n,[LocationAddressLine1]\n,[LocationCity]\n,[LocationState]\n,[LocationZipCode]\n,[CountryId]\n,[EgridRegionId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[Location]",
 					"metadata": {
 						"language": "sql"
 					},
