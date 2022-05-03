@@ -442,7 +442,8 @@
 				"          PurchasedEnergyId = PurchasedGasId,",
 				"          EmissionFactorId,",
 				"          VirtualEmissionFactorId = VirtualEmissionId,",
-				"          EnergyText = RefrigerantType",
+				"          EnergyText = RefrigerantType,",
+				"          RefrigerantCategory = Category",
 				"     )) ~> sink1"
 			]
 		}
