@@ -32,6 +32,9 @@
 				},
 				{
 					"name": "BannerData"
+				},
+				{
+					"name": "source1"
 				}
 			],
 			"sinks": [
@@ -156,6 +159,12 @@
 				},
 				{
 					"name": "CalculateToKG"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "filter1"
 				}
 			],
 			"scriptLines": [
@@ -291,6 +300,23 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'Banner') ~> BannerData",
+				"source(output(",
+				"          FacilityId as integer,",
+				"          FacilityName as string,",
+				"          LocationId as integer,",
+				"          GrossFloorArea as integer,",
+				"          AvailableSellingArea as integer,",
+				"          FacilityTypeId as integer,",
+				"          BannerId as integer,",
+				"          FacilityNumber as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Facility') ~> source1",
 				"split1@WithDoubleId derive(Location = replace(Location,'GF','')) ~> RemoveGF",
 				"RemoveGF derive(Location = replace(Location,'SS','')) ~> RemoveSS",
 				"ToInteger, JoinWithBanner join(Location == FacilityNumber",
@@ -414,8 +440,8 @@
 				"union2 derive(CalculateKG = {Total Charge}*0.4536) ~> CalculatesKG",
 				"RemoveSS derive(Location = toInteger(Location)) ~> ToInteger",
 				"split1@WithoutDoubleId derive(Location = toInteger({Location})) ~> toInteger3",
-				"toInteger3, JoinWithBanner join(Location == FacilityNumber,",
-				"     joinType:'inner',",
+				"toInteger3, filter1 join(Location == FacilityNumber,",
+				"     joinType:'left',",
 				"     broadcast: 'auto')~> JoinLocation3",
 				"joinLocation select(mapColumn(",
 				"          Location,",
@@ -437,8 +463,8 @@
 				"RefrigerantLeakageData split(case(    {Banner} == \"SS\", true(),     {Banner} == \"GF\", true()),",
 				"     disjoint: false) ~> split2@(SplitWithDoubleIds, SplitWithoutDoubleIds)",
 				"split2@SplitWithoutDoubleIds derive(StoreId = toInteger({StoreId})) ~> ToInteger4",
-				"ToInteger4, JoinWithBanner join(StoreId == FacilityNumber,",
-				"     joinType:'inner',",
+				"ToInteger4, filter1 join(StoreId == FacilityNumber,",
+				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinLocation4",
 				"joinLocation4 select(mapColumn(",
 				"          Locatie = StoreId,",
@@ -462,6 +488,10 @@
 				"     skipDuplicateMapOutputs: true) ~> select7",
 				"select7, select6 union(byName: true)~> union3",
 				"select3 derive(UnitKG = {Quantity added(lbs)}*0.4536) ~> CalculateToKG",
+				"source1, BannerData join(source1@BannerId == BannerData@BannerId,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join2",
+				"join2 filter(BannerName!= \"Stop and Shop\" && BannerName != \"Giant\") ~> filter1",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
