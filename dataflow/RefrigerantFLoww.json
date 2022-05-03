@@ -125,9 +125,6 @@
 					"name": "toInteger3"
 				},
 				{
-					"name": "Replace"
-				},
-				{
 					"name": "JoinLocation3"
 				},
 				{
@@ -299,7 +296,7 @@
 				"     tableName: 'Banner') ~> BannerData",
 				"split1@WithDoubleId derive(Location = replace(Location,'GF','')) ~> RemoveGF",
 				"RemoveGF derive(Location = replace(Location,'SS','')) ~> RemoveSS",
-				"Replace, JoinWithBanner join(Location == FacilityNumber",
+				"ToInteger, JoinWithBanner join(Location == FacilityNumber",
 				"     && BannerNames == BannerName,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> joinLocation",
@@ -420,12 +417,10 @@
 				"union2 derive(CalculateKG = {Total Charge}*0.4536) ~> CalculatesKG",
 				"RemoveSS derive(Location = toInteger(Location),",
 				"          BannerNames = case(\r",
-				"    {Facility Name} == \"Stop & Shop\", \"Stop and Shop\"\r",
-				"    )\r",
-				") ~> ToInteger",
+				"    {Facility Name} == \"Stop & Shop\", \"Stop and Shop\",\r",
+				"    {Banner}\r",
+				"    )) ~> ToInteger",
 				"split1@WithoutDoubleId derive(Location = toInteger({Location})) ~> toInteger3",
-				"ToInteger derive(BannerNames = case({Facility Name} == \"GF\", \"Giant\",\r",
-				"     {Facility Name} == \"Giant Food Stores LLC\", \"Giant\")) ~> Replace",
 				"toInteger3, NoGiantOrSS join(Location == FacilityNumber,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> JoinLocation3",
