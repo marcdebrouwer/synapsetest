@@ -2012,19 +2012,19 @@
 							"name": "derivedColumn5"
 						},
 						{
-							"name": "joinPurchasedGas"
-						},
-						{
-							"name": "joinVirtualEmissionFactor"
-						},
-						{
-							"name": "joinEmissionFactor"
-						},
-						{
 							"name": "select5"
 						},
 						{
 							"name": "surrogateKey1"
+						},
+						{
+							"name": "lookupPurchased"
+						},
+						{
+							"name": "lookupVirtualEmissions"
+						},
+						{
+							"name": "lookup1"
 						}
 					],
 					"scriptLines": [
@@ -2259,18 +2259,7 @@
 						"          Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> AdditionalColumns2",
 						"AdditionalColumns, AdditionalColumns2 union(byName: true)~> union3",
 						"union3 derive(UnitsKG = UnitsLBS*0.4536) ~> derivedColumn5",
-						"derivedColumn5, PurchasedGasData join(RefrigerantType == PurchasedGasName,",
-						"     joinType:'inner',",
-						"     broadcast: 'auto')~> joinPurchasedGas",
-						"joinPurchasedGas, VirtualEmissionsData join(union3@Date == VirtualEmissionsData@Date",
-						"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
-						"     joinType:'inner',",
-						"     broadcast: 'auto')~> joinVirtualEmissionFactor",
-						"joinVirtualEmissionFactor, EmissionFactorData join(VirtualEmissionsData@Date == EmissionStartDate",
-						"     && PurchasedGasData@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
-						"     joinType:'inner',",
-						"     broadcast: 'auto')~> joinEmissionFactor",
-						"joinEmissionFactor select(mapColumn(",
+						"lookup1 select(mapColumn(",
 						"          Location,",
 						"          RefrigerantType,",
 						"          FacilityId,",
@@ -2291,6 +2280,23 @@
 						"select5 keyGenerate(output(RefrigerantId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
+						"derivedColumn5, PurchasedGasData lookup(RefrigerantType == PurchasedGasName,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(PurchasedGasId, true),",
+						"     broadcast: 'auto')~> lookupPurchased",
+						"lookupPurchased, VirtualEmissionsData lookup(union3@Date == VirtualEmissionsData@Date",
+						"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(VirtualEmissionId, true),",
+						"     broadcast: 'auto')~> lookupVirtualEmissions",
+						"lookupVirtualEmissions, EmissionFactorData lookup(union3@Date == EmissionStartDate",
+						"     && PurchasedGasData@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
+						"     multiple: false,",
+						"     pickup: 'first',",
+						"     asc(EmissionFactorId, true),",
+						"     broadcast: 'auto')~> lookup1",
 						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
