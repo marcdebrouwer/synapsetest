@@ -29,6 +29,9 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "RefrigerantLeakageData"
+				},
+				{
+					"name": "BannerData"
 				}
 			],
 			"sinks": [
@@ -114,6 +117,12 @@
 				},
 				{
 					"name": "union1"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -237,7 +246,19 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> RefrigerantLeakageData",
-				"RefrigerantChargeData derive(Location = replace(Location,'GF','')) ~> RemoveGF",
+				"source(output(",
+				"          BannerId as integer,",
+				"          BannerName as string,",
+				"          OrganizationId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Banner') ~> BannerData",
+				"split1@WithDoubleId derive(Location = replace(Location,'GF','')) ~> RemoveGF",
 				"RemoveGF derive(Location = replace(Location,'SS','')) ~> RemoveSS",
 				"ToInteger, FacilityData join(Location === FacilityNumber,",
 				"     joinType:'inner',",
@@ -351,6 +372,14 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> FinalSelection2",
 				"FinalSelectBeforeAppend, FinalSelection2 union(byName: true)~> union1",
+				"FacilityData, BannerData join(FacilityData@BannerId == BannerData@BannerId,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join2",
+				"RefrigerantChargeData split(case(\r",
+				"    {Facility Name} == \"SS\", true(), \r",
+				"    {Facility Name} == \"GF\", true()\r",
+				"),",
+				"     disjoint: false) ~> split1@(WithDoubleId, WithoutDoubleId)",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
