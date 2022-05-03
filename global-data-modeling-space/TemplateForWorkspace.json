@@ -1391,13 +1391,13 @@
 							"name": "surrogateKey1"
 						},
 						{
-							"name": "lookup1"
-						},
-						{
 							"name": "lookup2"
 						},
 						{
 							"name": "lookup3"
+						},
+						{
+							"name": "join1"
 						}
 					],
 					"scriptLines": [
@@ -1484,11 +1484,7 @@
 						"select1 keyGenerate(output(FacilityId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
-						"FacilityData, BannerData lookup(OpCo == BannerName,",
-						"     multiple: false,",
-						"     pickup: 'any',",
-						"     broadcast: 'auto')~> lookup1",
-						"lookup1, LocationData lookup({Facility Name} == LocationName,",
+						"join1, LocationData lookup({Facility Name} == LocationName,",
 						"     multiple: false,",
 						"     pickup: 'first',",
 						"     asc(LocationId, true),",
@@ -1497,6 +1493,9 @@
 						"     multiple: false,",
 						"     pickup: 'any',",
 						"     broadcast: 'auto')~> lookup3",
+						"FacilityData, BannerData join(OpCo == BannerName,",
+						"     joinType:'inner',",
+						"     broadcast: 'auto')~> join1",
 						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -20178,8 +20177,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20275,8 +20274,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20546,8 +20545,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/DirectEmissionsFromRefrigeration",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20662,8 +20661,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20847,8 +20846,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20945,8 +20944,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21157,8 +21156,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21336,7 +21335,19 @@
 										"OriginDataTypeName": {
 											"TypeName": "integer",
 											"IsComplexType": false,
-											"IsNullable": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										}
+									},
+									{
+										"Name": "LocationNo",
+										"Description": "",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
@@ -21351,8 +21362,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21377,7 +21388,7 @@
 								"IsStoredAsSubdirectories": false
 							},
 							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Location\",\"description\":\"A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\\n\\n- the address of a physical structure\\n- the location of a business or service\\n- the location of a component\\n- the delivery location for a shipment or mail\",\"baseEntityReference\":{\"name\":\"Location\",\"path\":\"Location.cdm.json/Location\"},\"primaryKey\":[\"LocationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":false,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a location.\",\"isNullable\":true,\"name\":\"LocationName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The 'street' component of a location. Includes street name, apartment, suite number or PO Box.\",\"isNullable\":true,\"name\":\"LocationAddressLine1\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The 'city' component of a location.\",\"isNullable\":true,\"name\":\"LocationCity\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of the State = State Code.\\n\\nA two-digit FIPS code assigned by the NIST to identify each State and statistically equivalent entity. The NIST assigns the codes based on the alphabetic sequence of State names (Puerto Rico and the Outlying Areas appear at the end); it documents these codes in a FIPS publication (FIPS PUB 5). Also, a two-digit code assigned by the Census Bureau to identify each State within its census geographic division (Puerto Rico and the Outlying Areas appear at the end).\",\"isNullable\":true,\"name\":\"LocationState\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Zip Code.\",\"isNullable\":true,\"name\":\"LocationZipCode\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the Country.\",\"isNullable\":true,\"name\":\"CountryId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"EgridRegionId\"}]}}}",
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Location\",\"description\":\"A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\\n\\n- the address of a physical structure\\n- the location of a business or service\\n- the location of a component\\n- the delivery location for a shipment or mail\",\"baseEntityReference\":{\"name\":\"Location\",\"path\":\"Location.cdm.json/Location\"},\"primaryKey\":[\"LocationId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":false,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a location.\",\"isNullable\":true,\"name\":\"LocationName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationAddressLine1\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The 'street' component of a location. Includes street name, apartment, suite number or PO Box.\",\"isNullable\":true,\"name\":\"LocationAddressLine1\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationCity\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The 'city' component of a location.\",\"isNullable\":true,\"name\":\"LocationCity\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationStateId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of the State = State Code.\\n\\nA two-digit FIPS code assigned by the NIST to identify each State and statistically equivalent entity. The NIST assigns the codes based on the alphabetic sequence of State names (Puerto Rico and the Outlying Areas appear at the end); it documents these codes in a FIPS publication (FIPS PUB 5). Also, a two-digit code assigned by the Census Bureau to identify each State within its census geographic division (Puerto Rico and the Outlying Areas appear at the end).\",\"isNullable\":true,\"name\":\"LocationState\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"LocationZipCode\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Zip Code.\",\"isNullable\":true,\"name\":\"LocationZipCode\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Location.cdm.json/Location\",\"name\":\"CountryId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the Country.\",\"isNullable\":true,\"name\":\"CountryId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"EgridRegionId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"LocationNo\"}]}}}",
 								"Description": "A location is a physical point that can be defined as a single latitude / longitude. A location can be used to describe:\n\n- the address of a physical structure\n- the location of a business or service\n- the location of a component\n- the delivery location for a shipment or mail",
 								"DisplayFolderInfo": "{\"name\":\"Geography\",\"colorCode\":\"#8170C2\"}",
 								"PrimaryKeys": "LocationId",
@@ -21449,8 +21460,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21547,8 +21558,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PurchasedGas",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21713,8 +21724,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2Emissions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21847,8 +21858,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/UnitOfMeasure",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21997,8 +22008,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
