@@ -37,7 +37,11 @@
 					"name": "EmissionFactorData"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "split"
@@ -125,6 +129,18 @@
 				},
 				{
 					"name": "joinPurchasedGas"
+				},
+				{
+					"name": "joinVirtualEmissionFactor"
+				},
+				{
+					"name": "joinEmissionFactor"
+				},
+				{
+					"name": "select5"
+				},
+				{
+					"name": "surrogateKey1"
 				}
 			],
 			"scriptLines": [
@@ -361,7 +377,68 @@
 				"union3 derive(UnitsKG = UnitsLBS*0.4536) ~> derivedColumn5",
 				"derivedColumn5, PurchasedGasData join(RefrigerantType == PurchasedGasName,",
 				"     joinType:'inner',",
-				"     broadcast: 'auto')~> joinPurchasedGas"
+				"     broadcast: 'auto')~> joinPurchasedGas",
+				"joinPurchasedGas, VirtualEmissionsData join(union3@Date == VirtualEmissionsData@Date",
+				"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> joinVirtualEmissionFactor",
+				"joinVirtualEmissionFactor, EmissionFactorData join(VirtualEmissionsData@Date == EmissionStartDate",
+				"     && PurchasedGasData@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> joinEmissionFactor",
+				"joinEmissionFactor select(mapColumn(",
+				"          Location,",
+				"          RefrigerantType,",
+				"          FacilityId,",
+				"          BannerName,",
+				"          UnitsLBS,",
+				"          Category,",
+				"          Date = union3@Date,",
+				"          Status,",
+				"          Vendor,",
+				"          UnitsKG,",
+				"          PurchasedGasId = PurchasedGasData@PurchasedGasId,",
+				"          PurchasedGasName,",
+				"          VirtualEmissionId,",
+				"          EmissionFactorId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select5",
+				"select5 keyGenerate(output(RefrigerantId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"surrogateKey1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'DirectEmissionsFromRefrigeration',",
+				"     input(",
+				"          RefrigerantId as integer,",
+				"          PeriodStart as date,",
+				"          PeriodEnd as date,",
+				"          FuelMassVolumeUnitsLb as double,",
+				"          C02EmissionsUnits as double,",
+				"          PurchasedEnergyId as integer,",
+				"          EmissionFactorId as integer,",
+				"          FacilityId as integer,",
+				"          FuelMassKg as double,",
+				"          VirtualEmissionFactorId as integer,",
+				"          RefrigerantNumber as integer,",
+				"          LeakageStatus as string,",
+				"          LeakageVendor as string,",
+				"          RefrigerantCategory as string",
+				"     ),",
+				"     mapColumn(",
+				"          RefrigerantId,",
+				"          FuelMassVolumeUnitsLb = UnitsLBS,",
+				"          FuelMassKg = UnitsKG,",
+				"          PurchasedEnergyId = PurchasedGasId,",
+				"          EmissionFactorId,",
+				"          RefrigerantId,",
+				"          VirtualEmissionFactorId = VirtualEmissionId",
+				"     )) ~> sink1"
 			]
 		}
 	}
