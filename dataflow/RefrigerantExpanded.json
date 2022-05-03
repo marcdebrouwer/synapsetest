@@ -26,6 +26,15 @@
 				},
 				{
 					"name": "BannerData"
+				},
+				{
+					"name": "PurchasedGasData"
+				},
+				{
+					"name": "VirtualEmissionsData"
+				},
+				{
+					"name": "EmissionFactorData"
 				}
 			],
 			"sinks": [],
@@ -98,6 +107,24 @@
 				},
 				{
 					"name": "select4"
+				},
+				{
+					"name": "union2"
+				},
+				{
+					"name": "AdditionalColumns"
+				},
+				{
+					"name": "AdditionalColumns2"
+				},
+				{
+					"name": "union3"
+				},
+				{
+					"name": "derivedColumn5"
+				},
+				{
+					"name": "joinPurchasedGas"
 				}
 			],
 			"scriptLines": [
@@ -106,7 +133,7 @@
 				"          {Tag ID} as string,",
 				"          {Rack Type} as string,",
 				"          {Refrigerant Type} as string,",
-				"          {Total Charge} as short,",
+				"          {Total Charge} as double '000,000,000.000',",
 				"          {Primary Trade} as string,",
 				"          Brand as string,",
 				"          {Model No.} as string,",
@@ -131,7 +158,7 @@
 				"source(output(",
 				"          StoreId as string,",
 				"          {Tag ID} as string,",
-				"          {Quantity added(lbs)} as string,",
+				"          {Quantity added(lbs)} as double '000,000,000.000',",
 				"          {Refrigerant type} as string,",
 				"          {REFRIG TYPE} as string,",
 				"          {Tracking number} as integer,",
@@ -203,7 +230,54 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'Banner') ~> BannerData",
-				"Charge split(case(    {Banner} == \"Giant\", true(),     {Banner} == \"Stop and Shop\", true()),",
+				"source(output(",
+				"          PurchasedGasId as integer,",
+				"          PurchasedGasName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'PurchasedGas') ~> PurchasedGasData",
+				"source(output(",
+				"          VirtualEmissionId as integer,",
+				"          PurchasedGasId as integer,",
+				"          Date as date,",
+				"          VirtualEmissionScope as string,",
+				"          BannerId as integer,",
+				"          VirtualEmissionFactorLocation as double,",
+				"          VirtualEmissionFactorMarket as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'VirtualEmissionFactor') ~> VirtualEmissionsData",
+				"source(output(",
+				"          EmissionFactorId as integer,",
+				"          EmissionFactorName as string,",
+				"          EmissionScope as string,",
+				"          EmissionCategory as string,",
+				"          EmissionFactorLocationBased as double,",
+				"          EmissionFactorMarketBased as double,",
+				"          UnitOfMeasure as string,",
+				"          EmissionStartDate as date,",
+				"          EmissionEndDate as date,",
+				"          EgridRegion as string,",
+				"          PurchasedGasId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'GreenhouseGasType') ~> EmissionFactorData",
+				"Charge split(case(    Banner == \"Giant\", true(),     Banner == \"Stop and Shop\", true()),",
 				"     disjoint: false) ~> split@(SSandGiant, Rest)",
 				"Leakage split(case(    Banner == \"SS\", true(),     Banner == \"GF\", true()),",
 				"     disjoint: false) ~> split2@(SSandGiant2, Therest2)",
@@ -211,7 +285,7 @@
 				"derivedColumn1 derive(Location = replace(Location,\"GF\",'')) ~> derivedColumn2",
 				"split2@SSandGiant2 derive(StoreId = replace(StoreId,\"SS\",'')) ~> derivedColumn3",
 				"derivedColumn3 derive(StoreId = replace(StoreId,\"GF\",'')) ~> derivedColumn4",
-				"derivedColumn2 derive(Location = toInteger({Location})) ~> toInteger1",
+				"derivedColumn2 derive(Location = toInteger(Location)) ~> toInteger1",
 				"split@Rest derive(Location = toInteger({Location})) ~> toInteger2",
 				"derivedColumn4 derive(StoreId = toInteger(StoreId)) ~> toInteger3",
 				"split2@Therest2 derive(StoreId = toInteger(StoreId)) ~> toInteger4",
@@ -240,14 +314,14 @@
 				"          RefrigerantType = {Refrigerant Type},",
 				"          FacilityId,",
 				"          BannerName,",
-				"          {Total Charge}",
+				"          UnitsLBS = {Total Charge}",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
 				"joinFacility2 select(mapColumn(",
 				"          Location,",
 				"          RefrigerantType = {Refrigerant Type},",
-				"          {Total Charge},",
+				"          UnitsLBS = {Total Charge},",
 				"          FacilityId,",
 				"          BannerName",
 				"     ),",
@@ -275,7 +349,19 @@
 				"          BannerName",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select4"
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"select3, select4 union(byName: true)~> union2",
+				"union1 derive(Category = \"Charge\",",
+				"          Date = toDate(\"01-10-2021\",'dd-MM-yyyy'),",
+				"          Status = \"\",",
+				"          Vendor = \"\") ~> AdditionalColumns",
+				"union2 derive(Category = \"Leakage\",",
+				"          Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> AdditionalColumns2",
+				"AdditionalColumns, AdditionalColumns2 union(byName: true)~> union3",
+				"union3 derive(UnitsKG = UnitsLBS*0.4536) ~> derivedColumn5",
+				"derivedColumn5, PurchasedGasData join(RefrigerantType == PurchasedGasName,",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> joinPurchasedGas"
 			]
 		}
 	}
