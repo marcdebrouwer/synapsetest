@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 19",
+	"properties": {
+		"content": {
+			"query": "SELECT TOP (100) [LocationId]\n,[LocationName]\n,[LocationAddressLine1]\n,[LocationCity]\n,[LocationState]\n,[LocationZipCode]\n,[CountryId]\n,[EgridRegionId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[Location]",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ESGNORMALIZEDMODEL",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
