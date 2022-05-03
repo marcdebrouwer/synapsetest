@@ -1,0 +1,127 @@
+{
+	"name": "Dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "Charge"
+				},
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "Leakage"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "split"
+				},
+				{
+					"name": "split2"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "derivedColumn4"
+				},
+				{
+					"name": "toInteger1"
+				},
+				{
+					"name": "toInteger2"
+				},
+				{
+					"name": "toInteger3"
+				},
+				{
+					"name": "toInteger4"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Location as string,",
+				"          {Tag ID} as string,",
+				"          {Rack Type} as string,",
+				"          {Refrigerant Type} as string,",
+				"          {Total Charge} as short,",
+				"          {Primary Trade} as string,",
+				"          Brand as string,",
+				"          {Model No.} as string,",
+				"          {Serial No.} as string,",
+				"          {Facility Name} as string,",
+				"          Deactivated as boolean,",
+				"          {Rack Id} as string,",
+				"          {Asset Type} as string,",
+				"          Banner as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'Refrigerants.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> Charge",
+				"source(output(",
+				"          StoreId as string,",
+				"          {Tag ID} as string,",
+				"          {Quantity added(lbs)} as string,",
+				"          {Refrigerant type} as string,",
+				"          {REFRIG TYPE} as string,",
+				"          {Tracking number} as integer,",
+				"          Vendor as string,",
+				"          {Part use date} as string,",
+				"          {Refrigerant Use Reason} as string,",
+				"          {Leak event date} as string,",
+				"          {Inventory LocationId} as integer,",
+				"          AssetId as integer,",
+				"          LeakId as integer,",
+				"          Banner as string,",
+				"          charge as string,",
+				"          R134A as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'RefrigerantLeakage.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> Leakage",
+				"Charge split(case(    {Banner} == \"Giant\", true(),     {Banner} == \"Stop and Shop\", true()),",
+				"     disjoint: false) ~> split@(SSandGiant, Rest)",
+				"Leakage split(case(    Banner == \"SS\", true(),     Banner == \"GF\", true()),",
+				"     disjoint: false) ~> split2@(SSandGiant2, Therest2)",
+				"split@SSandGiant derive(Location = replace(Location,\"SS\",'')) ~> derivedColumn1",
+				"derivedColumn1 derive(Location = replace(Location,\"GF\",'')) ~> derivedColumn2",
+				"split2@SSandGiant2 derive(StoreId = replace(StoreId,\"SS\",'')) ~> derivedColumn3",
+				"derivedColumn3 derive(StoreId = replace(StoreId,\"GF\",'')) ~> derivedColumn4",
+				"derivedColumn2 derive(Location = toInteger({Location})) ~> toInteger1",
+				"split@Rest derive(Location = toInteger({Location})) ~> toInteger2",
+				"derivedColumn4 derive(StoreId = toInteger(StoreId)) ~> toInteger3",
+				"split2@Therest2 derive(StoreId = toInteger(StoreId)) ~> toInteger4"
+			]
+		}
+	}
+}
