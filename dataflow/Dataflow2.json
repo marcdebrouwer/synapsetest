@@ -45,6 +45,9 @@
 				},
 				{
 					"name": "EgridRegionData"
+				},
+				{
+					"name": "CountryData"
 				}
 			],
 			"sinks": [
@@ -90,7 +93,7 @@
 					"name": "LookupVirtualEmission"
 				},
 				{
-					"name": "join1"
+					"name": "joinLocation"
 				},
 				{
 					"name": "SelectFacilityData"
@@ -99,7 +102,7 @@
 					"name": "LookupGasId"
 				},
 				{
-					"name": "LookupEmissionFactor"
+					"name": "LookupEGrid"
 				},
 				{
 					"name": "LookUpEgridId"
@@ -117,7 +120,7 @@
 					"name": "ChangeColumnName1"
 				},
 				{
-					"name": "split1"
+					"name": "SplitForKWHCalc"
 				},
 				{
 					"name": "derivedColumn4"
@@ -127,6 +130,21 @@
 				},
 				{
 					"name": "CalculateKWH2"
+				},
+				{
+					"name": "AppendKWHs"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "joinCountry"
+				},
+				{
+					"name": "splitForEmissionFactorLink"
+				},
+				{
+					"name": "lookup1"
 				},
 				{
 					"name": "union1"
@@ -312,6 +330,17 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'EgridRegions') ~> EgridRegionData",
+				"source(output(",
+				"          CountryId as integer,",
+				"          IsoCountryName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Country') ~> CountryData",
 				"MakeDouble unpivot(output(",
 				"          EnergyType as string,",
 				"          Amount as double",
@@ -355,13 +384,13 @@
 				"          {Heat import [kg CO2/kWh]} = toDouble({Heat import [kg CO2/kWh]}),",
 				"          EFEC = toDouble(EFEC)) ~> MakeDouble2",
 				"unpivot2 union(byName: true)~> AppendData",
-				"union1 derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
+				"AppendKWHs derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
 				"CreateJoinColumn, SelectFacilityData lookup(CreateJoinColumn@JoinColumn == SelectFacilityData@JoinColumn,",
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> LookUpFacility",
 				"CreateDate derive(JoinColumn = at(split({Facility Name}, ','),1)) ~> CreateJoinColumn",
-				"join1 derive(JoinColumn = at(split({FacilityName}, ','),1)) ~> derivedColumn3",
+				"joinCountry derive(JoinColumn = at(split({FacilityName}, ','),1)) ~> derivedColumn3",
 				"LookupGasId, VirtualEmissionsData lookup(CreateDate@Date == VirtualEmissionsData@Date",
 				"     && SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
 				"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
@@ -370,7 +399,7 @@
 				"     broadcast: 'auto')~> LookupVirtualEmission",
 				"FacilityData, LocationData join(FacilityData@LocationId == LocationData@LocationId,",
 				"     joinType:'left',",
-				"     broadcast: 'auto')~> join1",
+				"     broadcast: 'auto')~> joinLocation",
 				"derivedColumn3 select(mapColumn(",
 				"          FacilityId,",
 				"          FacilityName,",
@@ -379,14 +408,11 @@
 				"          AvailableSellingArea,",
 				"          FacilityTypeId,",
 				"          BannerId,",
-				"          FacilitySub,",
 				"          LocationId = LocationData@LocationId,",
 				"          LocationName,",
 				"          LocationAddressLine1,",
-				"          LocationCity,",
-				"          LocationState,",
 				"          LocationZipCode,",
-				"          CountryId,",
+				"          Country = IsoCountryName,",
 				"          EgridRegionId,",
 				"          LocationNo,",
 				"          JoinColumn",
@@ -397,12 +423,10 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> LookupGasId",
-				"LookupVirtualEmission, LookUpEgridId lookup(VirtualEmissionsData@Date == EmissionStartDate",
-				"     && VirtualEmissionsData@PurchasedGasId == EmissionFactorData@PurchasedGasId",
-				"     && SelectFacilityData@EgridRegionId == EgridRegionData@EgridRegionId,",
+				"splitForEmissionFactorLink@Electricity, LookUpEgridId lookup(splitForEmissionFactorLink@Electricity@EgridRegionId == EgridRegionData@EgridRegionId,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> LookupEmissionFactor",
+				"     broadcast: 'auto')~> LookupEGrid",
 				"EmissionFactorData, EgridRegionData lookup(EgridRegion == EGridRegionLongName,",
 				"     multiple: false,",
 				"     pickup: 'any',",
@@ -410,7 +434,7 @@
 				"selectRequiredColumns keyGenerate(output(EmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> CreateEmissionId",
-				"LookupEmissionFactor select(mapColumn(",
+				"union1 select(mapColumn(",
 				"          Amount = KWHAmount,",
 				"          Date = CreateDate@Date,",
 				"          FacilityId,",
@@ -448,7 +472,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> ChangeColumnName1",
 				"derivedColumn4 split(case(IsKwh == \"Yes\",true()),",
-				"     disjoint: false) ~> split1@(KWH, Therms)",
+				"     disjoint: false) ~> SplitForKWHCalc@(KWH, Therms)",
 				"AppendData derive(IsKwh = case(\r",
 				"    EnergyType == \"Electricity\", \"Yes\",\r",
 				"    EnergyType == \"EFEC\", \"Yes\", \r",
@@ -457,9 +481,37 @@
 				"    EnergyType == \"Natural Gas\", \"No\",\r",
 				"    EnergyType == \"Light fuel [kg CO2/kWh]\", \"No\"\r",
 				"    )) ~> derivedColumn4",
-				"split1@KWH derive(KWHAmount = Amount) ~> CalculateKWH",
-				"split1@Therms derive(KWHAmount = Amount *29.3297) ~> CalculateKWH2",
-				"CalculateKWH, CalculateKWH2 union(byName: true)~> union1",
+				"SplitForKWHCalc@KWH derive(KWHAmount = Amount) ~> CalculateKWH",
+				"SplitForKWHCalc@Therms derive(KWHAmount = Amount *29.3297) ~> CalculateKWH2",
+				"CalculateKWH, CalculateKWH2 union(byName: true)~> AppendKWHs",
+				"LookupVirtualEmission select(mapColumn(",
+				"          {Facility Name},",
+				"          EnergyType,",
+				"          Amount,",
+				"          IsKwh,",
+				"          KWHAmount,",
+				"          Date = CreateDate@Date,",
+				"          JoinColumn = CreateJoinColumn@JoinColumn,",
+				"          FacilityId,",
+				"          BannerId = SelectFacilityData@BannerId,",
+				"          Country,",
+				"          EgridRegionId,",
+				"          PurchasedGasName,",
+				"          VirtualEmissionId,",
+				"          PurchasedGasId = VirtualEmissionsData@PurchasedGasId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"joinLocation, CountryData join(LocationData@CountryId == CountryData@CountryId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinCountry",
+				"select1 split(case(EnergyType == \"Electricity\",true()),",
+				"     disjoint: false) ~> splitForEmissionFactorLink@(Electricity, Rest)",
+				"splitForEmissionFactorLink@Rest lookup(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"LookupEGrid union(byName: true)~> union1",
 				"CreateEmissionId sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
