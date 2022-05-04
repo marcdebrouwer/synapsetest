@@ -427,7 +427,7 @@
 				"          EgridRegionId,",
 				"          PurchasedGasName,",
 				"          VirtualEmissionId,",
-				"          PurchasedGasId = splitElectricity@PurchasedGasId",
+				"          PurchasedGasId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectRequiredColumns",
