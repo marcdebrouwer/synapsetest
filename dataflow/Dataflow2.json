@@ -558,7 +558,8 @@
 				"          EmissionFactorId as integer,",
 				"          FacilityId as integer,",
 				"          VirtualEmissionFactorId as integer,",
-				"          PurchasedGasId as integer",
+				"          PurchasedGasId as integer,",
+				"          CountryText as string",
 				"     ),",
 				"     mapColumn(",
 				"          EmissionId,",
@@ -567,7 +568,8 @@
 				"          FacilityId,",
 				"          VirtualEmissionFactorId = VirtualEmissionId,",
 				"          EmissionFactorId,",
-				"          PurchasedGasId",
+				"          PurchasedGasId,",
+				"          CountryText = EnergyType",
 				"     )) ~> sink1"
 			]
 		}
