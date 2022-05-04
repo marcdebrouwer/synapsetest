@@ -1122,7 +1122,7 @@
 						"          OpCo as string,",
 						"          Brand as string,",
 						"          {Facility Type} as string,",
-						"          {Facility ID} as short,",
+						"          {Facility ID} as string,",
 						"          {Facility Name} as string,",
 						"          Address as string,",
 						"          City as string,",
@@ -1197,7 +1197,7 @@
 						"          AvailableSellingArea as integer,",
 						"          FacilityTypeId as integer,",
 						"          BannerId as integer,",
-						"          FacilityNumber as integer",
+						"          FacilitySub as string",
 						"     ),",
 						"     mapColumn(",
 						"          FacilityId = FacilityID,",
@@ -1206,7 +1206,7 @@
 						"          AvailableSellingArea = {Sales area owned stores ft2},",
 						"          FacilityTypeId,",
 						"          BannerId,",
-						"          FacilityNumber = {Facility ID}",
+						"          FacilitySub = {Facility ID}",
 						"     )) ~> sink1"
 					]
 				}
