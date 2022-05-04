@@ -17,14 +17,20 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "DelhaizeEnergy"
+				},
+				{
+					"name": "FacilityData"
+				},
+				{
+					"name": "VirtualEmissionsData"
+				},
+				{
+					"name": "EmissionFactorData"
 				}
 			],
 			"sinks": [
 				{
 					"name": "sink1"
-				},
-				{
-					"name": "sink2"
 				}
 			],
 			"transformations": [
@@ -44,7 +50,10 @@
 					"name": "CommaToPoint2"
 				},
 				{
-					"name": "derivedColumn2"
+					"name": "MakeDouble2"
+				},
+				{
+					"name": "AppendData"
 				}
 			],
 			"scriptLines": [
@@ -76,11 +85,11 @@
 				"          {Location ID} as short,",
 				"          {Selling m2} as string,",
 				"          {Facility Type} as string,",
-				"          Electric as double '000,000,000.000',",
-				"          {Natural Gas} as double '000,000,000.000',",
-				"          Propane as double '000,000,000.000',",
-				"          {Fuel Oil} as double '000,000,000.000',",
-				"          EFEC as double '000,000,000.000'",
+				"          Electric as string,",
+				"          {Natural Gas} as string,",
+				"          Propane as string,",
+				"          {Fuel Oil} as string,",
+				"          EFEC as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -93,6 +102,59 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> DelhaizeEnergy",
+				"source(output(",
+				"          FacilityId as integer,",
+				"          FacilityName as string,",
+				"          LocationId as integer,",
+				"          GrossFloorArea as integer,",
+				"          AvailableSellingArea as integer,",
+				"          FacilityTypeId as integer,",
+				"          BannerId as integer,",
+				"          FacilitySub as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Facility') ~> FacilityData",
+				"source(output(",
+				"          VirtualEmissionId as integer,",
+				"          PurchasedGasId as integer,",
+				"          Date as date,",
+				"          VirtualEmissionScope as string,",
+				"          BannerId as integer,",
+				"          VirtualEmissionFactorLocation as double,",
+				"          VirtualEmissionFactorMarket as double",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'VirtualEmissionFactor') ~> VirtualEmissionsData",
+				"source(output(",
+				"          EmissionFactorId as integer,",
+				"          EmissionFactorName as string,",
+				"          EmissionScope as string,",
+				"          EmissionCategory as string,",
+				"          EmissionFactorLocationBased as double,",
+				"          EmissionFactorMarketBased as double,",
+				"          UnitOfMeasure as string,",
+				"          EmissionStartDate as date,",
+				"          EmissionEndDate as date,",
+				"          EgridRegion as string,",
+				"          PurchasedGasId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'GreenhouseGasType') ~> EmissionFactorData",
 				"MakeDouble unpivot(output(",
 				"          EnergyType as string,",
 				"          Amount as double",
@@ -103,7 +165,7 @@
 				"          {Facility Type}),",
 				"     lateral: true,",
 				"     ignoreNullPivots: true) ~> unpivot1",
-				"derivedColumn2 unpivot(output(",
+				"MakeDouble2 unpivot(output(",
 				"          EnergyType as string,",
 				"          Amount as double",
 				"     ),",
@@ -125,23 +187,24 @@
 				"          {Fuel Oil} = toDouble({Fuel Oil}),",
 				"          {Solar Used On-Site} = toDouble({Solar Used On-Site}),",
 				"          EFEC = toDouble({EFEC})) ~> MakeDouble",
-				"DelhaizeEnergy derive(Electric = replace({Electric}, \",\", \".\"),",
-				"          column1 = ERROR_FUNCTION('replace({Electric, \",\", \".\")')) ~> CommaToPoint2",
-				"CommaToPoint2 derive() ~> derivedColumn2",
-				"unpivot1 sink(allowSchemaDrift: true,",
+				"DelhaizeEnergy derive(Electric = replace(Electric, \",\", \".\"),",
+				"          {Natural Gas} = replace({Natural Gas}, \",\", \".\"),",
+				"          Propane = replace({Propane}, \",\", \".\"),",
+				"          {Fuel Oil} = replace({Fuel Oil}, \",\", \".\"),",
+				"          EFEC = replace({EFEC}, \",\", \".\")) ~> CommaToPoint2",
+				"CommaToPoint2 derive(Electric = toDouble(Electric),",
+				"          {Natural Gas} = toDouble({Natural Gas}),",
+				"          Propane = toDouble({Propane}),",
+				"          {Fuel Oil} = toDouble({Fuel Oil}),",
+				"          EFEC = toDouble({EFEC})) ~> MakeDouble2",
+				"unpivot2 union(byName: true)~> AppendData",
+				"AppendData sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: 'Scope2Emissions') ~> sink1",
-				"unpivot2 sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     store: 'synapse',",
-				"     databaseType: 'spark',",
-				"     format: 'table',",
-				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: 'Scope2Emissions') ~> sink2"
+				"     tableName: 'Scope2Emissions') ~> sink1"
 			]
 		}
 	}

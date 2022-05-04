@@ -9,7 +9,7 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "GreenhouseGasType",
+		"FromTableName": "EmissionFactors",
 		"ToTableName": "Scope2Emissions",
 		"ColumnRelationshipInformations": [
 			{
