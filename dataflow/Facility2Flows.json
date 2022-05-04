@@ -68,7 +68,7 @@
 				"          OpCo as string,",
 				"          Brand as string,",
 				"          {Facility Type} as string,",
-				"          {Facility ID} as short,",
+				"          {Facility ID} as string,",
 				"          {Facility Name} as string,",
 				"          Address as string,",
 				"          City as string,",
@@ -113,7 +113,7 @@
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'FacilityType') ~> FacilityType",
 				"derivedColumn2 aggregate(groupBy({Facility Name}),",
-				"     each(match(name != \"Facility Name\"), $$ = first($$))) ~> aggregateFacilityName",
+				"     each(match(name!=\"Facility Name\"), $$ = first($$))) ~> aggregateFacilityName",
 				"aggregateFacilityName keyGenerate(output(FacilityID as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> FacilityKey",
@@ -143,7 +143,7 @@
 				"          AvailableSellingArea as integer,",
 				"          FacilityTypeId as integer,",
 				"          BannerId as integer,",
-				"          FacilityNumber as integer",
+				"          FacilitySub as string",
 				"     ),",
 				"     mapColumn(",
 				"          FacilityId = FacilityID,",
@@ -152,7 +152,7 @@
 				"          AvailableSellingArea = {Sales area owned stores ft2},",
 				"          FacilityTypeId,",
 				"          BannerId,",
-				"          FacilityNumber = {Facility ID}",
+				"          FacilitySub = {Facility ID}",
 				"     )) ~> sink1"
 			]
 		}
