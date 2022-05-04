@@ -133,6 +133,56 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/MapEgrids')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "EgridFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow3",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"EGridData": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "3NF TABLES"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/Dataflow3')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/NormalizedSupporting1NF')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -262,11 +312,9 @@
 								"parameters": {},
 								"datasetParameters": {
 									"FacilityData": {},
-									"EgridData": {},
 									"MapFacilityType": {},
 									"MapCountry": {},
-									"MapOrganization": {},
-									"MapEgridRegion": {}
+									"MapOrganization": {}
 								}
 							},
 							"staging": {},
@@ -532,6 +580,7 @@
 									"LocationData": {},
 									"PurchasedGasData": {},
 									"EgridRegionData": {},
+									"CountryData": {},
 									"sink1": {}
 								}
 							},
@@ -935,6 +984,9 @@
 						},
 						{
 							"name": "EgridRegionData"
+						},
+						{
+							"name": "CountryData"
 						}
 					],
 					"sinks": [
@@ -980,16 +1032,13 @@
 							"name": "LookupVirtualEmission"
 						},
 						{
-							"name": "join1"
+							"name": "joinLocation"
 						},
 						{
 							"name": "SelectFacilityData"
 						},
 						{
 							"name": "LookupGasId"
-						},
-						{
-							"name": "LookupEmissionFactor"
 						},
 						{
 							"name": "LookUpEgridId"
@@ -1007,7 +1056,7 @@
 							"name": "ChangeColumnName1"
 						},
 						{
-							"name": "split1"
+							"name": "SplitForKWHCalc"
 						},
 						{
 							"name": "derivedColumn4"
@@ -1019,7 +1068,13 @@
 							"name": "CalculateKWH2"
 						},
 						{
-							"name": "union1"
+							"name": "AppendKWHs"
+						},
+						{
+							"name": "select1"
+						},
+						{
+							"name": "joinCountry"
 						}
 					],
 					"scriptLines": [
@@ -1202,6 +1257,17 @@
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
 						"     tableName: 'EgridRegions') ~> EgridRegionData",
+						"source(output(",
+						"          CountryId as integer,",
+						"          IsoCountryName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Country') ~> CountryData",
 						"MakeDouble unpivot(output(",
 						"          EnergyType as string,",
 						"          Amount as double",
@@ -1245,13 +1311,13 @@
 						"          {Heat import [kg CO2/kWh]} = toDouble({Heat import [kg CO2/kWh]}),",
 						"          EFEC = toDouble(EFEC)) ~> MakeDouble2",
 						"unpivot2 union(byName: true)~> AppendData",
-						"union1 derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
+						"AppendKWHs derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
 						"CreateJoinColumn, SelectFacilityData lookup(CreateJoinColumn@JoinColumn == SelectFacilityData@JoinColumn,",
 						"     multiple: false,",
 						"     pickup: 'any',",
 						"     broadcast: 'auto')~> LookUpFacility",
 						"CreateDate derive(JoinColumn = at(split({Facility Name}, ','),1)) ~> CreateJoinColumn",
-						"join1 derive(JoinColumn = at(split({FacilityName}, ','),1)) ~> derivedColumn3",
+						"joinCountry derive(JoinColumn = at(split({FacilityName}, ','),1)) ~> derivedColumn3",
 						"LookupGasId, VirtualEmissionsData lookup(CreateDate@Date == VirtualEmissionsData@Date",
 						"     && SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
 						"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
@@ -1260,7 +1326,7 @@
 						"     broadcast: 'auto')~> LookupVirtualEmission",
 						"FacilityData, LocationData join(FacilityData@LocationId == LocationData@LocationId,",
 						"     joinType:'left',",
-						"     broadcast: 'auto')~> join1",
+						"     broadcast: 'auto')~> joinLocation",
 						"derivedColumn3 select(mapColumn(",
 						"          FacilityId,",
 						"          FacilityName,",
@@ -1269,14 +1335,11 @@
 						"          AvailableSellingArea,",
 						"          FacilityTypeId,",
 						"          BannerId,",
-						"          FacilitySub,",
 						"          LocationId = LocationData@LocationId,",
 						"          LocationName,",
 						"          LocationAddressLine1,",
-						"          LocationCity,",
-						"          LocationState,",
 						"          LocationZipCode,",
-						"          CountryId,",
+						"          Country = IsoCountryName,",
 						"          EgridRegionId,",
 						"          LocationNo,",
 						"          JoinColumn",
@@ -1287,12 +1350,6 @@
 						"     multiple: false,",
 						"     pickup: 'any',",
 						"     broadcast: 'auto')~> LookupGasId",
-						"LookupVirtualEmission, LookUpEgridId lookup(VirtualEmissionsData@Date == EmissionStartDate",
-						"     && VirtualEmissionsData@PurchasedGasId == EmissionFactorData@PurchasedGasId",
-						"     && SelectFacilityData@EgridRegionId == EgridRegionData@EgridRegionId,",
-						"     multiple: false,",
-						"     pickup: 'any',",
-						"     broadcast: 'auto')~> LookupEmissionFactor",
 						"EmissionFactorData, EgridRegionData lookup(EgridRegion == EGridRegionLongName,",
 						"     multiple: false,",
 						"     pickup: 'any',",
@@ -1300,13 +1357,20 @@
 						"selectRequiredColumns keyGenerate(output(EmissionId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> CreateEmissionId",
-						"LookupEmissionFactor select(mapColumn(",
-						"          Amount = KWHAmount,",
-						"          Date = CreateDate@Date,",
+						"select1 select(mapColumn(",
+						"          {Facility Name},",
+						"          EnergyType,",
+						"          Amount,",
+						"          IsKwh,",
+						"          Date,",
+						"          JoinColumn,",
 						"          FacilityId,",
+						"          BannerId,",
+						"          Country,",
+						"          EgridRegionId,",
+						"          PurchasedGasName,",
 						"          VirtualEmissionId,",
-						"          EmissionFactorId,",
-						"          PurchasedGasId = PurchasedGasData@PurchasedGasId",
+						"          PurchasedGasId",
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> selectRequiredColumns",
@@ -1338,7 +1402,7 @@
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> ChangeColumnName1",
 						"derivedColumn4 split(case(IsKwh == \"Yes\",true()),",
-						"     disjoint: false) ~> split1@(KWH, Therms)",
+						"     disjoint: false) ~> SplitForKWHCalc@(KWH, Therms)",
 						"AppendData derive(IsKwh = case(\r",
 						"    EnergyType == \"Electricity\", \"Yes\",\r",
 						"    EnergyType == \"EFEC\", \"Yes\", \r",
@@ -1347,9 +1411,30 @@
 						"    EnergyType == \"Natural Gas\", \"No\",\r",
 						"    EnergyType == \"Light fuel [kg CO2/kWh]\", \"No\"\r",
 						"    )) ~> derivedColumn4",
-						"split1@KWH derive(KWHAmount = Amount) ~> CalculateKWH",
-						"split1@Therms derive(KWHAmount = Amount *29.3297) ~> CalculateKWH2",
-						"CalculateKWH, CalculateKWH2 union(byName: true)~> union1",
+						"SplitForKWHCalc@KWH derive(KWHAmount = Amount) ~> CalculateKWH",
+						"SplitForKWHCalc@Therms derive(KWHAmount = Amount *29.3297) ~> CalculateKWH2",
+						"CalculateKWH, CalculateKWH2 union(byName: true)~> AppendKWHs",
+						"LookupVirtualEmission select(mapColumn(",
+						"          {Facility Name},",
+						"          EnergyType,",
+						"          Amount = KWHAmount,",
+						"          IsKwh,",
+						"          KWHAmount,",
+						"          Date = CreateDate@Date,",
+						"          JoinColumn = CreateJoinColumn@JoinColumn,",
+						"          FacilityId,",
+						"          BannerId = SelectFacilityData@BannerId,",
+						"          Country,",
+						"          EgridRegionId,",
+						"          PurchasedGasName,",
+						"          VirtualEmissionId,",
+						"          PurchasedGasId = VirtualEmissionsData@PurchasedGasId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select1",
+						"joinLocation, CountryData join(LocationData@CountryId == CountryData@CountryId,",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> joinCountry",
 						"CreateEmissionId sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -1371,10 +1456,82 @@
 						"          EmissionId,",
 						"          EmissionDate = Date,",
 						"          EmissionsUnitsKwH = Amount,",
-						"          EmissionFactorId,",
 						"          FacilityId,",
 						"          VirtualEmissionFactorId = VirtualEmissionId,",
 						"          PurchasedGasId",
+						"     )) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Dataflow3')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "EGridData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "CreateKey"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          Zipcode as string,",
+						"          EgridRegion as string,",
+						"          {DimEgridRegions.eGrid Subregion_1} as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'EgridRegion.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> EGridData",
+						"EGridData keyGenerate(output(EgridId as long),",
+						"     startAt: 1L,",
+						"     stepValue: 1L) ~> CreateKey",
+						"CreateKey sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'EgridRegions',",
+						"     recreate:true,",
+						"     input(",
+						"          EgridRegionId as integer,",
+						"          EgridRegionName as string,",
+						"          EGridRegionLongName as string,",
+						"          EgridZipcode as string",
+						"     ),",
+						"     mapColumn(",
+						"          EgridRegionId = EgridId,",
+						"          EgridRegionName = EgridRegion,",
+						"          EGridRegionLongName = {DimEgridRegions.eGrid Subregion_1},",
+						"          EgridZipcode = Zipcode",
 						"     )) ~> sink1"
 					]
 				}
@@ -1858,13 +2015,6 @@
 								"type": "LinkedServiceReference"
 							},
 							"name": "FacilityData"
-						},
-						{
-							"linkedService": {
-								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-								"type": "LinkedServiceReference"
-							},
-							"name": "EgridData"
 						}
 					],
 					"sinks": [
@@ -1876,9 +2026,6 @@
 						},
 						{
 							"name": "MapOrganization"
-						},
-						{
-							"name": "MapEgridRegion"
 						}
 					],
 					"transformations": [
@@ -1899,9 +2046,6 @@
 						},
 						{
 							"name": "CreateOrganizationKey"
-						},
-						{
-							"name": "CreateEgridKey"
 						}
 					],
 					"scriptLines": [
@@ -1932,22 +2076,6 @@
 						"     escapeChar: '\\\\',",
 						"     quoteChar: '\\\"',",
 						"     columnNamesAsHeader: true) ~> FacilityData",
-						"source(output(",
-						"          Zipcode as string,",
-						"          EgridRegion as string,",
-						"          {DimEgridRegions.eGrid Subregion_1} as string",
-						"     ),",
-						"     allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     ignoreNoFilesFound: false,",
-						"     format: 'delimited',",
-						"     fileSystem: 'fsgdmsdevweeu01',",
-						"     folderPath: 'ESG_MAPDATA',",
-						"     fileName: 'EgridRegion.csv',",
-						"     columnDelimiter: ';',",
-						"     escapeChar: '\\\\',",
-						"     quoteChar: '\\\"',",
-						"     columnNamesAsHeader: true) ~> EgridData",
 						"FacilityData aggregate(groupBy({Facility Type}),",
 						"     each(match(name!=\"Facility Type\"), $$ = first($$))) ~> DistinctFacilityType",
 						"DistinctFacilityType keyGenerate(output(FacilityTypeId as long),",
@@ -1963,9 +2091,6 @@
 						"DistinctOrganization keyGenerate(output(OrganizationId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> CreateOrganizationKey",
-						"EgridData keyGenerate(output(EgridId as long),",
-						"     startAt: 1L,",
-						"     stepValue: 1L) ~> CreateEgridKey",
 						"CreateFacilityKey sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -1973,6 +2098,7 @@
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
 						"     tableName: 'FacilityType',",
+						"     recreate:true,",
 						"     input(",
 						"          FacilityTypeId as integer,",
 						"          FaciityTypeName as string",
@@ -1988,6 +2114,7 @@
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
 						"     tableName: 'Country',",
+						"     recreate:true,",
 						"     input(",
 						"          CountryId as integer,",
 						"          IsoCountryName as string",
@@ -2003,6 +2130,7 @@
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
 						"     tableName: 'PartyOrganization',",
+						"     recreate:true,",
 						"     input(",
 						"          OrganizationId as integer,",
 						"          OrganizationName as string",
@@ -2010,26 +2138,7 @@
 						"     mapColumn(",
 						"          OrganizationId,",
 						"          OrganizationName = Company",
-						"     )) ~> MapOrganization",
-						"CreateEgridKey sink(allowSchemaDrift: true,",
-						"     validateSchema: false,",
-						"     store: 'synapse',",
-						"     databaseType: 'spark',",
-						"     format: 'table',",
-						"     database: 'ESGNORMALIZEDMODEL',",
-						"     tableName: 'EgridRegions',",
-						"     input(",
-						"          EgridRegionId as integer,",
-						"          EgridRegionName as string,",
-						"          EGridRegionLongName as string,",
-						"          EgridZipcode as string",
-						"     ),",
-						"     mapColumn(",
-						"          EgridRegionId = EgridId,",
-						"          EgridRegionName = EgridRegion,",
-						"          EGridRegionLongName = {DimEgridRegions.eGrid Subregion_1},",
-						"          EgridZipcode = Zipcode",
-						"     )) ~> MapEgridRegion"
+						"     )) ~> MapOrganization"
 					]
 				}
 			},
