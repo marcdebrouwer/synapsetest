@@ -41,6 +41,9 @@
 				},
 				{
 					"name": "derivedColumn2"
+				},
+				{
+					"name": "lookup1"
 				}
 			],
 			"scriptLines": [
@@ -128,13 +131,18 @@
 				"     asc(BannerId, true),",
 				"     broadcast: 'auto')~> lookupBanner",
 				"FacilityData derive(FacilityNamee = trim({Facility Name})) ~> derivedColumn2",
-				"lookupBanner sink(allowSchemaDrift: true,",
+				"lookupBanner, LocationData lookup({Postal Code} == LocationAddressLine1,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'Facility',",
+				"     recreate:true,",
 				"     input(",
 				"          FacilityId as integer,",
 				"          FacilityName as string,",

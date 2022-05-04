@@ -15,12 +15,89 @@
 			"Columns": [
 				{
 					"Name": "VirtualEmissionFactorId",
+					"Description": "The unique identifier of a virtual emission factor ",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionFactorName",
+					"Description": "The name of a virtual emission",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionFactorMarketBased",
+					"Description": "The market based emission factor allocated to the virtual emission",
+					"OriginDataTypeName": {
+						"TypeName": "double",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "double"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionFactorLocationBased",
+					"Description": "The location based emission factor allocated to the virtual emission",
+					"OriginDataTypeName": {
+						"TypeName": "double",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "double"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionDate",
+					"Description": "The data allocated to the emission factor",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionBanner",
+					"Description": "The banner associated with a virtual emission",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "VirtualEmissionScope",
+					"Description": "The scope associated with a virtual emission factor",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
 						}
 					}
 				}
