@@ -1,0 +1,23 @@
+{
+	"name": "relationship-fxauhyxvkj",
+	"properties": {
+		"Name": "relationship-fxauhyxvkj",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "ESGNORMALIZEDMODEL"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PurchasedGas",
+		"ToTableName": "Scope2Emissions",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PurchasedGasId",
+				"ToColumnName": "PurchasedGasId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

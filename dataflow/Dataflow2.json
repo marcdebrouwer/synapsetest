@@ -87,7 +87,7 @@
 					"name": "derivedColumn3"
 				},
 				{
-					"name": "LookupPurchasedGas"
+					"name": "LookupVirtualEmission"
 				},
 				{
 					"name": "join1"
@@ -367,7 +367,7 @@
 				"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> LookupPurchasedGas",
+				"     broadcast: 'auto')~> LookupVirtualEmission",
 				"FacilityData, LocationData join(FacilityData@LocationId == LocationData@LocationId,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join1",
@@ -397,7 +397,7 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> LookupGasId",
-				"LookupPurchasedGas, LookUpEgridId lookup(CreateDate@Date == EmissionStartDate",
+				"LookupVirtualEmission, LookUpEgridId lookup(VirtualEmissionsData@Date == EmissionStartDate",
 				"     && VirtualEmissionsData@PurchasedGasId == EmissionFactorData@PurchasedGasId",
 				"     && SelectFacilityData@EgridRegionId == EgridRegionData@EgridRegionId,",
 				"     multiple: false,",
