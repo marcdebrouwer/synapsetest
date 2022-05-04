@@ -1623,6 +1623,7 @@
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
 						"     tableName: 'EmissionFactors',",
+						"     recreate:true,",
 						"     input(",
 						"          EmissionFactorId as integer,",
 						"          EmissionFactorName as string,",
@@ -1634,7 +1635,8 @@
 						"          EmissionStartDate as date,",
 						"          EmissionEndDate as date,",
 						"          EgridRegion as string,",
-						"          PurchasedGasId as integer",
+						"          PurchasedGasId as integer,",
+						"          EmissionCountry as string",
 						"     ),",
 						"     mapColumn(",
 						"          EmissionFactorId,",
@@ -1647,7 +1649,8 @@
 						"          EmissionStartDate = StartDate,",
 						"          EmissionEndDate = EndDate,",
 						"          EgridRegion = Region,",
-						"          PurchasedGasId",
+						"          PurchasedGasId,",
+						"          EmissionCountry = Country",
 						"     )) ~> sink1"
 					]
 				}
