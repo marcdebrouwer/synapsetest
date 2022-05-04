@@ -965,19 +965,19 @@
 							"name": "AppendData"
 						},
 						{
-							"name": "derivedColumn1"
+							"name": "CreateDate"
 						},
 						{
 							"name": "LookUpFacility"
 						},
 						{
-							"name": "derivedColumn2"
+							"name": "CreateJoinColumn"
 						},
 						{
 							"name": "derivedColumn3"
 						},
 						{
-							"name": "LookupPurchasedGas"
+							"name": "LookupVirtualEmission"
 						},
 						{
 							"name": "join1"
@@ -995,10 +995,31 @@
 							"name": "LookUpEgridId"
 						},
 						{
-							"name": "surrogateKey1"
+							"name": "CreateEmissionId"
 						},
 						{
-							"name": "select1"
+							"name": "selectRequiredColumns"
+						},
+						{
+							"name": "ChangeColumnName"
+						},
+						{
+							"name": "ChangeColumnName1"
+						},
+						{
+							"name": "split1"
+						},
+						{
+							"name": "derivedColumn4"
+						},
+						{
+							"name": "CalculateKWH"
+						},
+						{
+							"name": "CalculateKWH2"
+						},
+						{
+							"name": "union1"
 						}
 					],
 					"scriptLines": [
@@ -1201,42 +1222,42 @@
 						"          {Selling m2}),",
 						"     lateral: true,",
 						"     ignoreNullPivots: true) ~> unpivot2",
-						"AholdEnergy derive(Electric = replace({Electric}, \",\", \".\"),",
+						"ChangeColumnName derive(Electricity = replace(Electricity, \",\", \".\"),",
 						"          {Natural Gas} = replace({Natural Gas}, \",\", \".\"),",
-						"          Propane = replace({Propane}, \",\", \".\"),",
-						"          {Fuel Oil} = replace({Fuel Oil}, \",\", \".\"),",
+						"          Propane = replace(Propane, \",\", \".\"),",
+						"          {Heat import [kg CO2/kWh]} = replace({Heat import [kg CO2/kWh]}, \",\", \".\"),",
 						"          {Solar Used On-Site} = replace({Solar Used On-Site}, \",\", \".\"),",
-						"          EFEC = replace({EFEC}, \",\", \".\")) ~> CommaToPoint",
-						"CommaToPoint derive(Electric = toDouble({Electric}),",
+						"          EFEC = replace(EFEC, \",\", \".\")) ~> CommaToPoint",
+						"CommaToPoint derive(Electricity = toDouble(Electricity),",
 						"          {Natural Gas} = toDouble({Natural Gas}),",
-						"          Propane = toDouble({Propane}),",
-						"          {Fuel Oil} = toDouble({Fuel Oil}),",
+						"          Propane = toDouble(Propane),",
+						"          {Heat import [kg CO2/kWh]} = toDouble({Heat import [kg CO2/kWh]}),",
 						"          {Solar Used On-Site} = toDouble({Solar Used On-Site}),",
-						"          EFEC = toDouble({EFEC})) ~> MakeDouble",
-						"DelhaizeEnergy derive(Electric = replace(Electric, \",\", \".\"),",
+						"          EFEC = toDouble(EFEC)) ~> MakeDouble",
+						"ChangeColumnName1 derive(Electricity = replace(Electricity, \",\", \".\"),",
 						"          {Natural Gas} = replace({Natural Gas}, \",\", \".\"),",
-						"          Propane = replace({Propane}, \",\", \".\"),",
-						"          {Fuel Oil} = replace({Fuel Oil}, \",\", \".\"),",
-						"          EFEC = replace({EFEC}, \",\", \".\")) ~> CommaToPoint2",
-						"CommaToPoint2 derive(Electric = toDouble(Electric),",
+						"          Propane = replace(Propane, \",\", \".\"),",
+						"          {Heat import [kg CO2/kWh]} = replace({Heat import [kg CO2/kWh]}, \",\", \".\"),",
+						"          EFEC = replace(EFEC, \",\", \".\")) ~> CommaToPoint2",
+						"CommaToPoint2 derive(Electricity = toDouble(Electricity),",
 						"          {Natural Gas} = toDouble({Natural Gas}),",
-						"          Propane = toDouble({Propane}),",
-						"          {Fuel Oil} = toDouble({Fuel Oil}),",
-						"          EFEC = toDouble({EFEC})) ~> MakeDouble2",
+						"          Propane = toDouble(Propane),",
+						"          {Heat import [kg CO2/kWh]} = toDouble({Heat import [kg CO2/kWh]}),",
+						"          EFEC = toDouble(EFEC)) ~> MakeDouble2",
 						"unpivot2 union(byName: true)~> AppendData",
-						"AppendData derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> derivedColumn1",
-						"derivedColumn2, SelectFacilityData lookup(derivedColumn2@JoinColumn == SelectFacilityData@JoinColumn,",
+						"union1 derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
+						"CreateJoinColumn, SelectFacilityData lookup(CreateJoinColumn@JoinColumn == SelectFacilityData@JoinColumn,",
 						"     multiple: false,",
 						"     pickup: 'any',",
 						"     broadcast: 'auto')~> LookUpFacility",
-						"derivedColumn1 derive(JoinColumn = at(split({Facility Name}, ','),1)) ~> derivedColumn2",
+						"CreateDate derive(JoinColumn = at(split({Facility Name}, ','),1)) ~> CreateJoinColumn",
 						"join1 derive(JoinColumn = at(split({FacilityName}, ','),1)) ~> derivedColumn3",
-						"LookupGasId, VirtualEmissionsData lookup(derivedColumn1@Date == VirtualEmissionsData@Date",
+						"LookupGasId, VirtualEmissionsData lookup(CreateDate@Date == VirtualEmissionsData@Date",
 						"     && SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
 						"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
 						"     multiple: false,",
 						"     pickup: 'any',",
-						"     broadcast: 'auto')~> LookupPurchasedGas",
+						"     broadcast: 'auto')~> LookupVirtualEmission",
 						"FacilityData, LocationData join(FacilityData@LocationId == LocationData@LocationId,",
 						"     joinType:'left',",
 						"     broadcast: 'auto')~> join1",
@@ -1266,7 +1287,7 @@
 						"     multiple: false,",
 						"     pickup: 'any',",
 						"     broadcast: 'auto')~> LookupGasId",
-						"LookupPurchasedGas, LookUpEgridId lookup(derivedColumn1@Date == EmissionStartDate",
+						"LookupVirtualEmission, LookUpEgridId lookup(VirtualEmissionsData@Date == EmissionStartDate",
 						"     && VirtualEmissionsData@PurchasedGasId == EmissionFactorData@PurchasedGasId",
 						"     && SelectFacilityData@EgridRegionId == EgridRegionData@EgridRegionId,",
 						"     multiple: false,",
@@ -1276,19 +1297,60 @@
 						"     multiple: false,",
 						"     pickup: 'any',",
 						"     broadcast: 'auto')~> LookUpEgridId",
-						"select1 keyGenerate(output(EmissionId as long),",
+						"selectRequiredColumns keyGenerate(output(EmissionId as long),",
 						"     startAt: 1L,",
-						"     stepValue: 1L) ~> surrogateKey1",
+						"     stepValue: 1L) ~> CreateEmissionId",
 						"LookupEmissionFactor select(mapColumn(",
-						"          Amount,",
-						"          Date = derivedColumn1@Date,",
+						"          Amount = KWHAmount,",
+						"          Date = CreateDate@Date,",
 						"          FacilityId,",
 						"          VirtualEmissionId,",
-						"          EmissionFactorId",
+						"          EmissionFactorId,",
+						"          PurchasedGasId = PurchasedGasData@PurchasedGasId",
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> select1",
-						"surrogateKey1 sink(allowSchemaDrift: true,",
+						"     skipDuplicateMapOutputs: true) ~> selectRequiredColumns",
+						"AholdEnergy select(mapColumn(",
+						"          {Facility Name},",
+						"          {Location ID},",
+						"          {Selling m2},",
+						"          {Facility Type},",
+						"          Electricity = Electric,",
+						"          {Natural Gas},",
+						"          Propane,",
+						"          {Heat import [kg CO2/kWh]} = {Fuel Oil},",
+						"          {Solar Used On-Site},",
+						"          EFEC",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> ChangeColumnName",
+						"DelhaizeEnergy select(mapColumn(",
+						"          {Facility Name},",
+						"          {Location ID},",
+						"          {Selling m2},",
+						"          {Facility Type},",
+						"          Electricity = Electric,",
+						"          {Natural Gas},",
+						"          Propane,",
+						"          {Heat import [kg CO2/kWh]} = {Fuel Oil},",
+						"          EFEC",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> ChangeColumnName1",
+						"derivedColumn4 split(case(IsKwh == \"Yes\",true()),",
+						"     disjoint: false) ~> split1@(KWH, Therms)",
+						"AppendData derive(IsKwh = case(\r",
+						"    EnergyType == \"Electricity\", \"Yes\",\r",
+						"    EnergyType == \"EFEC\", \"Yes\", \r",
+						"    EnergyType == \"Solar Used On-Site\", \"Yes\",\r",
+						"    EnergyType == \"Propane\", \"No\",\r",
+						"    EnergyType == \"Natural Gas\", \"No\",\r",
+						"    EnergyType == \"Light fuel [kg CO2/kWh]\", \"No\"\r",
+						"    )) ~> derivedColumn4",
+						"split1@KWH derive(KWHAmount = Amount) ~> CalculateKWH",
+						"split1@Therms derive(KWHAmount = Amount *29.3297) ~> CalculateKWH2",
+						"CalculateKWH, CalculateKWH2 union(byName: true)~> union1",
+						"CreateEmissionId sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
 						"     databaseType: 'spark',",
@@ -1297,21 +1359,22 @@
 						"     tableName: 'Scope2Emissions',",
 						"     recreate:true,",
 						"     input(",
-						"          Emisison as integer,",
-						"          Date as date,",
-						"          TotalCo2EEmissionsUnits as integer,",
-						"          TotalCo2EEmissionsUomId as integer,",
+						"          EmissionId as integer,",
+						"          EmissionDate as date,",
+						"          EmissionsUnitsKwH as integer,",
 						"          EmissionFactorId as integer,",
 						"          FacilityId as integer,",
-						"          VirtualEmissionFactorId as integer",
+						"          VirtualEmissionFactorId as integer,",
+						"          PurchasedGasId as integer",
 						"     ),",
 						"     mapColumn(",
-						"          Emisison = EmissionId,",
-						"          Date,",
-						"          TotalCo2EEmissionsUnits = Amount,",
+						"          EmissionId,",
+						"          EmissionDate = Date,",
+						"          EmissionsUnitsKwH = Amount,",
 						"          EmissionFactorId,",
 						"          FacilityId,",
-						"          VirtualEmissionFactorId = VirtualEmissionId",
+						"          VirtualEmissionFactorId = VirtualEmissionId,",
+						"          PurchasedGasId",
 						"     )) ~> sink1"
 					]
 				}
@@ -20941,8 +21004,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21038,8 +21101,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21309,8 +21372,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/DirectEmissionsFromRefrigeration",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21425,8 +21488,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21636,8 +21699,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EmissionFactors",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21823,8 +21886,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21921,8 +21984,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22127,8 +22190,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22225,8 +22288,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22323,8 +22386,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PurchasedGas",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22485,8 +22548,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2Emissions",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22619,8 +22682,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/UnitOfMeasure",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22769,8 +22832,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22822,6 +22885,33 @@
 							},
 							"FromTableName": "PurchasedGas",
 							"ToTableName": "EmissionFactors",
+							"ColumnRelationshipInformations": [
+								{
+									"FromColumnName": "PurchasedGasId",
+									"ToColumnName": "PurchasedGasId"
+								}
+							],
+							"RelationshipType": 0,
+							"Properties": {}
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "relationship-fxauhyxvkj",
+							"EntityType": "RELATIONSHIP",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"FromTableName": "PurchasedGas",
+							"ToTableName": "Scope2Emissions",
 							"ColumnRelationshipInformations": [
 								{
 									"FromColumnName": "PurchasedGasId",
