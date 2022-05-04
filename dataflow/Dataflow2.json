@@ -102,7 +102,7 @@
 					"name": "LookupGasId"
 				},
 				{
-					"name": "LookupEGrid"
+					"name": "LookupEmissionData"
 				},
 				{
 					"name": "LookUpEgridId"
@@ -423,10 +423,11 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> LookupGasId",
-				"splitForEmissionFactorLink@Electricity, LookUpEgridId lookup(splitForEmissionFactorLink@Electricity@EgridRegionId == EgridRegionData@EgridRegionId,",
+				"splitForEmissionFactorLink@Electricity, LookUpEgridId lookup(Country == EgridRegionData@EgridRegionId",
+				"     && ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> LookupEGrid",
+				"     broadcast: 'auto')~> LookupEmissionData",
 				"EmissionFactorData, EgridRegionData lookup(EgridRegion == EGridRegionLongName,",
 				"     multiple: false,",
 				"     pickup: 'any',",
@@ -511,7 +512,7 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup1",
-				"LookupEGrid union(byName: true)~> union1",
+				"LookupEmissionData union(byName: true)~> union1",
 				"CreateEmissionId sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
