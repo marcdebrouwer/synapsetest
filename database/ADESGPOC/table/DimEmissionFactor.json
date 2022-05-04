@@ -18,8 +18,8 @@
 					"Description": "The unique identifier of a emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -34,8 +34,8 @@
 					"Description": "The name of an emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 128,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -51,8 +51,8 @@
 					"Description": "The emission factor location based",
 					"OriginDataTypeName": {
 						"TypeName": "double",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
@@ -67,29 +67,16 @@
 					"Description": "The emission factor market based",
 					"OriginDataTypeName": {
 						"TypeName": "double",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
 					}
 				},
 				{
-					"Name": "EmissionPeriodStart",
+					"Name": "EmissionDate",
 					"Description": "The start date of an emission factor",
-					"OriginDataTypeName": {
-						"TypeName": "date",
-						"IsNullable": true,
-						"IsComplexType": false,
-						"Properties": {
-							"DateFormat": "dd-MM-yyyy",
-							"HIVE_TYPE_STRING": "date"
-						}
-					}
-				},
-				{
-					"Name": "EmissionPeriodEnd",
-					"Description": "The end date of an emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsNullable": true,
@@ -105,8 +92,8 @@
 					"Description": "The countryof the emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -118,8 +105,8 @@
 					"Description": "The scope of the emission",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -131,8 +118,8 @@
 					"Description": "The unit of measure of an emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -144,8 +131,8 @@
 					"Description": "The egrid region attached to an emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -187,12 +174,11 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimEmissionFactor\",\"description\":\"Virtual Emission factors allocated to an emission\",\"baseEntityReference\":{\"name\":\"GreenhouseGasType\",\"path\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\"},\"primaryKey\":[\"EmissionFactorId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a emission factor\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of an emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeDescription\"},\"dataType\":\"double\",\"description\":\"The emission factor location based\",\"isNullable\":true,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The emission factor market based\",\"isNullable\":true,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The start date of an emission factor\",\"isNullable\":true,\"name\":\"EmissionPeriodStart\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The end date of an emission factor\",\"isNullable\":true,\"name\":\"EmissionPeriodEnd\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The countryof the emission factor\",\"isNullable\":true,\"name\":\"EmissionCountry\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The scope of the emission\",\"isNullable\":true,\"name\":\"EmissionFactorScope\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unit of measure of an emission factor\",\"isNullable\":false,\"name\":\"EmissionFactorUom\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The egrid region attached to an emission factor\",\"isNullable\":false,\"name\":\"EmissionFactorEgridRegion\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimEmissionFactor\",\"description\":\"Virtual Emission factors allocated to an emission\",\"baseEntityReference\":{\"name\":\"GreenhouseGasType\",\"path\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\"},\"primaryKey\":[\"EmissionFactorId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a emission factor\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of an emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeDescription\"},\"dataType\":\"double\",\"description\":\"The emission factor location based\",\"isNullable\":true,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The emission factor market based\",\"isNullable\":true,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The start date of an emission factor\",\"isNullable\":true,\"name\":\"EmissionDate\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The countryof the emission factor\",\"isNullable\":true,\"name\":\"EmissionCountry\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The scope of the emission\",\"isNullable\":true,\"name\":\"EmissionFactorScope\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unit of measure of an emission factor\",\"isNullable\":false,\"name\":\"EmissionFactorUom\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The egrid region attached to an emission factor\",\"isNullable\":false,\"name\":\"EmissionFactorEgridRegion\"}]}}}",
 			"Description": "Virtual Emission factors allocated to an emission",
 			"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#001475\"}",
 			"PrimaryKeys": "EmissionFactorId",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

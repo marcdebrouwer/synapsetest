@@ -133,6 +133,15 @@
 				},
 				{
 					"name": "surrogateKey1"
+				},
+				{
+					"name": "split1"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select3"
 				}
 			],
 			"scriptLines": [
@@ -450,7 +459,7 @@
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinEgrid",
 				"AppendKWHs filter(Amount != 0.0) ~> FilterOutZeroes",
-				"LookupGasId select(mapColumn(",
+				"select3 select(mapColumn(",
 				"          {Facility Name},",
 				"          EnergyType,",
 				"          Amount,",
@@ -462,7 +471,7 @@
 				"          LocationId,",
 				"          OriginalBannerId = BannerId,",
 				"          Country,",
-				"          OriginalPurchasedGasId = PurchasedGasId,",
+				"          OriginalPurchasedGasId = split1@Elec@PurchasedGasId,",
 				"          OriginalPurchasedGasName = PurchasedGasName,",
 				"          EgridRegionId,",
 				"          EGridRegionLongName",
@@ -472,6 +481,28 @@
 				"select2 keyGenerate(output(EmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
+				"LookupGasId split(case(EnergyType == \"Electricity\", true()),",
+				"     disjoint: false) ~> split1@(Elec, NoElec)",
+				"split1@Elec, EmissionFactorData join(Country == EmissionCountry",
+				"     && split1@Elec@PurchasedGasId == EmissionFactorData@PurchasedGasId",
+				"     && Date == EmissionStartDate,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          {Facility Name},",
+				"          EnergyType,",
+				"          Amount,",
+				"          IsKwh,",
+				"          KWHAmount,",
+				"          Date,",
+				"          JoinColumn = split1@Elec@JoinColumn,",
+				"          FacilityId,",
+				"          PurchasedGasId = split1@Elec@PurchasedGasId,",
+				"          PurchasedGasName,",
+				"          EmissionFactorId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select3",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",

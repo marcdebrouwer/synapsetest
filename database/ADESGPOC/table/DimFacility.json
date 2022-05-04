@@ -47,22 +47,6 @@
 					}
 				},
 				{
-					"Name": "LocationId",
-					"Description": "The unique identifier of a Location.",
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Store.cdm.json/Store",
-						"Name": "LocationId"
-					}
-				},
-				{
 					"Name": "GrossFloorArea",
 					"Description": "The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.",
 					"OriginDataTypeName": {
@@ -112,12 +96,12 @@
 					}
 				},
 				{
-					"Name": "OpCo",
+					"Name": "FacilityOpco",
 					"Description": "The unique identifier of a Brand.",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": true,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -134,7 +118,7 @@
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -147,7 +131,7 @@
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -155,12 +139,12 @@
 					}
 				},
 				{
-					"Name": "FacilityRegion",
+					"Name": "FacilityState",
 					"Description": "The region of a facility",
 					"OriginDataTypeName": {
 						"TypeName": "string",
+						"IsNullable": true,
 						"IsComplexType": false,
-						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -173,7 +157,7 @@
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -186,7 +170,20 @@
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "FacilityOrganization",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": true,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -222,13 +219,13 @@
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
 				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"LocationId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"GrossFloorArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"FacilityType\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"OpCo\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"}}}"
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"GrossFloorArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"FacilityType\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"FacilityOpco\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"}}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimFacility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"dataType\":\"double\",\"description\":\"The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.\",\"isNullable\":true,\"name\":\"GrossFloorArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"double\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"FacilityType\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Brand.\",\"isNullable\":true,\"name\":\"OpCo\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The adress of a facility\",\"isNullable\":false,\"name\":\"FacilityAdressLine\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The country of a facility\",\"isNullable\":false,\"name\":\"FacilityCountry\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The region of a facility\",\"isNullable\":false,\"name\":\"FacilityRegion\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The zipcode of a facility\",\"isNullable\":false,\"name\":\"FacilityZipcode\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The e-grid region of a facility\",\"isNullable\":false,\"name\":\"FacilityEgridRegion\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"DimFacility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"dataType\":\"double\",\"description\":\"The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.\",\"isNullable\":true,\"name\":\"GrossFloorArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"double\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"FacilityType\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"BrandId\"},\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unique identifier of a Brand.\",\"isNullable\":true,\"name\":\"FacilityOpco\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The adress of a facility\",\"isNullable\":true,\"name\":\"FacilityAdressLine\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The country of a facility\",\"isNullable\":true,\"name\":\"FacilityCountry\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The region of a facility\",\"isNullable\":true,\"name\":\"FacilityState\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The zipcode of a facility\",\"isNullable\":true,\"name\":\"FacilityZipcode\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The e-grid region of a facility\",\"isNullable\":true,\"name\":\"FacilityEgridRegion\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"FacilityOrganization\"}]}}}",
 			"Description": "A retail/channel location where products, goods and services are sold to consumers.",
 			"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
 			"PrimaryKeys": "FacilityId",

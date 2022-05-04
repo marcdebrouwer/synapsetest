@@ -30,8 +30,8 @@
 					"Description": "The name of a virtual emission",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -43,8 +43,8 @@
 					"Description": "The market based emission factor allocated to the virtual emission",
 					"OriginDataTypeName": {
 						"TypeName": "double",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
@@ -55,8 +55,8 @@
 					"Description": "The location based emission factor allocated to the virtual emission",
 					"OriginDataTypeName": {
 						"TypeName": "double",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "double"
 						}
@@ -66,12 +66,12 @@
 					"Name": "VirtualEmissionDate",
 					"Description": "The data allocated to the emission factor",
 					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
+						"TypeName": "date",
 						"IsComplexType": false,
-						"Length": 256,
+						"IsNullable": false,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"HIVE_TYPE_STRING": "date",
+							"DateFormat": "dd-MM-yyyy"
 						}
 					}
 				},
@@ -80,8 +80,8 @@
 					"Description": "The banner associated with a virtual emission",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -93,8 +93,8 @@
 					"Description": "The scope associated with a virtual emission factor",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
