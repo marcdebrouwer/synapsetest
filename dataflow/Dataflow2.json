@@ -36,6 +36,15 @@
 				},
 				{
 					"name": "BannerData"
+				},
+				{
+					"name": "LocationData"
+				},
+				{
+					"name": "PurchasedGasData"
+				},
+				{
+					"name": "EgridRegionData"
 				}
 			],
 			"sinks": [
@@ -67,6 +76,36 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "LookUpFacility"
+				},
+				{
+					"name": "derivedColumn2"
+				},
+				{
+					"name": "derivedColumn3"
+				},
+				{
+					"name": "LookupPurchasedGas"
+				},
+				{
+					"name": "join1"
+				},
+				{
+					"name": "SelectFacilityData"
+				},
+				{
+					"name": "LookupGasId"
+				},
+				{
+					"name": "LookupEmissionFactor"
+				},
+				{
+					"name": "LookUpEgridId"
+				},
+				{
+					"name": "surrogateKey1"
 				}
 			],
 			"scriptLines": [
@@ -167,7 +206,7 @@
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: 'GreenhouseGasType') ~> EmissionFactorData",
+				"     tableName: 'EmissionFactors') ~> EmissionFactorData",
 				"source(output(",
 				"          Company as string,",
 				"          Region as string,",
@@ -207,6 +246,48 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'Banner') ~> BannerData",
+				"source(output(",
+				"          LocationId as integer,",
+				"          LocationName as string,",
+				"          LocationAddressLine1 as string,",
+				"          LocationCity as string,",
+				"          LocationState as string,",
+				"          LocationZipCode as string,",
+				"          CountryId as integer,",
+				"          EgridRegionId as integer,",
+				"          LocationNo as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Location') ~> LocationData",
+				"source(output(",
+				"          PurchasedGasId as integer,",
+				"          PurchasedGasName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'PurchasedGas') ~> PurchasedGasData",
+				"source(output(",
+				"          EgridRegionId as integer,",
+				"          EgridRegionName as string,",
+				"          EGridRegionLongName as string,",
+				"          EgridZipcode as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'EgridRegions') ~> EgridRegionData",
 				"MakeDouble unpivot(output(",
 				"          EnergyType as string,",
 				"          Amount as double",
@@ -251,13 +332,85 @@
 				"          EFEC = toDouble({EFEC})) ~> MakeDouble2",
 				"unpivot2 union(byName: true)~> AppendData",
 				"AppendData derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"derivedColumn2, SelectFacilityData lookup(derivedColumn2@JoinColumn == SelectFacilityData@JoinColumn,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> LookUpFacility",
+				"derivedColumn1 derive(JoinColumn = at(split({Facility Name}, ','),1)) ~> derivedColumn2",
+				"join1 derive(JoinColumn = at(split({FacilityName}, ','),1)) ~> derivedColumn3",
+				"LookupGasId, VirtualEmissionsData lookup(derivedColumn1@Date == VirtualEmissionsData@Date",
+				"     && SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
+				"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> LookupPurchasedGas",
+				"FacilityData, LocationData join(FacilityData@LocationId == LocationData@LocationId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> join1",
+				"derivedColumn3 select(mapColumn(",
+				"          FacilityId,",
+				"          FacilityName,",
+				"          LocationId = FacilityData@LocationId,",
+				"          GrossFloorArea,",
+				"          AvailableSellingArea,",
+				"          FacilityTypeId,",
+				"          BannerId,",
+				"          FacilitySub,",
+				"          LocationId = LocationData@LocationId,",
+				"          LocationName,",
+				"          LocationAddressLine1,",
+				"          LocationCity,",
+				"          LocationState,",
+				"          LocationZipCode,",
+				"          CountryId,",
+				"          EgridRegionId,",
+				"          LocationNo,",
+				"          JoinColumn",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SelectFacilityData",
+				"LookUpFacility, PurchasedGasData lookup(EnergyType == PurchasedGasName,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> LookupGasId",
+				"LookupPurchasedGas, LookUpEgridId lookup(derivedColumn1@Date == EmissionStartDate",
+				"     && VirtualEmissionsData@PurchasedGasId == EmissionFactorData@PurchasedGasId",
+				"     && SelectFacilityData@EgridRegionId == EgridRegionData@EgridRegionId,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> LookupEmissionFactor",
+				"EmissionFactorData, EgridRegionData lookup(EgridRegion == EGridRegionLongName,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> LookUpEgridId",
+				"LookupEmissionFactor keyGenerate(output(EmissionId as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: 'Scope2Emissions') ~> sink1"
+				"     tableName: 'Scope2Emissions',",
+				"     recreate:true,",
+				"     input(",
+				"          Emisison as integer,",
+				"          Date as date,",
+				"          TotalCo2EEmissionsUnits as integer,",
+				"          TotalCo2EEmissionsUomId as integer,",
+				"          EmissionFactorId as integer,",
+				"          FacilityId as integer,",
+				"          VirtualEmissionFactorId as integer",
+				"     ),",
+				"     mapColumn(",
+				"          Emisison = EmissionId,",
+				"          Date = derivedColumn1@Date,",
+				"          TotalCo2EEmissionsUnits = Amount,",
+				"          EmissionFactorId,",
+				"          FacilityId,",
+				"          VirtualEmissionFactorId = VirtualEmissionId",
+				"     )) ~> sink1"
 			]
 		}
 	}

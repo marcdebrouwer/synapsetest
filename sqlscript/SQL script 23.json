@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 23",
+	"properties": {
+		"content": {
+			"query": "SELECT [FacilityId]\n,[FacilityName]\n,[GrossFloorArea]\n,[AvailableSellingArea]\n,[FacilityTypeId]\n,[BannerId]\n,[FacilitySub]\n,[LocationId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[Facility]\n WHERE LocationId IS NULL",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "ESGNORMALIZEDMODEL",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
