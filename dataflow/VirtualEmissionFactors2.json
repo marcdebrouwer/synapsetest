@@ -103,6 +103,7 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'VirtualEmissionFactor',",
+				"     recreate:true,",
 				"     input(",
 				"          VirtualEmissionId as integer,",
 				"          PurchasedGasId as integer,",

@@ -129,9 +129,6 @@
 					"name": "FilterOutZeroes"
 				},
 				{
-					"name": "select2"
-				},
-				{
 					"name": "surrogateKey1"
 				},
 				{
@@ -142,6 +139,21 @@
 				},
 				{
 					"name": "select3"
+				},
+				{
+					"name": "select4"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "join3"
+				},
+				{
+					"name": "select5"
+				},
+				{
+					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -459,29 +471,10 @@
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinEgrid",
 				"AppendKWHs filter(Amount != 0.0) ~> FilterOutZeroes",
-				"select3 select(mapColumn(",
-				"          {Facility Name},",
-				"          EnergyType,",
-				"          Amount,",
-				"          IsKwh,",
-				"          KWHAmount,",
-				"          OriginalDate = Date,",
-				"          FacilityId,",
-				"          FacilityName,",
-				"          LocationId,",
-				"          OriginalBannerId = BannerId,",
-				"          Country,",
-				"          OriginalPurchasedGasId = split1@Elec@PurchasedGasId,",
-				"          OriginalPurchasedGasName = PurchasedGasName,",
-				"          EgridRegionId,",
-				"          EGridRegionLongName",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select2",
-				"select2 keyGenerate(output(EmissionId as long),",
+				"union1 keyGenerate(output(EmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
-				"LookupGasId split(case(EnergyType == \"Electricity\", true()),",
+				"select4 split(case(EnergyType == \"Electricity\", true()),",
 				"     disjoint: false) ~> split1@(Elec, NoElec)",
 				"split1@Elec, EmissionFactorData join(Country == EmissionCountry",
 				"     && split1@Elec@PurchasedGasId == EmissionFactorData@PurchasedGasId",
@@ -495,14 +488,57 @@
 				"          IsKwh,",
 				"          KWHAmount,",
 				"          Date,",
-				"          JoinColumn = split1@Elec@JoinColumn,",
 				"          FacilityId,",
+				"          VirtualEmissionId,",
 				"          PurchasedGasId = split1@Elec@PurchasedGasId,",
 				"          PurchasedGasName,",
 				"          EmissionFactorId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
+				"join2 select(mapColumn(",
+				"          {Facility Name},",
+				"          EnergyType,",
+				"          Amount,",
+				"          IsKwh,",
+				"          KWHAmount,",
+				"          Date = CreateDate@Date,",
+				"          FacilityId,",
+				"          EgridRegionId,",
+				"          EGridRegionLongName,",
+				"          PurchasedGasId = PurchasedGasData@PurchasedGasId,",
+				"          PurchasedGasName,",
+				"          Country,",
+				"          VirtualEmissionId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select4",
+				"LookupGasId, VirtualEmissionsData join(SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
+				"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId",
+				"     && CreateDate@Date == VirtualEmissionsData@Date,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> join2",
+				"split1@NoElec, EmissionFactorData join(Date == EmissionStartDate",
+				"     && split1@NoElec@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> join3",
+				"join3 select(mapColumn(",
+				"          {Facility Name},",
+				"          EnergyType,",
+				"          Amount,",
+				"          IsKwh,",
+				"          KWHAmount,",
+				"          Date,",
+				"          FacilityId,",
+				"          PurchasedGasName,",
+				"          PurchasedGasId = split1@NoElec@PurchasedGasId,",
+				"          VirtualEmissionId,",
+				"          EmissionFactorId,",
+				"          PurchasedGasId = EmissionFactorData@PurchasedGasId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select5",
+				"select3, select5 union(byName: true)~> union1",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
@@ -523,11 +559,13 @@
 				"     ),",
 				"     mapColumn(",
 				"          EmissionId,",
-				"          EmissionDate = OriginalDate,",
-				"          EmissionsUnitsKwH = Amount,",
+				"          EmissionDate = Date,",
+				"          EmissionsUnitsKwH = KWHAmount,",
 				"          FacilityId,",
-				"          PurchasedGasId = OriginalPurchasedGasId,",
-				"          CountryText = EnergyType",
+				"          PurchasedGasId,",
+				"          CountryText = PurchasedGasName,",
+				"          VirtualEmissionFactorId = VirtualEmissionId,",
+				"          EmissionFactorId",
 				"     )) ~> sink1"
 			]
 		}
