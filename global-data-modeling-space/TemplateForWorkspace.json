@@ -176,6 +176,9 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
+				"folder": {
+					"name": "2NF TABLES"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -606,6 +609,58 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/Scope2Emissions2')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "EmissionsFLow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow2",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"AholdEnergy": {},
+									"DelhaizeEnergy": {},
+									"sink1": {},
+									"sink2": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "1NF TABLES"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/Dataflow2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/VirtualEmissionFactors')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -927,6 +982,105 @@
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
 						"     tableName: 'Scope2Emissions') ~> sink1"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Dataflow2')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "AholdEnergy"
+						},
+						{
+							"linkedService": {
+								"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+								"type": "LinkedServiceReference"
+							},
+							"name": "DelhaizeEnergy"
+						}
+					],
+					"sinks": [
+						{
+							"name": "sink1"
+						},
+						{
+							"name": "sink2"
+						}
+					],
+					"transformations": [],
+					"scriptLines": [
+						"source(output(",
+						"          {Facility Name} as string,",
+						"          {Location ID} as short,",
+						"          {Selling m2} as string,",
+						"          {Facility Type} as string,",
+						"          Electric as string,",
+						"          {Natural Gas} as string,",
+						"          Propane as string,",
+						"          {Fuel Oil} as string,",
+						"          {Solar Used On-Site} as string,",
+						"          EFEC as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'AholdEnergy.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> AholdEnergy",
+						"source(output(",
+						"          {Facility Name} as string,",
+						"          {Location ID} as short,",
+						"          {Selling m2} as string,",
+						"          {Facility Type} as string,",
+						"          Electric as string,",
+						"          {Natural Gas} as string,",
+						"          Propane as string,",
+						"          {Fuel Oil} as string,",
+						"          EFEC as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     ignoreNoFilesFound: false,",
+						"     format: 'delimited',",
+						"     fileSystem: 'fsgdmsdevweeu01',",
+						"     folderPath: 'ESG_MAPDATA',",
+						"     fileName: 'DelhaizeEnergy.csv',",
+						"     columnDelimiter: ';',",
+						"     escapeChar: '\\\\',",
+						"     quoteChar: '\\\"',",
+						"     columnNamesAsHeader: true) ~> DelhaizeEnergy",
+						"AholdEnergy sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Scope2Emissions') ~> sink1",
+						"DelhaizeEnergy sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Scope2Emissions') ~> sink2"
 					]
 				}
 			},
@@ -2169,18 +2323,6 @@
 							"name": "derivedColumn4"
 						},
 						{
-							"name": "toInteger1"
-						},
-						{
-							"name": "toInteger2"
-						},
-						{
-							"name": "toInteger3"
-						},
-						{
-							"name": "toInteger4"
-						},
-						{
 							"name": "joinSSGF"
 						},
 						{
@@ -2315,7 +2457,7 @@
 						"          AvailableSellingArea as integer,",
 						"          FacilityTypeId as integer,",
 						"          BannerId as integer,",
-						"          FacilityNumber as integer",
+						"          FacilitySub as string",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
@@ -2332,7 +2474,7 @@
 						"          AvailableSellingArea as integer,",
 						"          FacilityTypeId as integer,",
 						"          BannerId as integer,",
-						"          FacilityNumber as integer",
+						"          FacilitySub as string",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
@@ -2408,10 +2550,6 @@
 						"derivedColumn1 derive(Location = replace(Location,\"GF\",'')) ~> derivedColumn2",
 						"split2@SSandGiant2 derive(StoreId = replace(StoreId,\"SS\",'')) ~> derivedColumn3",
 						"derivedColumn3 derive(StoreId = replace(StoreId,\"GF\",'')) ~> derivedColumn4",
-						"derivedColumn2 derive(Location = toInteger(Location)) ~> toInteger1",
-						"split@Rest derive(Location = toInteger({Location})) ~> toInteger2",
-						"derivedColumn4 derive(StoreId = toInteger(StoreId)) ~> toInteger3",
-						"split2@Therest2 derive(StoreId = toInteger(StoreId)) ~> toInteger4",
 						"FacilitySSGF, BannerData join(FacilitySSGF@BannerId == BannerData@BannerId,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinSSGF",
@@ -2420,16 +2558,16 @@
 						"     broadcast: 'auto')~> joinRest",
 						"joinSSGF filter(BannerName == \"Stop and Shop\"|| BannerName == \"Giant\") ~> filterSSGF",
 						"joinRest filter(BannerName != \"Stop and Shop\" && BannerName != \"Giant\") ~> filterRest",
-						"toInteger1, filterSSGF join(Location == FacilityNumber,",
+						"derivedColumn2, filterSSGF join(Location == FacilitySub,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinFacility1",
-						"toInteger2, filterRest join(Location == FacilityNumber,",
+						"split@Rest, filterRest join(Location == FacilitySub,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinFacility2",
-						"toInteger3, filterSSGF join(StoreId == FacilityNumber,",
+						"derivedColumn4, filterSSGF join(StoreId == FacilitySub,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinFacility3",
-						"toInteger4, filterRest join(StoreId == FacilityNumber,",
+						"split2@Therest2, filterRest join(StoreId == FacilitySub,",
 						"     joinType:'inner',",
 						"     broadcast: 'auto')~> joinFacility4",
 						"joinFacility1 select(mapColumn(",
@@ -3584,6 +3722,26 @@
 			"properties": {
 				"content": {
 					"query": "SELECT TOP (100) [LocationId]\n,[LocationName]\n,[LocationAddressLine1]\n,[LocationCity]\n,[LocationState]\n,[LocationZipCode]\n,[CountryId]\n,[EgridRegionId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[Location]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "ESGNORMALIZEDMODEL",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 20')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [EmissionFactorId]\n,[EmissionFactorName]\n,[EmissionScope]\n,[EmissionCategory]\n,[EmissionFactorLocationBased]\n,[EmissionFactorMarketBased]\n,[UnitOfMeasure]\n,[EmissionStartDate]\n,[EmissionEndDate]\n,[EgridRegion]\n,[PurchasedGasId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[GreenhouseGasType]",
 					"metadata": {
 						"language": "sql"
 					},
@@ -20397,8 +20555,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20494,8 +20652,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20765,8 +20923,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/DirectEmissionsFromRefrigeration",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20881,8 +21039,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21067,8 +21225,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21165,8 +21323,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21377,8 +21535,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21583,8 +21741,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21681,8 +21839,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21779,8 +21937,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PurchasedGas",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21945,8 +22103,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2Emissions",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22079,8 +22237,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/UnitOfMeasure",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22229,8 +22387,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
