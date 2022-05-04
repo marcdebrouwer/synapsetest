@@ -1044,9 +1044,6 @@
 							"name": "CreateEmissionId"
 						},
 						{
-							"name": "selectRequiredColumns"
-						},
-						{
 							"name": "ChangeColumnName"
 						},
 						{
@@ -1075,6 +1072,24 @@
 						},
 						{
 							"name": "joinEgrid"
+						},
+						{
+							"name": "splitElectric"
+						},
+						{
+							"name": "joinElectricityEmission"
+						},
+						{
+							"name": "joinRestEmission"
+						},
+						{
+							"name": "selectNeeded"
+						},
+						{
+							"name": "selectNeeded2"
+						},
+						{
+							"name": "union1"
 						}
 					],
 					"scriptLines": [
@@ -1159,15 +1174,16 @@
 						"source(output(",
 						"          EmissionFactorId as integer,",
 						"          EmissionFactorName as string,",
-						"          EmissionScope as string,",
 						"          EmissionCategory as string,",
+						"          EmissionScope as string,",
 						"          EmissionFactorLocationBased as double,",
 						"          EmissionFactorMarketBased as double,",
 						"          UnitOfMeasure as string,",
 						"          EmissionStartDate as date,",
 						"          EmissionEndDate as date,",
 						"          EgridRegion as string,",
-						"          PurchasedGasId as integer",
+						"          PurchasedGasId as integer,",
+						"          EmissionCountry as string",
 						"     ),",
 						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
@@ -1350,26 +1366,9 @@
 						"     multiple: false,",
 						"     pickup: 'any',",
 						"     broadcast: 'auto')~> LookupGasId",
-						"selectRequiredColumns keyGenerate(output(EmissionId as long),",
+						"union1 keyGenerate(output(EmissionId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> CreateEmissionId",
-						"select1 select(mapColumn(",
-						"          {Facility Name},",
-						"          EnergyType,",
-						"          Amount,",
-						"          IsKwh,",
-						"          Date,",
-						"          JoinColumn,",
-						"          FacilityId,",
-						"          BannerId,",
-						"          Country,",
-						"          EgridRegionId,",
-						"          PurchasedGasName,",
-						"          VirtualEmissionId,",
-						"          PurchasedGasId",
-						"     ),",
-						"     skipDuplicateMapInputs: true,",
-						"     skipDuplicateMapOutputs: true) ~> selectRequiredColumns",
 						"AholdEnergy select(mapColumn(",
 						"          {Facility Name},",
 						"          {Location ID},",
@@ -1435,6 +1434,54 @@
 						"joinLocation, EgridRegionData join(LocationData@EgridRegionId == EgridRegionData@EgridRegionId,",
 						"     joinType:'left',",
 						"     broadcast: 'auto')~> joinEgrid",
+						"select1 split(case(\r",
+						"    EnergyType == \"Electricity\", true(),\r",
+						"    EnergyType == \"EFEC\", true()\r",
+						"),",
+						"     disjoint: false) ~> splitElectric@(ElectricityEFEC, Rest)",
+						"splitElectric@ElectricityEFEC, EmissionFactorData join(Country == EmissionCountry",
+						"     && splitElectric@ElectricityEFEC@PurchasedGasId == EmissionFactorData@PurchasedGasId",
+						"     && Date == EmissionStartDate",
+						"     && EGridRegionLongName == EgridRegion,",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> joinElectricityEmission",
+						"splitElectric@Rest, EmissionFactorData join(splitElectric@Rest@PurchasedGasId == EmissionFactorData@PurchasedGasId",
+						"     && Date == EmissionStartDate,",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> joinRestEmission",
+						"joinElectricityEmission select(mapColumn(",
+						"          {Facility Name},",
+						"          EnergyType,",
+						"          Amount,",
+						"          IsKwh,",
+						"          Date,",
+						"          JoinColumn,",
+						"          FacilityId,",
+						"          BannerId,",
+						"          Country,",
+						"          VirtualEmissionId,",
+						"          EmissionFactorId,",
+						"          PurchasedGasId = splitElectric@ElectricityEFEC@PurchasedGasId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> selectNeeded",
+						"joinRestEmission select(mapColumn(",
+						"          {Facility Name},",
+						"          EnergyType,",
+						"          Amount,",
+						"          IsKwh,",
+						"          Date,",
+						"          JoinColumn,",
+						"          FacilityId,",
+						"          BannerId,",
+						"          Country,",
+						"          VirtualEmissionId,",
+						"          PurchasedGasId = splitElectric@Rest@PurchasedGasId,",
+						"          EmissionFactorId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> selectNeeded2",
+						"selectNeeded, selectNeeded2 union(byName: true)~> union1",
 						"CreateEmissionId sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -1458,6 +1505,7 @@
 						"          EmissionsUnitsKwH = Amount,",
 						"          FacilityId,",
 						"          VirtualEmissionFactorId = VirtualEmissionId,",
+						"          EmissionFactorId,",
 						"          PurchasedGasId",
 						"     )) ~> sink1"
 					]
@@ -42875,18 +42923,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/TestDedicatedSqlPool')]",
-			"type": "Microsoft.Synapse/workspaces/sqlPools",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"collation": "SQL_Latin1_General_CP1_CI_AS",
-				"maxSizeBytes": 263882790666240,
-				"annotations": []
-			},
-			"dependsOn": [],
-			"location": "westeurope"
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/ESGPOC')]",
 			"type": "Microsoft.Synapse/workspaces/bigDataPools",
 			"apiVersion": "2019-06-01-preview",
@@ -42906,6 +42942,18 @@
 				"sparkVersion": "3.1",
 				"isComputeIsolationEnabled": false,
 				"sessionLevelPackagesEnabled": false,
+				"annotations": []
+			},
+			"dependsOn": [],
+			"location": "westeurope"
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/TestDedicatedSqlPool')]",
+			"type": "Microsoft.Synapse/workspaces/sqlPools",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"collation": "SQL_Latin1_General_CP1_CI_AS",
+				"maxSizeBytes": 263882790666240,
 				"annotations": []
 			},
 			"dependsOn": [],
