@@ -102,9 +102,6 @@
 					"name": "LookupGasId"
 				},
 				{
-					"name": "LookupEmissionData"
-				},
-				{
 					"name": "LookUpEgridId"
 				},
 				{
@@ -139,15 +136,6 @@
 				},
 				{
 					"name": "joinCountry"
-				},
-				{
-					"name": "splitForEmissionFactorLink"
-				},
-				{
-					"name": "lookup1"
-				},
-				{
-					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -423,11 +411,6 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> LookupGasId",
-				"splitForEmissionFactorLink@Electricity, LookUpEgridId lookup(Country == EgridRegionData@EgridRegionId",
-				"     && ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     multiple: false,",
-				"     pickup: 'any',",
-				"     broadcast: 'auto')~> LookupEmissionData",
 				"EmissionFactorData, EgridRegionData lookup(EgridRegion == EGridRegionLongName,",
 				"     multiple: false,",
 				"     pickup: 'any',",
@@ -435,13 +418,20 @@
 				"selectRequiredColumns keyGenerate(output(EmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> CreateEmissionId",
-				"union1 select(mapColumn(",
-				"          Amount = KWHAmount,",
-				"          Date = CreateDate@Date,",
+				"select1 select(mapColumn(",
+				"          {Facility Name},",
+				"          EnergyType,",
+				"          Amount,",
+				"          IsKwh,",
+				"          Date,",
+				"          JoinColumn,",
 				"          FacilityId,",
+				"          BannerId,",
+				"          Country,",
+				"          EgridRegionId,",
+				"          PurchasedGasName,",
 				"          VirtualEmissionId,",
-				"          EmissionFactorId,",
-				"          PurchasedGasId = PurchasedGasData@PurchasedGasId",
+				"          PurchasedGasId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectRequiredColumns",
@@ -488,7 +478,7 @@
 				"LookupVirtualEmission select(mapColumn(",
 				"          {Facility Name},",
 				"          EnergyType,",
-				"          Amount,",
+				"          Amount = KWHAmount,",
 				"          IsKwh,",
 				"          KWHAmount,",
 				"          Date = CreateDate@Date,",
@@ -506,13 +496,6 @@
 				"joinLocation, CountryData join(LocationData@CountryId == CountryData@CountryId,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinCountry",
-				"select1 split(case(EnergyType == \"Electricity\",true()),",
-				"     disjoint: false) ~> splitForEmissionFactorLink@(Electricity, Rest)",
-				"splitForEmissionFactorLink@Rest lookup(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     multiple: false,",
-				"     pickup: 'any',",
-				"     broadcast: 'auto')~> lookup1",
-				"LookupEmissionData union(byName: true)~> union1",
 				"CreateEmissionId sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
@@ -534,7 +517,6 @@
 				"          EmissionId,",
 				"          EmissionDate = Date,",
 				"          EmissionsUnitsKwH = Amount,",
-				"          EmissionFactorId,",
 				"          FacilityId,",
 				"          VirtualEmissionFactorId = VirtualEmissionId,",
 				"          PurchasedGasId",
