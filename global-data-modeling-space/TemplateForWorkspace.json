@@ -1329,7 +1329,7 @@
 						"          Propane = toDouble(Propane),",
 						"          {Heat import} = toDouble({Heat import}),",
 						"          EFEC = toDouble(EFEC)) ~> MakeDouble2",
-						"unpivot2 union(byName: true)~> AppendData",
+						"unpivot2, unpivot1 union(byName: true)~> AppendData",
 						"FilterOutZeroes derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
 						"CreateJoinColumn, SelectFacilityData lookup(CreateJoinColumn@JoinColumn == SelectFacilityData@JoinColumn,",
 						"     multiple: false,",
