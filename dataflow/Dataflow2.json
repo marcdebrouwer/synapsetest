@@ -19,7 +19,14 @@
 					"name": "DelhaizeEnergy"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				},
+				{
+					"name": "sink2"
+				}
+			],
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
@@ -66,7 +73,21 @@
 				"     columnDelimiter: ';',",
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: true) ~> DelhaizeEnergy"
+				"     columnNamesAsHeader: true) ~> DelhaizeEnergy",
+				"AholdEnergy sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Scope2Emissions') ~> sink1",
+				"DelhaizeEnergy sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Scope2Emissions') ~> sink2"
 			]
 		}
 	}
