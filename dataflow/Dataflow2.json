@@ -417,7 +417,7 @@
 				"     ),",
 				"     mapColumn(",
 				"          Emisison = EmissionId,",
-				"          Date = derivedColumn1@Date,",
+				"          Date,",
 				"          TotalCo2EEmissionsUnits = Amount,",
 				"          EmissionFactorId,",
 				"          FacilityId,",
