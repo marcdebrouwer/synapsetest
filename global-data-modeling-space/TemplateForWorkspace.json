@@ -1090,6 +1090,9 @@
 						},
 						{
 							"name": "union1"
+						},
+						{
+							"name": "FilterOutZeroes"
 						}
 					],
 					"scriptLines": [
@@ -1327,7 +1330,7 @@
 						"          {Heat import} = toDouble({Heat import}),",
 						"          EFEC = toDouble(EFEC)) ~> MakeDouble2",
 						"unpivot2 union(byName: true)~> AppendData",
-						"AppendKWHs derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
+						"FilterOutZeroes derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
 						"CreateJoinColumn, SelectFacilityData lookup(CreateJoinColumn@JoinColumn == SelectFacilityData@JoinColumn,",
 						"     multiple: false,",
 						"     pickup: 'any',",
@@ -1482,6 +1485,7 @@
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> selectNeeded2",
 						"selectNeeded, selectNeeded2 union(byName: true)~> union1",
+						"AppendKWHs filter(Amount != 0.0) ~> FilterOutZeroes",
 						"CreateEmissionId sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
