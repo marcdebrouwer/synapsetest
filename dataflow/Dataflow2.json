@@ -102,9 +102,6 @@
 					"name": "LookupGasId"
 				},
 				{
-					"name": "LookUpEgridId"
-				},
-				{
 					"name": "CreateEmissionId"
 				},
 				{
@@ -136,6 +133,15 @@
 				},
 				{
 					"name": "joinCountry"
+				},
+				{
+					"name": "joinEgrid"
+				},
+				{
+					"name": "splitElectricity"
+				},
+				{
+					"name": "joinEmissionFactor"
 				}
 			],
 			"scriptLines": [
@@ -398,12 +404,12 @@
 				"          BannerId,",
 				"          LocationId = LocationData@LocationId,",
 				"          LocationName,",
-				"          LocationAddressLine1,",
 				"          LocationZipCode,",
-				"          Country = IsoCountryName,",
-				"          EgridRegionId,",
+				"          EgridRegionId = LocationData@EgridRegionId,",
+				"          EGridRegionLongName,",
 				"          LocationNo,",
-				"          JoinColumn",
+				"          JoinColumn,",
+				"          Country = IsoCountryName",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> SelectFacilityData",
@@ -411,14 +417,10 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> LookupGasId",
-				"EmissionFactorData, EgridRegionData lookup(EgridRegion == EGridRegionLongName,",
-				"     multiple: false,",
-				"     pickup: 'any',",
-				"     broadcast: 'auto')~> LookUpEgridId",
 				"selectRequiredColumns keyGenerate(output(EmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> CreateEmissionId",
-				"select1 select(mapColumn(",
+				"joinEmissionFactor select(mapColumn(",
 				"          {Facility Name},",
 				"          EnergyType,",
 				"          Amount,",
@@ -431,7 +433,7 @@
 				"          EgridRegionId,",
 				"          PurchasedGasName,",
 				"          VirtualEmissionId,",
-				"          PurchasedGasId",
+				"          PurchasedGasId = splitElectricity@Electricity@PurchasedGasId",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> selectRequiredColumns",
@@ -489,13 +491,22 @@
 				"          EgridRegionId,",
 				"          PurchasedGasName,",
 				"          VirtualEmissionId,",
-				"          PurchasedGasId = VirtualEmissionsData@PurchasedGasId",
+				"          PurchasedGasId = VirtualEmissionsData@PurchasedGasId,",
+				"          EGridRegionLongName",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select1",
-				"joinLocation, CountryData join(LocationData@CountryId == CountryData@CountryId,",
+				"joinEgrid, CountryData join(LocationData@CountryId == CountryData@CountryId,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinCountry",
+				"joinLocation, EgridRegionData join(LocationData@EgridRegionId == EgridRegionData@EgridRegionId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinEgrid",
+				"select1 split(case(EnergyType == \"Electricity\", true()),",
+				"     disjoint: false) ~> splitElectricity@(Electricity, NoElectricity)",
+				"splitElectricity@Electricity, EmissionFactorData join(Country == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> joinEmissionFactor",
 				"CreateEmissionId sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
