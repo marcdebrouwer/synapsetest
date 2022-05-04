@@ -80,59 +80,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/Facility')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "FacilityFlow",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "FacilityFlow",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"FacilityData": {},
-									"LocationData": {},
-									"BannerData": {},
-									"FacilityTypeData": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "2NF TABLES"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/FacilityFlow')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/Facility2')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -182,7 +129,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/Facility2Flows')]"
+				"[concat(variables('workspaceId'), '/dataflows/Facility2Flows')]",
+				"[concat(variables('workspaceId'), '/integrationRuntimes/AutoResolveIntegrationRuntime')]"
 			]
 		},
 		{
@@ -1366,6 +1314,9 @@
 						},
 						{
 							"name": "derivedColumn2"
+						},
+						{
+							"name": "lookup1"
 						}
 					],
 					"scriptLines": [
@@ -1453,13 +1404,18 @@
 						"     asc(BannerId, true),",
 						"     broadcast: 'auto')~> lookupBanner",
 						"FacilityData derive(FacilityNamee = trim({Facility Name})) ~> derivedColumn2",
-						"lookupBanner sink(allowSchemaDrift: true,",
+						"lookupBanner, LocationData lookup({Postal Code} == LocationAddressLine1,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookup1",
+						"lookup1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
 						"     databaseType: 'spark',",
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
 						"     tableName: 'Facility',",
+						"     recreate:true,",
 						"     input(",
 						"          FacilityId as integer,",
 						"          FacilityName as string,",
@@ -4248,8 +4204,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/DimEmissionFactor",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -4493,8 +4449,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/DimFacility",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -4551,12 +4507,89 @@
 								"Columns": [
 									{
 										"Name": "VirtualEmissionFactorId",
+										"Description": "The unique identifier of a virtual emission factor ",
 										"OriginDataTypeName": {
 											"TypeName": "integer",
 											"IsComplexType": false,
 											"IsNullable": true,
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
+											}
+										}
+									},
+									{
+										"Name": "VirtualEmissionFactorName",
+										"Description": "The name of a virtual emission",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									},
+									{
+										"Name": "VirtualEmissionFactorMarketBased",
+										"Description": "The market based emission factor allocated to the virtual emission",
+										"OriginDataTypeName": {
+											"TypeName": "double",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "double"
+											}
+										}
+									},
+									{
+										"Name": "VirtualEmissionFactorLocationBased",
+										"Description": "The location based emission factor allocated to the virtual emission",
+										"OriginDataTypeName": {
+											"TypeName": "double",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "double"
+											}
+										}
+									},
+									{
+										"Name": "VirtualEmissionDate",
+										"Description": "The data allocated to the emission factor",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									},
+									{
+										"Name": "VirtualEmissionBanner",
+										"Description": "The banner associated with a virtual emission",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									},
+									{
+										"Name": "VirtualEmissionScope",
+										"Description": "The scope associated with a virtual emission factor",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
 											}
 										}
 									}
@@ -4569,8 +4602,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/DimVirtualEmissionFactor",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -4751,8 +4784,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/FactEmissions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -4911,8 +4944,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/UnitOfMeasure",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
