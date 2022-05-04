@@ -78,7 +78,7 @@
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: 'GreenhouseGasType',",
+				"     tableName: 'EmissionFactors',",
 				"     input(",
 				"          EmissionFactorId as integer,",
 				"          EmissionFactorName as string,",

@@ -280,7 +280,7 @@
 				"     databaseType: 'spark',",
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: 'GreenhouseGasType') ~> EmissionFactorData",
+				"     tableName: 'EmissionFactors') ~> EmissionFactorData",
 				"Charge split(case(    Banner == \"Giant\", true(),     Banner == \"Stop and Shop\", true()),",
 				"     disjoint: false) ~> split@(SSandGiant, Rest)",
 				"Leakage split(case(    Banner == \"SS\", true(),     Banner == \"GF\", true()),",
