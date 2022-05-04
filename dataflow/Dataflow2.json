@@ -26,6 +26,16 @@
 				},
 				{
 					"name": "EmissionFactorData"
+				},
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "Facility2Data"
+				},
+				{
+					"name": "BannerData"
 				}
 			],
 			"sinks": [
@@ -54,6 +64,12 @@
 				},
 				{
 					"name": "AppendData"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "lookup1"
 				}
 			],
 			"scriptLines": [
@@ -155,6 +171,45 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'GreenhouseGasType') ~> EmissionFactorData",
+				"source(output(",
+				"          Company as string,",
+				"          Region as string,",
+				"          OpCo as string,",
+				"          Brand as string,",
+				"          {Facility Type} as string,",
+				"          {Facility ID} as short,",
+				"          {Facility Name} as string,",
+				"          Address as string,",
+				"          City as string,",
+				"          {State } as string,",
+				"          Country as string,",
+				"          {Postal Code} as string,",
+				"          {Gross area owned stores ft2} as integer,",
+				"          {Sales area owned stores ft2} as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'Facility.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> Facility2Data",
+				"source(output(",
+				"          BannerId as integer,",
+				"          BannerName as string,",
+				"          OrganizationId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Banner') ~> BannerData",
 				"MakeDouble unpivot(output(",
 				"          EnergyType as string,",
 				"          Amount as double",
@@ -198,7 +253,12 @@
 				"          {Fuel Oil} = toDouble({Fuel Oil}),",
 				"          EFEC = toDouble({EFEC})) ~> MakeDouble2",
 				"unpivot2 union(byName: true)~> AppendData",
-				"AppendData sink(allowSchemaDrift: true,",
+				"AppendData derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> derivedColumn1",
+				"FacilityData, Facility2Data lookup(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
