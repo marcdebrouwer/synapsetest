@@ -503,63 +503,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/RefrigerantPipeline')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "RefrigerantPipeline",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "RefrigerantFLoww",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"RefrigerantChargeData": {},
-									"FacilityData": {},
-									"VirtualEmissionFactorData": {},
-									"EmissionFactorData": {},
-									"PurchasedEnergyData": {},
-									"RefrigerantLeakageData": {},
-									"BannerData": {},
-									"source1": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "1NF TABLES"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/RefrigerantFLoww')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/Scope2Emissions')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -634,8 +577,10 @@
 								"datasetParameters": {
 									"AholdEnergy": {},
 									"DelhaizeEnergy": {},
-									"sink1": {},
-									"sink2": {}
+									"FacilityData": {},
+									"VirtualEmissionsData": {},
+									"EmissionFactorData": {},
+									"sink1": {}
 								}
 							},
 							"staging": {},
@@ -1010,17 +955,45 @@
 								"type": "LinkedServiceReference"
 							},
 							"name": "DelhaizeEnergy"
+						},
+						{
+							"name": "FacilityData"
+						},
+						{
+							"name": "VirtualEmissionsData"
+						},
+						{
+							"name": "EmissionFactorData"
 						}
 					],
 					"sinks": [
 						{
 							"name": "sink1"
-						},
-						{
-							"name": "sink2"
 						}
 					],
-					"transformations": [],
+					"transformations": [
+						{
+							"name": "unpivot1"
+						},
+						{
+							"name": "unpivot2"
+						},
+						{
+							"name": "CommaToPoint"
+						},
+						{
+							"name": "MakeDouble"
+						},
+						{
+							"name": "CommaToPoint2"
+						},
+						{
+							"name": "MakeDouble2"
+						},
+						{
+							"name": "AppendData"
+						}
+					],
 					"scriptLines": [
 						"source(output(",
 						"          {Facility Name} as string,",
@@ -1067,20 +1040,109 @@
 						"     escapeChar: '\\\\',",
 						"     quoteChar: '\\\"',",
 						"     columnNamesAsHeader: true) ~> DelhaizeEnergy",
-						"AholdEnergy sink(allowSchemaDrift: true,",
+						"source(output(",
+						"          FacilityId as integer,",
+						"          FacilityName as string,",
+						"          LocationId as integer,",
+						"          GrossFloorArea as integer,",
+						"          AvailableSellingArea as integer,",
+						"          FacilityTypeId as integer,",
+						"          BannerId as integer,",
+						"          FacilitySub as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
 						"     databaseType: 'spark',",
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
-						"     tableName: 'Scope2Emissions') ~> sink1",
-						"DelhaizeEnergy sink(allowSchemaDrift: true,",
+						"     tableName: 'Facility') ~> FacilityData",
+						"source(output(",
+						"          VirtualEmissionId as integer,",
+						"          PurchasedGasId as integer,",
+						"          Date as date,",
+						"          VirtualEmissionScope as string,",
+						"          BannerId as integer,",
+						"          VirtualEmissionFactorLocation as double,",
+						"          VirtualEmissionFactorMarket as double",
+						"     ),",
+						"     allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
 						"     databaseType: 'spark',",
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
-						"     tableName: 'Scope2Emissions') ~> sink2"
+						"     tableName: 'VirtualEmissionFactor') ~> VirtualEmissionsData",
+						"source(output(",
+						"          EmissionFactorId as integer,",
+						"          EmissionFactorName as string,",
+						"          EmissionScope as string,",
+						"          EmissionCategory as string,",
+						"          EmissionFactorLocationBased as double,",
+						"          EmissionFactorMarketBased as double,",
+						"          UnitOfMeasure as string,",
+						"          EmissionStartDate as date,",
+						"          EmissionEndDate as date,",
+						"          EgridRegion as string,",
+						"          PurchasedGasId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'GreenhouseGasType') ~> EmissionFactorData",
+						"MakeDouble unpivot(output(",
+						"          EnergyType as string,",
+						"          Amount as double",
+						"     ),",
+						"     ungroupBy({Facility Name},",
+						"          {Location ID},",
+						"          {Selling m2},",
+						"          {Facility Type}),",
+						"     lateral: true,",
+						"     ignoreNullPivots: true) ~> unpivot1",
+						"MakeDouble2 unpivot(output(",
+						"          EnergyType as string,",
+						"          Amount as double",
+						"     ),",
+						"     ungroupBy({Facility Name},",
+						"          {Facility Type},",
+						"          {Location ID},",
+						"          {Selling m2}),",
+						"     lateral: true,",
+						"     ignoreNullPivots: true) ~> unpivot2",
+						"AholdEnergy derive(Electric = replace({Electric}, \",\", \".\"),",
+						"          {Natural Gas} = replace({Natural Gas}, \",\", \".\"),",
+						"          Propane = replace({Propane}, \",\", \".\"),",
+						"          {Fuel Oil} = replace({Fuel Oil}, \",\", \".\"),",
+						"          {Solar Used On-Site} = replace({Solar Used On-Site}, \",\", \".\"),",
+						"          EFEC = replace({EFEC}, \",\", \".\")) ~> CommaToPoint",
+						"CommaToPoint derive(Electric = toDouble({Electric}),",
+						"          {Natural Gas} = toDouble({Natural Gas}),",
+						"          Propane = toDouble({Propane}),",
+						"          {Fuel Oil} = toDouble({Fuel Oil}),",
+						"          {Solar Used On-Site} = toDouble({Solar Used On-Site}),",
+						"          EFEC = toDouble({EFEC})) ~> MakeDouble",
+						"DelhaizeEnergy derive(Electric = replace(Electric, \",\", \".\"),",
+						"          {Natural Gas} = replace({Natural Gas}, \",\", \".\"),",
+						"          Propane = replace({Propane}, \",\", \".\"),",
+						"          {Fuel Oil} = replace({Fuel Oil}, \",\", \".\"),",
+						"          EFEC = replace({EFEC}, \",\", \".\")) ~> CommaToPoint2",
+						"CommaToPoint2 derive(Electric = toDouble(Electric),",
+						"          {Natural Gas} = toDouble({Natural Gas}),",
+						"          Propane = toDouble({Propane}),",
+						"          {Fuel Oil} = toDouble({Fuel Oil}),",
+						"          EFEC = toDouble({EFEC})) ~> MakeDouble2",
+						"unpivot2 union(byName: true)~> AppendData",
+						"AppendData sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Scope2Emissions') ~> sink1"
 					]
 				}
 			},
@@ -20555,8 +20617,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Banner",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20652,8 +20714,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Country",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -20923,8 +20985,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/DirectEmissionsFromRefrigeration",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21039,8 +21101,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EgridRegions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21082,292 +21144,7 @@
 						"ActionType": "CREATE",
 						"OldEntity": null,
 						"NewEntity": {
-							"Name": "Facility",
-							"EntityType": "TABLE",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Description": "A retail/channel location where products, goods and services are sold to consumers.",
-							"TableType": "EXTERNAL",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"StorageDescriptor": {
-								"Columns": [
-									{
-										"Name": "FacilityId",
-										"Description": "The unique identifier of a Store.",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "StoreId"
-										}
-									},
-									{
-										"Name": "FacilityName",
-										"Description": "The business name of the store.",
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Length": 128,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "StoreName"
-										}
-									},
-									{
-										"Name": "LocationId",
-										"Description": "The unique identifier of a Location.",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "LocationId"
-										}
-									},
-									{
-										"Name": "GrossFloorArea",
-										"Description": "The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "GrossFloorArea"
-										}
-									},
-									{
-										"Name": "AvailableSellingArea",
-										"Description": "The total selling area within the Store expressed in square footage.",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "AvailableSellingArea"
-										}
-									},
-									{
-										"Name": "FacilityTypeId",
-										"Description": "The unique identifier of a Store Type.",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "Store.cdm.json/Store",
-											"Name": "StoreTypeId"
-										}
-									},
-									{
-										"Name": "BannerId",
-										"Description": "",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										}
-									},
-									{
-										"Name": "FacilitySub",
-										"Description": "The number of the facility",
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Length": 256,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										}
-									}
-								],
-								"Format": {
-									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-									"FormatType": "csv",
-									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
-									"Properties": {
-										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
-										"delimiter": ",",
-										"firstRowAsHeader": "false",
-										"multiLine": "false",
-										"serialization.format": "1",
-										"escape": "\\",
-										"quote": "\"",
-										"FormatTypeSetToDatabaseDefault": true,
-										"header": "false"
-									}
-								},
-								"Source": {
-									"Provider": "ADLS",
-									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
-									"Properties": {
-										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-										"LocationSetToDatabaseDefault": true
-									}
-								},
-								"Properties": {
-									"textinputformat.record.delimiter": ",",
-									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"LocationId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"GrossFloorArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"FacilityTypeId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"}}}"
-								},
-								"Compressed": false,
-								"IsStoredAsSubdirectories": false
-							},
-							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Facility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"dataType\":\"integer\",\"description\":\"The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.\",\"isNullable\":true,\"name\":\"GrossFloorArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"integer\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"FacilityTypeId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"BannerId\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The number of the facility\",\"isNullable\":true,\"name\":\"FacilitySub\"}]}}}",
-								"Description": "A retail/channel location where products, goods and services are sold to consumers.",
-								"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
-								"PrimaryKeys": "FacilityId",
-								"spark.sql.sources.provider": "csv"
-							},
-							"Retention": 0,
-							"Temporary": false,
-							"IsRewriteEnabled": false
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "FacilityType",
-							"EntityType": "TABLE",
-							"Namespace": {
-								"DatabaseName": "ESGNORMALIZEDMODEL"
-							},
-							"Description": "A categorization of stores based upon common characteristics or functionality.\n\nEx:\n- Central Business District\n- Community Center\n- Convenience Store\n- Discount Store\n- Discount-Anchored Center\n- Gas Station\n- Neighborhood Center\n- Pad Site \n- Power Shopping Center\n- Regional Center\n- Strip Center\n- Superstore \n- Warehouse Club\n- Warehouse Store\n\nwhere:\n\nCENTRAL BUSINESS DISTRICT\n The traditional downtown business area of a city or town.\n \nCOMMUNITY CENTER\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\n \nCONVENIENCE STORE\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\n \nDISCOUNT STORE\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\n\nEx:\n- Target \n- Kmart\n \nDISCOUNT-ANCHORED CENTER\n A shopping center that contains one or more discount stores plus smaller retail tenants.\n \nNEIGHBORHOOD CENTER\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \n\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\n \nPAD SITE\n A location for a free-standing retail building that sits in front of a mall or shopping center.\n \nPOWER SHOPPING CENTER\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \n\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\n \nREGIONAL CENTER\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \nSuper-regionals are similar but have at least four department stores.\n \nSTRIP CENTER\n A small shopping center that comprises several adjacent stores located along a major street or highway.\n \nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\n \nWAREHOUSE CLUB\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\n \nWAREHOUSE STORE\n A discount retailer offering merchandise in a no-frills environment.",
-							"TableType": "EXTERNAL",
-							"Origin": {
-								"Type": "SPARK"
-							},
-							"StorageDescriptor": {
-								"Columns": [
-									{
-										"Name": "FacilityTypeId",
-										"Description": "The unique identifier of a Store Type.",
-										"OriginDataTypeName": {
-											"TypeName": "integer",
-											"IsComplexType": false,
-											"IsNullable": false,
-											"Properties": {
-												"HIVE_TYPE_STRING": "integer"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "StoreType.cdm.json/StoreType",
-											"Name": "StoreTypeId"
-										}
-									},
-									{
-										"Name": "FaciityTypeName",
-										"Description": "The name of a Store Type.",
-										"OriginDataTypeName": {
-											"TypeName": "string",
-											"IsComplexType": false,
-											"IsNullable": true,
-											"Length": 128,
-											"Properties": {
-												"HIVE_TYPE_STRING": "string"
-											}
-										},
-										"BaseAttributeReference": {
-											"Entity": "StoreType.cdm.json/StoreType",
-											"Name": "StoreTypeName"
-										}
-									}
-								],
-								"Format": {
-									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
-									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
-									"FormatType": "csv",
-									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
-									"Properties": {
-										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
-										"delimiter": ",",
-										"firstRowAsHeader": "false",
-										"multiLine": "false",
-										"serialization.format": "1",
-										"escape": "\\",
-										"quote": "\"",
-										"FormatTypeSetToDatabaseDefault": true,
-										"header": "false"
-									}
-								},
-								"Source": {
-									"Provider": "ADLS",
-									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
-									"Properties": {
-										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-										"LocationSetToDatabaseDefault": true
-									}
-								},
-								"Properties": {
-									"textinputformat.record.delimiter": ",",
-									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityTypeId\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeId\"},\"FaciityTypeName\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeName\"}}}"
-								},
-								"Compressed": false,
-								"IsStoredAsSubdirectories": false
-							},
-							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"FacilityType\",\"description\":\"A categorization of stores based upon common characteristics or functionality.\\n\\nEx:\\n- Central Business District\\n- Community Center\\n- Convenience Store\\n- Discount Store\\n- Discount-Anchored Center\\n- Gas Station\\n- Neighborhood Center\\n- Pad Site \\n- Power Shopping Center\\n- Regional Center\\n- Strip Center\\n- Superstore \\n- Warehouse Club\\n- Warehouse Store\\n\\nwhere:\\n\\nCENTRAL BUSINESS DISTRICT\\n The traditional downtown business area of a city or town.\\n \\nCOMMUNITY CENTER\\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\\n \\nCONVENIENCE STORE\\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\\n \\nDISCOUNT STORE\\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\\n\\nEx:\\n- Target \\n- Kmart\\n \\nDISCOUNT-ANCHORED CENTER\\n A shopping center that contains one or more discount stores plus smaller retail tenants.\\n \\nNEIGHBORHOOD CENTER\\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \\n\\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\\n \\nPAD SITE\\n A location for a free-standing retail building that sits in front of a mall or shopping center.\\n \\nPOWER SHOPPING CENTER\\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \\n\\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\\n \\nREGIONAL CENTER\\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \\nSuper-regionals are similar but have at least four department stores.\\n \\nSTRIP CENTER\\n A small shopping center that comprises several adjacent stores located along a major street or highway.\\n \\nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\\n \\nWAREHOUSE CLUB\\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\\n \\nWAREHOUSE STORE\\n A discount retailer offering merchandise in a no-frills environment.\",\"baseEntityReference\":{\"name\":\"StoreType\",\"path\":\"StoreType.cdm.json/StoreType\"},\"primaryKey\":[\"FacilityTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":false,\"name\":\"FacilityTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Store Type.\",\"isNullable\":true,\"name\":\"FaciityTypeName\"}]}}}",
-								"Description": "A categorization of stores based upon common characteristics or functionality.\n\nEx:\n- Central Business District\n- Community Center\n- Convenience Store\n- Discount Store\n- Discount-Anchored Center\n- Gas Station\n- Neighborhood Center\n- Pad Site \n- Power Shopping Center\n- Regional Center\n- Strip Center\n- Superstore \n- Warehouse Club\n- Warehouse Store\n\nwhere:\n\nCENTRAL BUSINESS DISTRICT\n The traditional downtown business area of a city or town.\n \nCOMMUNITY CENTER\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\n \nCONVENIENCE STORE\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\n \nDISCOUNT STORE\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\n\nEx:\n- Target \n- Kmart\n \nDISCOUNT-ANCHORED CENTER\n A shopping center that contains one or more discount stores plus smaller retail tenants.\n \nNEIGHBORHOOD CENTER\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \n\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\n \nPAD SITE\n A location for a free-standing retail building that sits in front of a mall or shopping center.\n \nPOWER SHOPPING CENTER\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \n\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\n \nREGIONAL CENTER\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \nSuper-regionals are similar but have at least four department stores.\n \nSTRIP CENTER\n A small shopping center that comprises several adjacent stores located along a major street or highway.\n \nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\n \nWAREHOUSE CLUB\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\n \nWAREHOUSE STORE\n A discount retailer offering merchandise in a no-frills environment.",
-								"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
-								"PrimaryKeys": "FacilityTypeId",
-								"spark.sql.sources.provider": "csv"
-							},
-							"Retention": 0,
-							"Temporary": false,
-							"IsRewriteEnabled": false
-						},
-						"Source": {
-							"Type": "SPARK"
-						}
-					},
-					{
-						"ActionType": "CREATE",
-						"OldEntity": null,
-						"NewEntity": {
-							"Name": "GreenhouseGasType",
+							"Name": "EmissionFactors",
 							"EntityType": "TABLE",
 							"Namespace": {
 								"DatabaseName": "ESGNORMALIZEDMODEL"
@@ -21533,10 +21310,10 @@
 									"FormatType": "csv",
 									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 									"Properties": {
-										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
+										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EmissionFactors",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21546,7 +21323,7 @@
 								},
 								"Source": {
 									"Provider": "ADLS",
-									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/GreenhouseGasType",
+									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/EmissionFactors",
 									"Properties": {
 										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 										"LocationSetToDatabaseDefault": true
@@ -21561,10 +21338,295 @@
 								"IsStoredAsSubdirectories": false
 							},
 							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"GreenhouseGasType\",\"description\":\"The type of greenhouse gas:\\n\\n- CO2\\n- CH4 \\n- N2O\\n- HFC\\n- CO2\",\"baseEntityReference\":{\"name\":\"GreenhouseGasType\",\"path\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\"},\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a greenhouse gas type.\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a greenhouse gas type.\",\"isNullable\":true,\"name\":\"EmissionFactorName\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The scope of an emission factor\",\"isNullable\":true,\"name\":\"EmissionScope\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The category of an emission\",\"isNullable\":true,\"name\":\"EmissionCategory\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The location based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The market based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unit of measure required for the emission\",\"isNullable\":true,\"name\":\"UnitOfMeasure\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"Start date of an emission\",\"isNullable\":true,\"name\":\"EmissionStartDate\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"End date of an emission\",\"isNullable\":true,\"name\":\"EmissionEndDate\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The Egrid region allocated to an emission\",\"isNullable\":true,\"name\":\"EgridRegion\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of a purchased gas\",\"isNullable\":false,\"name\":\"PurchasedGasId\"}]},\"primaryKey\":[\"EmissionFactorId\"]}}",
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"EmissionFactors\",\"description\":\"The type of greenhouse gas:\\n\\n- CO2\\n- CH4 \\n- N2O\\n- HFC\\n- CO2\",\"baseEntityReference\":{\"name\":\"GreenhouseGasType\",\"path\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\"},\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a greenhouse gas type.\",\"isNullable\":false,\"name\":\"EmissionFactorId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"GreenhouseGasType.cdm.json/GreenhouseGasType\",\"name\":\"GreenhouseGasTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a greenhouse gas type.\",\"isNullable\":true,\"name\":\"EmissionFactorName\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The scope of an emission factor\",\"isNullable\":true,\"name\":\"EmissionScope\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The category of an emission\",\"isNullable\":true,\"name\":\"EmissionCategory\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The location based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorLocationBased\"},{\"type\":\"New\",\"dataType\":\"double\",\"description\":\"The market based emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorMarketBased\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The unit of measure required for the emission\",\"isNullable\":true,\"name\":\"UnitOfMeasure\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"Start date of an emission\",\"isNullable\":true,\"name\":\"EmissionStartDate\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"End date of an emission\",\"isNullable\":true,\"name\":\"EmissionEndDate\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The Egrid region allocated to an emission\",\"isNullable\":true,\"name\":\"EgridRegion\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of a purchased gas\",\"isNullable\":false,\"name\":\"PurchasedGasId\"}]},\"primaryKey\":[\"EmissionFactorId\"]}}",
 								"Description": "The type of greenhouse gas:\n\n- CO2\n- CH4 \n- N2O\n- HFC\n- CO2",
 								"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#042C59\"}",
 								"PrimaryKeys": "EmissionFactorId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "Facility",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Description": "A retail/channel location where products, goods and services are sold to consumers.",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "FacilityId",
+										"Description": "The unique identifier of a Store.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "StoreId"
+										}
+									},
+									{
+										"Name": "FacilityName",
+										"Description": "The business name of the store.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "StoreName"
+										}
+									},
+									{
+										"Name": "LocationId",
+										"Description": "The unique identifier of a Location.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "LocationId"
+										}
+									},
+									{
+										"Name": "GrossFloorArea",
+										"Description": "The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "GrossFloorArea"
+										}
+									},
+									{
+										"Name": "AvailableSellingArea",
+										"Description": "The total selling area within the Store expressed in square footage.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "AvailableSellingArea"
+										}
+									},
+									{
+										"Name": "FacilityTypeId",
+										"Description": "The unique identifier of a Store Type.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "Store.cdm.json/Store",
+											"Name": "StoreTypeId"
+										}
+									},
+									{
+										"Name": "BannerId",
+										"Description": "",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										}
+									},
+									{
+										"Name": "FacilitySub",
+										"Description": "The number of the facility",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Facility",
+									"Properties": {
+										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"FacilityName\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"LocationId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"GrossFloorArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"AvailableSellingArea\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"FacilityTypeId\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Facility\",\"description\":\"A retail/channel location where products, goods and services are sold to consumers.\",\"baseEntityReference\":{\"name\":\"Store\",\"path\":\"Store.cdm.json/Store\"},\"primaryKey\":[\"FacilityId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store.\",\"isNullable\":false,\"name\":\"FacilityId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The business name of the store.\",\"isNullable\":true,\"name\":\"FacilityName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"LocationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Location.\",\"isNullable\":true,\"name\":\"LocationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"GrossFloorArea\"},\"dataType\":\"integer\",\"description\":\"The total floor area of the Store including display and support areas such as stock keeping, dressing rooms and building functions.\",\"isNullable\":true,\"name\":\"GrossFloorArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"AvailableSellingArea\"},\"dataType\":\"integer\",\"description\":\"The total selling area within the Store expressed in square footage.\",\"isNullable\":true,\"name\":\"AvailableSellingArea\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Store.cdm.json/Store\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":true,\"name\":\"FacilityTypeId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":true,\"name\":\"BannerId\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"The number of the facility\",\"isNullable\":true,\"name\":\"FacilitySub\"}]}}}",
+								"Description": "A retail/channel location where products, goods and services are sold to consumers.",
+								"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
+								"PrimaryKeys": "FacilityId",
+								"spark.sql.sources.provider": "csv"
+							},
+							"Retention": 0,
+							"Temporary": false,
+							"IsRewriteEnabled": false
+						},
+						"Source": {
+							"Type": "SPARK"
+						}
+					},
+					{
+						"ActionType": "CREATE",
+						"OldEntity": null,
+						"NewEntity": {
+							"Name": "FacilityType",
+							"EntityType": "TABLE",
+							"Namespace": {
+								"DatabaseName": "ESGNORMALIZEDMODEL"
+							},
+							"Description": "A categorization of stores based upon common characteristics or functionality.\n\nEx:\n- Central Business District\n- Community Center\n- Convenience Store\n- Discount Store\n- Discount-Anchored Center\n- Gas Station\n- Neighborhood Center\n- Pad Site \n- Power Shopping Center\n- Regional Center\n- Strip Center\n- Superstore \n- Warehouse Club\n- Warehouse Store\n\nwhere:\n\nCENTRAL BUSINESS DISTRICT\n The traditional downtown business area of a city or town.\n \nCOMMUNITY CENTER\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\n \nCONVENIENCE STORE\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\n \nDISCOUNT STORE\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\n\nEx:\n- Target \n- Kmart\n \nDISCOUNT-ANCHORED CENTER\n A shopping center that contains one or more discount stores plus smaller retail tenants.\n \nNEIGHBORHOOD CENTER\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \n\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\n \nPAD SITE\n A location for a free-standing retail building that sits in front of a mall or shopping center.\n \nPOWER SHOPPING CENTER\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \n\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\n \nREGIONAL CENTER\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \nSuper-regionals are similar but have at least four department stores.\n \nSTRIP CENTER\n A small shopping center that comprises several adjacent stores located along a major street or highway.\n \nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\n \nWAREHOUSE CLUB\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\n \nWAREHOUSE STORE\n A discount retailer offering merchandise in a no-frills environment.",
+							"TableType": "EXTERNAL",
+							"Origin": {
+								"Type": "SPARK"
+							},
+							"StorageDescriptor": {
+								"Columns": [
+									{
+										"Name": "FacilityTypeId",
+										"Description": "The unique identifier of a Store Type.",
+										"OriginDataTypeName": {
+											"TypeName": "integer",
+											"IsComplexType": false,
+											"IsNullable": false,
+											"Properties": {
+												"HIVE_TYPE_STRING": "integer"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "StoreType.cdm.json/StoreType",
+											"Name": "StoreTypeId"
+										}
+									},
+									{
+										"Name": "FaciityTypeName",
+										"Description": "The name of a Store Type.",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 128,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										},
+										"BaseAttributeReference": {
+											"Entity": "StoreType.cdm.json/StoreType",
+											"Name": "StoreTypeName"
+										}
+									}
+								],
+								"Format": {
+									"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+									"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+									"FormatType": "csv",
+									"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+									"Properties": {
+										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
+										"delimiter": ",",
+										"multiLine": "false",
+										"firstRowAsHeader": "false",
+										"serialization.format": "1",
+										"escape": "\\",
+										"quote": "\"",
+										"FormatTypeSetToDatabaseDefault": true,
+										"header": "false"
+									}
+								},
+								"Source": {
+									"Provider": "ADLS",
+									"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/FacilityType",
+									"Properties": {
+										"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+										"LocationSetToDatabaseDefault": true
+									}
+								},
+								"Properties": {
+									"textinputformat.record.delimiter": ",",
+									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"derivedModelAttributeInfo": "{\"attributeReferences\":{\"FacilityTypeId\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeId\"},\"FaciityTypeName\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeName\"}}}"
+								},
+								"Compressed": false,
+								"IsStoredAsSubdirectories": false
+							},
+							"Properties": {
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"FacilityType\",\"description\":\"A categorization of stores based upon common characteristics or functionality.\\n\\nEx:\\n- Central Business District\\n- Community Center\\n- Convenience Store\\n- Discount Store\\n- Discount-Anchored Center\\n- Gas Station\\n- Neighborhood Center\\n- Pad Site \\n- Power Shopping Center\\n- Regional Center\\n- Strip Center\\n- Superstore \\n- Warehouse Club\\n- Warehouse Store\\n\\nwhere:\\n\\nCENTRAL BUSINESS DISTRICT\\n The traditional downtown business area of a city or town.\\n \\nCOMMUNITY CENTER\\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\\n \\nCONVENIENCE STORE\\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\\n \\nDISCOUNT STORE\\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\\n\\nEx:\\n- Target \\n- Kmart\\n \\nDISCOUNT-ANCHORED CENTER\\n A shopping center that contains one or more discount stores plus smaller retail tenants.\\n \\nNEIGHBORHOOD CENTER\\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \\n\\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\\n \\nPAD SITE\\n A location for a free-standing retail building that sits in front of a mall or shopping center.\\n \\nPOWER SHOPPING CENTER\\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \\n\\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\\n \\nREGIONAL CENTER\\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \\nSuper-regionals are similar but have at least four department stores.\\n \\nSTRIP CENTER\\n A small shopping center that comprises several adjacent stores located along a major street or highway.\\n \\nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\\n \\nWAREHOUSE CLUB\\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\\n \\nWAREHOUSE STORE\\n A discount retailer offering merchandise in a no-frills environment.\",\"baseEntityReference\":{\"name\":\"StoreType\",\"path\":\"StoreType.cdm.json/StoreType\"},\"primaryKey\":[\"FacilityTypeId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Store Type.\",\"isNullable\":false,\"name\":\"FacilityTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"StoreType.cdm.json/StoreType\",\"name\":\"StoreTypeName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of a Store Type.\",\"isNullable\":true,\"name\":\"FaciityTypeName\"}]}}}",
+								"Description": "A categorization of stores based upon common characteristics or functionality.\n\nEx:\n- Central Business District\n- Community Center\n- Convenience Store\n- Discount Store\n- Discount-Anchored Center\n- Gas Station\n- Neighborhood Center\n- Pad Site \n- Power Shopping Center\n- Regional Center\n- Strip Center\n- Superstore \n- Warehouse Club\n- Warehouse Store\n\nwhere:\n\nCENTRAL BUSINESS DISTRICT\n The traditional downtown business area of a city or town.\n \nCOMMUNITY CENTER\n A large shopping center that includes a discount store, specialty department store, super drugstore, home-improvement center and other convenience and shopping goods stores.\n \nCONVENIENCE STORE\n A shopping center that typically includes such stores as a convenience store and a dry cleaner.\n \nDISCOUNT STORE\n A general merchandise retailer offering a wide variety of merchandise,  limited service and low prices:\n\nEx:\n- Target \n- Kmart\n \nDISCOUNT-ANCHORED CENTER\n A shopping center that contains one or more discount stores plus smaller retail tenants.\n \nNEIGHBORHOOD CENTER\n A shopping center that includes a supermarket, drugstore, home-improvement center or variety store.  \n\nNeighborhood centers often include small stores, such as apparel, shoe, camera and other shopping goods stores.\n \nPAD SITE\n A location for a free-standing retail building that sits in front of a mall or shopping center.\n \nPOWER SHOPPING CENTER\n A large, open-air shopping center with the majority of space pre-leased to several well-known anchor retail tenants.  \n\nConvenient access and parking are emphasized.  These centers usually sit on major intersections.\n \nREGIONAL CENTER\n A shopping center or mall which includes up to three department stores plus shopping or specialty stores rather than convenience stores.  \nSuper-regionals are similar but have at least four department stores.\n \nSTRIP CENTER\n A small shopping center that comprises several adjacent stores located along a major street or highway.\n \nSUPERSTORE A large supermarket or specialty store, usually between 20,000 and 100,000 square feet.\n \nWAREHOUSE CLUB\n A retail store that sells a limited assortment of general merchandise to customers who are members of the club. Memberships are generally fee-based, margins are small and there is little customer service provided to the members.\n \nWAREHOUSE STORE\n A discount retailer offering merchandise in a no-frills environment.",
+								"DisplayFolderInfo": "{\"name\":\"Channel\",\"colorCode\":\"#001D3F\"}",
+								"PrimaryKeys": "FacilityTypeId",
 								"spark.sql.sources.provider": "csv"
 							},
 							"Retention": 0,
@@ -21741,8 +21803,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Location",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21839,8 +21901,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PartyOrganization",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -21937,8 +21999,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/PurchasedGas",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22103,8 +22165,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/Scope2Emissions",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22237,8 +22299,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/UnitOfMeasure",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22387,8 +22449,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ESGNORMALIZEDMODEL/VirtualEmissionFactor",
 										"delimiter": ",",
-										"firstRowAsHeader": "false",
 										"multiLine": "false",
+										"firstRowAsHeader": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -22439,7 +22501,7 @@
 								"Type": "SPARK"
 							},
 							"FromTableName": "PurchasedGas",
-							"ToTableName": "GreenhouseGasType",
+							"ToTableName": "EmissionFactors",
 							"ColumnRelationshipInformations": [
 								{
 									"FromColumnName": "PurchasedGasId",
@@ -22492,7 +22554,7 @@
 							"Origin": {
 								"Type": "SPARK"
 							},
-							"FromTableName": "GreenhouseGasType",
+							"FromTableName": "EmissionFactors",
 							"ToTableName": "Scope2Emissions",
 							"ColumnRelationshipInformations": [
 								{
