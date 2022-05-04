@@ -67,9 +67,6 @@
 				},
 				{
 					"name": "derivedColumn1"
-				},
-				{
-					"name": "lookup1"
 				}
 			],
 			"scriptLines": [
@@ -254,10 +251,6 @@
 				"          EFEC = toDouble({EFEC})) ~> MakeDouble2",
 				"unpivot2 union(byName: true)~> AppendData",
 				"AppendData derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> derivedColumn1",
-				"FacilityData, Facility2Data lookup(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     multiple: false,",
-				"     pickup: 'any',",
-				"     broadcast: 'auto')~> lookup1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
