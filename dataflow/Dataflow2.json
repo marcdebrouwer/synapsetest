@@ -1,0 +1,73 @@
+{
+	"name": "Dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "AholdEnergy"
+				},
+				{
+					"linkedService": {
+						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+						"type": "LinkedServiceReference"
+					},
+					"name": "DelhaizeEnergy"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          {Facility Name} as string,",
+				"          {Location ID} as short,",
+				"          {Selling m2} as string,",
+				"          {Facility Type} as string,",
+				"          Electric as string,",
+				"          {Natural Gas} as string,",
+				"          Propane as string,",
+				"          {Fuel Oil} as string,",
+				"          {Solar Used On-Site} as string,",
+				"          EFEC as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'AholdEnergy.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> AholdEnergy",
+				"source(output(",
+				"          {Facility Name} as string,",
+				"          {Location ID} as short,",
+				"          {Selling m2} as string,",
+				"          {Facility Type} as string,",
+				"          Electric as string,",
+				"          {Natural Gas} as string,",
+				"          Propane as string,",
+				"          {Fuel Oil} as string,",
+				"          EFEC as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'delimited',",
+				"     fileSystem: 'fsgdmsdevweeu01',",
+				"     folderPath: 'ESG_MAPDATA',",
+				"     fileName: 'DelhaizeEnergy.csv',",
+				"     columnDelimiter: ';',",
+				"     escapeChar: '\\\\',",
+				"     quoteChar: '\\\"',",
+				"     columnNamesAsHeader: true) ~> DelhaizeEnergy"
+			]
+		}
+	}
+}

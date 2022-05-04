@@ -1,9 +1,9 @@
 {
-	"name": "GreenhouseGasType",
+	"name": "Scope2Emissions2",
 	"properties": {
 		"activities": [
 			{
-				"name": "Greenhousegasflow",
+				"name": "EmissionsFLow",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "EmissionFactors",
+						"referenceName": "Dataflow2",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -28,7 +28,7 @@
 			}
 		],
 		"folder": {
-			"name": "2NF TABLES"
+			"name": "1NF TABLES"
 		},
 		"annotations": []
 	}
