@@ -10,13 +10,6 @@
 						"type": "LinkedServiceReference"
 					},
 					"name": "FacilityData"
-				},
-				{
-					"linkedService": {
-						"referenceName": "global-data-modeling-space-WorkspaceDefaultStorage",
-						"type": "LinkedServiceReference"
-					},
-					"name": "EgridData"
 				}
 			],
 			"sinks": [
@@ -28,9 +21,6 @@
 				},
 				{
 					"name": "MapOrganization"
-				},
-				{
-					"name": "MapEgridRegion"
 				}
 			],
 			"transformations": [
@@ -51,9 +41,6 @@
 				},
 				{
 					"name": "CreateOrganizationKey"
-				},
-				{
-					"name": "CreateEgridKey"
 				}
 			],
 			"scriptLines": [
@@ -84,22 +71,6 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> FacilityData",
-				"source(output(",
-				"          Zipcode as string,",
-				"          EgridRegion as string,",
-				"          {DimEgridRegions.eGrid Subregion_1} as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false,",
-				"     format: 'delimited',",
-				"     fileSystem: 'fsgdmsdevweeu01',",
-				"     folderPath: 'ESG_MAPDATA',",
-				"     fileName: 'EgridRegion.csv',",
-				"     columnDelimiter: ';',",
-				"     escapeChar: '\\\\',",
-				"     quoteChar: '\\\"',",
-				"     columnNamesAsHeader: true) ~> EgridData",
 				"FacilityData aggregate(groupBy({Facility Type}),",
 				"     each(match(name!=\"Facility Type\"), $$ = first($$))) ~> DistinctFacilityType",
 				"DistinctFacilityType keyGenerate(output(FacilityTypeId as long),",
@@ -115,9 +86,6 @@
 				"DistinctOrganization keyGenerate(output(OrganizationId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> CreateOrganizationKey",
-				"EgridData keyGenerate(output(EgridId as long),",
-				"     startAt: 1L,",
-				"     stepValue: 1L) ~> CreateEgridKey",
 				"CreateFacilityKey sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
@@ -165,27 +133,7 @@
 				"     mapColumn(",
 				"          OrganizationId,",
 				"          OrganizationName = Company",
-				"     )) ~> MapOrganization",
-				"CreateEgridKey sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     store: 'synapse',",
-				"     databaseType: 'spark',",
-				"     format: 'table',",
-				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: 'EgridRegions',",
-				"     recreate:true,",
-				"     input(",
-				"          EgridRegionId as integer,",
-				"          EgridRegionName as string,",
-				"          EGridRegionLongName as string,",
-				"          EgridZipcode as string",
-				"     ),",
-				"     mapColumn(",
-				"          EgridRegionId = EgridId,",
-				"          EgridRegionName = EgridRegion,",
-				"          EGridRegionLongName = {DimEgridRegions.eGrid Subregion_1},",
-				"          EgridZipcode = Zipcode",
-				"     )) ~> MapEgridRegion"
+				"     )) ~> MapOrganization"
 			]
 		}
 	}
