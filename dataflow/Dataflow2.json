@@ -35,7 +35,16 @@
 					"name": "unpivot2"
 				},
 				{
-					"name": "derivedColumn1"
+					"name": "CommaToPoint"
+				},
+				{
+					"name": "MakeDouble"
+				},
+				{
+					"name": "CommaToPoint2"
+				},
+				{
+					"name": "derivedColumn2"
 				}
 			],
 			"scriptLines": [
@@ -84,7 +93,7 @@
 				"     escapeChar: '\\\\',",
 				"     quoteChar: '\\\"',",
 				"     columnNamesAsHeader: true) ~> DelhaizeEnergy",
-				"derivedColumn1 unpivot(output(",
+				"MakeDouble unpivot(output(",
 				"          EnergyType as string,",
 				"          Amount as double",
 				"     ),",
@@ -94,7 +103,7 @@
 				"          {Facility Type}),",
 				"     lateral: true,",
 				"     ignoreNullPivots: true) ~> unpivot1",
-				"DelhaizeEnergy unpivot(output(",
+				"derivedColumn2 unpivot(output(",
 				"          EnergyType as string,",
 				"          Amount as double",
 				"     ),",
@@ -109,7 +118,16 @@
 				"          Propane = replace({Propane}, \",\", \".\"),",
 				"          {Fuel Oil} = replace({Fuel Oil}, \",\", \".\"),",
 				"          {Solar Used On-Site} = replace({Solar Used On-Site}, \",\", \".\"),",
-				"          EFEC = replace({EFEC}, \",\", \".\")) ~> derivedColumn1",
+				"          EFEC = replace({EFEC}, \",\", \".\")) ~> CommaToPoint",
+				"CommaToPoint derive(Electric = toDouble({Electric}),",
+				"          {Natural Gas} = toDouble({Natural Gas}),",
+				"          Propane = toDouble({Propane}),",
+				"          {Fuel Oil} = toDouble({Fuel Oil}),",
+				"          {Solar Used On-Site} = toDouble({Solar Used On-Site}),",
+				"          EFEC = toDouble({EFEC})) ~> MakeDouble",
+				"DelhaizeEnergy derive(Electric = replace({Electric}, \",\", \".\"),",
+				"          column1 = ERROR_FUNCTION('replace({Electric, \",\", \".\")')) ~> CommaToPoint2",
+				"CommaToPoint2 derive() ~> derivedColumn2",
 				"unpivot1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
