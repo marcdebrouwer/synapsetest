@@ -14,12 +14,12 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "Emisison",
+					"Name": "EmissionId",
 					"Description": "The unique identifier of a Legal Entity.",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -30,7 +30,7 @@
 					}
 				},
 				{
-					"Name": "Date",
+					"Name": "EmissionDate",
 					"Description": "Date of the emission",
 					"OriginDataTypeName": {
 						"TypeName": "date",
@@ -47,12 +47,12 @@
 					}
 				},
 				{
-					"Name": "TotalCo2EEmissionsUnits",
+					"Name": "EmissionsUnitsKwH",
 					"Description": "The total CO2e emission units.",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": true,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -60,22 +60,6 @@
 					"BaseAttributeReference": {
 						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
 						"Name": "TotalCo2EEmissionsUnits"
-					}
-				},
-				{
-					"Name": "TotalCo2EEmissionsUomId",
-					"Description": "The emission factor UOM.",
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach",
-						"Name": "TotalCo2EEmissionsUomId"
 					}
 				},
 				{
@@ -113,6 +97,18 @@
 							"HIVE_TYPE_STRING": "integer"
 						}
 					}
+				},
+				{
+					"Name": "PurchasedGasId",
+					"Description": "Unique identifier of a purchased gas",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
 				}
 			],
 			"Format": {
@@ -143,16 +139,16 @@
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
 				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
-				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"Emisison\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"Date\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"TotalCo2EEmissionsUnits\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"},\"TotalCo2EEmissionsUomId\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUomId\"}}}"
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmissionId\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"EmissionDate\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"EmissionsUnitsKwH\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"}}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Scope2Emissions\",\"description\":\"Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\\n\\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.\",\"baseEntityReference\":{\"name\":\"Scope2MarketBasedApproach\",\"path\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\"},\"primaryKey\":[\"Emisison\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"Emisison\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"Date of the emission\",\"isNullable\":true,\"name\":\"Date\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a greenhouse gas type\",\"isNullable\":true,\"name\":\"EmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a facility\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a virtual emission factor\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Scope2Emissions\",\"description\":\"Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\\n\\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.\",\"baseEntityReference\":{\"name\":\"Scope2MarketBasedApproach\",\"path\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\"},\"primaryKey\":[\"EmissionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"ReportingEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"EmissionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"Date of the emission\",\"isNullable\":true,\"name\":\"EmissionDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope2MarketBasedApproach.cdm.json/Scope2MarketBasedApproach\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"EmissionsUnitsKwH\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a greenhouse gas type\",\"isNullable\":true,\"name\":\"EmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a facility\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a virtual emission factor\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Unique identifier of a purchased gas\",\"isNullable\":true,\"name\":\"PurchasedGasId\"}]}}}",
 			"Description": "Market-based method: A method to quantify the scope 2 GHG emissions of a reporter based on GHG emissions emitted by the generators from which the reporter contractually purchases electricity bundled with contractual instruments, or contractual instruments on their own.\n\nMarket-based: Where we have options in terms of energy product or supplier, these are the emissions associated with our procurement choices in the market.",
 			"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#042C59\"}",
-			"PrimaryKeys": "Emisison",
+			"PrimaryKeys": "EmissionId",
 			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
