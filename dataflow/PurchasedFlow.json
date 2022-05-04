@@ -62,6 +62,7 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'PurchasedGas',",
+				"     recreate:true,",
 				"     input(",
 				"          PurchasedGasId as integer,",
 				"          PurchasedGasName as string",
