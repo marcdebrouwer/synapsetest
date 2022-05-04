@@ -106,6 +106,9 @@
 				},
 				{
 					"name": "surrogateKey1"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -383,9 +386,18 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> LookUpEgridId",
-				"LookupEmissionFactor keyGenerate(output(EmissionId as long),",
+				"select1 keyGenerate(output(EmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
+				"LookupEmissionFactor select(mapColumn(",
+				"          Amount,",
+				"          Date = derivedColumn1@Date,",
+				"          FacilityId,",
+				"          VirtualEmissionId,",
+				"          EmissionFactorId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
