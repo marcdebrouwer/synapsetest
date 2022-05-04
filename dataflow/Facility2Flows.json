@@ -168,7 +168,8 @@
 				"          AvailableSellingArea = {Sales area owned stores ft2},",
 				"          FacilityTypeId,",
 				"          BannerId,",
-				"          FacilitySub = {Facility ID}",
+				"          FacilitySub = {Facility ID},",
+				"          LocationId",
 				"     )) ~> sink1"
 			]
 		}
