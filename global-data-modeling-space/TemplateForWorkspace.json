@@ -2410,6 +2410,7 @@
 						"     format: 'table',",
 						"     database: 'ADESGPOC',",
 						"     tableName: 'FactEmissions',",
+						"     recreate:true,",
 						"     input(",
 						"          EmissionId as integer,",
 						"          PeriodStartTimestamp as date,",
