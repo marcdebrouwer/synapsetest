@@ -38,6 +38,9 @@
 				},
 				{
 					"name": "FromTextToInt"
+				},
+				{
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -89,13 +92,14 @@
 				"FromTextToInt, BrandData join(Brand == BannerName,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join1",
-				"join1, EnergyTypesData join(EnergyType == PurchasedGasName,",
+				"derivedColumn1, EnergyTypesData join(EnergyType == PurchasedGasName,",
 				"     joinType:'inner',",
 				"     broadcast: 'auto')~> join2",
 				"VirtualEmissionFactorData derive({virtual Location based} = replace({virtual Location based},',','.'),",
 				"          {virtual Market based} = replace({virtual Market based},',','.')) ~> CommaToPoint",
 				"CommaToPoint derive({virtual Market based} = toDouble({virtual Market based}),",
 				"          {virtual Location based} = toDouble({virtual Location based})) ~> FromTextToInt",
+				"join1 derive(EnergyType = trim(EnergyType)) ~> derivedColumn1",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
