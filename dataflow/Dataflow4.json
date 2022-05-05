@@ -188,8 +188,6 @@
 				"     mapColumn(",
 				"          FacilityId,",
 				"          FacilityName,",
-				"          GrossFloorArea,",
-				"          AvailableSellingArea,",
 				"          FacilityType = FaciityTypeName,",
 				"          FacilityOpco = BannerName,",
 				"          FacilityAdressLine = LocationAddressLine1,",
