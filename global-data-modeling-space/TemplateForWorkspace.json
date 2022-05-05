@@ -131,6 +131,57 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/EmissionsFact')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "EMissionFact",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "EmissionsFact",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"RefrigerantData": {},
+									"PurchasedData": {},
+									"MapData": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "DENORMALIZED"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/EmissionsFact')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/Facility2')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -2283,6 +2334,106 @@
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/EmissionsFact')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "RefrigerantData"
+						},
+						{
+							"name": "PurchasedData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "MapData"
+						}
+					],
+					"transformations": [
+						{
+							"name": "joinEnergy"
+						},
+						{
+							"name": "derivedColumn1"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          RefrigerantId as integer,",
+						"          PeriodStart as date,",
+						"          PeriodEnd as date,",
+						"          FuelMassVolumeUnitsLb as double,",
+						"          C02EmissionsUnits as double,",
+						"          PurchasedEnergyId as integer,",
+						"          EmissionFactorId as integer,",
+						"          FacilityId as integer,",
+						"          FuelMassKg as double,",
+						"          VirtualEmissionFactorId as integer,",
+						"          RefrigerantNumber as integer,",
+						"          LeakageStatus as string,",
+						"          LeakageVendor as string,",
+						"          RefrigerantCategory as string,",
+						"          EnergyText as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'DirectEmissionsFromRefrigeration') ~> RefrigerantData",
+						"source(output(",
+						"          PurchasedGasId as integer,",
+						"          PurchasedGasName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'PurchasedGas') ~> PurchasedData",
+						"RefrigerantData, PurchasedData join(PurchasedEnergyId == PurchasedGasId,",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> joinEnergy",
+						"joinEnergy derive(Type = \"Refrigerants\") ~> derivedColumn1",
+						"derivedColumn1 sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ADESGPOC',",
+						"     tableName: 'FactEmissions',",
+						"     input(",
+						"          EmissionId as integer,",
+						"          PeriodStartTimestamp as date,",
+						"          PeriodEndTimestamp as date,",
+						"          TotalCo2EEmissionsUnits as integer,",
+						"          TotalCo2EEmissionsUomId as integer,",
+						"          FacilityId as integer,",
+						"          EmissionFactorId as integer,",
+						"          VirtualEmissionFactorId as integer,",
+						"          EmissionSource as string",
+						"     ),",
+						"     mapColumn(",
+						"          EmissionId = RefrigerantId,",
+						"          PeriodStartTimestamp = PeriodStart,",
+						"          TotalCo2EEmissionsUnits = FuelMassKg,",
+						"          FacilityId,",
+						"          EmissionFactorId,",
+						"          VirtualEmissionFactorId,",
+						"          EmissionSource = Type",
+						"     )) ~> MapData"
+					]
+				}
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/Facility2Flows')]",
@@ -5769,6 +5920,19 @@
 												"HIVE_TYPE_STRING": "string"
 											}
 										}
+									},
+									{
+										"Name": "EmissionEnergyType",
+										"Description": "",
+										"OriginDataTypeName": {
+											"TypeName": "string",
+											"IsComplexType": false,
+											"IsNullable": true,
+											"Length": 256,
+											"Properties": {
+												"HIVE_TYPE_STRING": "string"
+											}
+										}
 									}
 								],
 								"Format": {
@@ -5805,7 +5969,7 @@
 								"IsStoredAsSubdirectories": false
 							},
 							"Properties": {
-								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"FactEmissions\",\"description\":\"Emissions summary, including scope 1 + 2\",\"baseEntityReference\":{\"name\":\"Scope1LegalEntityDirectEmissionsSummary\",\"path\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\"},\"primaryKey\":[\"EmissionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"EmissionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":false,\"name\":\"PeriodStartTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The facility of an emission\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of an emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of a virtual emission factor\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"EmissionSource\"}]}}}",
+								"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"FactEmissions\",\"description\":\"Emissions summary, including scope 1 + 2\",\"baseEntityReference\":{\"name\":\"Scope1LegalEntityDirectEmissionsSummary\",\"path\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\"},\"primaryKey\":[\"EmissionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"ReportingLegalEntityId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Legal Entity.\",\"isNullable\":false,\"name\":\"EmissionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodStartTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period start timestamp.\",\"isNullable\":false,\"name\":\"PeriodStartTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"PeriodEndTimestamp\"},\"dataType\":\"date\",\"dateFormat\":\"dd-MM-yyyy\",\"description\":\"The period end timestamp.\",\"isNullable\":true,\"name\":\"PeriodEndTimestamp\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUnits\"},\"dataType\":\"integer\",\"description\":\"The total CO2e emission units.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUnits\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Scope1LegalEntityDirectEmissionsSummary.cdm.json/Scope1LegalEntityDirectEmissionsSummary\",\"name\":\"TotalCo2EEmissionsUomId\"},\"dataType\":\"integer\",\"description\":\"The emission factor UOM.\",\"isNullable\":true,\"name\":\"TotalCo2EEmissionsUomId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The facility of an emission\",\"isNullable\":true,\"name\":\"FacilityId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of an emission factor\",\"isNullable\":true,\"name\":\"EmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"The unique identifier of a virtual emission factor\",\"isNullable\":true,\"name\":\"VirtualEmissionFactorId\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"EmissionSource\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":true,\"name\":\"EmissionEnergyType\"}]}}}",
 								"Description": "Emissions summary, including scope 1 + 2",
 								"DisplayFolderInfo": "{\"name\":\"Emissions\",\"colorCode\":\"#001475\"}",
 								"PrimaryKeys": "EmissionId",
