@@ -21,7 +21,7 @@
 					"name": "joinEnergy"
 				},
 				{
-					"name": "derivedColumn1"
+					"name": "Type"
 				}
 			],
 			"scriptLines": [
@@ -63,8 +63,8 @@
 				"RefrigerantData, PurchasedData join(PurchasedEnergyId == PurchasedGasId,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinEnergy",
-				"joinEnergy derive(Type = \"Refrigerants\") ~> derivedColumn1",
-				"derivedColumn1 sink(allowSchemaDrift: true,",
+				"joinEnergy derive(Type = \"Refrigerants\") ~> Type",
+				"Type sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
@@ -80,7 +80,8 @@
 				"          FacilityId as integer,",
 				"          EmissionFactorId as integer,",
 				"          VirtualEmissionFactorId as integer,",
-				"          EmissionSource as string",
+				"          EmissionSource as string,",
+				"          EmissionEnergyType as string",
 				"     ),",
 				"     mapColumn(",
 				"          EmissionId = RefrigerantId,",
@@ -89,7 +90,8 @@
 				"          FacilityId,",
 				"          EmissionFactorId,",
 				"          VirtualEmissionFactorId,",
-				"          EmissionSource = Type",
+				"          EmissionSource = Type,",
+				"          EmissionEnergyType = PurchasedGasName",
 				"     )) ~> MapData"
 			]
 		}
