@@ -9,6 +9,9 @@
 				},
 				{
 					"name": "PurchasedData"
+				},
+				{
+					"name": "EmissionsData"
 				}
 			],
 			"sinks": [
@@ -22,6 +25,9 @@
 				},
 				{
 					"name": "lookup1"
+				},
+				{
+					"name": "Type2"
 				}
 			],
 			"scriptLines": [
@@ -60,11 +66,31 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'PurchasedGas') ~> PurchasedData",
+				"source(output(",
+				"          EmissionId as integer,",
+				"          EmissionDate as date,",
+				"          EmissionsUnitsKwH as double,",
+				"          EmissionFactorId as integer,",
+				"          FacilityId as integer,",
+				"          VirtualEmissionFactorId as integer,",
+				"          PurchasedGasId as integer,",
+				"          EnergyType as string,",
+				"          EmissionUnits as double,",
+				"          EnergyTypeAdj as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Scope2Emissions') ~> EmissionsData",
 				"lookup1 derive(Type = \"Refrigerants\") ~> Type",
 				"RefrigerantData, PurchasedData lookup(PurchasedEnergyId == PurchasedGasId,",
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup1",
+				"EmissionsData derive(Type = \"Scope 2 Emissions\") ~> Type2",
 				"Type sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
