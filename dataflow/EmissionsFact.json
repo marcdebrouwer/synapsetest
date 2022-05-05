@@ -82,7 +82,8 @@
 				"          EmissionFactorId as integer,",
 				"          VirtualEmissionFactorId as integer,",
 				"          EmissionSource as string,",
-				"          EmissionEnergyType as string",
+				"          EmissionEnergyType as string,",
+				"          EmissionCategory as string",
 				"     ),",
 				"     mapColumn(",
 				"          EmissionId = RefrigerantId,",
@@ -92,7 +93,8 @@
 				"          EmissionFactorId,",
 				"          VirtualEmissionFactorId,",
 				"          EmissionSource = Type,",
-				"          EmissionEnergyType = PurchasedGasName",
+				"          EmissionEnergyType = PurchasedGasName,",
+				"          EmissionCategory = RefrigerantCategory",
 				"     )) ~> MapData"
 			]
 		}
