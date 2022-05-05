@@ -1,0 +1,139 @@
+{
+	"name": "Dataflow4",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "FacilityData"
+				},
+				{
+					"name": "LocationData"
+				},
+				{
+					"name": "FacilityTypeData"
+				},
+				{
+					"name": "BannerData"
+				},
+				{
+					"name": "CountryData"
+				},
+				{
+					"name": "EgridRegionData"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "joinLocation"
+				},
+				{
+					"name": "joinFacilityType"
+				},
+				{
+					"name": "joinCountry"
+				},
+				{
+					"name": "join3"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          FacilityId as integer,",
+				"          FacilityName as string,",
+				"          GrossFloorArea as integer,",
+				"          AvailableSellingArea as integer,",
+				"          FacilityTypeId as integer,",
+				"          BannerId as integer,",
+				"          FacilitySub as string,",
+				"          LocationId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Facility') ~> FacilityData",
+				"source(output(",
+				"          LocationId as integer,",
+				"          LocationName as string,",
+				"          LocationAddressLine1 as string,",
+				"          LocationCity as string,",
+				"          LocationState as string,",
+				"          LocationZipCode as string,",
+				"          CountryId as integer,",
+				"          EgridRegionId as integer,",
+				"          LocationNo as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Location') ~> LocationData",
+				"source(output(",
+				"          FacilityTypeId as integer,",
+				"          FaciityTypeName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'FacilityType') ~> FacilityTypeData",
+				"source(output(",
+				"          BannerId as integer,",
+				"          BannerName as string,",
+				"          OrganizationId as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Banner') ~> BannerData",
+				"source(output(",
+				"          CountryId as integer,",
+				"          IsoCountryName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'Country') ~> CountryData",
+				"source(output(",
+				"          EgridRegionId as integer,",
+				"          EgridRegionName as string,",
+				"          EGridRegionLongName as string,",
+				"          EgridZipcode as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'EgridRegions') ~> EgridRegionData",
+				"FacilityData, LocationData join(FacilityData@LocationId == LocationData@LocationId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinLocation",
+				"joinLocation, FacilityTypeData join(FacilityData@FacilityTypeId == FacilityTypeData@FacilityTypeId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinFacilityType",
+				"joinFacilityType, CountryData join(LocationData@CountryId == CountryData@CountryId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinCountry",
+				"joinCountry join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join3"
+			]
+		}
+	}
+}

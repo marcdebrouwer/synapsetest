@@ -126,25 +126,16 @@
 					"name": "joinEgrid"
 				},
 				{
-					"name": "FilterOutZeroes"
-				},
-				{
 					"name": "surrogateKey1"
 				},
 				{
 					"name": "split1"
 				},
 				{
-					"name": "join1"
-				},
-				{
 					"name": "select3"
 				},
 				{
 					"name": "select4"
-				},
-				{
-					"name": "join2"
 				},
 				{
 					"name": "join3"
@@ -154,6 +145,15 @@
 				},
 				{
 					"name": "union1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "lookup2"
 				}
 			],
 			"scriptLines": [
@@ -391,7 +391,7 @@
 				"          {Heat import} = toDouble({Heat import}),",
 				"          EFEC = toDouble(EFEC)) ~> MakeDouble2",
 				"unpivot2, unpivot1 union(byName: true)~> AppendData",
-				"FilterOutZeroes derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
+				"AppendKWHs derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
 				"CreateJoinColumn, SelectFacilityData lookup(CreateJoinColumn@JoinColumn == SelectFacilityData@JoinColumn,",
 				"     multiple: false,",
 				"     pickup: 'any',",
@@ -453,7 +453,7 @@
 				"     skipDuplicateMapOutputs: true) ~> ChangeColumnName1",
 				"derivedColumn4 split(case(IsKwh == \"Yes\",true()),",
 				"     disjoint: false) ~> SplitForKWHCalc@(KWH, Therms)",
-				"AppendData derive(IsKwh = case(\r",
+				"filter1 derive(IsKwh = case(\r",
 				"    EnergyType == \"Electricity\", \"Yes\",\r",
 				"    EnergyType == \"EFEC\", \"Yes\", \r",
 				"    EnergyType == \"Solar Used On-Site\", \"Yes\",\r",
@@ -470,19 +470,12 @@
 				"joinLocation, EgridRegionData join(LocationData@EgridRegionId == EgridRegionData@EgridRegionId,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinEgrid",
-				"AppendKWHs filter(Amount != 0.0) ~> FilterOutZeroes",
 				"union1 keyGenerate(output(EmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
 				"select4 split(case(EnergyType == \"Electricity\", true()),",
 				"     disjoint: false) ~> split1@(Elec, NoElec)",
-				"split1@Elec, EmissionFactorData join(Country == EmissionCountry",
-				"     && split1@Elec@PurchasedGasId == EmissionFactorData@PurchasedGasId",
-				"     && Date == EmissionStartDate",
-				"     && EGridRegionLongName == EgridRegion,",
-				"     joinType:'left',",
-				"     broadcast: 'auto')~> join1",
-				"join1 select(mapColumn(",
+				"lookup2 select(mapColumn(",
 				"          {Facility Name},",
 				"          EnergyType,",
 				"          Amount,",
@@ -497,7 +490,7 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select3",
-				"join2 select(mapColumn(",
+				"lookup1 select(mapColumn(",
 				"          {Facility Name},",
 				"          {Facility Type},",
 				"          EnergyType,",
@@ -515,11 +508,6 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select4",
-				"LookupGasId, VirtualEmissionsData join(SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
-				"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId",
-				"     && CreateDate@Date == VirtualEmissionsData@Date,",
-				"     joinType:'left',",
-				"     broadcast: 'auto')~> join2",
 				"split1@NoElec, EmissionFactorData join(Date == EmissionStartDate",
 				"     && split1@NoElec@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
 				"     joinType:'left',",
@@ -541,6 +529,20 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select5",
 				"select3, select5 union(byName: true)~> union1",
+				"AppendData filter(Amount != 0.0) ~> filter1",
+				"LookupGasId, VirtualEmissionsData lookup(SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
+				"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId",
+				"     && CreateDate@Date == VirtualEmissionsData@Date,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"split1@Elec, EmissionFactorData lookup(Country == EmissionCountry",
+				"     && split1@Elec@PurchasedGasId == EmissionFactorData@PurchasedGasId",
+				"     && Date == EmissionStartDate",
+				"     && EGridRegionLongName == EgridRegion,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup2",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
