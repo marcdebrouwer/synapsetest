@@ -512,9 +512,8 @@
 				"          FacilityId,",
 				"          PurchasedGasId,",
 				"          EnergyType = PurchasedGasName,",
-				"          EnergyTypeAdj = {Facility Name},",
-				"          VirtualEmissionFactorId = VirtualEmissionId,",
-				"          EnergyTypeAdj = Adj_EnergyType",
+				"          EnergyTypeAdj = Adj_EnergyType,",
+				"          VirtualEmissionFactorId = VirtualEmissionId",
 				"     )) ~> sink1"
 			]
 		}
