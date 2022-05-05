@@ -133,6 +133,59 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/FacilityDenormalized')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "FacilityDenormalized",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow4",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"FacilityData": {},
+									"LocationData": {},
+									"FacilityTypeData": {},
+									"BannerData": {},
+									"CountryData": {},
+									"EgridRegionData": {},
+									"OrgData": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/Dataflow4')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/MapEgrids')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -1065,25 +1118,16 @@
 							"name": "joinEgrid"
 						},
 						{
-							"name": "FilterOutZeroes"
-						},
-						{
 							"name": "surrogateKey1"
 						},
 						{
 							"name": "split1"
 						},
 						{
-							"name": "join1"
-						},
-						{
 							"name": "select3"
 						},
 						{
 							"name": "select4"
-						},
-						{
-							"name": "join2"
 						},
 						{
 							"name": "join3"
@@ -1093,6 +1137,15 @@
 						},
 						{
 							"name": "union1"
+						},
+						{
+							"name": "filter1"
+						},
+						{
+							"name": "lookup1"
+						},
+						{
+							"name": "lookup2"
 						}
 					],
 					"scriptLines": [
@@ -1330,7 +1383,7 @@
 						"          {Heat import} = toDouble({Heat import}),",
 						"          EFEC = toDouble(EFEC)) ~> MakeDouble2",
 						"unpivot2, unpivot1 union(byName: true)~> AppendData",
-						"FilterOutZeroes derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
+						"AppendKWHs derive(Date = toDate(\"01-10-2021\",'dd-MM-yyyy')) ~> CreateDate",
 						"CreateJoinColumn, SelectFacilityData lookup(CreateJoinColumn@JoinColumn == SelectFacilityData@JoinColumn,",
 						"     multiple: false,",
 						"     pickup: 'any',",
@@ -1392,7 +1445,7 @@
 						"     skipDuplicateMapOutputs: true) ~> ChangeColumnName1",
 						"derivedColumn4 split(case(IsKwh == \"Yes\",true()),",
 						"     disjoint: false) ~> SplitForKWHCalc@(KWH, Therms)",
-						"AppendData derive(IsKwh = case(\r",
+						"filter1 derive(IsKwh = case(\r",
 						"    EnergyType == \"Electricity\", \"Yes\",\r",
 						"    EnergyType == \"EFEC\", \"Yes\", \r",
 						"    EnergyType == \"Solar Used On-Site\", \"Yes\",\r",
@@ -1409,19 +1462,12 @@
 						"joinLocation, EgridRegionData join(LocationData@EgridRegionId == EgridRegionData@EgridRegionId,",
 						"     joinType:'left',",
 						"     broadcast: 'auto')~> joinEgrid",
-						"AppendKWHs filter(Amount != 0.0) ~> FilterOutZeroes",
 						"union1 keyGenerate(output(EmissionId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
 						"select4 split(case(EnergyType == \"Electricity\", true()),",
 						"     disjoint: false) ~> split1@(Elec, NoElec)",
-						"split1@Elec, EmissionFactorData join(Country == EmissionCountry",
-						"     && split1@Elec@PurchasedGasId == EmissionFactorData@PurchasedGasId",
-						"     && Date == EmissionStartDate",
-						"     && EGridRegionLongName == EgridRegion,",
-						"     joinType:'left',",
-						"     broadcast: 'auto')~> join1",
-						"join1 select(mapColumn(",
+						"lookup2 select(mapColumn(",
 						"          {Facility Name},",
 						"          EnergyType,",
 						"          Amount,",
@@ -1436,7 +1482,7 @@
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> select3",
-						"join2 select(mapColumn(",
+						"lookup1 select(mapColumn(",
 						"          {Facility Name},",
 						"          {Facility Type},",
 						"          EnergyType,",
@@ -1454,11 +1500,6 @@
 						"     ),",
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> select4",
-						"LookupGasId, VirtualEmissionsData join(SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
-						"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId",
-						"     && CreateDate@Date == VirtualEmissionsData@Date,",
-						"     joinType:'left',",
-						"     broadcast: 'auto')~> join2",
 						"split1@NoElec, EmissionFactorData join(Date == EmissionStartDate",
 						"     && split1@NoElec@PurchasedGasId == EmissionFactorData@PurchasedGasId,",
 						"     joinType:'left',",
@@ -1480,6 +1521,20 @@
 						"     skipDuplicateMapInputs: true,",
 						"     skipDuplicateMapOutputs: true) ~> select5",
 						"select3, select5 union(byName: true)~> union1",
+						"AppendData filter(Amount != 0.0) ~> filter1",
+						"LookupGasId, VirtualEmissionsData lookup(SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
+						"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId",
+						"     && CreateDate@Date == VirtualEmissionsData@Date,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookup1",
+						"split1@Elec, EmissionFactorData lookup(Country == EmissionCountry",
+						"     && split1@Elec@PurchasedGasId == EmissionFactorData@PurchasedGasId",
+						"     && Date == EmissionStartDate",
+						"     && EGridRegionLongName == EgridRegion,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookup2",
 						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -1589,6 +1644,212 @@
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/linkedServices/global-data-modeling-space-WorkspaceDefaultStorage')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Dataflow4')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "FacilityData"
+						},
+						{
+							"name": "LocationData"
+						},
+						{
+							"name": "FacilityTypeData"
+						},
+						{
+							"name": "BannerData"
+						},
+						{
+							"name": "CountryData"
+						},
+						{
+							"name": "EgridRegionData"
+						},
+						{
+							"name": "OrgData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "sink1"
+						}
+					],
+					"transformations": [
+						{
+							"name": "joinLocation"
+						},
+						{
+							"name": "joinFacilityType"
+						},
+						{
+							"name": "joinCountry"
+						},
+						{
+							"name": "joinBanner"
+						},
+						{
+							"name": "joinEgrid"
+						},
+						{
+							"name": "joinOrganization"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          FacilityId as integer,",
+						"          FacilityName as string,",
+						"          GrossFloorArea as integer,",
+						"          AvailableSellingArea as integer,",
+						"          FacilityTypeId as integer,",
+						"          BannerId as integer,",
+						"          FacilitySub as string,",
+						"          LocationId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Facility') ~> FacilityData",
+						"source(output(",
+						"          LocationId as integer,",
+						"          LocationName as string,",
+						"          LocationAddressLine1 as string,",
+						"          LocationCity as string,",
+						"          LocationState as string,",
+						"          LocationZipCode as string,",
+						"          CountryId as integer,",
+						"          EgridRegionId as integer,",
+						"          LocationNo as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Location') ~> LocationData",
+						"source(output(",
+						"          FacilityTypeId as integer,",
+						"          FaciityTypeName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'FacilityType') ~> FacilityTypeData",
+						"source(output(",
+						"          BannerId as integer,",
+						"          BannerName as string,",
+						"          OrganizationId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Banner') ~> BannerData",
+						"source(output(",
+						"          CountryId as integer,",
+						"          IsoCountryName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Country') ~> CountryData",
+						"source(output(",
+						"          EgridRegionId as integer,",
+						"          EgridRegionName as string,",
+						"          EGridRegionLongName as string,",
+						"          EgridZipcode as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'EgridRegions') ~> EgridRegionData",
+						"source(output(",
+						"          OrganizationId as integer,",
+						"          OrganizationName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'PartyOrganization') ~> OrgData",
+						"FacilityData, LocationData join(FacilityData@LocationId == LocationData@LocationId,",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> joinLocation",
+						"joinLocation, FacilityTypeData join(FacilityData@FacilityTypeId == FacilityTypeData@FacilityTypeId,",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> joinFacilityType",
+						"joinFacilityType, CountryData join(LocationData@CountryId == CountryData@CountryId,",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> joinCountry",
+						"joinCountry, BannerData join(FacilityData@BannerId == BannerData@BannerId,",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> joinBanner",
+						"joinBanner, EgridRegionData join(LocationData@EgridRegionId == EgridRegionData@EgridRegionId,",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> joinEgrid",
+						"joinEgrid, OrgData join(BannerData@OrganizationId == OrgData@OrganizationId,",
+						"     joinType:'left',",
+						"     broadcast: 'auto')~> joinOrganization",
+						"joinOrganization sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ADESGPOC',",
+						"     tableName: 'DimFacility',",
+						"     input(",
+						"          FacilityId as integer,",
+						"          FacilityName as string,",
+						"          GrossFloorArea as double,",
+						"          AvailableSellingArea as double,",
+						"          FacilityType as string,",
+						"          FacilityOpco as string,",
+						"          FacilityAdressLine as string,",
+						"          FacilityCountry as string,",
+						"          FacilityState as string,",
+						"          FacilityZipcode as string,",
+						"          FacilityEgridRegion as string,",
+						"          FacilityOrganization as string",
+						"     ),",
+						"     mapColumn(",
+						"          FacilityId,",
+						"          FacilityName,",
+						"          GrossFloorArea,",
+						"          AvailableSellingArea,",
+						"          FacilityType = FaciityTypeName,",
+						"          FacilityOpco = BannerName,",
+						"          FacilityAdressLine = LocationAddressLine1,",
+						"          FacilityZipcode = LocationZipCode,",
+						"          FacilityState = LocationState,",
+						"          FacilityEgridRegion = EGridRegionLongName,",
+						"          FacilityOrganization = OrganizationName",
+						"     )) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('workspaceName'), '/EmissionFactors')]",
