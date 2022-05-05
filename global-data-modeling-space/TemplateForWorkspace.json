@@ -2413,7 +2413,8 @@
 						"          EmissionFactorId as integer,",
 						"          VirtualEmissionFactorId as integer,",
 						"          EmissionSource as string,",
-						"          EmissionEnergyType as string",
+						"          EmissionEnergyType as string,",
+						"          EmissionCategory as string",
 						"     ),",
 						"     mapColumn(",
 						"          EmissionId = RefrigerantId,",
@@ -2423,7 +2424,8 @@
 						"          EmissionFactorId,",
 						"          VirtualEmissionFactorId,",
 						"          EmissionSource = Type,",
-						"          EmissionEnergyType = PurchasedGasName",
+						"          EmissionEnergyType = PurchasedGasName,",
+						"          EmissionCategory = RefrigerantCategory",
 						"     )) ~> MapData"
 					]
 				}
@@ -5335,8 +5337,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/DimEmissionFactor",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -5577,8 +5579,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/DimFacility",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -5730,8 +5732,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/DimVirtualEmissionFactor",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
@@ -5951,8 +5953,8 @@
 									"Properties": {
 										"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ADESGPOC/FactEmissions",
 										"delimiter": ",",
-										"multiLine": "false",
 										"firstRowAsHeader": "false",
+										"multiLine": "false",
 										"serialization.format": "1",
 										"escape": "\\",
 										"quote": "\"",
