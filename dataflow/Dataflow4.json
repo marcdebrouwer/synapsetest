@@ -21,9 +21,16 @@
 				},
 				{
 					"name": "EgridRegionData"
+				},
+				{
+					"name": "OrgData"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "joinLocation"
@@ -35,7 +42,13 @@
 					"name": "joinCountry"
 				},
 				{
-					"name": "join3"
+					"name": "joinBanner"
+				},
+				{
+					"name": "joinEgrid"
+				},
+				{
+					"name": "joinOrganization"
 				}
 			],
 			"scriptLines": [
@@ -121,6 +134,17 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'EgridRegions') ~> EgridRegionData",
+				"source(output(",
+				"          OrganizationId as integer,",
+				"          OrganizationName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'PartyOrganization') ~> OrgData",
 				"FacilityData, LocationData join(FacilityData@LocationId == LocationData@LocationId,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinLocation",
@@ -130,9 +154,49 @@
 				"joinFacilityType, CountryData join(LocationData@CountryId == CountryData@CountryId,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinCountry",
-				"joinCountry join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     joinType:'inner',",
-				"     broadcast: 'auto')~> join3"
+				"joinCountry, BannerData join(FacilityData@BannerId == BannerData@BannerId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinBanner",
+				"joinBanner, EgridRegionData join(LocationData@EgridRegionId == EgridRegionData@EgridRegionId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinEgrid",
+				"joinEgrid, OrgData join(BannerData@OrganizationId == OrgData@OrganizationId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinOrganization",
+				"joinOrganization sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ADESGPOC',",
+				"     tableName: 'DimFacility',",
+				"     input(",
+				"          FacilityId as integer,",
+				"          FacilityName as string,",
+				"          GrossFloorArea as double,",
+				"          AvailableSellingArea as double,",
+				"          FacilityType as string,",
+				"          FacilityOpco as string,",
+				"          FacilityAdressLine as string,",
+				"          FacilityCountry as string,",
+				"          FacilityState as string,",
+				"          FacilityZipcode as string,",
+				"          FacilityEgridRegion as string,",
+				"          FacilityOrganization as string",
+				"     ),",
+				"     mapColumn(",
+				"          FacilityId,",
+				"          FacilityName,",
+				"          GrossFloorArea,",
+				"          AvailableSellingArea,",
+				"          FacilityType = FaciityTypeName,",
+				"          FacilityOpco = BannerName,",
+				"          FacilityAdressLine = LocationAddressLine1,",
+				"          FacilityZipcode = LocationZipCode,",
+				"          FacilityState = LocationState,",
+				"          FacilityEgridRegion = EGridRegionLongName,",
+				"          FacilityOrganization = OrganizationName",
+				"     )) ~> sink1"
 			]
 		}
 	}
