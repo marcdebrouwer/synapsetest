@@ -1,0 +1,109 @@
+{
+	"name": "EmissionsFact",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "RefrigerantData"
+				},
+				{
+					"name": "PurchasedData"
+				},
+				{
+					"name": "Facility"
+				}
+			],
+			"sinks": [
+				{
+					"name": "MapData"
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "join2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          RefrigerantId as integer,",
+				"          PeriodStart as date,",
+				"          PeriodEnd as date,",
+				"          FuelMassVolumeUnitsLb as double,",
+				"          C02EmissionsUnits as double,",
+				"          PurchasedEnergyId as integer,",
+				"          EmissionFactorId as integer,",
+				"          FacilityId as integer,",
+				"          FuelMassKg as double,",
+				"          VirtualEmissionFactorId as integer,",
+				"          RefrigerantNumber as integer,",
+				"          LeakageStatus as string,",
+				"          LeakageVendor as string,",
+				"          RefrigerantCategory as string,",
+				"          EnergyText as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'DirectEmissionsFromRefrigeration') ~> RefrigerantData",
+				"source(output(",
+				"          PurchasedGasId as integer,",
+				"          PurchasedGasName as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: 'PurchasedGas') ~> PurchasedData",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ESGNORMALIZEDMODEL',",
+				"     tableName: '') ~> Facility",
+				"RefrigerantData join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join1",
+				"join1 join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     broadcast: 'auto')~> join2",
+				"join2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     store: 'synapse',",
+				"     databaseType: 'spark',",
+				"     format: 'table',",
+				"     database: 'ADESGPOC',",
+				"     tableName: 'FactEmissions',",
+				"     input(",
+				"          EmissionId as integer,",
+				"          PeriodStartTimestamp as date,",
+				"          PeriodEndTimestamp as date,",
+				"          TotalCo2EEmissionsUnits as integer,",
+				"          TotalCo2EEmissionsUomId as integer,",
+				"          FacilityId as integer,",
+				"          EmissionFactorId as integer,",
+				"          VirtualEmissionFactorId as integer,",
+				"          EmissionSource as string",
+				"     ),",
+				"     mapColumn(",
+				"          EmissionId = RefrigerantId,",
+				"          PeriodStartTimestamp = PeriodStart,",
+				"          TotalCo2EEmissionsUnits = FuelMassKg,",
+				"          FacilityId,",
+				"          EmissionFactorId,",
+				"          VirtualEmissionFactorId,",
+				"          EmissionSource = FuelMassKg",
+				"     )) ~> MapData"
+			]
+		}
+	}
+}
