@@ -29,6 +29,54 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('workspaceName'), '/EmissionFactorDenormalized')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "EmissionFactorDenormalized",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DenormalizedEmisionFactor",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"sourceEmissions": {},
+									"PurchasedGasData": {},
+									"sinkEmissions": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/DenormalizedEmisionFactor')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/EmissionFactors')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -1847,6 +1895,102 @@
 						"          GrossFloorArea,",
 						"          AvailableSellingArea",
 						"     )) ~> sink1"
+					]
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/DenormalizedEmisionFactor')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "sourceEmissions"
+						},
+						{
+							"name": "PurchasedGasData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "sinkEmissions"
+						}
+					],
+					"transformations": [
+						{
+							"name": "lookupGas"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          EmissionFactorId as integer,",
+						"          EmissionFactorName as string,",
+						"          EmissionCategory as string,",
+						"          EmissionScope as string,",
+						"          EmissionFactorLocationBased as double,",
+						"          EmissionFactorMarketBased as double,",
+						"          UnitOfMeasure as string,",
+						"          EmissionStartDate as date,",
+						"          EmissionEndDate as date,",
+						"          EgridRegion as string,",
+						"          PurchasedGasId as integer,",
+						"          EmissionCountry as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'EmissionFactors') ~> sourceEmissions",
+						"source(output(",
+						"          PurchasedGasId as integer,",
+						"          PurchasedGasName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'PurchasedGas') ~> PurchasedGasData",
+						"sourceEmissions, PurchasedGasData lookup(sourceEmissions@PurchasedGasId == PurchasedGasData@PurchasedGasId,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookupGas",
+						"lookupGas sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ADESGPOC',",
+						"     tableName: 'DimEmissionFactor',",
+						"     input(",
+						"          EmissionFactorId as integer,",
+						"          EmissionFactorName as string,",
+						"          EmissionFactorLocationBased as double,",
+						"          EmissionFactorMarketBased as double,",
+						"          EmissionDate as date,",
+						"          EmissionCountry as string,",
+						"          EmissionFactorScope as string,",
+						"          EmissionFactorUom as string,",
+						"          EmissionFactorEgridRegion as string",
+						"     ),",
+						"     mapColumn(",
+						"          EmissionFactorId,",
+						"          EmissionFactorName = PurchasedGasName,",
+						"          EmissionFactorLocationBased,",
+						"          EmissionFactorMarketBased,",
+						"          EmissionFactorUom = UnitOfMeasure,",
+						"          EmissionDate = EmissionStartDate,",
+						"          EmissionFactorEgridRegion = EgridRegion,",
+						"          EmissionCountry,",
+						"          EmissionFactorScope = EmissionScope",
+						"     )) ~> sinkEmissions"
 					]
 				}
 			},
