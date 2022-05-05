@@ -552,12 +552,13 @@
 				"     input(",
 				"          EmissionId as integer,",
 				"          EmissionDate as date,",
-				"          EmissionsUnitsKwH as integer,",
+				"          EmissionsUnitsKwH as double,",
+				"          EmissionFactorId as integer,",
 				"          FacilityId as integer,",
 				"          VirtualEmissionFactorId as integer,",
-				"          EmissionFactorId as integer,",
 				"          PurchasedGasId as integer,",
-				"          CountryText as string",
+				"          CountryText as string,",
+				"          EmissionUnits as double",
 				"     ),",
 				"     mapColumn(",
 				"          EmissionId,",
@@ -567,7 +568,8 @@
 				"          PurchasedGasId,",
 				"          CountryText = PurchasedGasName,",
 				"          VirtualEmissionFactorId = VirtualEmissionId,",
-				"          EmissionFactorId",
+				"          EmissionFactorId,",
+				"          EmissionUnits = Amount",
 				"     )) ~> sink1"
 			]
 		}
