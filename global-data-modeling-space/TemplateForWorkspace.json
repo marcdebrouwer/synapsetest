@@ -70,6 +70,9 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
+				"folder": {
+					"name": "DENORMALIZED"
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -226,6 +229,9 @@
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "DENORMALIZED"
 				},
 				"annotations": []
 			},
@@ -708,6 +714,58 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/VirtualEmissionFactorDenormalized')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "VirtualEMissionFactorFlow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "DataFlowDenormalized",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"VirtualEmissionData": {},
+									"PurchasedData": {},
+									"BannerData": {},
+									"sinkVirtual": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "DENORMALIZED"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/DataFlowDenormalized')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/VirtualEmissionFactors')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -912,6 +970,116 @@
 							"timeToLive": 0
 						}
 					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/DataFlowDenormalized')]",
+			"type": "Microsoft.Synapse/workspaces/dataflows",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "MappingDataFlow",
+				"typeProperties": {
+					"sources": [
+						{
+							"name": "VirtualEmissionData"
+						},
+						{
+							"name": "PurchasedData"
+						},
+						{
+							"name": "BannerData"
+						}
+					],
+					"sinks": [
+						{
+							"name": "sinkVirtual"
+						}
+					],
+					"transformations": [
+						{
+							"name": "lookupPurchasedData"
+						},
+						{
+							"name": "lookupBanner"
+						}
+					],
+					"scriptLines": [
+						"source(output(",
+						"          VirtualEmissionId as integer,",
+						"          PurchasedGasId as integer,",
+						"          Date as date,",
+						"          VirtualEmissionScope as string,",
+						"          BannerId as integer,",
+						"          VirtualEmissionFactorLocation as double,",
+						"          VirtualEmissionFactorMarket as double",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'VirtualEmissionFactor') ~> VirtualEmissionData",
+						"source(output(",
+						"          PurchasedGasId as integer,",
+						"          PurchasedGasName as string",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'PurchasedGas') ~> PurchasedData",
+						"source(output(",
+						"          BannerId as integer,",
+						"          BannerName as string,",
+						"          OrganizationId as integer",
+						"     ),",
+						"     allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ESGNORMALIZEDMODEL',",
+						"     tableName: 'Banner') ~> BannerData",
+						"VirtualEmissionData, PurchasedData lookup(VirtualEmissionData@PurchasedGasId == PurchasedData@PurchasedGasId,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookupPurchasedData",
+						"lookupPurchasedData, BannerData lookup(VirtualEmissionData@BannerId == BannerData@BannerId,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookupBanner",
+						"lookupBanner sink(allowSchemaDrift: true,",
+						"     validateSchema: false,",
+						"     store: 'synapse',",
+						"     databaseType: 'spark',",
+						"     format: 'table',",
+						"     database: 'ADESGPOC',",
+						"     tableName: 'DimVirtualEmissionFactor',",
+						"     recreate:true,",
+						"     input(",
+						"          VirtualEmissionFactorId as integer,",
+						"          VirtualEmissionFactorName as string,",
+						"          VirtualEmissionFactorMarketBased as double,",
+						"          VirtualEmissionFactorLocationBased as double,",
+						"          VirtualEmissionDate as date,",
+						"          VirtualEmissionBanner as string,",
+						"          VirtualEmissionScope as string",
+						"     ),",
+						"     mapColumn(",
+						"          VirtualEmissionFactorId = VirtualEmissionId,",
+						"          VirtualEmissionDate = Date,",
+						"          VirtualEmissionScope,",
+						"          VirtualEmissionFactorLocationBased = VirtualEmissionFactorLocation,",
+						"          VirtualEmissionFactorMarketBased = VirtualEmissionFactorMarket,",
+						"          VirtualEmissionFactorName = PurchasedGasName,",
+						"          VirtualEmissionBanner = BannerName",
+						"     )) ~> sinkVirtual"
+					]
 				}
 			},
 			"dependsOn": []
@@ -1969,6 +2137,7 @@
 						"     format: 'table',",
 						"     database: 'ADESGPOC',",
 						"     tableName: 'DimEmissionFactor',",
+						"     recreate:true,",
 						"     input(",
 						"          EmissionFactorId as integer,",
 						"          EmissionFactorName as string,",
