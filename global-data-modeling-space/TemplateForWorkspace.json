@@ -765,6 +765,66 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/Scope2Emissions2_copy1')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "EmissionsFLow",
+						"type": "ExecuteDataFlow",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataflow": {
+								"referenceName": "Dataflow2",
+								"type": "DataFlowReference",
+								"parameters": {},
+								"datasetParameters": {
+									"AholdEnergy": {},
+									"DelhaizeEnergy": {},
+									"FacilityData": {},
+									"VirtualEmissionsData": {},
+									"EmissionFactorData": {},
+									"Facility2Data": {},
+									"BannerData": {},
+									"LocationData": {},
+									"PurchasedGasData": {},
+									"EgridRegionData": {},
+									"CountryData": {},
+									"sink1": {}
+								}
+							},
+							"staging": {},
+							"compute": {
+								"coreCount": 8,
+								"computeType": "General"
+							},
+							"traceLevel": "Fine"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"folder": {
+					"name": "1NF TABLES"
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/dataflows/Dataflow2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/VirtualEmissionFactorDenormalized')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
