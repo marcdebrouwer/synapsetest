@@ -65,6 +65,7 @@
 				"     format: 'table',",
 				"     database: 'ADESGPOC',",
 				"     tableName: 'DimEmissionFactor',",
+				"     recreate:true,",
 				"     input(",
 				"          EmissionFactorId as integer,",
 				"          EmissionFactorName as string,",

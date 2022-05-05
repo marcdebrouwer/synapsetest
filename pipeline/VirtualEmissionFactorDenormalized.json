@@ -1,9 +1,9 @@
 {
-	"name": "EmissionFactorDenormalized",
+	"name": "VirtualEmissionFactorDenormalized",
 	"properties": {
 		"activities": [
 			{
-				"name": "EmissionFactorDenormalized",
+				"name": "VirtualEMissionFactorFlow",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "DenormalizedEmisionFactor",
+						"referenceName": "DataFlowDenormalized",
 						"type": "DataFlowReference"
 					},
 					"compute": {
