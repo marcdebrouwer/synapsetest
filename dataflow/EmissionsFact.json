@@ -161,8 +161,7 @@
 				"          EmissionFactorId,",
 				"          VirtualEmissionFactorId,",
 				"          EmissionSource = Type,",
-				"          EmissionEnergyType = PurchasedGasName,",
-				"          EmissionCategory = RefrigerantCategory",
+				"          EmissionEnergyType = PurchasedGasName",
 				"     )) ~> MapData"
 			]
 		}
