@@ -24,10 +24,22 @@
 					"name": "Type"
 				},
 				{
-					"name": "lookup1"
+					"name": "lookupEnergy1"
 				},
 				{
 					"name": "Type2"
+				},
+				{
+					"name": "union1"
+				},
+				{
+					"name": "lookupEnergy2"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "select2"
 				}
 			],
 			"scriptLines": [
@@ -85,13 +97,42 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'Scope2Emissions') ~> EmissionsData",
-				"lookup1 derive(Type = \"Refrigerants\") ~> Type",
+				"select1 derive(Type = \"Refrigerants\") ~> Type",
 				"RefrigerantData, PurchasedData lookup(PurchasedEnergyId == PurchasedGasId,",
 				"     multiple: false,",
 				"     pickup: 'any',",
-				"     broadcast: 'auto')~> lookup1",
-				"EmissionsData derive(Type = \"Scope 2 Emissions\") ~> Type2",
-				"Type sink(allowSchemaDrift: true,",
+				"     broadcast: 'auto')~> lookupEnergy1",
+				"select2 derive(Type = \"Scope 2 Emissions\") ~> Type2",
+				"Type, Type2 union(byName: true)~> union1",
+				"EmissionsData, PurchasedData lookup(EmissionsData@PurchasedGasId == PurchasedData@PurchasedGasId,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookupEnergy2",
+				"lookupEnergy1 select(mapColumn(",
+				"          RefrigerantId,",
+				"          Date = PeriodStart,",
+				"          PurchasedEnergyId,",
+				"          EmissionFactorId,",
+				"          FacilityId,",
+				"          Units = FuelMassKg,",
+				"          VirtualEmissionFactorId,",
+				"          PurchasedGasName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"lookupEnergy2 select(mapColumn(",
+				"          Date = EmissionDate,",
+				"          Units = EmissionsUnitsKwH,",
+				"          EmissionFactorId,",
+				"          FacilityId,",
+				"          VirtualEmissionFactorId,",
+				"          PurchasedGasId = EmissionsData@PurchasedGasId,",
+				"          EnergyTypeAdj,",
+				"          PurchasedGasName",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"union1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
@@ -114,8 +155,8 @@
 				"     ),",
 				"     mapColumn(",
 				"          EmissionId = RefrigerantId,",
-				"          PeriodStartTimestamp = PeriodStart,",
-				"          TotalUnits = FuelMassKg,",
+				"          PeriodStartTimestamp = Date,",
+				"          TotalUnits = Units,",
 				"          FacilityId,",
 				"          EmissionFactorId,",
 				"          VirtualEmissionFactorId,",
