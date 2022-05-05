@@ -9,9 +9,6 @@
 				},
 				{
 					"name": "PurchasedData"
-				},
-				{
-					"name": "Facility"
 				}
 			],
 			"sinks": [
@@ -21,10 +18,10 @@
 			],
 			"transformations": [
 				{
-					"name": "join1"
+					"name": "joinEnergy"
 				},
 				{
-					"name": "join2"
+					"name": "derivedColumn1"
 				}
 			],
 			"scriptLines": [
@@ -63,20 +60,11 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'PurchasedGas') ~> PurchasedData",
-				"source(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     store: 'synapse',",
-				"     databaseType: 'spark',",
-				"     format: 'table',",
-				"     database: 'ESGNORMALIZEDMODEL',",
-				"     tableName: '') ~> Facility",
-				"RefrigerantData join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     joinType:'inner',",
-				"     broadcast: 'auto')~> join1",
-				"join1 join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     joinType:'inner',",
-				"     broadcast: 'auto')~> join2",
-				"join2 sink(allowSchemaDrift: true,",
+				"RefrigerantData, PurchasedData join(PurchasedEnergyId == PurchasedGasId,",
+				"     joinType:'left',",
+				"     broadcast: 'auto')~> joinEnergy",
+				"joinEnergy derive(Type = \"Refrigerants\") ~> derivedColumn1",
+				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
 				"     databaseType: 'spark',",
@@ -101,7 +89,7 @@
 				"          FacilityId,",
 				"          EmissionFactorId,",
 				"          VirtualEmissionFactorId,",
-				"          EmissionSource = FuelMassKg",
+				"          EmissionSource = Type",
 				"     )) ~> MapData"
 			]
 		}
