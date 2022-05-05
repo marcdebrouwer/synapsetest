@@ -18,10 +18,10 @@
 			],
 			"transformations": [
 				{
-					"name": "joinEnergy"
+					"name": "Type"
 				},
 				{
-					"name": "Type"
+					"name": "lookup1"
 				}
 			],
 			"scriptLines": [
@@ -60,10 +60,11 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'PurchasedGas') ~> PurchasedData",
-				"RefrigerantData, PurchasedData join(PurchasedEnergyId == PurchasedGasId,",
-				"     joinType:'left',",
-				"     broadcast: 'auto')~> joinEnergy",
-				"joinEnergy derive(Type = \"Refrigerants\") ~> Type",
+				"lookup1 derive(Type = \"Refrigerants\") ~> Type",
+				"RefrigerantData, PurchasedData lookup(PurchasedEnergyId == PurchasedGasId,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
 				"Type sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
