@@ -1819,6 +1819,7 @@
 						"     format: 'table',",
 						"     database: 'ADESGPOC',",
 						"     tableName: 'DimFacility',",
+						"     recreate:true,",
 						"     input(",
 						"          FacilityId as integer,",
 						"          FacilityName as string,",
@@ -1836,15 +1837,15 @@
 						"     mapColumn(",
 						"          FacilityId,",
 						"          FacilityName,",
-						"          GrossFloorArea,",
-						"          AvailableSellingArea,",
 						"          FacilityType = FaciityTypeName,",
 						"          FacilityOpco = BannerName,",
 						"          FacilityAdressLine = LocationAddressLine1,",
 						"          FacilityZipcode = LocationZipCode,",
 						"          FacilityState = LocationState,",
 						"          FacilityEgridRegion = EGridRegionLongName,",
-						"          FacilityOrganization = OrganizationName",
+						"          FacilityOrganization = OrganizationName,",
+						"          GrossFloorArea,",
+						"          AvailableSellingArea",
 						"     )) ~> sink1"
 					]
 				}
