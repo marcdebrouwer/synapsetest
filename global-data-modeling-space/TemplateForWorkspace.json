@@ -342,56 +342,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/NormalizedSupporting1NF')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "FacilityFlow",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "FacilityDataFlow",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"LocationData": {},
-									"FacilityData": {},
-									"FacilityTypeData": {},
-									"BannerData": {},
-									"MapFacility": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/FacilityDataFlow')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/NormalizedSupporting2NF')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -549,57 +499,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/Refrigerant')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "Refrigerantflow",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "Refrigerants",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"VirtualEmissionData": {},
-									"RefrigerantData": {},
-									"FacilityData": {},
-									"PurchasedGas": {},
-									"BannerData": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/Refrigerants')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/Refrigerant2')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -654,55 +553,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/dataflows/RefrigerantExpanded')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/Scope2Emissions')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "Data flow1",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "Dataflow1",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"source1": {},
-									"source2": {},
-									"source3": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/Dataflow1')]"
 			]
 		},
 		{
@@ -1462,6 +1312,30 @@
 						},
 						{
 							"name": "AdjEnergytype2"
+						},
+						{
+							"name": "split1"
+						},
+						{
+							"name": "select4"
+						},
+						{
+							"name": "lookupEmissonFactor"
+						},
+						{
+							"name": "lookupEmissioNFactor2"
+						},
+						{
+							"name": "lookupEgridRegion"
+						},
+						{
+							"name": "select5"
+						},
+						{
+							"name": "select6"
+						},
+						{
+							"name": "union1"
 						}
 					],
 					"scriptLines": [
@@ -1781,16 +1655,17 @@
 						"select3 keyGenerate(output(EmissionId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
-						"lookupVirtualEmissions select(mapColumn(",
+						"union1 select(mapColumn(",
 						"          {Facility Name},",
 						"          EnergyType,",
 						"          Amount,",
 						"          IsKwh,",
 						"          KWHAmount,",
-						"          Date = VirtualEmissionsData@Date,",
+						"          Date,",
 						"          FacilityId,",
 						"          VirtualEmissionId,",
-						"          PurchasedGasId = VirtualEmissionsData@PurchasedGasId,",
+						"          EmissionFactorId,",
+						"          PurchasedGasId,",
 						"          PurchasedGasName,",
 						"          Adj_EnergyType",
 						"     ),",
@@ -1805,6 +1680,93 @@
 						"     broadcast: 'auto')~> lookupVirtualEmissions",
 						"unpivot1 derive(Adj_EnergyType = case(EnergyType == \"EFEC\",\"Electricity\",EnergyType)) ~> AdjEnergytype",
 						"unpivot2 derive(Adj_EnergyType = case(EnergyType == \"EFEC\",\"Electricity\",EnergyType)) ~> AdjEnergytype2",
+						"select4 split(case(\r",
+						"    Adj_EnergyType == \"Electricity\", true()\r",
+						"    \r",
+						"    ),",
+						"     disjoint: false) ~> split1@(Electricity, Rest)",
+						"lookupVirtualEmissions select(mapColumn(",
+						"          {Facility Name},",
+						"          EnergyType,",
+						"          Amount,",
+						"          Adj_EnergyType,",
+						"          IsKwh,",
+						"          KWHAmount,",
+						"          Date = CreateDate@Date,",
+						"          FacilityId,",
+						"          LocationId,",
+						"          EgridRegionId,",
+						"          EGridRegionLongName,",
+						"          LocationNo,",
+						"          JoinColumn = SelectFacilityData@JoinColumn,",
+						"          Country,",
+						"          PurchasedGasId = PurchasedGasData@PurchasedGasId,",
+						"          PurchasedGasName,",
+						"          VirtualEmissionId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select4",
+						"split1@Electricity, lookupEgridRegion lookup(Country == EmissionCountry",
+						"     && split1@Electricity@PurchasedGasId == EmissionFactorData@PurchasedGasId",
+						"     && Date == EmissionStartDate",
+						"     && split1@Electricity@EgridRegionId == EgridRegionData@EgridRegionId,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookupEmissonFactor",
+						"split1@Rest, lookupEgridRegion lookup(split1@Rest@PurchasedGasId == EmissionFactorData@PurchasedGasId",
+						"     && Date == EmissionStartDate,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookupEmissioNFactor2",
+						"EmissionFactorData, EgridRegionData lookup(EgridRegion == EGridRegionLongName,",
+						"     multiple: false,",
+						"     pickup: 'any',",
+						"     broadcast: 'auto')~> lookupEgridRegion",
+						"lookupEmissonFactor select(mapColumn(",
+						"          {Facility Name},",
+						"          EnergyType,",
+						"          Amount,",
+						"          Adj_EnergyType,",
+						"          IsKwh,",
+						"          KWHAmount,",
+						"          Date,",
+						"          FacilityId,",
+						"          LocationId,",
+						"          EgridRegionId = split1@Electricity@EgridRegionId,",
+						"          EGridRegionLongName = split1@Electricity@EGridRegionLongName,",
+						"          LocationNo,",
+						"          JoinColumn,",
+						"          Country,",
+						"          PurchasedGasId = split1@Electricity@PurchasedGasId,",
+						"          PurchasedGasName,",
+						"          VirtualEmissionId,",
+						"          EmissionFactorId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select5",
+						"lookupEmissioNFactor2 select(mapColumn(",
+						"          {Facility Name},",
+						"          EnergyType,",
+						"          Amount,",
+						"          Adj_EnergyType,",
+						"          IsKwh,",
+						"          KWHAmount,",
+						"          Date,",
+						"          FacilityId,",
+						"          LocationId,",
+						"          EgridRegionId = split1@Rest@EgridRegionId,",
+						"          EGridRegionLongName = split1@Rest@EGridRegionLongName,",
+						"          LocationNo,",
+						"          JoinColumn,",
+						"          Country,",
+						"          PurchasedGasId = split1@Rest@PurchasedGasId,",
+						"          PurchasedGasName,",
+						"          VirtualEmissionId,",
+						"          EmissionFactorId",
+						"     ),",
+						"     skipDuplicateMapInputs: true,",
+						"     skipDuplicateMapOutputs: true) ~> select6",
+						"select5, select6 union(byName: true)~> union1",
 						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -1827,13 +1789,13 @@
 						"     ),",
 						"     mapColumn(",
 						"          EmissionId,",
-						"          EmissionDate = Date,",
 						"          EmissionsUnitsKwH = KWHAmount,",
 						"          FacilityId,",
 						"          PurchasedGasId,",
 						"          EnergyType = PurchasedGasName,",
 						"          EnergyTypeAdj = Adj_EnergyType,",
-						"          VirtualEmissionFactorId = VirtualEmissionId",
+						"          VirtualEmissionFactorId = VirtualEmissionId,",
+						"          EmissionFactorId",
 						"     )) ~> sink1"
 					]
 				}
@@ -5008,26 +4970,6 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/SQL script 18')]",
-			"type": "Microsoft.Synapse/workspaces/sqlscripts",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"content": {
-					"query": "SELECT TOP (100) [PurchasedGasId]\n,[PurchasedGasName]\n FROM [ESGNORMALIZEDMODEL].[dbo].[PurchasedGas]",
-					"metadata": {
-						"language": "sql"
-					},
-					"currentConnection": {
-						"databaseName": "ESGNORMALIZEDMODEL",
-						"poolName": "Built-in"
-					},
-					"resultLimit": 5000
-				},
-				"type": "SqlQuery"
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/SQL script 19')]",
 			"type": "Microsoft.Synapse/workspaces/sqlscripts",
 			"apiVersion": "2019-06-01-preview",
@@ -5113,67 +5055,7 @@
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
 				"content": {
-					"query": "SELECT [FacilityId]\n,[FacilityName]\n,[GrossFloorArea]\n,[AvailableSellingArea]\n,[FacilityTypeId]\n,[BannerId]\n,[FacilitySub]\n,[LocationId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[Facility]\n WHERE LocationId IS NULL",
-					"metadata": {
-						"language": "sql"
-					},
-					"currentConnection": {
-						"databaseName": "ESGNORMALIZEDMODEL",
-						"poolName": "Built-in"
-					},
-					"resultLimit": 5000
-				},
-				"type": "SqlQuery"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/SQL script 3')]",
-			"type": "Microsoft.Synapse/workspaces/sqlscripts",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"content": {
-					"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseDelimitedTextFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseDelimitedTextFormat] \n\tWITH ( FORMAT_TYPE = DELIMITEDTEXT ,\n\t       FORMAT_OPTIONS (\n\t\t\t FIELD_TERMINATOR = ',',\n\t\t\t USE_TYPE_DEFAULT = FALSE\n\t\t\t))\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'fsgdmsdevweeu01_stgdmsdevweeu01_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [fsgdmsdevweeu01_stgdmsdevweeu01_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net' \n\t)\nGO\n\nCREATE EXTERNAL TABLE [Emission] (\n\t[Country] nvarchar(4000),\n\t[CarbonScope] nvarchar(4000),\n\t[EmissionCategory] nvarchar(4000),\n\t[EmissionType] nvarchar(4000),\n\t[EmissionFactorLocationBased] float,\n\t[EmissionFactorMarketBased] float,\n\t[UnitOfMeasure] nvarchar(4000),\n\t[StartDate] date,\n\t[EndDate] date,\n\t[Region] nvarchar(4000),\n\t[HasMarketBasedFactor] bigint\n\t)\n\tWITH (\n\tLOCATION = 'ESG_staging/EmissionFactors.csv',\n\tDATA_SOURCE = [fsgdmsdevweeu01_stgdmsdevweeu01_dfs_core_windows_net],\n\tFILE_FORMAT = [SynapseDelimitedTextFormat]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM [dbo].[Emission]\nGO",
-					"metadata": {
-						"language": "sql"
-					},
-					"currentConnection": {
-						"databaseName": "Built-in",
-						"poolName": "Built-in"
-					},
-					"resultLimit": 5000
-				},
-				"type": "SqlQuery"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/SQL script 4')]",
-			"type": "Microsoft.Synapse/workspaces/sqlscripts",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"content": {
-					"query": "SELECT TOP (100) [BannerId]\n,[BannerName]\n,[OrganizationId]\n FROM [ESGNORMALIZEDMODEL].[dbo].[Banner]",
-					"metadata": {
-						"language": "sql"
-					},
-					"currentConnection": {
-						"databaseName": "ESGNORMALIZEDMODEL",
-						"poolName": "Built-in"
-					},
-					"resultLimit": 5000
-				},
-				"type": "SqlQuery"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/SQL script 5')]",
-			"type": "Microsoft.Synapse/workspaces/sqlscripts",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"content": {
-					"query": "SELECT TOP (100) [VirtualEmissionId]\n,[PurchasedGasId]\n,[VirtualEmissionStartDate]\n,[VirtualEmissionEndDate]\n,[VirtualEmissionScope]\n,[BannerId]\n,[VirtualEmissionFactorLocation]\n,[VirtualEmissionFactorMarket]\n FROM [ESGNORMALIZEDMODEL].[dbo].[VirtualEmissionFactor]",
+					"query": "SELECT TOP (100) [VirtualEmissionId]\n,[PurchasedGasId]\n,[Date]\n,[BannerId]\n,[VirtualEmissionFactorLocation]\n,[VirtualEmissionFactorMarket]\n FROM [ESGNORMALIZEDMODEL].[dbo].[VirtualEmissionFactor]",
 					"metadata": {
 						"language": "sql"
 					},
