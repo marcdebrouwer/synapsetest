@@ -145,6 +145,24 @@
 				},
 				{
 					"name": "lookupEgridRegion"
+				},
+				{
+					"name": "split1"
+				},
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "lookup2"
+				},
+				{
+					"name": "select5"
+				},
+				{
+					"name": "select6"
+				},
+				{
+					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -461,13 +479,12 @@
 				"joinLocation, EgridRegionData join(LocationData@EgridRegionId == EgridRegionData@EgridRegionId,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinEgrid",
-				"select4 keyGenerate(output(EmissionId as long),",
+				"union1 keyGenerate(output(EmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
 				"AppendData filter(Amount != 0.0) ~> filter1",
 				"LookupGasId, VirtualEmissionsData lookup(SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
-				"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId",
-				"     && CreateDate@Date == VirtualEmissionsData@Date,",
+				"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId,",
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookupVirtualEmissions",
@@ -498,6 +515,66 @@
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookupEgridRegion",
+				"select4 split(case(\r",
+				"Adj_EnergyType == \"Electricity\", true()\r",
+				"),",
+				"     disjoint: false) ~> split1@(ElecEFEC, Rest)",
+				"split1@ElecEFEC, lookupEgridRegion lookup(split1@ElecEFEC@PurchasedGasId == EmissionFactorData@PurchasedGasId",
+				"     && Date == EmissionStartDate",
+				"     && split1@ElecEFEC@EGridRegionLongName == EgridRegion,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"split1@Rest, lookupEgridRegion lookup(split1@Rest@PurchasedGasId == EmissionFactorData@PurchasedGasId",
+				"     && Date == EmissionStartDate,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup2",
+				"lookup1 select(mapColumn(",
+				"          {Facility Name},",
+				"          EnergyType,",
+				"          Amount,",
+				"          Adj_EnergyType,",
+				"          IsKwh,",
+				"          KWHAmount,",
+				"          Date,",
+				"          FacilityId,",
+				"          LocationId,",
+				"          EgridRegionId = split1@ElecEFEC@EgridRegionId,",
+				"          EGridRegionLongName = split1@ElecEFEC@EGridRegionLongName,",
+				"          LocationNo,",
+				"          JoinColumn,",
+				"          Country,",
+				"          PurchasedGasId = split1@ElecEFEC@PurchasedGasId,",
+				"          PurchasedGasName,",
+				"          VirtualEmissionId,",
+				"          EmissionFactorId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select5",
+				"lookup2 select(mapColumn(",
+				"          {Facility Name},",
+				"          EnergyType,",
+				"          Amount,",
+				"          Adj_EnergyType,",
+				"          IsKwh,",
+				"          KWHAmount,",
+				"          Date,",
+				"          FacilityId,",
+				"          LocationId,",
+				"          EgridRegionId = split1@Rest@EgridRegionId,",
+				"          EGridRegionLongName = split1@Rest@EGridRegionLongName,",
+				"          LocationNo,",
+				"          JoinColumn,",
+				"          Country,",
+				"          PurchasedGasId = split1@Rest@PurchasedGasId,",
+				"          PurchasedGasName,",
+				"          VirtualEmissionId,",
+				"          EmissionFactorId",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select6",
+				"select5, select6 union(byName: true)~> union1",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
@@ -525,7 +602,8 @@
 				"          PurchasedGasId,",
 				"          EnergyType = PurchasedGasName,",
 				"          EnergyTypeAdj = Adj_EnergyType,",
-				"          VirtualEmissionFactorId = VirtualEmissionId",
+				"          VirtualEmissionFactorId = VirtualEmissionId,",
+				"          EmissionFactorId",
 				"     )) ~> sink1"
 			]
 		}
