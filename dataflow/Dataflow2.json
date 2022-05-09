@@ -129,9 +129,6 @@
 					"name": "surrogateKey1"
 				},
 				{
-					"name": "select3"
-				},
-				{
 					"name": "filter1"
 				},
 				{
@@ -144,28 +141,10 @@
 					"name": "AdjEnergytype2"
 				},
 				{
-					"name": "split1"
-				},
-				{
 					"name": "select4"
 				},
 				{
-					"name": "lookupEmissonFactor"
-				},
-				{
-					"name": "lookupEmissioNFactor2"
-				},
-				{
 					"name": "lookupEgridRegion"
-				},
-				{
-					"name": "select5"
-				},
-				{
-					"name": "select6"
-				},
-				{
-					"name": "union1"
 				}
 			],
 			"scriptLines": [
@@ -482,25 +461,9 @@
 				"joinLocation, EgridRegionData join(LocationData@EgridRegionId == EgridRegionData@EgridRegionId,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> joinEgrid",
-				"select3 keyGenerate(output(EmissionId as long),",
+				"select4 keyGenerate(output(EmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
-				"union1 select(mapColumn(",
-				"          {Facility Name},",
-				"          EnergyType,",
-				"          Amount,",
-				"          IsKwh,",
-				"          KWHAmount,",
-				"          Date,",
-				"          FacilityId,",
-				"          VirtualEmissionId,",
-				"          EmissionFactorId,",
-				"          PurchasedGasId,",
-				"          PurchasedGasName,",
-				"          Adj_EnergyType",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select3",
 				"AppendData filter(Amount != 0.0) ~> filter1",
 				"LookupGasId, VirtualEmissionsData lookup(SelectFacilityData@BannerId == VirtualEmissionsData@BannerId",
 				"     && PurchasedGasData@PurchasedGasId == VirtualEmissionsData@PurchasedGasId",
@@ -510,11 +473,6 @@
 				"     broadcast: 'auto')~> lookupVirtualEmissions",
 				"unpivot1 derive(Adj_EnergyType = case(EnergyType == \"EFEC\",\"Electricity\",EnergyType)) ~> AdjEnergytype",
 				"unpivot2 derive(Adj_EnergyType = case(EnergyType == \"EFEC\",\"Electricity\",EnergyType)) ~> AdjEnergytype2",
-				"select4 split(case(\r",
-				"    Adj_EnergyType == \"Electricity\", true()\r",
-				"    \r",
-				"    ),",
-				"     disjoint: false) ~> split1@(Electricity, Rest)",
 				"lookupVirtualEmissions select(mapColumn(",
 				"          {Facility Name},",
 				"          EnergyType,",
@@ -536,67 +494,10 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> select4",
-				"split1@Electricity, lookupEgridRegion lookup(Country == EmissionCountry",
-				"     && split1@Electricity@PurchasedGasId == EmissionFactorData@PurchasedGasId",
-				"     && Date == EmissionStartDate",
-				"     && split1@Electricity@EgridRegionId == EgridRegionData@EgridRegionId,",
-				"     multiple: false,",
-				"     pickup: 'any',",
-				"     broadcast: 'auto')~> lookupEmissonFactor",
-				"split1@Rest, lookupEgridRegion lookup(split1@Rest@PurchasedGasId == EmissionFactorData@PurchasedGasId",
-				"     && Date == EmissionStartDate,",
-				"     multiple: false,",
-				"     pickup: 'any',",
-				"     broadcast: 'auto')~> lookupEmissioNFactor2",
 				"EmissionFactorData, EgridRegionData lookup(EgridRegion == EGridRegionLongName,",
 				"     multiple: false,",
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookupEgridRegion",
-				"lookupEmissonFactor select(mapColumn(",
-				"          {Facility Name},",
-				"          EnergyType,",
-				"          Amount,",
-				"          Adj_EnergyType,",
-				"          IsKwh,",
-				"          KWHAmount,",
-				"          Date,",
-				"          FacilityId,",
-				"          LocationId,",
-				"          EgridRegionId = split1@Electricity@EgridRegionId,",
-				"          EGridRegionLongName = split1@Electricity@EGridRegionLongName,",
-				"          LocationNo,",
-				"          JoinColumn,",
-				"          Country,",
-				"          PurchasedGasId = split1@Electricity@PurchasedGasId,",
-				"          PurchasedGasName,",
-				"          VirtualEmissionId,",
-				"          EmissionFactorId",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select5",
-				"lookupEmissioNFactor2 select(mapColumn(",
-				"          {Facility Name},",
-				"          EnergyType,",
-				"          Amount,",
-				"          Adj_EnergyType,",
-				"          IsKwh,",
-				"          KWHAmount,",
-				"          Date,",
-				"          FacilityId,",
-				"          LocationId,",
-				"          EgridRegionId = split1@Rest@EgridRegionId,",
-				"          EGridRegionLongName = split1@Rest@EGridRegionLongName,",
-				"          LocationNo,",
-				"          JoinColumn,",
-				"          Country,",
-				"          PurchasedGasId = split1@Rest@PurchasedGasId,",
-				"          PurchasedGasName,",
-				"          VirtualEmissionId,",
-				"          EmissionFactorId",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select6",
-				"select5, select6 union(byName: true)~> union1",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",
@@ -624,8 +525,7 @@
 				"          PurchasedGasId,",
 				"          EnergyType = PurchasedGasName,",
 				"          EnergyTypeAdj = Adj_EnergyType,",
-				"          VirtualEmissionFactorId = VirtualEmissionId,",
-				"          EmissionFactorId",
+				"          VirtualEmissionFactorId = VirtualEmissionId",
 				"     )) ~> sink1"
 			]
 		}
