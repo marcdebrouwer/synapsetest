@@ -29,6 +29,12 @@
 				},
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "CommaToPoint"
+				},
+				{
+					"name": "ToDouble"
 				}
 			],
 			"scriptLines": [
@@ -37,8 +43,8 @@
 				"          CarbonScope as string,",
 				"          EmissionCategory as string,",
 				"          EmissionType as string,",
-				"          EmissionFactorLocationBased as double '000,000,000.000',",
-				"          EmissionFactorMarketBased as double '000,000,000.000',",
+				"          EmissionFactorLocationBased as string,",
+				"          EmissionFactorMarketBased as string,",
 				"          UnitOfMeasure as string,",
 				"          StartDate as date 'dd-MM-yyyy',",
 				"          EndDate as date 'dd-MM-yyyy',",
@@ -67,7 +73,7 @@
 				"     format: 'table',",
 				"     database: 'ESGNORMALIZEDMODEL',",
 				"     tableName: 'PurchasedGas') ~> EnergyTypes",
-				"EmissionFactors keyGenerate(output(EmissionFactorId as long),",
+				"ToDouble keyGenerate(output(EmissionFactorId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
 				"derivedColumn1, EnergyTypes lookup(EmissionType == PurchasedGasName,",
@@ -76,6 +82,10 @@
 				"     asc(PurchasedGasId, true),",
 				"     broadcast: 'auto')~> lookup1",
 				"surrogateKey1 derive(EmissionType = trim(EmissionType)) ~> derivedColumn1",
+				"EmissionFactors derive(EmissionFactorLocationBased = replace(EmissionFactorLocationBased,',','.'),",
+				"          EmissionFactorMarketBased = replace(EmissionFactorMarketBased,',','.')) ~> CommaToPoint",
+				"CommaToPoint derive(EmissionFactorLocationBased = toDouble(EmissionFactorLocationBased),",
+				"          EmissionFactorMarketBased = toDouble(EmissionFactorMarketBased)) ~> ToDouble",
 				"lookup1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     store: 'synapse',",

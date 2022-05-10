@@ -37,7 +37,7 @@
 					"name": "CommaToPoint"
 				},
 				{
-					"name": "FromTextToInt"
+					"name": "FromTextToDouble"
 				},
 				{
 					"name": "derivedColumn1"
@@ -89,7 +89,7 @@
 				"join2 keyGenerate(output(VirtualEmissionId as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
-				"FromTextToInt, BrandData join(Brand == BannerName,",
+				"FromTextToDouble, BrandData join(Brand == BannerName,",
 				"     joinType:'left',",
 				"     broadcast: 'auto')~> join1",
 				"derivedColumn1, EnergyTypesData join(EnergyType == PurchasedGasName,",
@@ -98,7 +98,7 @@
 				"VirtualEmissionFactorData derive({virtual Location based} = replace({virtual Location based},',','.'),",
 				"          {virtual Market based} = replace({virtual Market based},',','.')) ~> CommaToPoint",
 				"CommaToPoint derive({virtual Market based} = toDouble({virtual Market based}),",
-				"          {virtual Location based} = toDouble({virtual Location based})) ~> FromTextToInt",
+				"          {virtual Location based} = toDouble({virtual Location based})) ~> FromTextToDouble",
 				"join1 derive(EnergyType = trim(EnergyType)) ~> derivedColumn1",
 				"surrogateKey1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
