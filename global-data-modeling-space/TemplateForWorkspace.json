@@ -556,66 +556,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/Scope2Emissions2')]",
-			"type": "Microsoft.Synapse/workspaces/pipelines",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"activities": [
-					{
-						"name": "EmissionsFLow",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "Dataflow2",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"AholdEnergy": {},
-									"DelhaizeEnergy": {},
-									"FacilityData": {},
-									"VirtualEmissionsData": {},
-									"EmissionFactorData": {},
-									"Facility2Data": {},
-									"BannerData": {},
-									"LocationData": {},
-									"PurchasedGasData": {},
-									"EgridRegionData": {},
-									"CountryData": {},
-									"sink1": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"folder": {
-					"name": "1NF TABLES"
-				},
-				"annotations": []
-			},
-			"dependsOn": [
-				"[concat(variables('workspaceId'), '/dataflows/Dataflow2')]"
-			]
-		},
-		{
 			"name": "[concat(parameters('workspaceName'), '/Scope2Emissions2_copy1')]",
 			"type": "Microsoft.Synapse/workspaces/pipelines",
 			"apiVersion": "2019-06-01-preview",
@@ -2192,6 +2132,12 @@
 						},
 						{
 							"name": "derivedColumn1"
+						},
+						{
+							"name": "CommaToPoint"
+						},
+						{
+							"name": "ToDouble"
 						}
 					],
 					"scriptLines": [
@@ -2200,8 +2146,8 @@
 						"          CarbonScope as string,",
 						"          EmissionCategory as string,",
 						"          EmissionType as string,",
-						"          EmissionFactorLocationBased as double '000,000,000.000',",
-						"          EmissionFactorMarketBased as double '000,000,000.000',",
+						"          EmissionFactorLocationBased as string,",
+						"          EmissionFactorMarketBased as string,",
 						"          UnitOfMeasure as string,",
 						"          StartDate as date 'dd-MM-yyyy',",
 						"          EndDate as date 'dd-MM-yyyy',",
@@ -2230,7 +2176,7 @@
 						"     format: 'table',",
 						"     database: 'ESGNORMALIZEDMODEL',",
 						"     tableName: 'PurchasedGas') ~> EnergyTypes",
-						"EmissionFactors keyGenerate(output(EmissionFactorId as long),",
+						"ToDouble keyGenerate(output(EmissionFactorId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
 						"derivedColumn1, EnergyTypes lookup(EmissionType == PurchasedGasName,",
@@ -2239,6 +2185,10 @@
 						"     asc(PurchasedGasId, true),",
 						"     broadcast: 'auto')~> lookup1",
 						"surrogateKey1 derive(EmissionType = trim(EmissionType)) ~> derivedColumn1",
+						"EmissionFactors derive(EmissionFactorLocationBased = replace(EmissionFactorLocationBased,',','.'),",
+						"          EmissionFactorMarketBased = replace(EmissionFactorMarketBased,',','.')) ~> CommaToPoint",
+						"CommaToPoint derive(EmissionFactorLocationBased = toDouble(EmissionFactorLocationBased),",
+						"          EmissionFactorMarketBased = toDouble(EmissionFactorMarketBased)) ~> ToDouble",
 						"lookup1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
 						"     store: 'synapse',",
@@ -4702,7 +4652,7 @@
 							"name": "CommaToPoint"
 						},
 						{
-							"name": "FromTextToInt"
+							"name": "FromTextToDouble"
 						},
 						{
 							"name": "derivedColumn1"
@@ -4754,7 +4704,7 @@
 						"join2 keyGenerate(output(VirtualEmissionId as long),",
 						"     startAt: 1L,",
 						"     stepValue: 1L) ~> surrogateKey1",
-						"FromTextToInt, BrandData join(Brand == BannerName,",
+						"FromTextToDouble, BrandData join(Brand == BannerName,",
 						"     joinType:'left',",
 						"     broadcast: 'auto')~> join1",
 						"derivedColumn1, EnergyTypesData join(EnergyType == PurchasedGasName,",
@@ -4763,7 +4713,7 @@
 						"VirtualEmissionFactorData derive({virtual Location based} = replace({virtual Location based},',','.'),",
 						"          {virtual Market based} = replace({virtual Market based},',','.')) ~> CommaToPoint",
 						"CommaToPoint derive({virtual Market based} = toDouble({virtual Market based}),",
-						"          {virtual Location based} = toDouble({virtual Location based})) ~> FromTextToInt",
+						"          {virtual Location based} = toDouble({virtual Location based})) ~> FromTextToDouble",
 						"join1 derive(EnergyType = trim(EnergyType)) ~> derivedColumn1",
 						"surrogateKey1 sink(allowSchemaDrift: true,",
 						"     validateSchema: false,",
