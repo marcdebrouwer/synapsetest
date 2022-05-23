@@ -183,7 +183,8 @@
 				"          FacilityState as string,",
 				"          FacilityZipcode as string,",
 				"          FacilityEgridRegion as string,",
-				"          FacilityOrganization as string",
+				"          FacilityOrganization as string,",
+				"          FacilityCity as string",
 				"     ),",
 				"     mapColumn(",
 				"          FacilityId,",
@@ -196,7 +197,8 @@
 				"          FacilityEgridRegion = EGridRegionLongName,",
 				"          FacilityOrganization = OrganizationName,",
 				"          GrossFloorArea,",
-				"          AvailableSellingArea",
+				"          AvailableSellingArea,",
+				"          FacilityCity = LocationCity",
 				"     )) ~> sink1"
 			]
 		}
