@@ -272,7 +272,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"CommunicationId\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationId\"},\"CommunicationStartTimestamp\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationStartTimestamp\"},\"CommunicationEndTimestamp\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationEndTimestamp\"},\"CommunicationDescription\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationDescription\"},\"CommunicationNote\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationNote\"},\"CommunicationQueueTime\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationQueueTime\"},\"CommunicationHoldTime\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationHoldTime\"},\"InboundOutboundCommunicationIndicator\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"InboundOutboundCommunicationIndicator\"},\"CommunicationText\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationText\"},\"CommunicationMethodId\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationMethodId\"},\"CommunicationTypeId\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationTypeId\"},\"CommunicationStatusId\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationStatusId\"},\"CommunicationPriorityId\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"CommunicationPriorityId\"},\"IsoLanguageId\":{\"entity\":\"Communication.cdm.json/Communication\",\"name\":\"IsoLanguageId\"}}}"
 			},
 			"Compressed": false,
@@ -283,8 +283,7 @@
 			"Description": "A communication to/from one or more party(s).",
 			"DisplayFolderInfo": "{\"name\":\"Customer Service & Contact Management\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "CommunicationId",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

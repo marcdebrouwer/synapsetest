@@ -355,7 +355,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"WarehouseId\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"WarehouseId\"},\"WarehouseName\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"WarehouseName\"},\"LocationId\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"LocationId\"},\"GlobalLocationNumber\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"GlobalLocationNumber\"},\"WarehouseTelephoneNumber\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"WarehouseTelephoneNumber\"},\"WarehouseFaxNumber\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"WarehouseFaxNumber\"},\"WarehouseEmailAddress\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"WarehouseEmailAddress\"},\"PickAndPackLeadTime\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"PickAndPackLeadTime\"},\"WarehouseOrderCutoffTime\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"WarehouseOrderCutoffTime\"},\"TotalFloorSpace\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"TotalFloorSpace\"},\"TotalFloorInventoryStorageSpace\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"TotalFloorInventoryStorageSpace\"},\"StorageSpaceUnitOfMeasureId\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"StorageSpaceUnitOfMeasureId\"},\"ContractWarehouseIndicator\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"ContractWarehouseIndicator\"},\"StoreId\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"StoreId\"},\"CustomerId\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"CustomerId\"},\"CustomerOwnedWarehouseIndicator\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"CustomerOwnedWarehouseIndicator\"},\"CustomerManagedWarehouseIndicator\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"CustomerManagedWarehouseIndicator\"},\"InventoryOwnedByCustomerIndicator\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"InventoryOwnedByCustomerIndicator\"},\"WarehouseTypeId\":{\"entity\":\"Warehouse.cdm.json/Warehouse\",\"name\":\"WarehouseTypeId\"}}}"
 			},
 			"Compressed": false,
@@ -366,8 +366,7 @@
 			"Description": "A structure designated for storage of things or items.\nA 'warehouse' is synonymous with 'stockroom'.",
 			"DisplayFolderInfo": "{\"name\":\"Inventory\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "WarehouseId",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

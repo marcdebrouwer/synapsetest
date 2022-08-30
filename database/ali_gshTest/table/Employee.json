@@ -369,7 +369,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmployeeId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmployeeId\"},\"EmployeeName\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmployeeName\"},\"DateOfBirth\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"DateOfBirth\"},\"DateOfDeath\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"DateOfDeath\"},\"EmployeeStandardCostAmount\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmployeeStandardCostAmount\"},\"EmployeeOvertimeCostAmount\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmployeeOvertimeCostAmount\"},\"EmployeeHireDate\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmployeeHireDate\"},\"HighlyCompensatedEmployeeIndicator\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"HighlyCompensatedEmployeeIndicator\"},\"KeyEmployeeIndicator\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"KeyEmployeeIndicator\"},\"ExemptEmployeeIndicator\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"ExemptEmployeeIndicator\"},\"NonexemptEmployeeIndicator\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"NonexemptEmployeeIndicator\"},\"AlienStatusId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"AlienStatusId\"},\"SexId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"SexId\"},\"GenderId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"GenderId\"},\"RacialCategoryId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"RacialCategoryId\"},\"EthnicCategoryId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EthnicCategoryId\"},\"EmploymentLeadSourceId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmploymentLeadSourceId\"},\"SecurityClearanceId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"SecurityClearanceId\"},\"SecurityLevelId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"SecurityLevelId\"},\"PartyId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"PartyId\"}}}"
 			},
 			"Compressed": false,
@@ -380,8 +380,7 @@
 			"Description": "An individual who is hired to provide services to a company on a regular basis in exchange for compensation.",
 			"DisplayFolderInfo": "{\"name\":\"Human Resources & Payroll\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "EmployeeId",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,
