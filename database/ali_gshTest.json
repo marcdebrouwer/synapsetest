@@ -1,0 +1,24 @@
+{
+	"name": "ali_gshTest",
+	"properties": {
+		"Name": "ali_gshTest",
+		"EntityType": "DATABASE",
+		"Description": "",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"Properties": {
+			"DerivedModelDBInfo": "{\"ModelDirectives\":{\"BaseModel\":{\"Name\":\"Retail\",\"Version\":\"0.1.0\"}}}",
+			"IsSyMSCDMDatabase": true
+		},
+		"Source": {
+			"Provider": "ADLS",
+			"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/ali_gshTest",
+			"Properties": {
+				"FormatType": "csv",
+				"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage"
+			}
+		}
+	},
+	"type": "DATABASE"
+}
