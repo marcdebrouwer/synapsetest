@@ -1,0 +1,23 @@
+{
+	"name": "relationship-rypuyzirjx",
+	"properties": {
+		"Name": "relationship-rypuyzirjx",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Operating_Unit_C",
+		"ToTableName": "Employer",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "OperatingunitId",
+				"ToColumnName": "OperatingunitId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
