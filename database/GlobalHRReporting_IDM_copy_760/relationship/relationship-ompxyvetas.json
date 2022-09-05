@@ -1,0 +1,26 @@
+{
+	"name": "relationship-ompxyvetas",
+	"properties": {
+		"Name": "relationship-ompxyvetas",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM_copy_760"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Employer",
+		"ToTableName": "EmployeeEmployment",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EmployerId",
+				"ToColumnName": "EmployerId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Employer.cdm.json/Employer\",\"toEntity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"joinPairs\":[{\"fromAttribute\":\"EmployerId\",\"toAttribute\":\"EmployerId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}
