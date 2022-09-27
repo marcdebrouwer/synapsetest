@@ -1,0 +1,23 @@
+{
+	"name": "relationship-qizuzmuhsf",
+	"properties": {
+		"Name": "relationship-qizuzmuhsf",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Employer",
+		"ToTableName": "Department",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EmployerId",
+				"ToColumnName": "EmployerID"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
