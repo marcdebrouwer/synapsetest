@@ -1,0 +1,23 @@
+{
+	"name": "relationship-rpheyojjqn",
+	"properties": {
+		"Name": "relationship-rpheyojjqn",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "CostCenter",
+		"ToTableName": "",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "",
+				"ToColumnName": ""
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
