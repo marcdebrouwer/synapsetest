@@ -1,12 +1,12 @@
 {
-	"name": "EmpCompensation",
+	"name": "EmpCompensationAmount",
 	"properties": {
-		"Name": "EmpCompensation",
+		"Name": "EmpCompensationAmount",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "",
+		"Description": "Combined comp data (pre calculated in SF)",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -14,14 +14,25 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "Column_1",
+					"Name": "EmpCompensationAmountID",
 					"OriginDataTypeName": {
-						"TypeName": "string",
+						"TypeName": "integer",
+						"IsNullable": false,
 						"IsComplexType": false,
-						"IsNullable": true,
-						"Length": 256,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "UserID",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				}
@@ -32,7 +43,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmpCompensation",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmpCompensationAmount",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -45,7 +56,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmpCompensation",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmpCompensationAmount",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -60,9 +71,9 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "",
+			"Description": "Combined comp data (pre calculated in SF)",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "",
+			"PrimaryKeys": "EmpCompensationAmountID",
 			"spark.sql.sources.provider": "csv",
 			"sql:IsAppendOnly": false
 		},

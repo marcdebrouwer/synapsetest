@@ -1,0 +1,23 @@
+{
+	"name": "relationship-ifhxanuvnx",
+	"properties": {
+		"Name": "relationship-ifhxanuvnx",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EmpCompensationAmount",
+		"ToTableName": "EmpJob",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UserID",
+				"ToColumnName": "UserID"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
