@@ -1,0 +1,23 @@
+{
+	"name": "relationship-vbukgpiqwz",
+	"properties": {
+		"Name": "relationship-vbukgpiqwz",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "JobRequisition",
+		"ToTableName": "Position",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PositionID",
+				"ToColumnName": "PositionId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

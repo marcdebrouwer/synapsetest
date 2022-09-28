@@ -25,15 +25,14 @@
 					}
 				},
 				{
-					"Name": "Position",
+					"Name": "PositionID",
 					"Description": "",
 					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
+						"TypeName": "integer",
 						"IsNullable": false,
-						"Length": 256,
+						"IsComplexType": false,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				},
