@@ -1,0 +1,23 @@
+{
+	"name": "relationship-zosqoyldcg",
+	"properties": {
+		"Name": "relationship-zosqoyldcg",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EmpJob",
+		"ToTableName": "Employee",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UserID",
+				"ToColumnName": "UserID"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

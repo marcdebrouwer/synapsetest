@@ -16,6 +16,10 @@
 				{
 					"Name": "DepartmentId",
 					"Description": "The unique identifier of a Department.",
+					"BaseAttributeReference": {
+						"Entity": "Department.cdm.json/Department",
+						"Name": "DepartmentId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -23,15 +27,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Department.cdm.json/Department",
-						"Name": "DepartmentId"
 					}
 				},
 				{
 					"Name": "DepartmentName",
 					"Description": "The name of the Department.",
+					"BaseAttributeReference": {
+						"Entity": "Department.cdm.json/Department",
+						"Name": "DepartmentName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -40,10 +44,6 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Department.cdm.json/Department",
-						"Name": "DepartmentName"
 					}
 				},
 				{
@@ -216,7 +216,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"DepartmentId\":{\"entity\":\"Department.cdm.json/Department\",\"name\":\"DepartmentId\"},\"DepartmentName\":{\"entity\":\"Department.cdm.json/Department\",\"name\":\"DepartmentName\"}}}"
 			},
 			"Compressed": false,
