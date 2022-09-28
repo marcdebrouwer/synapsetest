@@ -1,7 +1,7 @@
 {
-	"name": "JobAppHistory",
+	"name": "SuccessorHistory",
 	"properties": {
-		"Name": "JobAppHistory",
+		"Name": "SuccessorHistory",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
@@ -14,10 +14,10 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "JobAppHistoryID",
+					"Name": "SuccessorHistory",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
+						"IsNullable": true,
 						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
@@ -25,7 +25,7 @@
 					}
 				},
 				{
-					"Name": "JobAppID",
+					"Name": "SuccessorID",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
@@ -43,7 +43,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/JobAppHistory",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/SuccessorHistory",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -56,7 +56,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/JobAppHistory",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/SuccessorHistory",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -73,7 +73,7 @@
 		"Properties": {
 			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "JobAppHistoryID",
+			"PrimaryKeys": "",
 			"spark.sql.sources.provider": "csv",
 			"sql:IsAppendOnly": false
 		},
