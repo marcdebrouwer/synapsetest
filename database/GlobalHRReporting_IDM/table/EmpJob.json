@@ -35,6 +35,19 @@
 							"HIVE_TYPE_STRING": "integer"
 						}
 					}
+				},
+				{
+					"Name": "Column_2",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
 				}
 			],
 			"Format": {
