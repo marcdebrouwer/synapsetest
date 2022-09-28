@@ -1,0 +1,23 @@
+{
+	"name": "relationship-mmfapjvvgz",
+	"properties": {
+		"Name": "relationship-mmfapjvvgz",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Successor",
+		"ToTableName": "Position",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "SuccessorID",
+				"ToColumnName": "SuccessorNav"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
