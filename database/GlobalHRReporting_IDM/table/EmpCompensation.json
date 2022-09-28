@@ -1,12 +1,12 @@
 {
-	"name": "EmployeeDetails",
+	"name": "EmpCompensation",
 	"properties": {
-		"Name": "EmployeeDetails",
+		"Name": "EmpCompensation",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "perpersonal data",
+		"Description": "",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -14,26 +14,14 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "ID",
+					"Name": "Column_1",
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
-						"IsNullable": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "EmployeeID",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": false,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				}
@@ -44,7 +32,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmployeeDetails",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmpCompensation",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -57,7 +45,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmployeeDetails",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmpCompensation",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -65,17 +53,18 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "perpersonal data",
+			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "ID",
-			"spark.sql.sources.provider": "csv"
+			"PrimaryKeys": "",
+			"spark.sql.sources.provider": "csv",
+			"sql:IsAppendOnly": false
 		},
 		"Retention": 0,
 		"Temporary": false,

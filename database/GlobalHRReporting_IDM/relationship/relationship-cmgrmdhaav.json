@@ -1,0 +1,23 @@
+{
+	"name": "relationship-cmgrmdhaav",
+	"properties": {
+		"Name": "relationship-cmgrmdhaav",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EmpPayComp",
+		"ToTableName": "EmpJob",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UserID",
+				"ToColumnName": "UserID"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

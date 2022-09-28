@@ -1,12 +1,12 @@
 {
-	"name": "Operating_Unit_C",
+	"name": "EmpPayComp",
 	"properties": {
-		"Name": "Operating_Unit_C",
+		"Name": "EmpPayComp",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Operating Unit - group of Brands - Employers, ",
+		"Description": "",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -14,66 +14,25 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "OperatingunitId",
+					"Name": "EmpPayCompID",
 					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
+						"TypeName": "integer",
 						"IsNullable": false,
-						"Length": 256,
+						"IsComplexType": false,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				},
 				{
-					"Name": "endDate",
+					"Name": "UserID",
 					"Description": "",
 					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
+						"TypeName": "integer",
 						"IsNullable": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "name",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
 						"IsComplexType": false,
-						"IsNullable": false,
-						"Length": 256,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "startDate",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
-						"IsNullable": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "status",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
-						"IsNullable": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				}
@@ -84,7 +43,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/Operating_Unit_C",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmpPayComp",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -97,7 +56,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/Operating_Unit_C",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmpPayComp",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -105,17 +64,18 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "Operating Unit - group of Brands - Employers, ",
+			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "OperatingunitId",
-			"spark.sql.sources.provider": "csv"
+			"PrimaryKeys": "EmpPayCompID",
+			"spark.sql.sources.provider": "csv",
+			"sql:IsAppendOnly": false
 		},
 		"Retention": 0,
 		"Temporary": false,
