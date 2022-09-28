@@ -1,0 +1,23 @@
+{
+	"name": "relationship-nstjznkjvs",
+	"properties": {
+		"Name": "relationship-nstjznkjvs",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "JobAppAudit",
+		"ToTableName": "JobApplication",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "JobAppID",
+				"ToColumnName": "JobAppID"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
