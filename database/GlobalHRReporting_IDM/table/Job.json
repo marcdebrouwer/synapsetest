@@ -16,10 +16,6 @@
 				{
 					"Name": "JobId",
 					"Description": "The unique identifier of a Job.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "JobId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobId"
 					}
 				},
 				{
 					"Name": "JobName",
 					"Description": "The formal name of the Job.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "JobName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,15 +40,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobName"
 					}
 				},
 				{
 					"Name": "JobDescription",
 					"Description": "The description of the Job.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "JobDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -61,15 +57,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobDescription"
 					}
 				},
 				{
 					"Name": "JobNote",
 					"Description": "Comments, notes or additional information regarding the associated Position.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "JobNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -78,15 +74,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobNote"
 					}
 				},
 				{
 					"Name": "JobAnalystName",
 					"Description": "The name of the HR analyst responsible for the Job description and posting.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "JobAnalystName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -95,15 +91,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobAnalystName"
 					}
 				},
 				{
 					"Name": "JobCreatedDate",
 					"Description": "The date that the Job was created.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "JobCreatedDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -112,15 +108,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobCreatedDate"
 					}
 				},
 				{
 					"Name": "JobClosedDate",
 					"Description": "The date that the Job was closed.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "JobClosedDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -129,15 +125,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobClosedDate"
 					}
 				},
 				{
 					"Name": "JobFirstAvailableDate",
 					"Description": "The date that the Job is first available.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "JobFirstAvailableDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -146,15 +142,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobFirstAvailableDate"
 					}
 				},
 				{
 					"Name": "JobLastAvailableDate",
 					"Description": "The date that the Job is last available for filling.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "JobLastAvailableDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -163,15 +159,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobLastAvailableDate"
 					}
 				},
 				{
 					"Name": "JobTitleId",
 					"Description": "The unique identifier of a Job Title.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "JobTitleId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -179,15 +175,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobTitleId"
 					}
 				},
 				{
 					"Name": "PrimaryDutiesStatement",
 					"Description": "A statement detailing the primary duties to be performed in conjunction with the associated Job/Position.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "PrimaryDutiesStatement"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -196,15 +192,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "PrimaryDutiesStatement"
 					}
 				},
 				{
 					"Name": "SecondaryDutiesStatement",
 					"Description": "A statement detailing the secondary duties to be performed in conjunction with the associated Job/Position.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "SecondaryDutiesStatement"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -213,15 +209,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "SecondaryDutiesStatement"
 					}
 				},
 				{
 					"Name": "ExperienceRequirementStatement",
 					"Description": "A statement detailing the experience requirements for the associated Job/Position.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "ExperienceRequirementStatement"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -230,15 +226,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "ExperienceRequirementStatement"
 					}
 				},
 				{
 					"Name": "EmployeeDecisionsRequirementStatement",
 					"Description": "A description of the decisions that must be made by the Employee in the associated Job/Position.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "EmployeeDecisionsRequirementStatement"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -247,15 +243,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "EmployeeDecisionsRequirementStatement"
 					}
 				},
 				{
 					"Name": "WorkingConditionsStatement",
 					"Description": "A statement detailing the Working Conditions in which the associated Job/Position will be performed.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "WorkingConditionsStatement"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -264,15 +260,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "WorkingConditionsStatement"
 					}
 				},
 				{
 					"Name": "ConfidentialDataRequirementStatement",
 					"Description": "A description of the requirements for dealing with confidential information in regard to the Job/Position.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "ConfidentialDataRequirementStatement"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -281,15 +277,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "ConfidentialDataRequirementStatement"
 					}
 				},
 				{
 					"Name": "TravelRequirementStatement",
 					"Description": "A statement detailing the travel requirements of the associated Job/Position.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "TravelRequirementStatement"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -298,15 +294,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "TravelRequirementStatement"
 					}
 				},
 				{
 					"Name": "TravelPercentage",
 					"Description": "The percentage of travel required by the associated Position.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "TravelPercentage"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -316,15 +312,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "TravelPercentage"
 					}
 				},
 				{
 					"Name": "SupervisionRequirementStatement",
 					"Description": "A description of the supervision to be performed or required in regard to the Job/Position.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "SupervisionRequirementStatement"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -333,15 +329,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "SupervisionRequirementStatement"
 					}
 				},
 				{
 					"Name": "PhysicalRequirementStatement",
 					"Description": "A statement detailing the physical requirements of the Job/Position.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "PhysicalRequirementStatement"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -350,15 +346,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "PhysicalRequirementStatement"
 					}
 				},
 				{
 					"Name": "StartingHourlySalaryAmount",
 					"Description": "The starting hourly salary that the Employee was paid under the associated Job.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "StartingHourlySalaryAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -368,15 +364,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "StartingHourlySalaryAmount"
 					}
 				},
 				{
 					"Name": "StartingMonthlySalaryAmount",
 					"Description": "The starting monthly salary that the Employee was paid under the associated Job.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "StartingMonthlySalaryAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -386,15 +382,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "StartingMonthlySalaryAmount"
 					}
 				},
 				{
 					"Name": "StartingAnnualSalaryAmount",
 					"Description": "The starting annual salary that the Employee was paid under the associated Job.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "StartingAnnualSalaryAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -404,15 +400,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "StartingAnnualSalaryAmount"
 					}
 				},
 				{
 					"Name": "EndingHourlySalaryAmount",
 					"Description": "The ending hourly salary that the Employee was paid under the associated Job.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "EndingHourlySalaryAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -422,15 +418,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "EndingHourlySalaryAmount"
 					}
 				},
 				{
 					"Name": "EndingMonthlySalaryAmount",
 					"Description": "The starting monthly salary that the Employee was paid under the associated Job.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "EndingMonthlySalaryAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -440,15 +436,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "EndingMonthlySalaryAmount"
 					}
 				},
 				{
 					"Name": "EndingAnnualSalaryAmount",
 					"Description": "The starting annual salary that the Employee was paid under the associated Job.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "EndingAnnualSalaryAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -458,15 +454,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "EndingAnnualSalaryAmount"
 					}
 				},
 				{
 					"Name": "SecurityClearanceId",
 					"Description": "The unique identifier of the Security Clearance.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "SecurityClearanceId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -474,15 +470,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "SecurityClearanceId"
 					}
 				},
 				{
 					"Name": "EmploymentTypeId",
 					"Description": "The unique identifier of an Employment Type.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "EmploymentTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -490,15 +486,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "EmploymentTypeId"
 					}
 				},
 				{
 					"Name": "PayGradeId",
 					"Description": "The unique identifier of a Pay Grade.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "PayGradeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -506,15 +502,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "PayGradeId"
 					}
 				},
 				{
 					"Name": "UnionId",
 					"Description": "The unique identifier of a Union.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "UnionId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -522,15 +518,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "UnionId"
 					}
 				},
 				{
 					"Name": "GradeLevelClassificationId",
 					"Description": "The unique identifier of a Grade Level Classification.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "GradeLevelClassificationId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -538,15 +534,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "GradeLevelClassificationId"
 					}
 				},
 				{
 					"Name": "AuthorizationLevelId",
 					"Description": "The unique identifier of an Authorization Level.",
-					"BaseAttributeReference": {
-						"Entity": "Job.cdm.json/Job",
-						"Name": "AuthorizationLevelId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -554,6 +550,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "AuthorizationLevelId"
 					}
 				}
 			],
@@ -584,7 +584,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"JobId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobId\"},\"JobName\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobName\"},\"JobDescription\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobDescription\"},\"JobNote\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobNote\"},\"JobAnalystName\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobAnalystName\"},\"JobCreatedDate\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobCreatedDate\"},\"JobClosedDate\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobClosedDate\"},\"JobFirstAvailableDate\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobFirstAvailableDate\"},\"JobLastAvailableDate\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobLastAvailableDate\"},\"JobTitleId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobTitleId\"},\"PrimaryDutiesStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"PrimaryDutiesStatement\"},\"SecondaryDutiesStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"SecondaryDutiesStatement\"},\"ExperienceRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"ExperienceRequirementStatement\"},\"EmployeeDecisionsRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EmployeeDecisionsRequirementStatement\"},\"WorkingConditionsStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"WorkingConditionsStatement\"},\"ConfidentialDataRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"ConfidentialDataRequirementStatement\"},\"TravelRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"TravelRequirementStatement\"},\"TravelPercentage\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"TravelPercentage\"},\"SupervisionRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"SupervisionRequirementStatement\"},\"PhysicalRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"PhysicalRequirementStatement\"},\"StartingHourlySalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"StartingHourlySalaryAmount\"},\"StartingMonthlySalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"StartingMonthlySalaryAmount\"},\"StartingAnnualSalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"StartingAnnualSalaryAmount\"},\"EndingHourlySalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EndingHourlySalaryAmount\"},\"EndingMonthlySalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EndingMonthlySalaryAmount\"},\"EndingAnnualSalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EndingAnnualSalaryAmount\"},\"SecurityClearanceId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"SecurityClearanceId\"},\"EmploymentTypeId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EmploymentTypeId\"},\"PayGradeId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"PayGradeId\"},\"UnionId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"UnionId\"},\"GradeLevelClassificationId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"GradeLevelClassificationId\"},\"AuthorizationLevelId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"AuthorizationLevelId\"}}}"
 			},
 			"Compressed": false,
