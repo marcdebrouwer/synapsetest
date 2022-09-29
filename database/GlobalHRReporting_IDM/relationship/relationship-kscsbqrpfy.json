@@ -1,0 +1,23 @@
+{
+	"name": "relationship-kscsbqrpfy",
+	"properties": {
+		"Name": "relationship-kscsbqrpfy",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EmployeeReview",
+		"ToTableName": "EmpJob",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UserID",
+				"ToColumnName": "UserID"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

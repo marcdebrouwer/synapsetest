@@ -16,6 +16,10 @@
 				{
 					"Name": "EmployeeId",
 					"Description": "PerPerson.fieldName",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "EmployeeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -23,15 +27,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "EmployeeId"
 					}
 				},
 				{
 					"Name": "EmployeeName",
 					"Description": "The name of the Employee.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "EmployeeName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -40,15 +44,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "EmployeeName"
 					}
 				},
 				{
 					"Name": "DateOfBirth",
 					"Description": "The date of birth of the employee.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "DateOfBirth"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -57,15 +61,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "DateOfBirth"
 					}
 				},
 				{
 					"Name": "DateOfDeath",
 					"Description": "The date of death of the employee.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "DateOfDeath"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -74,15 +78,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "DateOfDeath"
 					}
 				},
 				{
 					"Name": "EmployeeStandardCostAmount",
 					"Description": "The standard cost for the employee.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "EmployeeStandardCostAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -92,15 +96,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "EmployeeStandardCostAmount"
 					}
 				},
 				{
 					"Name": "EmployeeOvertimeCostAmount",
 					"Description": "The overtime cost for the employee.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "EmployeeOvertimeCostAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -110,15 +114,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "EmployeeOvertimeCostAmount"
 					}
 				},
 				{
 					"Name": "EmployeeHireDate",
 					"Description": "The date upon which the Employee was hired.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "EmployeeHireDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -127,15 +131,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "EmployeeHireDate"
 					}
 				},
 				{
 					"Name": "HighlyCompensatedEmployeeIndicator",
 					"Description": "Highly compensated employees are employees that receive compensation over a certain amount for a specific year.  The amount that qualifies an employee as a 'highly compensated' employee varies from year to year.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "HighlyCompensatedEmployeeIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -143,15 +147,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "HighlyCompensatedEmployeeIndicator"
 					}
 				},
 				{
 					"Name": "KeyEmployeeIndicator",
 					"Description": "An employee who, at any time during the plan year is (1) an officer having annual compensation greater than $130,000 (subject to cost-of-living adjusting), (2) a more-than-5-percent owner of the employer, or (3) a more-than-1-percent owner whose annual compensation exceeds $150,000.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "KeyEmployeeIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -159,15 +163,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "KeyEmployeeIndicator"
 					}
 				},
 				{
 					"Name": "ExemptEmployeeIndicator",
 					"Description": "An exempt employee is an employee who, because of his or her positional duties and responsibilities and level of decision making authority is exempt from the overtime provisions of the Fair Labor Standards Act (FLSA). Exempt employees are expected, by most organizations, to work whatever hours are necessary to accomplish the goals and deliverables of the position. Thus, exempt employees have more flexibility in their schedules to come and go as necessary to accomplish work than non-exempt or hourly employees.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "ExemptEmployeeIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -175,15 +179,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "ExemptEmployeeIndicator"
 					}
 				},
 				{
 					"Name": "NonexemptEmployeeIndicator",
 					"Description": "When an employee is classified as nonexempt, it means that the employee is entitled to a minimum wage, and overtime pay at the rate of time and one-half the regular rate for all hours worked in excess of 40 hours per week, as well as other protections under child labor and equal pay as prescribed by the FLSA.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "NonexemptEmployeeIndicator"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -191,15 +195,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "NonexemptEmployeeIndicator"
 					}
 				},
 				{
 					"Name": "AlienStatusId",
 					"Description": "The unique identifier of an Alien Status.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "AlienStatusId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -207,15 +211,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "AlienStatusId"
 					}
 				},
 				{
 					"Name": "SexId",
 					"Description": "The unique identifier of a Sex.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "SexId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -223,15 +227,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "SexId"
 					}
 				},
 				{
 					"Name": "GenderId",
 					"Description": "The unique identifier of a Gender.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "GenderId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -239,15 +243,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "GenderId"
 					}
 				},
 				{
 					"Name": "RacialCategoryId",
 					"Description": "The unique identifier of a Racial Category.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "RacialCategoryId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -255,15 +259,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "RacialCategoryId"
 					}
 				},
 				{
 					"Name": "EthnicCategoryId",
 					"Description": "The unique identifier of an Ethnic Category.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "EthnicCategoryId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -271,15 +275,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "EthnicCategoryId"
 					}
 				},
 				{
 					"Name": "EmploymentLeadSourceId",
 					"Description": "The unique identifier of an Employment Lead Source.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "EmploymentLeadSourceId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -287,15 +291,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "EmploymentLeadSourceId"
 					}
 				},
 				{
 					"Name": "SecurityClearanceId",
 					"Description": "The unique identifier of the Security Clearance.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "SecurityClearanceId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -303,15 +307,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "SecurityClearanceId"
 					}
 				},
 				{
 					"Name": "SecurityLevelId",
 					"Description": "The unique identifier of the Security Level.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "SecurityLevelId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -319,15 +323,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "SecurityLevelId"
 					}
 				},
 				{
 					"Name": "PartyId",
 					"Description": "The unique identifier of a Party.",
+					"BaseAttributeReference": {
+						"Entity": "Employee.cdm.json/Employee",
+						"Name": "PartyId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "long",
 						"IsComplexType": false,
@@ -335,10 +339,6 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "long"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Employee.cdm.json/Employee",
-						"Name": "PartyId"
 					}
 				},
 				{
@@ -381,7 +381,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmployeeId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmployeeId\"},\"EmployeeName\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmployeeName\"},\"DateOfBirth\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"DateOfBirth\"},\"DateOfDeath\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"DateOfDeath\"},\"EmployeeStandardCostAmount\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmployeeStandardCostAmount\"},\"EmployeeOvertimeCostAmount\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmployeeOvertimeCostAmount\"},\"EmployeeHireDate\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmployeeHireDate\"},\"HighlyCompensatedEmployeeIndicator\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"HighlyCompensatedEmployeeIndicator\"},\"KeyEmployeeIndicator\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"KeyEmployeeIndicator\"},\"ExemptEmployeeIndicator\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"ExemptEmployeeIndicator\"},\"NonexemptEmployeeIndicator\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"NonexemptEmployeeIndicator\"},\"AlienStatusId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"AlienStatusId\"},\"SexId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"SexId\"},\"GenderId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"GenderId\"},\"RacialCategoryId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"RacialCategoryId\"},\"EthnicCategoryId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EthnicCategoryId\"},\"EmploymentLeadSourceId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"EmploymentLeadSourceId\"},\"SecurityClearanceId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"SecurityClearanceId\"},\"SecurityLevelId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"SecurityLevelId\"},\"PartyId\":{\"entity\":\"Employee.cdm.json/Employee\",\"name\":\"PartyId\"}}}"
 			},
 			"Compressed": false,

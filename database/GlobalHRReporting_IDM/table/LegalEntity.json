@@ -16,6 +16,10 @@
 				{
 					"Name": "LegalEntityId",
 					"Description": "The unique identifier of a Legal Entity.",
+					"BaseAttributeReference": {
+						"Entity": "LegalEntity.cdm.json/LegalEntity",
+						"Name": "LegalEntityId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -23,15 +27,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "LegalEntity.cdm.json/LegalEntity",
-						"Name": "LegalEntityId"
 					}
 				},
 				{
 					"Name": "LegalEntityName",
 					"Description": "The business name of the Legal Entity.",
+					"BaseAttributeReference": {
+						"Entity": "LegalEntity.cdm.json/LegalEntity",
+						"Name": "LegalEntityName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -40,15 +44,15 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "LegalEntity.cdm.json/LegalEntity",
-						"Name": "LegalEntityName"
 					}
 				},
 				{
 					"Name": "LegalEntityDateOfEstablishment",
 					"Description": "The date that the Legal Entity was established.",
+					"BaseAttributeReference": {
+						"Entity": "LegalEntity.cdm.json/LegalEntity",
+						"Name": "LegalEntityDateOfEstablishment"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -57,15 +61,15 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "LegalEntity.cdm.json/LegalEntity",
-						"Name": "LegalEntityDateOfEstablishment"
 					}
 				},
 				{
 					"Name": "CountryOfLegalEntityEstablishment",
 					"Description": "The country in which the Legal Entity was established.",
+					"BaseAttributeReference": {
+						"Entity": "LegalEntity.cdm.json/LegalEntity",
+						"Name": "CountryOfLegalEntityEstablishment"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -74,10 +78,6 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "LegalEntity.cdm.json/LegalEntity",
-						"Name": "CountryOfLegalEntityEstablishment"
 					}
 				},
 				{
@@ -147,7 +147,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"LegalEntityId\":{\"entity\":\"LegalEntity.cdm.json/LegalEntity\",\"name\":\"LegalEntityId\"},\"LegalEntityName\":{\"entity\":\"LegalEntity.cdm.json/LegalEntity\",\"name\":\"LegalEntityName\"},\"LegalEntityDateOfEstablishment\":{\"entity\":\"LegalEntity.cdm.json/LegalEntity\",\"name\":\"LegalEntityDateOfEstablishment\"},\"CountryOfLegalEntityEstablishment\":{\"entity\":\"LegalEntity.cdm.json/LegalEntity\",\"name\":\"CountryOfLegalEntityEstablishment\"}}}"
 			},
 			"Compressed": false,
