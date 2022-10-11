@@ -1,0 +1,23 @@
+{
+	"name": "relationship-kasiiqrlkf",
+	"properties": {
+		"Name": "relationship-kasiiqrlkf",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Department",
+		"ToTableName": "CostCenter",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "CostCenter",
+				"ToColumnName": "CostCenterID"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

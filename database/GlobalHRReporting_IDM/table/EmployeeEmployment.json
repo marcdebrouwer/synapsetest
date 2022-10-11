@@ -206,7 +206,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmployeeId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmployeeId\"},\"EmployerId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmployerId\"},\"JobTitleId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"JobTitleId\"},\"PeriodStartDate\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"PeriodStartDate\"},\"PeriodEndDate\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"PeriodEndDate\"},\"EmploymentPositionTypeId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmploymentPositionTypeId\"},\"AnnualSalaryAmount\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"AnnualSalaryAmount\"},\"EmploymentNote\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmploymentNote\"},\"EmploymentClassificationId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmploymentClassificationId\"},\"EmploymentStatusId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmploymentStatusId\"}}}"
 			},
 			"Compressed": false,
@@ -217,8 +217,7 @@
 			"Description": "The Employment held by the Employee during the associated period.",
 			"DisplayFolderInfo": "{\"name\":\"Human Resources & Payroll\",\"colorCode\":\"#630454\"}",
 			"PrimaryKeys": "EmployeeId,EmployerId,JobTitleId,PeriodStartDate",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

@@ -1,0 +1,23 @@
+{
+	"name": "relationship-inpylunjzw",
+	"properties": {
+		"Name": "relationship-inpylunjzw",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "SuccessorHistory",
+		"ToTableName": "Successor",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "SuccessorID",
+				"ToColumnName": "SuccessorID"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

@@ -1,0 +1,23 @@
+{
+	"name": "relationship-zpeulwajkt",
+	"properties": {
+		"Name": "relationship-zpeulwajkt",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EmployeeDetails",
+		"ToTableName": "Employee",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EmployeeID",
+				"ToColumnName": "EmployeeId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

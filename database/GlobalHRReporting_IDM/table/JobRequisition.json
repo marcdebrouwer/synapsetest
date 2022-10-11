@@ -1,12 +1,12 @@
 {
-	"name": "Operating_Unit_C",
+	"name": "JobRequisition",
 	"properties": {
-		"Name": "Operating_Unit_C",
+		"Name": "JobRequisition",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Operating Unit - group of Brands - Employers, ",
+		"Description": "",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -14,58 +14,30 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "OperatingunitId",
+					"Name": "JobReqID",
 					"OriginDataTypeName": {
-						"TypeName": "string",
+						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 256,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				},
 				{
-					"Name": "endDate",
+					"Name": "PositionID",
 					"Description": "",
 					"OriginDataTypeName": {
-						"TypeName": "string",
+						"TypeName": "integer",
 						"IsComplexType": false,
 						"IsNullable": false,
-						"Length": 256,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"HIVE_TYPE_STRING": "integer"
 						}
 					}
 				},
 				{
-					"Name": "name",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
-						"IsNullable": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "startDate",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
-						"IsNullable": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "status",
+					"Name": "Column_2",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
@@ -84,7 +56,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/Operating_Unit_C",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/JobRequisition",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -97,7 +69,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/Operating_Unit_C",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/JobRequisition",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -112,9 +84,9 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "Operating Unit - group of Brands - Employers, ",
+			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "OperatingunitId",
+			"PrimaryKeys": "JobReqID",
 			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,

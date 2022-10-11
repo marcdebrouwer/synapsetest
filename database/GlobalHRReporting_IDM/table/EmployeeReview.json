@@ -1,0 +1,423 @@
+{
+	"name": "EmployeeReview",
+	"properties": {
+		"Name": "EmployeeReview",
+		"EntityType": "TABLE",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Description": "A review of the employees performance in the associated Position(s).",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "ReviewId",
+					"Description": "The unique identifier of a Review.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "ReviewId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "EmployeeId",
+					"Description": "The unique identifier of an Employee.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "EmployeeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "UserID",
+					"Description": "The unique identifier of a Position.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": true,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PositionId"
+					}
+				},
+				{
+					"Name": "ReviewDate",
+					"Description": "The date of the job review.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "ReviewDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "JobReviewRequestedByEmployeeIndicator",
+					"Description": "Indicates that the Job Review was requested by the employee.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "JobReviewRequestedByEmployeeIndicator"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "boolean",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "boolean"
+						}
+					}
+				},
+				{
+					"Name": "ReviewPeriodStartDate",
+					"Description": "The starting date for which the associated Employee Review is performed.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "ReviewPeriodStartDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "ReviewPeriodEndDate",
+					"Description": "The ending date for which the associated Employee Review is performed.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "ReviewPeriodEndDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "SalaryBeforeReview",
+					"Description": "The employee's salary prior to the Job Review.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "SalaryBeforeReview"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "SalaryAfterReview",
+					"Description": "The employee's salary after the Job Review.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "SalaryAfterReview"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "MeritIncreaseAmount",
+					"Description": "The amount awarded the employee in the form of a merit award.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "MeritIncreaseAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "LengthOfServiceIncreaseAmount",
+					"Description": "An amount awarded to an employee based upon length of service.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "LengthOfServiceIncreaseAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "TotalPossibleEvaluationCriteriaPoints",
+					"Description": "The total number of points that may be achieved from the associated Evaluation Criteria in the current review.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "TotalPossibleEvaluationCriteriaPoints"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "AchievedEvaluationCriteriaPoints",
+					"Description": "The actual number of points achieved from the associated Evaluation Criteria in the current review.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "AchievedEvaluationCriteriaPoints"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "ReviewNote",
+					"Description": "A note, comment or additional information regarding the employee review.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "ReviewNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "GradeLevelClassificationId",
+					"Description": "The unique identifier of a Grade Level Classification.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "GradeLevelClassificationId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PreReviewTitleId",
+					"Description": "The unique identifier of the pre-review Title.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PreReviewTitleId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PostReviewTitleId",
+					"Description": "The unique identifier of the pre-review Title.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PostReviewTitleId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "JobReviewTypeId",
+					"Description": "The unique identifier of a Job Review Type.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "JobReviewTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "JobReviewClassificationId",
+					"Description": "The unique identifier of the job review classification.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "JobReviewClassificationId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PreReviewPayGradeId",
+					"Description": "The unique identifier of a Pay Grade.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PreReviewPayGradeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PostReviewPayGradeId",
+					"Description": "The unique identifier of a Pay Grade.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PostReviewPayGradeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PotentialRating",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmployeeReview",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmployeeReview",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ReviewId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewId\"},\"EmployeeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"EmployeeId\"},\"UserID\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PositionId\"},\"ReviewDate\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewDate\"},\"JobReviewRequestedByEmployeeIndicator\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewRequestedByEmployeeIndicator\"},\"ReviewPeriodStartDate\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewPeriodStartDate\"},\"ReviewPeriodEndDate\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewPeriodEndDate\"},\"SalaryBeforeReview\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"SalaryBeforeReview\"},\"SalaryAfterReview\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"SalaryAfterReview\"},\"MeritIncreaseAmount\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"MeritIncreaseAmount\"},\"LengthOfServiceIncreaseAmount\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"LengthOfServiceIncreaseAmount\"},\"TotalPossibleEvaluationCriteriaPoints\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"TotalPossibleEvaluationCriteriaPoints\"},\"AchievedEvaluationCriteriaPoints\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"AchievedEvaluationCriteriaPoints\"},\"ReviewNote\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewNote\"},\"GradeLevelClassificationId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"GradeLevelClassificationId\"},\"PreReviewTitleId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PreReviewTitleId\"},\"PostReviewTitleId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PostReviewTitleId\"},\"JobReviewTypeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewTypeId\"},\"JobReviewClassificationId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewClassificationId\"},\"PreReviewPayGradeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PreReviewPayGradeId\"},\"PostReviewPayGradeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PostReviewPayGradeId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"EmployeeReview\",\"description\":\"A review of the employees performance in the associated Position(s).\",\"baseEntityReference\":{\"name\":\"EmployeeReview\",\"path\":\"EmployeeReview.cdm.json/EmployeeReview\"},\"primaryKey\":[\"ReviewId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Review.\",\"isNullable\":false,\"name\":\"ReviewId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"EmployeeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of an Employee.\",\"isNullable\":true,\"name\":\"EmployeeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PositionId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Position.\",\"isNullable\":true,\"name\":\"UserID\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"The date of the job review.\",\"isNullable\":false,\"name\":\"ReviewDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewRequestedByEmployeeIndicator\"},\"dataType\":\"boolean\",\"description\":\"Indicates that the Job Review was requested by the employee.\",\"isNullable\":true,\"name\":\"JobReviewRequestedByEmployeeIndicator\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewPeriodStartDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"The starting date for which the associated Employee Review is performed.\",\"isNullable\":true,\"name\":\"ReviewPeriodStartDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewPeriodEndDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"The ending date for which the associated Employee Review is performed.\",\"isNullable\":true,\"name\":\"ReviewPeriodEndDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"SalaryBeforeReview\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The employee's salary prior to the Job Review.\",\"isNullable\":true,\"scale\":2,\"name\":\"SalaryBeforeReview\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"SalaryAfterReview\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The employee's salary after the Job Review.\",\"isNullable\":true,\"scale\":2,\"name\":\"SalaryAfterReview\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"MeritIncreaseAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The amount awarded the employee in the form of a merit award.\",\"isNullable\":true,\"scale\":2,\"name\":\"MeritIncreaseAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"LengthOfServiceIncreaseAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"An amount awarded to an employee based upon length of service.\",\"isNullable\":true,\"scale\":2,\"name\":\"LengthOfServiceIncreaseAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"TotalPossibleEvaluationCriteriaPoints\"},\"dataType\":\"integer\",\"description\":\"The total number of points that may be achieved from the associated Evaluation Criteria in the current review.\",\"isNullable\":true,\"name\":\"TotalPossibleEvaluationCriteriaPoints\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"AchievedEvaluationCriteriaPoints\"},\"dataType\":\"integer\",\"description\":\"The actual number of points achieved from the associated Evaluation Criteria in the current review.\",\"isNullable\":true,\"name\":\"AchievedEvaluationCriteriaPoints\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"A note, comment or additional information regarding the employee review.\",\"isNullable\":true,\"name\":\"ReviewNote\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"GradeLevelClassificationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Grade Level Classification.\",\"isNullable\":true,\"name\":\"GradeLevelClassificationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PreReviewTitleId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the pre-review Title.\",\"isNullable\":true,\"name\":\"PreReviewTitleId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PostReviewTitleId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the pre-review Title.\",\"isNullable\":true,\"name\":\"PostReviewTitleId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Job Review Type.\",\"isNullable\":true,\"name\":\"JobReviewTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewClassificationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the job review classification.\",\"isNullable\":true,\"name\":\"JobReviewClassificationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PreReviewPayGradeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Pay Grade.\",\"isNullable\":true,\"name\":\"PreReviewPayGradeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PostReviewPayGradeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Pay Grade.\",\"isNullable\":true,\"name\":\"PostReviewPayGradeId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"PotentialRating\"}]}}}",
+			"Description": "A review of the employees performance in the associated Position(s).",
+			"DisplayFolderInfo": "{\"name\":\"Human Resources & Payroll\",\"colorCode\":\"#630454\"}",
+			"PrimaryKeys": "ReviewId",
+			"spark.sql.sources.provider": "csv",
+			"sql:IsAppendOnly": false
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

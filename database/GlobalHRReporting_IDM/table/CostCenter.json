@@ -1,12 +1,12 @@
 {
-	"name": "Operating_Unit_C",
+	"name": "CostCenter",
 	"properties": {
-		"Name": "Operating_Unit_C",
+		"Name": "CostCenter",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Operating Unit - group of Brands - Employers, ",
+		"Description": "Custom table for Cost center",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -14,19 +14,19 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "OperatingunitId",
+					"Name": "EndDate",
 					"OriginDataTypeName": {
-						"TypeName": "string",
+						"TypeName": "date",
 						"IsComplexType": false,
-						"IsNullable": false,
-						"Length": 256,
+						"IsNullable": true,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
 						}
 					}
 				},
 				{
-					"Name": "endDate",
+					"Name": "CostCenterID",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
@@ -39,33 +39,7 @@
 					}
 				},
 				{
-					"Name": "name",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
-						"IsNullable": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "startDate",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
-						"IsNullable": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
-				},
-				{
-					"Name": "status",
+					"Name": "Name",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
@@ -84,7 +58,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/Operating_Unit_C",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/CostCenter",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -97,7 +71,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/Operating_Unit_C",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/CostCenter",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -112,9 +86,9 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "Operating Unit - group of Brands - Employers, ",
+			"Description": "Custom table for Cost center",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "OperatingunitId",
+			"PrimaryKeys": "CostCenterID",
 			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,

@@ -1,0 +1,175 @@
+{
+	"name": "Position",
+	"properties": {
+		"Name": "Position",
+		"EntityType": "TABLE",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Description": "A POSITION is a JOB performed by an employee for the  employer for a period.     \n\nIt is implied that HR creates a Job and then fills it as a Position, which is based on that Job but may have additional requirements in terms of working conditions, training, certification, physical requirements, skills and duties.\n\nEx:  POSITION\nSenior Executive Assistant to the  VP Of Finance from 8/15/04-7/14/10.\n\nA JOB is defined by HR and consists of one or more duties (responsibilities) that are to be performed in conjunction with that job.    \n\nEx: JOB\nSenior Executive Assistant - Duties include those described for the  executive assistant but require stronger work experience within each function. Supports the  most senior executive, particularly in large corporations. May supervise other administrative staff. Possesses advanced computer skills along with the  ability to train others on system usage. A premium paid for specific industry or market experience.\n\n(1) HR creates JOB = \"Senior Executive Assistant\"\n\n(2) Two positions for JOB \"Senior Executive Assistant\" are created and to be filled at Bank Headquarters at Mission Street in San Francisco, CA\n\n(3) One of those position is filled by Jane Smith.",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "PositionId",
+					"Description": "The unique identifier of a Position.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "PositionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PositionName",
+					"Description": "The name of the Position.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "PositionName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PositionCreatedDate",
+					"Description": "The date that the Position was created.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "PositionCreatedDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "PositionClosedDate",
+					"Description": "The date that the Position was closed.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "PositionClosedDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "StartingHourlySalaryAmount",
+					"Description": "The starting hourly salary that the Employee was paid under the associated Position.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "StartingHourlySalaryAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "JobId",
+					"Description": "The unique identifier of a Job.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "JobId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "SuccessorNav",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/Position",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/Position",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PositionId\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionId\"},\"PositionName\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionName\"},\"PositionCreatedDate\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionCreatedDate\"},\"PositionClosedDate\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionClosedDate\"},\"StartingHourlySalaryAmount\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"StartingHourlySalaryAmount\"},\"JobId\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"JobId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"Position\",\"description\":\"A POSITION is a JOB performed by an employee for the  employer for a period.     \\n\\nIt is implied that HR creates a Job and then fills it as a Position, which is based on that Job but may have additional requirements in terms of working conditions, training, certification, physical requirements, skills and duties.\\n\\nEx:  POSITION\\nSenior Executive Assistant to the  VP Of Finance from 8/15/04-7/14/10.\\n\\nA JOB is defined by HR and consists of one or more duties (responsibilities) that are to be performed in conjunction with that job.    \\n\\nEx: JOB\\nSenior Executive Assistant - Duties include those described for the  executive assistant but require stronger work experience within each function. Supports the  most senior executive, particularly in large corporations. May supervise other administrative staff. Possesses advanced computer skills along with the  ability to train others on system usage. A premium paid for specific industry or market experience.\\n\\n(1) HR creates JOB = \\\"Senior Executive Assistant\\\"\\n\\n(2) Two positions for JOB \\\"Senior Executive Assistant\\\" are created and to be filled at Bank Headquarters at Mission Street in San Francisco, CA\\n\\n(3) One of those position is filled by Jane Smith.\",\"baseEntityReference\":{\"name\":\"Position\",\"path\":\"Position.cdm.json/Position\"},\"primaryKey\":[\"PositionId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Position.\",\"isNullable\":false,\"name\":\"PositionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of the Position.\",\"isNullable\":true,\"name\":\"PositionName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionCreatedDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"The date that the Position was created.\",\"isNullable\":true,\"name\":\"PositionCreatedDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionClosedDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"The date that the Position was closed.\",\"isNullable\":true,\"name\":\"PositionClosedDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"StartingHourlySalaryAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The starting hourly salary that the Employee was paid under the associated Position.\",\"isNullable\":true,\"scale\":2,\"name\":\"StartingHourlySalaryAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"JobId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Job.\",\"isNullable\":true,\"name\":\"JobId\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"SuccessorNav\"}]}}}",
+			"Description": "A POSITION is a JOB performed by an employee for the  employer for a period.     \n\nIt is implied that HR creates a Job and then fills it as a Position, which is based on that Job but may have additional requirements in terms of working conditions, training, certification, physical requirements, skills and duties.\n\nEx:  POSITION\nSenior Executive Assistant to the  VP Of Finance from 8/15/04-7/14/10.\n\nA JOB is defined by HR and consists of one or more duties (responsibilities) that are to be performed in conjunction with that job.    \n\nEx: JOB\nSenior Executive Assistant - Duties include those described for the  executive assistant but require stronger work experience within each function. Supports the  most senior executive, particularly in large corporations. May supervise other administrative staff. Possesses advanced computer skills along with the  ability to train others on system usage. A premium paid for specific industry or market experience.\n\n(1) HR creates JOB = \"Senior Executive Assistant\"\n\n(2) Two positions for JOB \"Senior Executive Assistant\" are created and to be filled at Bank Headquarters at Mission Street in San Francisco, CA\n\n(3) One of those position is filled by Jane Smith.",
+			"DisplayFolderInfo": "{\"name\":\"Human Resources & Payroll\",\"colorCode\":\"#630454\"}",
+			"PrimaryKeys": "PositionId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

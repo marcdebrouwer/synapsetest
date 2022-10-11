@@ -1,0 +1,23 @@
+{
+	"name": "relationship-mozwtpehlo",
+	"properties": {
+		"Name": "relationship-mozwtpehlo",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "JobApplication",
+		"ToTableName": "Candidate",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "JobAppID",
+				"ToColumnName": "JobAppID"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

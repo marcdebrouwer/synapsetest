@@ -1,0 +1,23 @@
+{
+	"name": "relationship-igtoznfccv",
+	"properties": {
+		"Name": "relationship-igtoznfccv",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EmpJob",
+		"ToTableName": "Job",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "Column_1",
+				"ToColumnName": "JobId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

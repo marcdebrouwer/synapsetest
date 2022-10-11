@@ -1,0 +1,605 @@
+{
+	"name": "Job",
+	"properties": {
+		"Name": "Job",
+		"EntityType": "TABLE",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Description": "A JOB is defined by HR and consists of one or more duties (responsibilities) that are to be performed in conjunction with that job.    \n\nA  POSITION is a JOB performed by an employee for the employer for a period.\n\nEx: JOB\nSenior Executive Assistant - Duties include those described for the executive assistant but require stronger work experience within each function. Supports the most senior executive, particularly in large corporations. May supervise other administrative staff. Possesses advanced computer skills along with the ability to train others on system usage. A premium paid for specific industry or market experience.\n\nEx:  POSITION\nSenior Executive Assistant to the VP Of Finance from 8/15/04-7/14/10.",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "JobId",
+					"Description": "The unique identifier of a Job.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "JobName",
+					"Description": "The formal name of the Job.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "JobDescription",
+					"Description": "The description of the Job.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobDescription"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 512,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "JobNote",
+					"Description": "Comments, notes or additional information regarding the associated Position.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobNote"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 1024,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "JobAnalystName",
+					"Description": "The name of the HR analyst responsible for the Job description and posting.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobAnalystName"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 128,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "JobCreatedDate",
+					"Description": "The date that the Job was created.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobCreatedDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "JobClosedDate",
+					"Description": "The date that the Job was closed.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobClosedDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "JobFirstAvailableDate",
+					"Description": "The date that the Job is first available.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobFirstAvailableDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "JobLastAvailableDate",
+					"Description": "The date that the Job is last available for filling.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobLastAvailableDate"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					}
+				},
+				{
+					"Name": "JobTitleId",
+					"Description": "The unique identifier of a Job Title.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "JobTitleId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PrimaryDutiesStatement",
+					"Description": "A statement detailing the primary duties to be performed in conjunction with the associated Job/Position.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "PrimaryDutiesStatement"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "SecondaryDutiesStatement",
+					"Description": "A statement detailing the secondary duties to be performed in conjunction with the associated Job/Position.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "SecondaryDutiesStatement"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ExperienceRequirementStatement",
+					"Description": "A statement detailing the experience requirements for the associated Job/Position.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "ExperienceRequirementStatement"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "EmployeeDecisionsRequirementStatement",
+					"Description": "A description of the decisions that must be made by the Employee in the associated Job/Position.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "EmployeeDecisionsRequirementStatement"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "WorkingConditionsStatement",
+					"Description": "A statement detailing the Working Conditions in which the associated Job/Position will be performed.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "WorkingConditionsStatement"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "ConfidentialDataRequirementStatement",
+					"Description": "A description of the requirements for dealing with confidential information in regard to the Job/Position.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "ConfidentialDataRequirementStatement"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "TravelRequirementStatement",
+					"Description": "A statement detailing the travel requirements of the associated Job/Position.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "TravelRequirementStatement"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "TravelPercentage",
+					"Description": "The percentage of travel required by the associated Position.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "TravelPercentage"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 8,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "SupervisionRequirementStatement",
+					"Description": "A description of the supervision to be performed or required in regard to the Job/Position.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "SupervisionRequirementStatement"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "PhysicalRequirementStatement",
+					"Description": "A statement detailing the physical requirements of the Job/Position.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "PhysicalRequirementStatement"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 2048,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					}
+				},
+				{
+					"Name": "StartingHourlySalaryAmount",
+					"Description": "The starting hourly salary that the Employee was paid under the associated Job.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "StartingHourlySalaryAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "StartingMonthlySalaryAmount",
+					"Description": "The starting monthly salary that the Employee was paid under the associated Job.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "StartingMonthlySalaryAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "StartingAnnualSalaryAmount",
+					"Description": "The starting annual salary that the Employee was paid under the associated Job.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "StartingAnnualSalaryAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "EndingHourlySalaryAmount",
+					"Description": "The ending hourly salary that the Employee was paid under the associated Job.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "EndingHourlySalaryAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "EndingMonthlySalaryAmount",
+					"Description": "The starting monthly salary that the Employee was paid under the associated Job.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "EndingMonthlySalaryAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "EndingAnnualSalaryAmount",
+					"Description": "The starting annual salary that the Employee was paid under the associated Job.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "EndingAnnualSalaryAmount"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "decimal",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Precision": 18,
+						"Scale": 2,
+						"Properties": {
+							"HIVE_TYPE_STRING": "decimal"
+						}
+					}
+				},
+				{
+					"Name": "SecurityClearanceId",
+					"Description": "The unique identifier of the Security Clearance.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "SecurityClearanceId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "EmploymentTypeId",
+					"Description": "The unique identifier of an Employment Type.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "EmploymentTypeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "PayGradeId",
+					"Description": "The unique identifier of a Pay Grade.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "PayGradeId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "UnionId",
+					"Description": "The unique identifier of a Union.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "UnionId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "GradeLevelClassificationId",
+					"Description": "The unique identifier of a Grade Level Classification.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "GradeLevelClassificationId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				},
+				{
+					"Name": "AuthorizationLevelId",
+					"Description": "The unique identifier of an Authorization Level.",
+					"BaseAttributeReference": {
+						"Entity": "Job.cdm.json/Job",
+						"Name": "AuthorizationLevelId"
+					},
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					}
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/Job",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/Job",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"JobId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobId\"},\"JobName\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobName\"},\"JobDescription\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobDescription\"},\"JobNote\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobNote\"},\"JobAnalystName\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobAnalystName\"},\"JobCreatedDate\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobCreatedDate\"},\"JobClosedDate\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobClosedDate\"},\"JobFirstAvailableDate\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobFirstAvailableDate\"},\"JobLastAvailableDate\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobLastAvailableDate\"},\"JobTitleId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobTitleId\"},\"PrimaryDutiesStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"PrimaryDutiesStatement\"},\"SecondaryDutiesStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"SecondaryDutiesStatement\"},\"ExperienceRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"ExperienceRequirementStatement\"},\"EmployeeDecisionsRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EmployeeDecisionsRequirementStatement\"},\"WorkingConditionsStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"WorkingConditionsStatement\"},\"ConfidentialDataRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"ConfidentialDataRequirementStatement\"},\"TravelRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"TravelRequirementStatement\"},\"TravelPercentage\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"TravelPercentage\"},\"SupervisionRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"SupervisionRequirementStatement\"},\"PhysicalRequirementStatement\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"PhysicalRequirementStatement\"},\"StartingHourlySalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"StartingHourlySalaryAmount\"},\"StartingMonthlySalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"StartingMonthlySalaryAmount\"},\"StartingAnnualSalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"StartingAnnualSalaryAmount\"},\"EndingHourlySalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EndingHourlySalaryAmount\"},\"EndingMonthlySalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EndingMonthlySalaryAmount\"},\"EndingAnnualSalaryAmount\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EndingAnnualSalaryAmount\"},\"SecurityClearanceId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"SecurityClearanceId\"},\"EmploymentTypeId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EmploymentTypeId\"},\"PayGradeId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"PayGradeId\"},\"UnionId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"UnionId\"},\"GradeLevelClassificationId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"GradeLevelClassificationId\"},\"AuthorizationLevelId\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"AuthorizationLevelId\"}}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"baseEntityReference\":{\"name\":\"Job\",\"path\":\"Job.cdm.json/Job\"},\"description\":\"A JOB is defined by HR and consists of one or more duties (responsibilities) that are to be performed in conjunction with that job.    \\n\\nA  POSITION is a JOB performed by an employee for the employer for a period.\\n\\nEx: JOB\\nSenior Executive Assistant - Duties include those described for the executive assistant but require stronger work experience within each function. Supports the most senior executive, particularly in large corporations. May supervise other administrative staff. Possesses advanced computer skills along with the ability to train others on system usage. A premium paid for specific industry or market experience.\\n\\nEx:  POSITION\\nSenior Executive Assistant to the VP Of Finance from 8/15/04-7/14/10.\",\"primaryKey\":[\"JobId\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Job.\",\"isNullable\":false,\"name\":\"JobId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The formal name of the Job.\",\"isNullable\":true,\"name\":\"JobName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobDescription\"},\"dataType\":\"string\",\"dataTypeLength\":512,\"description\":\"The description of the Job.\",\"isNullable\":true,\"name\":\"JobDescription\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobNote\"},\"dataType\":\"string\",\"dataTypeLength\":1024,\"description\":\"Comments, notes or additional information regarding the associated Position.\",\"isNullable\":true,\"name\":\"JobNote\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobAnalystName\"},\"dataType\":\"string\",\"dataTypeLength\":128,\"description\":\"The name of the HR analyst responsible for the Job description and posting.\",\"isNullable\":true,\"name\":\"JobAnalystName\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobCreatedDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"The date that the Job was created.\",\"isNullable\":true,\"name\":\"JobCreatedDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobClosedDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"The date that the Job was closed.\",\"isNullable\":true,\"name\":\"JobClosedDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobFirstAvailableDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"The date that the Job is first available.\",\"isNullable\":true,\"name\":\"JobFirstAvailableDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobLastAvailableDate\"},\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"The date that the Job is last available for filling.\",\"isNullable\":true,\"name\":\"JobLastAvailableDate\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"JobTitleId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Job Title.\",\"isNullable\":true,\"name\":\"JobTitleId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"PrimaryDutiesStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048,\"description\":\"A statement detailing the primary duties to be performed in conjunction with the associated Job/Position.\",\"isNullable\":true,\"name\":\"PrimaryDutiesStatement\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"SecondaryDutiesStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048,\"description\":\"A statement detailing the secondary duties to be performed in conjunction with the associated Job/Position.\",\"isNullable\":true,\"name\":\"SecondaryDutiesStatement\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"ExperienceRequirementStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048,\"description\":\"A statement detailing the experience requirements for the associated Job/Position.\",\"isNullable\":true,\"name\":\"ExperienceRequirementStatement\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EmployeeDecisionsRequirementStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048,\"description\":\"A description of the decisions that must be made by the Employee in the associated Job/Position.\",\"isNullable\":true,\"name\":\"EmployeeDecisionsRequirementStatement\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"WorkingConditionsStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048,\"description\":\"A statement detailing the Working Conditions in which the associated Job/Position will be performed.\",\"isNullable\":true,\"name\":\"WorkingConditionsStatement\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"ConfidentialDataRequirementStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048,\"description\":\"A description of the requirements for dealing with confidential information in regard to the Job/Position.\",\"isNullable\":true,\"name\":\"ConfidentialDataRequirementStatement\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"TravelRequirementStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048,\"description\":\"A statement detailing the travel requirements of the associated Job/Position.\",\"isNullable\":true,\"name\":\"TravelRequirementStatement\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"TravelPercentage\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The percentage of travel required by the associated Position.\",\"isNullable\":true,\"scale\":8,\"name\":\"TravelPercentage\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"SupervisionRequirementStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048,\"description\":\"A description of the supervision to be performed or required in regard to the Job/Position.\",\"isNullable\":true,\"name\":\"SupervisionRequirementStatement\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"PhysicalRequirementStatement\"},\"dataType\":\"string\",\"dataTypeLength\":2048,\"description\":\"A statement detailing the physical requirements of the Job/Position.\",\"isNullable\":true,\"name\":\"PhysicalRequirementStatement\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"StartingHourlySalaryAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The starting hourly salary that the Employee was paid under the associated Job.\",\"isNullable\":true,\"scale\":2,\"name\":\"StartingHourlySalaryAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"StartingMonthlySalaryAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The starting monthly salary that the Employee was paid under the associated Job.\",\"isNullable\":true,\"scale\":2,\"name\":\"StartingMonthlySalaryAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"StartingAnnualSalaryAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The starting annual salary that the Employee was paid under the associated Job.\",\"isNullable\":true,\"scale\":2,\"name\":\"StartingAnnualSalaryAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EndingHourlySalaryAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The ending hourly salary that the Employee was paid under the associated Job.\",\"isNullable\":true,\"scale\":2,\"name\":\"EndingHourlySalaryAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EndingMonthlySalaryAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The starting monthly salary that the Employee was paid under the associated Job.\",\"isNullable\":true,\"scale\":2,\"name\":\"EndingMonthlySalaryAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EndingAnnualSalaryAmount\"},\"dataType\":\"decimal\",\"dataTypeLength\":18,\"description\":\"The starting annual salary that the Employee was paid under the associated Job.\",\"isNullable\":true,\"scale\":2,\"name\":\"EndingAnnualSalaryAmount\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"SecurityClearanceId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of the Security Clearance.\",\"isNullable\":true,\"name\":\"SecurityClearanceId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"EmploymentTypeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of an Employment Type.\",\"isNullable\":true,\"name\":\"EmploymentTypeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"PayGradeId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Pay Grade.\",\"isNullable\":true,\"name\":\"PayGradeId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"UnionId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Union.\",\"isNullable\":true,\"name\":\"UnionId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"GradeLevelClassificationId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of a Grade Level Classification.\",\"isNullable\":true,\"name\":\"GradeLevelClassificationId\"},{\"type\":\"Existing\",\"attributeReference\":{\"entity\":\"Job.cdm.json/Job\",\"name\":\"AuthorizationLevelId\"},\"dataType\":\"integer\",\"description\":\"The unique identifier of an Authorization Level.\",\"isNullable\":true,\"name\":\"AuthorizationLevelId\"}]}}}",
+			"Description": "A JOB is defined by HR and consists of one or more duties (responsibilities) that are to be performed in conjunction with that job.    \n\nA  POSITION is a JOB performed by an employee for the employer for a period.\n\nEx: JOB\nSenior Executive Assistant - Duties include those described for the executive assistant but require stronger work experience within each function. Supports the most senior executive, particularly in large corporations. May supervise other administrative staff. Possesses advanced computer skills along with the ability to train others on system usage. A premium paid for specific industry or market experience.\n\nEx:  POSITION\nSenior Executive Assistant to the VP Of Finance from 8/15/04-7/14/10.",
+			"DisplayFolderInfo": "{\"name\":\"Human Resources & Payroll\",\"colorCode\":\"#630454\"}",
+			"PrimaryKeys": "JobId",
+			"spark.sql.sources.provider": "csv"
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}

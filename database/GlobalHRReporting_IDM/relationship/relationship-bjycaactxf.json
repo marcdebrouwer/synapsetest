@@ -1,0 +1,26 @@
+{
+	"name": "relationship-bjycaactxf",
+	"properties": {
+		"Name": "relationship-bjycaactxf",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "CalendarPeriod",
+		"ToTableName": "CalendarDate",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "CalendarPeriodId",
+				"ToColumnName": "CalendarPeriodId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"toEntity\":\"CalendarDate.cdm.json/CalendarDate\",\"joinPairs\":[{\"fromAttribute\":\"CalendarPeriodId\",\"toAttribute\":\"CalendarPeriodId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

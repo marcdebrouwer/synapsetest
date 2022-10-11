@@ -1,0 +1,26 @@
+{
+	"name": "relationship-lgcgviidoe",
+	"properties": {
+		"Name": "relationship-lgcgviidoe",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Job",
+		"ToTableName": "Position",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "JobId",
+				"ToColumnName": "JobId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"Job.cdm.json/Job\",\"toEntity\":\"Position.cdm.json/Position\",\"joinPairs\":[{\"fromAttribute\":\"JobId\",\"toAttribute\":\"JobId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}
