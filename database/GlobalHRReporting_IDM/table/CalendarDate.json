@@ -16,10 +16,6 @@
 				{
 					"Name": "CalendarId",
 					"Description": "The unique identifier of a Calendar.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarDate.cdm.json/CalendarDate",
-						"Name": "CalendarId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarDate.cdm.json/CalendarDate",
+						"Name": "CalendarId"
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "Date",
 					"Description": "The date of the associated calendar.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarDate.cdm.json/CalendarDate",
-						"Name": "Date"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -44,15 +41,16 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarDate.cdm.json/CalendarDate",
+						"Name": "Date"
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "DayOfWeekId",
 					"Description": "The unique identifier of a Day Of Week.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarDate.cdm.json/CalendarDate",
-						"Name": "DayOfWeekId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -60,32 +58,34 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarDate.cdm.json/CalendarDate",
+						"Name": "DayOfWeekId"
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarDateStandardStartTime",
 					"Description": "The standard time that operations start on this calendar date.",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "CalendarDate.cdm.json/CalendarDate",
 						"Name": "CalendarDateStandardStartTime"
 					},
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					}
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarDateStandardEndTime",
 					"Description": "The standard time that operations end on this calendar date.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarDate.cdm.json/CalendarDate",
-						"Name": "CalendarDateStandardEndTime"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -94,15 +94,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarDate.cdm.json/CalendarDate",
+						"Name": "CalendarDateStandardEndTime"
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "HolidayIndicator",
 					"Description": "Indicates that the associated date is a holiday.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarDate.cdm.json/CalendarDate",
-						"Name": "HolidayIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -110,15 +111,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarDate.cdm.json/CalendarDate",
+						"Name": "HolidayIndicator"
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "HolidayName",
 					"Description": "The name of the associated holiday.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarDate.cdm.json/CalendarDate",
-						"Name": "HolidayName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -127,95 +129,101 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarDate.cdm.json/CalendarDate",
+						"Name": "HolidayName"
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarDayNumber",
 					"Description": "The day number associated with the calendar date.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "CalendarDate.cdm.json/CalendarDate",
 						"Name": "CalendarDayNumber"
 					},
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					}
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarWeekId",
 					"Description": "The unique identifier of a Calendar Week.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "CalendarDate.cdm.json/CalendarDate",
 						"Name": "CalendarWeekId"
 					},
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					}
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarMonthId",
 					"Description": "The unique identifier of a calendar month.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "CalendarDate.cdm.json/CalendarDate",
 						"Name": "CalendarMonthId"
 					},
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					}
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarQuarterId",
 					"Description": "The unique identifier of a calendar quarter.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "CalendarDate.cdm.json/CalendarDate",
 						"Name": "CalendarQuarterId"
 					},
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					}
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarYearId",
 					"Description": "The unique identifier of a Calendar Year.",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
 					"BaseAttributeReference": {
 						"Entity": "CalendarDate.cdm.json/CalendarDate",
 						"Name": "CalendarYearId"
 					},
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsComplexType": false,
-						"IsNullable": true,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
-						}
-					}
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarPeriodId",
 					"Description": "The unique identifier of a Calendar Period.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarDate.cdm.json/CalendarDate",
-						"Name": "CalendarPeriodId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -223,15 +231,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarDate.cdm.json/CalendarDate",
+						"Name": "CalendarPeriodId"
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarDateNote",
 					"Description": "A note, comment or additional information regarding the calendar date.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarDate.cdm.json/CalendarDate",
-						"Name": "CalendarDateNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -240,7 +249,12 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarDate.cdm.json/CalendarDate",
+						"Name": "CalendarDateNote"
+					},
+					"DeltaFormatInvalidMessages": []
 				}
 			],
 			"Format": {
@@ -270,7 +284,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"CalendarId\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"CalendarId\"},\"Date\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"Date\"},\"DayOfWeekId\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"DayOfWeekId\"},\"CalendarDateStandardStartTime\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"CalendarDateStandardStartTime\"},\"CalendarDateStandardEndTime\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"CalendarDateStandardEndTime\"},\"HolidayIndicator\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"HolidayIndicator\"},\"HolidayName\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"HolidayName\"},\"CalendarDayNumber\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"CalendarDayNumber\"},\"CalendarWeekId\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"CalendarWeekId\"},\"CalendarMonthId\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"CalendarMonthId\"},\"CalendarQuarterId\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"CalendarQuarterId\"},\"CalendarYearId\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"CalendarYearId\"},\"CalendarPeriodId\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"CalendarPeriodId\"},\"CalendarDateNote\":{\"entity\":\"CalendarDate.cdm.json/CalendarDate\",\"name\":\"CalendarDateNote\"}}}"
 			},
 			"Compressed": false,
