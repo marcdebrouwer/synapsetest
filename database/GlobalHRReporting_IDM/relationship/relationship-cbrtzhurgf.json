@@ -1,0 +1,23 @@
+{
+	"name": "relationship-cbrtzhurgf",
+	"properties": {
+		"Name": "relationship-cbrtzhurgf",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PA0003",
+		"ToTableName": "PA0442",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PERNR",
+				"ToColumnName": "PERNR"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
