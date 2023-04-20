@@ -6,7 +6,7 @@
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "",
+		"Description": "Alle gewerkte uren. Groot data volume. All countries. over 100M records.",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -158,11 +158,10 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "",
+			"Description": "Alle gewerkte uren. Groot data volume. All countries. over 100M records.",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "MANDT,PERNR,SUBTY,OBJPS,SPRPS,ENDDA,BEGDA,SEQNR",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

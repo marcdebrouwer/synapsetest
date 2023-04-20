@@ -1,12 +1,12 @@
 {
-	"name": "PA0001",
+	"name": "PPDIT",
 	"properties": {
-		"Name": "PA0001",
+		"Name": "PPDIT",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Afgeleide informatie uit EC over employee\nCompany Code, personnel Area, personnel Subarea komt uit ECP voor NL\n",
+		"Description": "controling file heeft ppdit nodig. Boeking op cost center\nPosting results van subset payroll\nPosting Document\nDocument bevat de gesommeerde waardes",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -14,7 +14,7 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "PERNR",
+					"Name": "key_PPDIT",
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsNullable": false,
@@ -27,7 +27,7 @@
 					"DeltaFormatInvalidMessages": []
 				},
 				{
-					"Name": "key_CostCenter",
+					"Name": "key_PPDHD",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
@@ -41,8 +41,8 @@
 					"DeltaFormatInvalidMessages": []
 				},
 				{
-					"Name": "Column_2",
-					"Description": "",
+					"Name": "transaction_key",
+					"Description": "geeft aan of het een grootboek of een kostenplaats is",
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsNullable": false,
@@ -61,7 +61,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0001",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PPDIT",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -74,7 +74,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0001",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PPDIT",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -89,9 +89,9 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "Afgeleide informatie uit EC over employee\nCompany Code, personnel Area, personnel Subarea komt uit ECP voor NL\n",
+			"Description": "controling file heeft ppdit nodig. Boeking op cost center\nPosting results van subset payroll\nPosting Document\nDocument bevat de gesommeerde waardes",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "PERNR",
+			"PrimaryKeys": "key_PPDIT",
 			"spark.sql.sources.provider": "csv",
 			"sql:IsAppendOnly": false
 		},

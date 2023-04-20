@@ -1,7 +1,7 @@
 {
-	"name": "relationship-uxsghxdhtr",
+	"name": "relationship-thvsdgnkxz",
 	"properties": {
-		"Name": "relationship-uxsghxdhtr",
+		"Name": "relationship-thvsdgnkxz",
 		"EntityType": "RELATIONSHIP",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
@@ -10,11 +10,11 @@
 			"Type": "SPARK"
 		},
 		"FromTableName": "PA0003",
-		"ToTableName": "PA9000_FinalData_in_PA2010",
+		"ToTableName": "PA0059",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "MANDT",
-				"ToColumnName": "MANDT"
+				"FromColumnName": "PERNR",
+				"ToColumnName": "PERNR"
 			}
 		],
 		"RelationshipType": 0

@@ -6,7 +6,7 @@
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "",
+		"Description": "toeslagen en inhoudingen, bevat bedragen. Deel uit paycomponents vanuit EC aangevuld met ECP looncodes. Staat geregistreerd in uren. Staan ook in de payroll cluster, is voldoende om de payroll clusters binnen te halen",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -18,8 +18,8 @@
 					"Description": "Client",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -32,8 +32,8 @@
 					"Description": "Personnel Number",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -45,8 +45,8 @@
 					"Description": "Subtype",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -59,8 +59,8 @@
 					"Description": "Object Identification",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -73,8 +73,8 @@
 					"Description": "Lock Indicator for HR Master Data Record",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -87,8 +87,8 @@
 					"Description": "End Date",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
@@ -101,8 +101,8 @@
 					"Description": "Start Date",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
@@ -115,8 +115,8 @@
 					"Description": "Number of Infotype Record with Same Key",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -158,11 +158,10 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "",
+			"Description": "toeslagen en inhoudingen, bevat bedragen. Deel uit paycomponents vanuit EC aangevuld met ECP looncodes. Staat geregistreerd in uren. Staan ook in de payroll cluster, is voldoende om de payroll clusters binnen te halen",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "MANDT,PERNR,SUBTY,OBJPS,SPRPS,ENDDA,BEGDA,SEQNR",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

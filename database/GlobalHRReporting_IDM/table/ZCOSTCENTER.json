@@ -14,11 +14,11 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "Column_1",
+					"Name": "CostCenter",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": true,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"

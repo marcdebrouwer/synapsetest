@@ -6,7 +6,7 @@
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Geen rechstreekse informatie in deze tabel. Versleutelde gegevens",
+		"Description": "Geen rechstreekse informatie in deze tabel. Versleutelde gegevens\nCoster Center split op looncodes mogelijk incl door boeking. Koppeling richting Infotype 1",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -61,7 +61,7 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "Geen rechstreekse informatie in deze tabel. Versleutelde gegevens",
+			"Description": "Geen rechstreekse informatie in deze tabel. Versleutelde gegevens\nCoster Center split op looncodes mogelijk incl door boeking. Koppeling richting Infotype 1",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "",
 			"spark.sql.sources.provider": "csv",

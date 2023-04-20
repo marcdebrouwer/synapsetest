@@ -1,12 +1,12 @@
 {
-	"name": "PA0001",
+	"name": "PayPeriod",
 	"properties": {
-		"Name": "PA0001",
+		"Name": "PayPeriod",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Afgeleide informatie uit EC over employee\nCompany Code, personnel Area, personnel Subarea komt uit ECP voor NL\n",
+		"Description": "Dates of payroll period",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -14,42 +14,14 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "PERNR",
+					"Name": "Date",
 					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
+						"TypeName": "date",
+						"IsNullable": true,
 						"IsComplexType": false,
-						"Length": 256,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "key_CostCenter",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "Column_2",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
 						}
 					},
 					"DeltaFormatInvalidMessages": []
@@ -61,7 +33,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0001",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PayPeriod",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -74,7 +46,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0001",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PayPeriod",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -89,9 +61,9 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "Afgeleide informatie uit EC over employee\nCompany Code, personnel Area, personnel Subarea komt uit ECP voor NL\n",
+			"Description": "Dates of payroll period",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "PERNR",
+			"PrimaryKeys": "",
 			"spark.sql.sources.provider": "csv",
 			"sql:IsAppendOnly": false
 		},

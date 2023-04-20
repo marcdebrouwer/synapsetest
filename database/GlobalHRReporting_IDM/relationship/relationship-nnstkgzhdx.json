@@ -10,7 +10,7 @@
 			"Type": "SPARK"
 		},
 		"FromTableName": "PA0003",
-		"ToTableName": "PA0006_replicatie uit EC",
+		"ToTableName": "PA0006_from_EC",
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "PERNR",

@@ -1,12 +1,12 @@
 {
-	"name": "PA0001",
+	"name": "PA0059",
 	"properties": {
-		"Name": "PA0001",
+		"Name": "PA0059",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Afgeleide informatie uit EC over employee\nCompany Code, personnel Area, personnel Subarea komt uit ECP voor NL\n",
+		"Description": "Sociale lasten, contributie etc - NL specifiek",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -16,40 +16,11 @@
 				{
 					"Name": "PERNR",
 					"OriginDataTypeName": {
-						"TypeName": "string",
+						"TypeName": "integer",
 						"IsNullable": false,
 						"IsComplexType": false,
-						"Length": 256,
 						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "key_CostCenter",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "Column_2",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
+							"HIVE_TYPE_STRING": "integer"
 						}
 					},
 					"DeltaFormatInvalidMessages": []
@@ -61,7 +32,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0001",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0059",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -74,7 +45,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0001",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0059",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -89,7 +60,7 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "Afgeleide informatie uit EC over employee\nCompany Code, personnel Area, personnel Subarea komt uit ECP voor NL\n",
+			"Description": "Sociale lasten, contributie etc - NL specifiek",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "PERNR",
 			"spark.sql.sources.provider": "csv",

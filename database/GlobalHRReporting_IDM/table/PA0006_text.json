@@ -1,12 +1,12 @@
 {
-	"name": "PA0001",
+	"name": "PA0006_text",
 	"properties": {
-		"Name": "PA0001",
+		"Name": "PA0006_text",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Afgeleide informatie uit EC over employee\nCompany Code, personnel Area, personnel Subarea komt uit ECP voor NL\n",
+		"Description": "",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -14,10 +14,10 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "PERNR",
+					"Name": "key",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": false,
+						"IsNullable": true,
 						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
@@ -27,21 +27,7 @@
 					"DeltaFormatInvalidMessages": []
 				},
 				{
-					"Name": "key_CostCenter",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "Column_2",
+					"Name": "key_PA0006",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
@@ -61,7 +47,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0001",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0006_text",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -74,7 +60,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0001",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0006_text",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -89,9 +75,9 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "Afgeleide informatie uit EC over employee\nCompany Code, personnel Area, personnel Subarea komt uit ECP voor NL\n",
+			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "PERNR",
+			"PrimaryKeys": "",
 			"spark.sql.sources.provider": "csv",
 			"sql:IsAppendOnly": false
 		},

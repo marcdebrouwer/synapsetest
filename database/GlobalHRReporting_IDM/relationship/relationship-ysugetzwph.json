@@ -1,7 +1,7 @@
 {
-	"name": "relationship-uxsghxdhtr",
+	"name": "relationship-ysugetzwph",
 	"properties": {
-		"Name": "relationship-uxsghxdhtr",
+		"Name": "relationship-ysugetzwph",
 		"EntityType": "RELATIONSHIP",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
@@ -9,12 +9,12 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "PA0003",
-		"ToTableName": "PA9000_FinalData_in_PA2010",
+		"FromTableName": "PPDIT_details",
+		"ToTableName": "PA0003",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "MANDT",
-				"ToColumnName": "MANDT"
+				"FromColumnName": "key_PERNR",
+				"ToColumnName": "PERNR"
 			}
 		],
 		"RelationshipType": 0
