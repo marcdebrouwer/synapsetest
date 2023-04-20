@@ -1,0 +1,23 @@
+{
+	"name": "relationship-nnstkgzhdx",
+	"properties": {
+		"Name": "relationship-nnstkgzhdx",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PA0003",
+		"ToTableName": "PA0006_replicatie uit EC",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PERNR",
+				"ToColumnName": "PERNR"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

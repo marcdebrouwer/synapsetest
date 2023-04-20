@@ -1,0 +1,23 @@
+{
+	"name": "relationship-ytopkgpjyx",
+	"properties": {
+		"Name": "relationship-ytopkgpjyx",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "EmployeeEmployment",
+		"ToTableName": "PA0105",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "EmployeeId",
+				"ToColumnName": "subtype 0001"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

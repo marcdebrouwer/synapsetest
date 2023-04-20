@@ -6,7 +6,7 @@
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "",
+		"Description": "ECP table - Leasing info \nExample: Car models are defined in a different tables",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -158,11 +158,10 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "",
+			"Description": "ECP table - Leasing info \nExample: Car models are defined in a different tables",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "MANDT,PERNR,SUBTY,OBJPS,SPRPS,ENDDA,BEGDA,SEQNR",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,
