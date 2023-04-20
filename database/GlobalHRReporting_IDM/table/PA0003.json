@@ -6,7 +6,7 @@
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "",
+		"Description": "Payroll status, check tabel. Unique records of an employee",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -17,8 +17,8 @@
 					"Name": "MANDT",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -31,8 +31,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -74,11 +74,10 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "",
+			"Description": "Payroll status, check tabel. Unique records of an employee",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,
