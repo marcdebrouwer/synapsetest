@@ -1,0 +1,23 @@
+{
+	"name": "relationship-dwhjsbfpoe",
+	"properties": {
+		"Name": "relationship-dwhjsbfpoe",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PA0105",
+		"ToTableName": "PA0000_Empjob",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "ECUS",
+				"ToColumnName": "PERNR"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

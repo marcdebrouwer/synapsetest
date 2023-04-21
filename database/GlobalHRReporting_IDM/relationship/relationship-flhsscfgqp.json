@@ -1,0 +1,23 @@
+{
+	"name": "relationship-flhsscfgqp",
+	"properties": {
+		"Name": "relationship-flhsscfgqp",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PPDIT",
+		"ToTableName": "PPDHD",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "key_PPDHD",
+				"ToColumnName": "key_PPDHD"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

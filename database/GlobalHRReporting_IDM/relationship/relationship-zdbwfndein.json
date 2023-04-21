@@ -1,0 +1,23 @@
+{
+	"name": "relationship-zdbwfndein",
+	"properties": {
+		"Name": "relationship-zdbwfndein",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PPDIT",
+		"ToTableName": "PPDIT_details",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "key_PPDIT",
+				"ToColumnName": "key_PPDIT"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

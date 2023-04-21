@@ -1,0 +1,23 @@
+{
+	"name": "relationship-nfpovbzaud",
+	"properties": {
+		"Name": "relationship-nfpovbzaud",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "CostCenter",
+		"ToTableName": "ZCOSTCENTER",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "CostCenterID",
+				"ToColumnName": "CostCenter"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

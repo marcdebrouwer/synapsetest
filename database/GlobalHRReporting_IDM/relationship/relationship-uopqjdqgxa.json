@@ -1,0 +1,23 @@
+{
+	"name": "relationship-uopqjdqgxa",
+	"properties": {
+		"Name": "relationship-uopqjdqgxa",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PA0006_text",
+		"ToTableName": "PA0006_from_EC",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "key_PA0006",
+				"ToColumnName": "Column_1"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

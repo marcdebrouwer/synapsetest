@@ -16,10 +16,6 @@
 				{
 					"Name": "DepartmentId",
 					"Description": "The unique identifier of a Department.",
-					"BaseAttributeReference": {
-						"Entity": "Department.cdm.json/Department",
-						"Name": "DepartmentId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -27,15 +23,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Department.cdm.json/Department",
+						"Name": "DepartmentId"
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "DepartmentName",
 					"Description": "The name of the Department.",
-					"BaseAttributeReference": {
-						"Entity": "Department.cdm.json/Department",
-						"Name": "DepartmentName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -44,7 +41,12 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"BaseAttributeReference": {
+						"Entity": "Department.cdm.json/Department",
+						"Name": "DepartmentName"
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CostCenter",
@@ -57,7 +59,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "EmployerID",
@@ -69,7 +72,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "District",
@@ -82,7 +86,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "Region",
@@ -95,7 +100,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "StoreID",
@@ -108,7 +114,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "TeamType",
@@ -121,7 +128,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "DepartmentType",
@@ -134,7 +142,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "EndDate",
@@ -147,7 +156,8 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "Parent",
@@ -160,7 +170,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "StartDate",
@@ -173,7 +184,8 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "Status",
@@ -186,7 +198,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				}
 			],
 			"Format": {
@@ -216,7 +229,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"DepartmentId\":{\"entity\":\"Department.cdm.json/Department\",\"name\":\"DepartmentId\"},\"DepartmentName\":{\"entity\":\"Department.cdm.json/Department\",\"name\":\"DepartmentName\"}}}"
 			},
 			"Compressed": false,

@@ -1,0 +1,23 @@
+{
+	"name": "relationship-aqbbyigfjp",
+	"properties": {
+		"Name": "relationship-aqbbyigfjp",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "T512W",
+		"ToTableName": "T512T",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "LGART",
+				"ToColumnName": "LGART"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

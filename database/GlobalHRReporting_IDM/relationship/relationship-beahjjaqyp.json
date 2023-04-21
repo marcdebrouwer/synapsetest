@@ -1,0 +1,23 @@
+{
+	"name": "relationship-beahjjaqyp",
+	"properties": {
+		"Name": "relationship-beahjjaqyp",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PayPeriod",
+		"ToTableName": "PA0000_Empjob",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "Date",
+				"ToColumnName": "BEGDT"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

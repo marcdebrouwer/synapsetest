@@ -1,0 +1,23 @@
+{
+	"name": "relationship-gvixwtrksb",
+	"properties": {
+		"Name": "relationship-gvixwtrksb",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PA0003",
+		"ToTableName": "PA2010",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PERNR",
+				"ToColumnName": "PERNR"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
