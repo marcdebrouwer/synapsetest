@@ -10,7 +10,7 @@
 			"Type": "SPARK"
 		},
 		"FromTableName": "PA0001",
-		"ToTableName": "PA0003",
+		"ToTableName": "PA0105",
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "PERNR",

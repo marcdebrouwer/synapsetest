@@ -14,7 +14,7 @@
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "EmployeeId",
-				"ToColumnName": "subtype 0001"
+				"ToColumnName": "SUBTY"
 			}
 		],
 		"RelationshipType": 0

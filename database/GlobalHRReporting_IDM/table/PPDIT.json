@@ -14,7 +14,8 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "key_PPDIT",
+					"Name": "DOCLIN",
+					"Description": "Document line number",
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsNullable": false,
@@ -27,8 +28,8 @@
 					"DeltaFormatInvalidMessages": []
 				},
 				{
-					"Name": "key_PPDHD",
-					"Description": "",
+					"Name": "DOCNUM",
+					"Description": "Document number",
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsNullable": false,
@@ -41,8 +42,36 @@
 					"DeltaFormatInvalidMessages": []
 				},
 				{
-					"Name": "transaction_key",
-					"Description": "geeft aan of het een grootboek of een kostenplaats is",
+					"Name": "KTOSL",
+					"Description": "transaction key (kosten of grootboek rekening)",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "KOSTL",
+					"Description": "cost center",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "ABPER",
+					"Description": "afboekingsperiode",
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsNullable": false,
@@ -91,9 +120,8 @@
 		"Properties": {
 			"Description": "controling file heeft ppdit nodig. Boeking op cost center\nPosting results van subset payroll\nPosting Document\nDocument bevat de gesommeerde waardes",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "key_PPDIT",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"PrimaryKeys": "DOCLIN,DOCNUM",
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

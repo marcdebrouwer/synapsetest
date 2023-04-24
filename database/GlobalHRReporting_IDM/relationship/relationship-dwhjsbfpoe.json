@@ -13,7 +13,7 @@
 		"ToTableName": "PA0000_Empjob",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "ECUS",
+				"FromColumnName": "MANDT",
 				"ToColumnName": "PERNR"
 			}
 		],

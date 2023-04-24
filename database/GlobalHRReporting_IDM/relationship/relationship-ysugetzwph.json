@@ -9,11 +9,11 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "PPDIT_details",
-		"ToTableName": "PA0003",
+		"FromTableName": "PPOIX",
+		"ToTableName": "PA0105",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "key_PERNR",
+				"FromColumnName": "PERNR",
 				"ToColumnName": "PERNR"
 			}
 		],

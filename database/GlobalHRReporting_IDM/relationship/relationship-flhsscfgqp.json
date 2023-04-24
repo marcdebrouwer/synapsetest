@@ -13,8 +13,8 @@
 		"ToTableName": "PPDHD",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "key_PPDHD",
-				"ToColumnName": "key_PPDHD"
+				"FromColumnName": "DOCNUM",
+				"ToColumnName": "DOCNUM"
 			}
 		],
 		"RelationshipType": 0

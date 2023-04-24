@@ -13,7 +13,7 @@
 		"ToTableName": "PA0001",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "CostCenter",
+				"FromColumnName": "COSTCENTER_ITIM",
 				"ToColumnName": "key_CostCenter"
 			}
 		],

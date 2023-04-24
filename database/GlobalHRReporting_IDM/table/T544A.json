@@ -1,12 +1,12 @@
 {
-	"name": "PPDHD",
+	"name": "T544A",
 	"properties": {
-		"Name": "PPDHD",
+		"Name": "T544A",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Posting document header data",
+		"Description": "Text",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -14,78 +14,21 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "DOCNUM",
+					"Name": "CARRG",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsComplexType": false,
+						"IsNullable": true,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "key",
 					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "BUKRS",
-					"Description": "Company Code",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "BUDAT",
-					"Description": "Posting date of document",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "RUNID",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "EVTYP",
-					"Description": "to exculde test run - PP only",
-					"OriginDataTypeName": {
-						"TypeName": "string",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Length": 256,
-						"Properties": {
-							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "BLART",
-					"Description": "always AB for NL or SA for CZ",
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsNullable": false,
@@ -104,7 +47,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PPDHD",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/T544A",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -117,7 +60,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PPDHD",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/T544A",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -132,10 +75,11 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "Posting document header data",
+			"Description": "Text",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "DOCNUM",
-			"spark.sql.sources.provider": "csv"
+			"PrimaryKeys": "",
+			"spark.sql.sources.provider": "csv",
+			"sql:IsAppendOnly": false
 		},
 		"Retention": 0,
 		"Temporary": false,

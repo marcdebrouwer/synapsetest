@@ -1,12 +1,12 @@
 {
-	"name": "PA0014",
+	"name": "PA0014_EC",
 	"properties": {
-		"Name": "PA0014",
+		"Name": "PA0014_EC",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "toeslagen en inhoudingen, bevat bedragen. Deel uit paycomponents vanuit EC aangevuld met ECP looncodes. Staat geregistreerd in uren. Staan ook in de payroll cluster, is voldoende om de payroll clusters binnen te halen",
+		"Description": "toeslagen en inhoudingen, bevat bedragen. Deel uit paycomponents vanuit EC aangevuld met ECP looncodes. Staat geregistreerd in uren. Actuals staan in de payroll cluster",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -122,6 +122,20 @@
 						}
 					},
 					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "LGART",
+					"Description": "is hetzelfde als subtype",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
 				}
 			],
 			"Format": {
@@ -130,7 +144,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0014",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0014_EC",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -143,7 +157,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0014",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0014_EC",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -158,7 +172,7 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "toeslagen en inhoudingen, bevat bedragen. Deel uit paycomponents vanuit EC aangevuld met ECP looncodes. Staat geregistreerd in uren. Staan ook in de payroll cluster, is voldoende om de payroll clusters binnen te halen",
+			"Description": "toeslagen en inhoudingen, bevat bedragen. Deel uit paycomponents vanuit EC aangevuld met ECP looncodes. Staat geregistreerd in uren. Actuals staan in de payroll cluster",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "MANDT,PERNR,SUBTY,OBJPS,SPRPS,ENDDA,BEGDA,SEQNR",
 			"spark.sql.sources.provider": "csv"

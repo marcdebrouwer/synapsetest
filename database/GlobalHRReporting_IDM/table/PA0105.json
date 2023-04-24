@@ -14,10 +14,10 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "ECUS",
+					"Name": "MANDT",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
+						"IsNullable": false,
 						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
@@ -26,8 +26,119 @@
 					"DeltaFormatInvalidMessages": []
 				},
 				{
-					"Name": "subtype 0001",
+					"Name": "PERNR",
 					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "OBJPS",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "SUBTY",
+					"Description": "0001 = Glempid, ECUS = UserID",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "SPRPS",
+					"Description": "Geblokkeerde record die niet in processen wordt meegenomen. Gelockt record heeft \"X\"",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "ENDDT",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "BEGDT",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "SEQNR",
+					"Description": "Onderdeel van technische sleutel",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "USRID",
+					"Description": "Glempid (afhankelijk van SUBTY)",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "USRID_LONG",
+					"Description": "Userid (afhankelijk van SUBTY)",
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsNullable": false,
@@ -76,9 +187,8 @@
 		"Properties": {
 			"Description": "Personeels nummer gelinkt aan het EC userid",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"PrimaryKeys": "MANDT,PERNR,OBJPS,SUBTY,SPRPS,ENDDT,BEGDT,SEQNR",
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

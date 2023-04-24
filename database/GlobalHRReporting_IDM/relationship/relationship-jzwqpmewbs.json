@@ -1,7 +1,7 @@
 {
-	"name": "relationship-ceytetdoto",
+	"name": "relationship-jzwqpmewbs",
 	"properties": {
-		"Name": "relationship-ceytetdoto",
+		"Name": "relationship-jzwqpmewbs",
 		"EntityType": "RELATIONSHIP",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
@@ -9,12 +9,12 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "PA0105",
-		"ToTableName": "PA0008_EC",
+		"FromTableName": "PPDIX",
+		"ToTableName": "PPOIX",
 		"ColumnRelationshipInformations": [
 			{
-				"FromColumnName": "PERNR",
-				"ToColumnName": "PERNR"
+				"FromColumnName": "DOCNR",
+				"ToColumnName": "key_PPDIT"
 			}
 		],
 		"RelationshipType": 0

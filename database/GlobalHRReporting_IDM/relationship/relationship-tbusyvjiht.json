@@ -1,7 +1,7 @@
 {
-	"name": "relationship-ceytetdoto",
+	"name": "relationship-tbusyvjiht",
 	"properties": {
-		"Name": "relationship-ceytetdoto",
+		"Name": "relationship-tbusyvjiht",
 		"EntityType": "RELATIONSHIP",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
@@ -10,7 +10,7 @@
 			"Type": "SPARK"
 		},
 		"FromTableName": "PA0105",
-		"ToTableName": "PA0008_EC",
+		"ToTableName": "PA2006",
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "PERNR",

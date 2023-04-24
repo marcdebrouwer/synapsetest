@@ -9,7 +9,7 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "PA0003",
+		"FromTableName": "PA0105",
 		"ToTableName": "PA0442",
 		"ColumnRelationshipInformations": [
 			{

@@ -9,12 +9,12 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "PA0003",
+		"FromTableName": "PA0003_EC",
 		"ToTableName": "PA0105",
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "PERNR",
-				"ToColumnName": "subtype 0001"
+				"ToColumnName": "SUBTY"
 			}
 		],
 		"RelationshipType": 0

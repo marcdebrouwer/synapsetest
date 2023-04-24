@@ -9,7 +9,7 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "PPDIT_details",
+		"FromTableName": "PPOIX",
 		"ToTableName": "T512T",
 		"ColumnRelationshipInformations": [
 			{

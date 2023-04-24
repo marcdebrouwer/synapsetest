@@ -9,8 +9,8 @@
 		"Origin": {
 			"Type": "SPARK"
 		},
-		"FromTableName": "PA0003",
-		"ToTableName": "PA0014",
+		"FromTableName": "PA0105",
+		"ToTableName": "PA0014_EC",
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "PERNR",
