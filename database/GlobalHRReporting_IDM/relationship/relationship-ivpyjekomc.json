@@ -14,7 +14,7 @@
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "COSTCENTER_ITIM",
-				"ToColumnName": "key_CostCenter"
+				"ToColumnName": "KOSTL"
 			}
 		],
 		"RelationshipType": 0

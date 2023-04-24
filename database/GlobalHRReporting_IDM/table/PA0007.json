@@ -6,7 +6,7 @@
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Time management, anders dan NL, namelijk negative time management. Alle werkroosters zijn opgebouwd met alle details in dit infotype. Detailniveau voor NL aanzienlijk minder in deze tabel",
+		"Description": "CZ only: Time management, anders dan NL, namelijk negative time management. Alle werkroosters zijn opgebouwd met alle details in dit infotype. Detailniveau voor NL aanzienlijk minder in deze tabel",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -74,7 +74,7 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"Description": "Time management, anders dan NL, namelijk negative time management. Alle werkroosters zijn opgebouwd met alle details in dit infotype. Detailniveau voor NL aanzienlijk minder in deze tabel",
+			"Description": "CZ only: Time management, anders dan NL, namelijk negative time management. Alle werkroosters zijn opgebouwd met alle details in dit infotype. Detailniveau voor NL aanzienlijk minder in deze tabel",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "MANDT",
 			"spark.sql.sources.provider": "csv",
