@@ -1,0 +1,23 @@
+{
+	"name": "relationship-xvzqspiyna",
+	"properties": {
+		"Name": "relationship-xvzqspiyna",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PayRange",
+		"ToTableName": "EmployeeCompensation",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PayRangeID",
+				"ToColumnName": "PayRange"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
