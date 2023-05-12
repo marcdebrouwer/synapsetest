@@ -1,0 +1,23 @@
+{
+	"name": "relationship-mizrsjhzpm",
+	"properties": {
+		"Name": "relationship-mizrsjhzpm",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PayComponent",
+		"ToTableName": "EmpPayComp",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PayComponentID",
+				"ToColumnName": "PayComponent"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

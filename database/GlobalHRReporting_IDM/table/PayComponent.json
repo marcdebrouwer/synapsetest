@@ -14,11 +14,25 @@
 		"StorageDescriptor": {
 			"Columns": [
 				{
-					"Name": "Column_1",
+					"Name": "startDate",
+					"OriginDataTypeName": {
+						"TypeName": "date",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"DateFormat": "YYYY-MM-DD",
+							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "PayComponentID",
+					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
+						"IsNullable": false,
 						"IsComplexType": false,
-						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -63,7 +77,7 @@
 		"Properties": {
 			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
-			"PrimaryKeys": "",
+			"PrimaryKeys": "startDate,PayComponentID",
 			"spark.sql.sources.provider": "csv",
 			"sql:IsAppendOnly": false
 		},
