@@ -1,0 +1,23 @@
+{
+	"name": "relationship-xzurrgvomw",
+	"properties": {
+		"Name": "relationship-xzurrgvomw",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PayRange",
+		"ToTableName": "PayRangeReference",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PayRangeID",
+				"ToColumnName": "externalCode"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
