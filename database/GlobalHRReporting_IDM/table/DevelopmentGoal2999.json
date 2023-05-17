@@ -17,6 +17,32 @@
 					"Name": "ID",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "mltAchievementType",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsComplexType": false,
+						"IsNullable": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "planId",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
 						"IsNullable": false,
 						"IsComplexType": false,
 						"Properties": {
@@ -26,7 +52,7 @@
 					"DeltaFormatInvalidMessages": []
 				},
 				{
-					"Name": "mltAchievementType",
+					"Name": "userId",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
@@ -76,8 +102,7 @@
 			"Description": "",
 			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
 			"PrimaryKeys": "ID,mltAchievementType",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

@@ -1,0 +1,23 @@
+{
+	"name": "relationship-gsxfndlayu",
+	"properties": {
+		"Name": "relationship-gsxfndlayu",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "Employee",
+		"ToTableName": "SimpleDevelopmentGoal",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "UserID",
+				"ToColumnName": "userId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

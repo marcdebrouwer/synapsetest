@@ -1,0 +1,23 @@
+{
+	"name": "relationship-bzkhyyullv",
+	"properties": {
+		"Name": "relationship-bzkhyyullv",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "DevelopmentGoal2999",
+		"ToTableName": "DevelopmentGoalPlanTemplate",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "planId",
+				"ToColumnName": "parentPlanId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

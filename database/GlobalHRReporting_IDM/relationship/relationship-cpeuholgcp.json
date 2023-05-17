@@ -1,0 +1,23 @@
+{
+	"name": "relationship-cpeuholgcp",
+	"properties": {
+		"Name": "relationship-cpeuholgcp",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "DevelopmentGoalEnumeration",
+		"ToTableName": "DevelopmentGoalPlanTemplate",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "planid",
+				"ToColumnName": "parentPlanId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

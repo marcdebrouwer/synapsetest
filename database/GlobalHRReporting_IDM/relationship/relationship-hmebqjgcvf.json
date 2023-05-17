@@ -1,0 +1,23 @@
+{
+	"name": "relationship-hmebqjgcvf",
+	"properties": {
+		"Name": "relationship-hmebqjgcvf",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "SimpleDevelopmentGoal",
+		"ToTableName": "DevelopmentGoal2001",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "userId",
+				"ToColumnName": "userId"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
