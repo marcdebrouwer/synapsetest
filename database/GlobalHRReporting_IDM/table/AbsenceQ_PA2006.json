@@ -1,12 +1,12 @@
 {
-	"name": "EmployeeRemuneration_PA2010",
+	"name": "AbsenceQ_PA2006",
 	"properties": {
-		"Name": "EmployeeRemuneration_PA2010",
+		"Name": "AbsenceQ_PA2006",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
 		},
-		"Description": "Alle gewerkte uren. Groot data volume. All countries. over 100M records.",
+		"Description": "Time and attandance data. After Payroll - from Corto data becomes available.  Details van afboekingen zitten in andere tabellen. Status tm een bepaalde periode moeten berekend worden. Leave type ",
 		"TableType": "EXTERNAL",
 		"Origin": {
 			"Type": "SPARK"
@@ -15,11 +15,11 @@
 			"Columns": [
 				{
 					"Name": "MANDT",
-					"Description": "Client",
+					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -32,8 +32,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -45,8 +45,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -59,8 +59,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -73,8 +73,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -87,8 +87,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
@@ -101,11 +101,25 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "KTART",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
 						}
 					},
 					"DeltaFormatInvalidMessages": []
@@ -115,8 +129,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -130,7 +144,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmployeeRemuneration_PA2010",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/AbsenceQ_PA2006",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -143,7 +157,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/EmployeeRemuneration_PA2010",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/AbsenceQ_PA2006",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -151,18 +165,19 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"EmployeeRemuneration_PA2010\",\"description\":\"Alle gewerkte uren. Groot data volume. All countries. over 100M records.\",\"baseEntityReference\":{\"name\":\"WarehouseHoursOfOperation\",\"path\":\"WarehouseHoursOfOperation.cdm.json/WarehouseHoursOfOperation\"},\"projectionInfo\":{\"attributes\":[{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Client\",\"isNullable\":false,\"name\":\"MANDT\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"PERNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SUBTY\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"OBJPS\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SPRPS\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"\",\"isNullable\":false,\"name\":\"ENDDA\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"\",\"isNullable\":false,\"name\":\"BEGDA\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"SEQNR\"}]},\"primaryKey\":[\"MANDT\",\"PERNR\",\"SUBTY\",\"OBJPS\",\"SPRPS\",\"ENDDA\",\"BEGDA\",\"SEQNR\"]}}",
-			"Description": "Alle gewerkte uren. Groot data volume. All countries. over 100M records.",
-			"DisplayFolderInfo": "{\"name\":\"Inventory\",\"colorCode\":\"#034736\"}",
-			"PrimaryKeys": "MANDT,PERNR,SUBTY,OBJPS,SPRPS,ENDDA,BEGDA,SEQNR",
-			"spark.sql.sources.provider": "csv"
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"AbsenceQ_PA2006\",\"description\":\"Time and attandance data. After Payroll - from Corto data becomes available.  Details van afboekingen zitten in andere tabellen. Status tm een bepaalde periode moeten berekend worden. Leave type \",\"baseEntityReference\":{\"name\":\"HrEventType\",\"path\":\"HrEventType.cdm.json/HrEventType\"},\"primaryKey\":[],\"projectionInfo\":{\"attributes\":[{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"MANDT\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"PERNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SUBTY\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"OBJPS\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SPRPS\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"\",\"isNullable\":false,\"name\":\"ENDDA\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"\",\"isNullable\":false,\"name\":\"BEGDA\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"KTART\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"SEQNR\"}]}}}",
+			"Description": "Time and attandance data. After Payroll - from Corto data becomes available.  Details van afboekingen zitten in andere tabellen. Status tm een bepaalde periode moeten berekend worden. Leave type ",
+			"DisplayFolderInfo": "{\"name\":\"Human Resources & Payroll\",\"colorCode\":\"#630454\"}",
+			"PrimaryKeys": "",
+			"spark.sql.sources.provider": "csv",
+			"sql:IsAppendOnly": false
 		},
 		"Retention": 0,
 		"Temporary": false,

@@ -1,0 +1,23 @@
+{
+	"name": "relationship-bezokpdbym",
+	"properties": {
+		"Name": "relationship-bezokpdbym",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "AbsenceQ_PA2006",
+		"ToTableName": "T556A",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "KTART",
+				"ToColumnName": "KTART"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
