@@ -1,7 +1,7 @@
 {
-	"name": "PA0442",
+	"name": "LeasingInfo_PA0442",
 	"properties": {
-		"Name": "PA0442",
+		"Name": "LeasingInfo_PA0442",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
@@ -18,8 +18,8 @@
 					"Description": "Client",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -32,8 +32,8 @@
 					"Description": "Personnel Number",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -45,8 +45,8 @@
 					"Description": "Subtype",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -59,8 +59,8 @@
 					"Description": "Object Identification",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -73,8 +73,8 @@
 					"Description": "Lock Indicator for HR Master Data Record",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -87,8 +87,8 @@
 					"Description": "End Date",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
@@ -101,8 +101,8 @@
 					"Description": "Start Date",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
@@ -115,8 +115,8 @@
 					"Description": "Number of Infotype Record with Same Key",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
@@ -128,8 +128,8 @@
 					"Description": "License Plate",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -142,8 +142,8 @@
 					"Description": "Registration date",
 					"OriginDataTypeName": {
 						"TypeName": "date",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Properties": {
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
@@ -156,8 +156,8 @@
 					"Description": "Car list price",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -170,8 +170,8 @@
 					"Description": "Lease category",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -184,8 +184,8 @@
 					"Description": "Car CO2 Emmission",
 					"OriginDataTypeName": {
 						"TypeName": "string",
+						"IsNullable": false,
 						"IsComplexType": false,
-						"IsNullable": true,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -198,8 +198,8 @@
 					"Description": "Benefit value",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -212,8 +212,8 @@
 					"Description": "Fuel",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -226,8 +226,8 @@
 					"Description": "Currency",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -240,8 +240,8 @@
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -254,8 +254,8 @@
 					"Description": "private km",
 					"OriginDataTypeName": {
 						"TypeName": "string",
-						"IsComplexType": false,
 						"IsNullable": false,
+						"IsComplexType": false,
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
@@ -270,7 +270,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0442",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/LeasingInfo_PA0442",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -283,7 +283,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PA0442",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/LeasingInfo_PA0442",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -291,17 +291,19 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
 			},
 			"Compressed": false,
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"LeasingInfo_PA0442\",\"description\":\"ECP table - Leasing info \\nExample: Car models are defined in a different tables\",\"baseEntityReference\":{\"name\":\"Vehicle\",\"path\":\"Vehicle.cdm.json/Vehicle\"},\"primaryKey\":[\"MANDT\",\"PERNR\",\"SUBTY\",\"OBJPS\",\"SPRPS\",\"ENDDA\",\"BEGDA\",\"SEQNR\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Client\",\"isNullable\":false,\"name\":\"MANDT\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Personnel Number\",\"isNullable\":false,\"name\":\"PERNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Subtype\",\"isNullable\":false,\"name\":\"SUBTY\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Object Identification\",\"isNullable\":false,\"name\":\"OBJPS\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Lock Indicator for HR Master Data Record\",\"isNullable\":false,\"name\":\"SPRPS\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"End Date\",\"isNullable\":false,\"name\":\"ENDDA\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"Start Date\",\"isNullable\":false,\"name\":\"BEGDA\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"Number of Infotype Record with Same Key\",\"isNullable\":false,\"name\":\"SEQNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"License Plate\",\"isNullable\":false,\"name\":\"REGNO\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"Registration date\",\"isNullable\":false,\"name\":\"RGNDA\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Car list price\",\"isNullable\":false,\"name\":\"LISTP\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Lease category\",\"isNullable\":false,\"name\":\"LEASC\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Car CO2 Emmission\",\"isNullable\":false,\"name\":\"CO2EM\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Benefit value\",\"isNullable\":false,\"name\":\"BNFTV\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Fuel\",\"isNullable\":false,\"name\":\"FUELR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"Currency\",\"isNullable\":false,\"name\":\"CRNCY\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"POLLC\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"private km\",\"isNullable\":false,\"name\":\"CARRG\"}]}}}",
 			"Description": "ECP table - Leasing info \nExample: Car models are defined in a different tables",
-			"DisplayFolderInfo": "{\"name\":\"Others\",\"colorCode\":\"\"}",
+			"DisplayFolderInfo": "{\"name\":\"Inventory\",\"colorCode\":\"#034736\"}",
 			"PrimaryKeys": "MANDT,PERNR,SUBTY,OBJPS,SPRPS,ENDDA,BEGDA,SEQNR",
-			"spark.sql.sources.provider": "csv"
+			"spark.sql.sources.provider": "csv",
+			"sql:IsAppendOnly": false
 		},
 		"Retention": 0,
 		"Temporary": false,

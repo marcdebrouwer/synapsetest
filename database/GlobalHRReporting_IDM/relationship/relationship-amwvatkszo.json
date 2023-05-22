@@ -1,0 +1,23 @@
+{
+	"name": "relationship-amwvatkszo",
+	"properties": {
+		"Name": "relationship-amwvatkszo",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "T544A",
+		"ToTableName": "LeasingInfo_PA0442",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "CARRG",
+				"ToColumnName": "CARRG"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}

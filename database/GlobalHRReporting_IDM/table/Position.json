@@ -16,6 +16,10 @@
 				{
 					"Name": "PositionId",
 					"Description": "The unique identifier of a Position.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "PositionId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -24,15 +28,15 @@
 							"HIVE_TYPE_STRING": "integer"
 						}
 					},
-					"BaseAttributeReference": {
-						"Entity": "Position.cdm.json/Position",
-						"Name": "PositionId"
-					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PositionName",
 					"Description": "The name of the Position.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "PositionName"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -42,15 +46,15 @@
 							"HIVE_TYPE_STRING": "string"
 						}
 					},
-					"BaseAttributeReference": {
-						"Entity": "Position.cdm.json/Position",
-						"Name": "PositionName"
-					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PositionCreatedDate",
 					"Description": "The date that the Position was created.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "PositionCreatedDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -59,16 +63,16 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Position.cdm.json/Position",
-						"Name": "PositionCreatedDate"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PositionClosedDate",
 					"Description": "The date that the Position was closed.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "PositionClosedDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -78,15 +82,15 @@
 							"HIVE_TYPE_STRING": "date"
 						}
 					},
-					"BaseAttributeReference": {
-						"Entity": "Position.cdm.json/Position",
-						"Name": "PositionClosedDate"
-					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "StartingHourlySalaryAmount",
 					"Description": "The starting hourly salary that the Employee was paid under the associated Position.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "StartingHourlySalaryAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -97,15 +101,15 @@
 							"HIVE_TYPE_STRING": "decimal"
 						}
 					},
-					"BaseAttributeReference": {
-						"Entity": "Position.cdm.json/Position",
-						"Name": "StartingHourlySalaryAmount"
-					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "JobId",
 					"Description": "The unique identifier of a Job.",
+					"BaseAttributeReference": {
+						"Entity": "Position.cdm.json/Position",
+						"Name": "JobId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -113,10 +117,6 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "Position.cdm.json/Position",
-						"Name": "JobId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
@@ -161,7 +161,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"PositionId\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionId\"},\"PositionName\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionName\"},\"PositionCreatedDate\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionCreatedDate\"},\"PositionClosedDate\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"PositionClosedDate\"},\"StartingHourlySalaryAmount\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"StartingHourlySalaryAmount\"},\"JobId\":{\"entity\":\"Position.cdm.json/Position\",\"name\":\"JobId\"}}}"
 			},
 			"Compressed": false,

@@ -27,7 +27,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "EmployeeId",
@@ -43,23 +44,25 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "UserID",
 					"Description": "The unique identifier of a Position.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PositionId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": true,
 						"IsComplexType": false,
+						"IsNullable": true,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
 					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "PositionId"
-					}
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "ReviewDate",
@@ -76,7 +79,8 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "JobReviewRequestedByEmployeeIndicator",
@@ -92,7 +96,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "boolean"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "ReviewPeriodStartDate",
@@ -109,7 +114,8 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "ReviewPeriodEndDate",
@@ -126,7 +132,8 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "SalaryBeforeReview",
@@ -144,7 +151,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "SalaryAfterReview",
@@ -162,7 +170,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "MeritIncreaseAmount",
@@ -180,7 +189,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "LengthOfServiceIncreaseAmount",
@@ -198,7 +208,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "TotalPossibleEvaluationCriteriaPoints",
@@ -214,7 +225,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "AchievedEvaluationCriteriaPoints",
@@ -230,7 +242,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "ReviewNote",
@@ -247,7 +260,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "GradeLevelClassificationId",
@@ -263,7 +277,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PreReviewTitleId",
@@ -279,7 +294,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PostReviewTitleId",
@@ -295,7 +311,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "JobReviewTypeId",
@@ -311,7 +328,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "JobReviewClassificationId",
@@ -327,7 +345,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PreReviewPayGradeId",
@@ -343,7 +362,8 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PostReviewPayGradeId",
@@ -359,19 +379,21 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PotentialRating",
 					"Description": "",
 					"OriginDataTypeName": {
 						"TypeName": "integer",
-						"IsNullable": false,
 						"IsComplexType": false,
+						"IsNullable": false,
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					}
+					},
+					"DeltaFormatInvalidMessages": []
 				}
 			],
 			"Format": {
@@ -401,7 +423,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ReviewId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewId\"},\"EmployeeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"EmployeeId\"},\"UserID\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PositionId\"},\"ReviewDate\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewDate\"},\"JobReviewRequestedByEmployeeIndicator\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewRequestedByEmployeeIndicator\"},\"ReviewPeriodStartDate\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewPeriodStartDate\"},\"ReviewPeriodEndDate\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewPeriodEndDate\"},\"SalaryBeforeReview\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"SalaryBeforeReview\"},\"SalaryAfterReview\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"SalaryAfterReview\"},\"MeritIncreaseAmount\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"MeritIncreaseAmount\"},\"LengthOfServiceIncreaseAmount\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"LengthOfServiceIncreaseAmount\"},\"TotalPossibleEvaluationCriteriaPoints\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"TotalPossibleEvaluationCriteriaPoints\"},\"AchievedEvaluationCriteriaPoints\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"AchievedEvaluationCriteriaPoints\"},\"ReviewNote\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewNote\"},\"GradeLevelClassificationId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"GradeLevelClassificationId\"},\"PreReviewTitleId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PreReviewTitleId\"},\"PostReviewTitleId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PostReviewTitleId\"},\"JobReviewTypeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewTypeId\"},\"JobReviewClassificationId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewClassificationId\"},\"PreReviewPayGradeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PreReviewPayGradeId\"},\"PostReviewPayGradeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PostReviewPayGradeId\"}}}"
 			},
 			"Compressed": false,
@@ -412,8 +434,7 @@
 			"Description": "A review of the employees performance in the associated Position(s).",
 			"DisplayFolderInfo": "{\"name\":\"Human Resources & Payroll\",\"colorCode\":\"#630454\"}",
 			"PrimaryKeys": "ReviewId",
-			"spark.sql.sources.provider": "csv",
-			"sql:IsAppendOnly": false
+			"spark.sql.sources.provider": "csv"
 		},
 		"Retention": 0,
 		"Temporary": false,

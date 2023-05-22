@@ -1,0 +1,23 @@
+{
+	"name": "relationship-pblwlzfher",
+	"properties": {
+		"Name": "relationship-pblwlzfher",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "LeasingInfo_PA0442",
+		"ToTableName": "T51CE",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "POLLC",
+				"ToColumnName": "POLLC"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
