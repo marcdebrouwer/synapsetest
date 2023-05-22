@@ -10,7 +10,7 @@
 			"Type": "SPARK"
 		},
 		"FromTableName": "PA0105",
-		"ToTableName": "HoursWorked_PA2010",
+		"ToTableName": "EmployeeRemuneration_PA2010",
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "PERNR",
