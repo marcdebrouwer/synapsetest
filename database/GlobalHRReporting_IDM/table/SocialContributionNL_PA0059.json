@@ -1,7 +1,7 @@
 {
-	"name": "SocialContribution_PA0059",
+	"name": "SocialContributionNL_PA0059",
 	"properties": {
-		"Name": "SocialContribution_PA0059",
+		"Name": "SocialContributionNL_PA0059",
 		"EntityType": "TABLE",
 		"Namespace": {
 			"DatabaseName": "GlobalHRReporting_IDM"
@@ -145,7 +145,7 @@
 				"FormatType": "csv",
 				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
 				"Properties": {
-					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/SocialContribution_PA0059",
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/SocialContributionNL_PA0059",
 					"delimiter": ",",
 					"multiLine": "false",
 					"firstRowAsHeader": "false",
@@ -158,7 +158,7 @@
 			},
 			"Source": {
 				"Provider": "ADLS",
-				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/SocialContribution_PA0059",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/SocialContributionNL_PA0059",
 				"Properties": {
 					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
 					"LocationSetToDatabaseDefault": true
@@ -173,7 +173,7 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"SocialContribution_PA0059\",\"description\":\"Social charges, contribution etc - NL specific CZ uses PA0152\",\"baseEntityReference\":{\"name\":\"EmployeeBenefitPlanBeneficiary\",\"path\":\"EmployeeBenefitPlanBeneficiary.cdm.json/EmployeeBenefitPlanBeneficiary\"},\"primaryKey\":[\"PERNR\",\"MANDT\",\"SUBTYP\",\"OBJPS\",\"SPRPS\",\"ENDDA\",\"BEGDA\",\"SEQNR\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"PERNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"MANDT\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SUBTYP\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"OBJPS\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SPRPS\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"ENDDA\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"BEGDA\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SEQNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"EXSV6\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"SocialContributionNL_PA0059\",\"description\":\"Social charges, contribution etc - NL specific CZ uses PA0152\",\"baseEntityReference\":{\"name\":\"EmployeeBenefitPlanBeneficiary\",\"path\":\"EmployeeBenefitPlanBeneficiary.cdm.json/EmployeeBenefitPlanBeneficiary\"},\"projectionInfo\":{\"attributes\":[{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"PERNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"MANDT\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SUBTYP\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"OBJPS\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SPRPS\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"ENDDA\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"BEGDA\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SEQNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"EXSV6\"}]},\"primaryKey\":[\"PERNR\",\"MANDT\",\"SUBTYP\",\"OBJPS\",\"SPRPS\",\"ENDDA\",\"BEGDA\",\"SEQNR\"]}}",
 			"Description": "Social charges, contribution etc - NL specific CZ uses PA0152",
 			"DisplayFolderInfo": "{\"name\":\"Human Resources & Payroll\",\"colorCode\":\"#630454\"}",
 			"PrimaryKeys": "PERNR,MANDT,SUBTYP,OBJPS,SPRPS,ENDDA,BEGDA,SEQNR",

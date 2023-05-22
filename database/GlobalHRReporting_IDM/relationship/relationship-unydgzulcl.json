@@ -10,7 +10,7 @@
 			"Type": "SPARK"
 		},
 		"FromTableName": "PA0105",
-		"ToTableName": "SocialContribution_PA0059",
+		"ToTableName": "SocialContributionNL_PA0059",
 		"ColumnRelationshipInformations": [
 			{
 				"FromColumnName": "PERNR",
