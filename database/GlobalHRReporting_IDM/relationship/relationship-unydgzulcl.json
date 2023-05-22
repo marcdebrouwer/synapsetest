@@ -1,0 +1,23 @@
+{
+	"name": "relationship-unydgzulcl",
+	"properties": {
+		"Name": "relationship-unydgzulcl",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PA0105",
+		"ToTableName": "SocialContribution_PA0059",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PERNR",
+				"ToColumnName": "PERNR"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
