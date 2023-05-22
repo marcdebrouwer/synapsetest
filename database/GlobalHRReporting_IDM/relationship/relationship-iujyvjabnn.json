@@ -1,0 +1,23 @@
+{
+	"name": "relationship-iujyvjabnn",
+	"properties": {
+		"Name": "relationship-iujyvjabnn",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "PA0105",
+		"ToTableName": "HoursWorked_PA2010",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "PERNR",
+				"ToColumnName": "PERNR"
+			}
+		],
+		"RelationshipType": 0
+	},
+	"type": "RELATIONSHIP"
+}
