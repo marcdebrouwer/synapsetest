@@ -111,6 +111,19 @@
 					"DeltaFormatInvalidMessages": []
 				},
 				{
+					"Name": "SEQNR",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "integer",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Properties": {
+							"HIVE_TYPE_STRING": "integer"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
 					"Name": "KTART",
 					"Description": "",
 					"OriginDataTypeName": {
@@ -120,19 +133,6 @@
 						"Length": 256,
 						"Properties": {
 							"HIVE_TYPE_STRING": "string"
-						}
-					},
-					"DeltaFormatInvalidMessages": []
-				},
-				{
-					"Name": "SEQNR",
-					"Description": "",
-					"OriginDataTypeName": {
-						"TypeName": "integer",
-						"IsNullable": false,
-						"IsComplexType": false,
-						"Properties": {
-							"HIVE_TYPE_STRING": "integer"
 						}
 					},
 					"DeltaFormatInvalidMessages": []
@@ -172,10 +172,10 @@
 			"IsStoredAsSubdirectories": false
 		},
 		"Properties": {
-			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"AbsenceQ_PA2006\",\"description\":\"Time and attandance data. After Payroll - from Corto data becomes available.  Details van afboekingen zitten in andere tabellen. Status tm een bepaalde periode moeten berekend worden. Leave type \",\"baseEntityReference\":{\"name\":\"HrEventType\",\"path\":\"HrEventType.cdm.json/HrEventType\"},\"primaryKey\":[],\"projectionInfo\":{\"attributes\":[{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"MANDT\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"PERNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SUBTY\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"OBJPS\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SPRPS\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"\",\"isNullable\":false,\"name\":\"ENDDA\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"\",\"isNullable\":false,\"name\":\"BEGDA\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"KTART\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"SEQNR\"}]}}}",
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"AbsenceQ_PA2006\",\"description\":\"Time and attandance data. After Payroll - from Corto data becomes available.  Details van afboekingen zitten in andere tabellen. Status tm een bepaalde periode moeten berekend worden. Leave type \",\"baseEntityReference\":{\"name\":\"HrEventType\",\"path\":\"HrEventType.cdm.json/HrEventType\"},\"primaryKey\":[\"MANDT\",\"PERNR\",\"SUBTY\",\"OBJPS\",\"SPRPS\",\"ENDDA\",\"BEGDA\",\"SEQNR\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"MANDT\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"PERNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SUBTY\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"OBJPS\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"SPRPS\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"\",\"isNullable\":false,\"name\":\"ENDDA\"},{\"type\":\"New\",\"dataType\":\"date\",\"dateFormat\":\"YYYY-MM-DD\",\"description\":\"\",\"isNullable\":false,\"name\":\"BEGDA\"},{\"type\":\"New\",\"dataType\":\"integer\",\"description\":\"\",\"isNullable\":false,\"name\":\"SEQNR\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"KTART\"}]}}}",
 			"Description": "Time and attandance data. After Payroll - from Corto data becomes available.  Details van afboekingen zitten in andere tabellen. Status tm een bepaalde periode moeten berekend worden. Leave type ",
 			"DisplayFolderInfo": "{\"name\":\"Human Resources & Payroll\",\"colorCode\":\"#630454\"}",
-			"PrimaryKeys": "",
+			"PrimaryKeys": "MANDT,PERNR,SUBTY,OBJPS,SPRPS,ENDDA,BEGDA,SEQNR",
 			"spark.sql.sources.provider": "csv",
 			"sql:IsAppendOnly": false
 		},
