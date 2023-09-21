@@ -16,10 +16,6 @@
 				{
 					"Name": "ReviewId",
 					"Description": "The unique identifier of a Review.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "ReviewId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -28,15 +24,15 @@
 							"HIVE_TYPE_STRING": "integer"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "ReviewId"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "EmployeeId",
 					"Description": "The unique identifier of an Employee.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "EmployeeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -44,16 +40,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "EmployeeId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "UserID",
 					"Description": "The unique identifier of a Position.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "PositionId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -62,15 +58,15 @@
 							"HIVE_TYPE_STRING": "integer"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PositionId"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "ReviewDate",
 					"Description": "The date of the job review.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "ReviewDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -80,15 +76,15 @@
 							"HIVE_TYPE_STRING": "date"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "ReviewDate"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "JobReviewRequestedByEmployeeIndicator",
 					"Description": "Indicates that the Job Review was requested by the employee.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "JobReviewRequestedByEmployeeIndicator"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "boolean",
 						"IsComplexType": false,
@@ -97,15 +93,15 @@
 							"HIVE_TYPE_STRING": "boolean"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "JobReviewRequestedByEmployeeIndicator"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "ReviewPeriodStartDate",
 					"Description": "The starting date for which the associated Employee Review is performed.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "ReviewPeriodStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -114,16 +110,16 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "ReviewPeriodStartDate"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "ReviewPeriodEndDate",
 					"Description": "The ending date for which the associated Employee Review is performed.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "ReviewPeriodEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -133,15 +129,15 @@
 							"HIVE_TYPE_STRING": "date"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "ReviewPeriodEndDate"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "SalaryBeforeReview",
 					"Description": "The employee's salary prior to the Job Review.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "SalaryBeforeReview"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -151,16 +147,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "SalaryBeforeReview"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "SalaryAfterReview",
 					"Description": "The employee's salary after the Job Review.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "SalaryAfterReview"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -170,16 +166,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "SalaryAfterReview"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "MeritIncreaseAmount",
 					"Description": "The amount awarded the employee in the form of a merit award.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "MeritIncreaseAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -189,16 +185,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "decimal"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "MeritIncreaseAmount"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "LengthOfServiceIncreaseAmount",
 					"Description": "An amount awarded to an employee based upon length of service.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "LengthOfServiceIncreaseAmount"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -209,15 +205,15 @@
 							"HIVE_TYPE_STRING": "decimal"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "LengthOfServiceIncreaseAmount"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "TotalPossibleEvaluationCriteriaPoints",
 					"Description": "The total number of points that may be achieved from the associated Evaluation Criteria in the current review.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "TotalPossibleEvaluationCriteriaPoints"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -225,16 +221,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "TotalPossibleEvaluationCriteriaPoints"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "AchievedEvaluationCriteriaPoints",
 					"Description": "The actual number of points achieved from the associated Evaluation Criteria in the current review.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "AchievedEvaluationCriteriaPoints"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -243,15 +239,15 @@
 							"HIVE_TYPE_STRING": "integer"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "AchievedEvaluationCriteriaPoints"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "ReviewNote",
 					"Description": "A note, comment or additional information regarding the employee review.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "ReviewNote"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -261,15 +257,15 @@
 							"HIVE_TYPE_STRING": "string"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "ReviewNote"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "GradeLevelClassificationId",
 					"Description": "The unique identifier of a Grade Level Classification.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "GradeLevelClassificationId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -277,16 +273,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "GradeLevelClassificationId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PreReviewTitleId",
 					"Description": "The unique identifier of the pre-review Title.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "PreReviewTitleId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -294,16 +290,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PreReviewTitleId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PostReviewTitleId",
 					"Description": "The unique identifier of the pre-review Title.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "PostReviewTitleId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -311,16 +307,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PostReviewTitleId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "JobReviewTypeId",
 					"Description": "The unique identifier of a Job Review Type.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "JobReviewTypeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -328,16 +324,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "JobReviewTypeId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "JobReviewClassificationId",
 					"Description": "The unique identifier of the job review classification.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "JobReviewClassificationId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -345,16 +341,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "JobReviewClassificationId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PreReviewPayGradeId",
 					"Description": "The unique identifier of a Pay Grade.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "PreReviewPayGradeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -362,16 +358,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PreReviewPayGradeId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PostReviewPayGradeId",
 					"Description": "The unique identifier of a Pay Grade.",
-					"BaseAttributeReference": {
-						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
-						"Name": "PostReviewPayGradeId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -379,6 +375,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "EmployeeReview.cdm.json/EmployeeReview",
+						"Name": "PostReviewPayGradeId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
@@ -423,7 +423,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"ReviewId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewId\"},\"EmployeeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"EmployeeId\"},\"UserID\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PositionId\"},\"ReviewDate\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewDate\"},\"JobReviewRequestedByEmployeeIndicator\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewRequestedByEmployeeIndicator\"},\"ReviewPeriodStartDate\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewPeriodStartDate\"},\"ReviewPeriodEndDate\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewPeriodEndDate\"},\"SalaryBeforeReview\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"SalaryBeforeReview\"},\"SalaryAfterReview\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"SalaryAfterReview\"},\"MeritIncreaseAmount\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"MeritIncreaseAmount\"},\"LengthOfServiceIncreaseAmount\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"LengthOfServiceIncreaseAmount\"},\"TotalPossibleEvaluationCriteriaPoints\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"TotalPossibleEvaluationCriteriaPoints\"},\"AchievedEvaluationCriteriaPoints\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"AchievedEvaluationCriteriaPoints\"},\"ReviewNote\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"ReviewNote\"},\"GradeLevelClassificationId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"GradeLevelClassificationId\"},\"PreReviewTitleId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PreReviewTitleId\"},\"PostReviewTitleId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PostReviewTitleId\"},\"JobReviewTypeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewTypeId\"},\"JobReviewClassificationId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"JobReviewClassificationId\"},\"PreReviewPayGradeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PreReviewPayGradeId\"},\"PostReviewPayGradeId\":{\"entity\":\"EmployeeReview.cdm.json/EmployeeReview\",\"name\":\"PostReviewPayGradeId\"}}}"
 			},
 			"Compressed": false,

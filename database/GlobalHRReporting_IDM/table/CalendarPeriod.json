@@ -16,10 +16,6 @@
 				{
 					"Name": "CalendarId",
 					"Description": "The unique identifier of a Calendar.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -28,15 +24,15 @@
 							"HIVE_TYPE_STRING": "integer"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarId"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarPeriodId",
 					"Description": "The unique identifier of a Calendar Period.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarPeriodId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -45,15 +41,15 @@
 							"HIVE_TYPE_STRING": "integer"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarPeriodId"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarPeriodName",
 					"Description": "The name of the associated calendar period.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarPeriodName"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -63,15 +59,15 @@
 							"HIVE_TYPE_STRING": "string"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarPeriodName"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarPeriodDescription",
 					"Description": "The description of the calendar period.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarPeriodDescription"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -81,15 +77,15 @@
 							"HIVE_TYPE_STRING": "string"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarPeriodDescription"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarPeriodStartDate",
 					"Description": "The start date of the calendar period.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarPeriodStartDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -98,16 +94,16 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarPeriodStartDate"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarPeriodEndDate",
 					"Description": "The end date of the calendar period.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarPeriodEndDate"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -117,15 +113,15 @@
 							"HIVE_TYPE_STRING": "date"
 						}
 					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarPeriodEndDate"
+					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarPeriodNumber",
 					"Description": "The period number associated with the calendar period.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarPeriodNumber"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -133,16 +129,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarPeriodNumber"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarWeekId",
 					"Description": "The unique identifier of a Calendar Week.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarWeekId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -150,16 +146,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarWeekId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarMonthId",
 					"Description": "The unique identifier of a calendar month.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarMonthId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -167,16 +163,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarMonthId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarQuarterId",
 					"Description": "The unique identifier of a calendar quarter.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarQuarterId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -184,16 +180,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarQuarterId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "CalendarYearId",
 					"Description": "The unique identifier of a Calendar Year.",
-					"BaseAttributeReference": {
-						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
-						"Name": "CalendarYearId"
-					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -201,6 +197,10 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
+					},
+					"BaseAttributeReference": {
+						"Entity": "CalendarPeriod.cdm.json/CalendarPeriod",
+						"Name": "CalendarYearId"
 					},
 					"DeltaFormatInvalidMessages": []
 				}
@@ -232,7 +232,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"CalendarId\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarId\"},\"CalendarPeriodId\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarPeriodId\"},\"CalendarPeriodName\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarPeriodName\"},\"CalendarPeriodDescription\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarPeriodDescription\"},\"CalendarPeriodStartDate\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarPeriodStartDate\"},\"CalendarPeriodEndDate\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarPeriodEndDate\"},\"CalendarPeriodNumber\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarPeriodNumber\"},\"CalendarWeekId\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarWeekId\"},\"CalendarMonthId\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarMonthId\"},\"CalendarQuarterId\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarQuarterId\"},\"CalendarYearId\":{\"entity\":\"CalendarPeriod.cdm.json/CalendarPeriod\",\"name\":\"CalendarYearId\"}}}"
 			},
 			"Compressed": false,
