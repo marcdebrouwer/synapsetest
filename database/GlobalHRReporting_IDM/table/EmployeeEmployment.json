@@ -16,6 +16,10 @@
 				{
 					"Name": "EmployeeId",
 					"Description": "The unique identifier of an Employee.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
+						"Name": "EmployeeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -23,16 +27,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
-						"Name": "EmployeeId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "EmployerId",
 					"Description": "The unique identifier of an Employer.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
+						"Name": "EmployerId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -40,16 +44,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
-						"Name": "EmployerId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "JobTitleId",
 					"Description": "The unique identifier of a Job Title.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
+						"Name": "JobTitleId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -58,15 +62,15 @@
 							"HIVE_TYPE_STRING": "integer"
 						}
 					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
-						"Name": "JobTitleId"
-					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PeriodStartDate",
 					"Description": "The period start date of the associated Employment position.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
+						"Name": "PeriodStartDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -75,16 +79,16 @@
 							"DateFormat": "YYYY-MM-DD",
 							"HIVE_TYPE_STRING": "date"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
-						"Name": "PeriodStartDate"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "PeriodEndDate",
 					"Description": "The period end date of the associated Employment position.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
+						"Name": "PeriodEndDate"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "date",
 						"IsComplexType": false,
@@ -94,15 +98,15 @@
 							"HIVE_TYPE_STRING": "date"
 						}
 					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
-						"Name": "PeriodEndDate"
-					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "EmploymentPositionTypeId",
 					"Description": "The unique identifier of an Employment Position Type.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
+						"Name": "EmploymentPositionTypeId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -111,15 +115,15 @@
 							"HIVE_TYPE_STRING": "integer"
 						}
 					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
-						"Name": "EmploymentPositionTypeId"
-					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "AnnualSalaryAmount",
 					"Description": "The estimated annual salary of the individual in the position.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
+						"Name": "AnnualSalaryAmount"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "decimal",
 						"IsComplexType": false,
@@ -130,15 +134,15 @@
 							"HIVE_TYPE_STRING": "decimal"
 						}
 					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
-						"Name": "AnnualSalaryAmount"
-					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "EmploymentNote",
 					"Description": "Notes, comments or additional information regarding the associated employment.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
+						"Name": "EmploymentNote"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "string",
 						"IsComplexType": false,
@@ -148,15 +152,15 @@
 							"HIVE_TYPE_STRING": "string"
 						}
 					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
-						"Name": "EmploymentNote"
-					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "EmploymentClassificationId",
 					"Description": "The unique identifier of an Employment Classification.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
+						"Name": "EmploymentClassificationId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -164,16 +168,16 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
-						"Name": "EmploymentClassificationId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
 				{
 					"Name": "EmploymentStatusId",
 					"Description": "The unique identifier of an Employment Status.",
+					"BaseAttributeReference": {
+						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
+						"Name": "EmploymentStatusId"
+					},
 					"OriginDataTypeName": {
 						"TypeName": "integer",
 						"IsComplexType": false,
@@ -181,10 +185,6 @@
 						"Properties": {
 							"HIVE_TYPE_STRING": "integer"
 						}
-					},
-					"BaseAttributeReference": {
-						"Entity": "EmployeeEmployment.cdm.json/EmployeeEmployment",
-						"Name": "EmploymentStatusId"
 					},
 					"DeltaFormatInvalidMessages": []
 				},
@@ -229,7 +229,7 @@
 			},
 			"Properties": {
 				"textinputformat.record.delimiter": ",",
-				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"compression": "",
 				"derivedModelAttributeInfo": "{\"attributeReferences\":{\"EmployeeId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmployeeId\"},\"EmployerId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmployerId\"},\"JobTitleId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"JobTitleId\"},\"PeriodStartDate\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"PeriodStartDate\"},\"PeriodEndDate\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"PeriodEndDate\"},\"EmploymentPositionTypeId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmploymentPositionTypeId\"},\"AnnualSalaryAmount\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"AnnualSalaryAmount\"},\"EmploymentNote\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmploymentNote\"},\"EmploymentClassificationId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmploymentClassificationId\"},\"EmploymentStatusId\":{\"entity\":\"EmployeeEmployment.cdm.json/EmployeeEmployment\",\"name\":\"EmploymentStatusId\"}}}"
 			},
 			"Compressed": false,

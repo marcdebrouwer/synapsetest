@@ -1,0 +1,91 @@
+{
+	"name": "PickListV2",
+	"properties": {
+		"Name": "PickListV2",
+		"EntityType": "TABLE",
+		"Namespace": {
+			"DatabaseName": "GlobalHRReporting_IDM"
+		},
+		"Description": "A document that tells the picker what to pick for an order or customer.\n\nThe Pick List usually shows the picking locations, the item (Product) to be picked and the quantity to be picked.\n\nSome Pick Lists are arranged to minimize the time the picker spends moving from location to location.\n\nPick Lists, depending upon use, may also show the customer's name, address, method of shipment and other information.\n\nPicking is the process of selecting inventory to fill an order and physically removing it from its storage location.    Picking reduces the on-hand balance and the allocation amount for the picking location but does not usually result in the reduction of the inventory facilities total on-hand balance.",
+		"TableType": "EXTERNAL",
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"StorageDescriptor": {
+			"Columns": [
+				{
+					"Name": "id",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				},
+				{
+					"Name": "effectiveStartDate",
+					"Description": "",
+					"OriginDataTypeName": {
+						"TypeName": "string",
+						"IsNullable": false,
+						"IsComplexType": false,
+						"Length": 256,
+						"Properties": {
+							"HIVE_TYPE_STRING": "string"
+						}
+					},
+					"DeltaFormatInvalidMessages": []
+				}
+			],
+			"Format": {
+				"InputFormat": "org.apache.hadoop.mapred.SequenceFileInputFormat",
+				"OutputFormat": "org.apache.hadoop.hive.ql.io.HiveSequenceFileOutputFormat",
+				"FormatType": "csv",
+				"SerializeLib": "org.apache.hadoop.hive.serde2.lazy.LazySimpleSerDe",
+				"Properties": {
+					"path": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PickListV2",
+					"delimiter": ",",
+					"multiLine": "false",
+					"firstRowAsHeader": "false",
+					"serialization.format": "1",
+					"escape": "\\",
+					"quote": "\"",
+					"FormatTypeSetToDatabaseDefault": true,
+					"header": "false"
+				}
+			},
+			"Source": {
+				"Provider": "ADLS",
+				"Location": "abfss://fsgdmsdevweeu01@stgdmsdevweeu01.dfs.core.windows.net/GlobalHRReporting_IDM/PickListV2",
+				"Properties": {
+					"LinkedServiceName": "global-data-modeling-space-WorkspaceDefaultStorage",
+					"LocationSetToDatabaseDefault": true
+				}
+			},
+			"Properties": {
+				"textinputformat.record.delimiter": ",",
+				"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+				"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
+			},
+			"Compressed": false,
+			"IsStoredAsSubdirectories": false
+		},
+		"Properties": {
+			"DerivedModelEntityInfo": "{\"entityDirectives\":{\"name\":\"PickListV2\",\"description\":\"A document that tells the picker what to pick for an order or customer.\\n\\nThe Pick List usually shows the picking locations, the item (Product) to be picked and the quantity to be picked.\\n\\nSome Pick Lists are arranged to minimize the time the picker spends moving from location to location.\\n\\nPick Lists, depending upon use, may also show the customer's name, address, method of shipment and other information.\\n\\nPicking is the process of selecting inventory to fill an order and physically removing it from its storage location.    Picking reduces the on-hand balance and the allocation amount for the picking location but does not usually result in the reduction of the inventory facilities total on-hand balance.\",\"baseEntityReference\":{\"name\":\"PickList\",\"path\":\"PickList.cdm.json/PickList\"},\"primaryKey\":[\"id\",\"effectiveStartDate\"],\"projectionInfo\":{\"attributes\":[{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"id\"},{\"type\":\"New\",\"dataType\":\"string\",\"dataTypeLength\":256,\"description\":\"\",\"isNullable\":false,\"name\":\"effectiveStartDate\"}]}}}",
+			"Description": "A document that tells the picker what to pick for an order or customer.\n\nThe Pick List usually shows the picking locations, the item (Product) to be picked and the quantity to be picked.\n\nSome Pick Lists are arranged to minimize the time the picker spends moving from location to location.\n\nPick Lists, depending upon use, may also show the customer's name, address, method of shipment and other information.\n\nPicking is the process of selecting inventory to fill an order and physically removing it from its storage location.    Picking reduces the on-hand balance and the allocation amount for the picking location but does not usually result in the reduction of the inventory facilities total on-hand balance.",
+			"DisplayFolderInfo": "{\"name\":\"Inventory\",\"colorCode\":\"#034736\"}",
+			"PrimaryKeys": "id,effectiveStartDate",
+			"spark.sql.sources.provider": "csv",
+			"sql:IsAppendOnly": false
+		},
+		"Retention": 0,
+		"Temporary": false,
+		"IsRewriteEnabled": false
+	},
+	"type": "TABLE"
+}
