@@ -1,0 +1,26 @@
+{
+	"name": "relationship-tvarvxhgsq",
+	"properties": {
+		"Name": "relationship-tvarvxhgsq",
+		"EntityType": "RELATIONSHIP",
+		"Namespace": {
+			"DatabaseName": "Retail_b15"
+		},
+		"Origin": {
+			"Type": "SPARK"
+		},
+		"FromTableName": "JournalTransactionType",
+		"ToTableName": "JournalTransaction",
+		"ColumnRelationshipInformations": [
+			{
+				"FromColumnName": "JournalTransactionTypeId",
+				"ToColumnName": "JournalTransactionTypeId"
+			}
+		],
+		"RelationshipType": 0,
+		"Properties": {
+			"DerivedModelRelationshipInfo": "{\"baseRelationship\":{\"fromEntity\":\"JournalTransactionType.cdm.json/JournalTransactionType\",\"toEntity\":\"JournalTransaction.cdm.json/JournalTransaction\",\"joinPairs\":[{\"fromAttribute\":\"JournalTransactionTypeId\",\"toAttribute\":\"JournalTransactionTypeId\"}]}}"
+		}
+	},
+	"type": "RELATIONSHIP"
+}

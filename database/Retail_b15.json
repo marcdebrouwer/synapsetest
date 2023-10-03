@@ -1,6 +1,8 @@
 {
 	"name": "Retail_b15",
 	"properties": {
+		"Name": "Retail_b15",
+		"EntityType": "DATABASE",
 		"Description": "Marc's trial DB",
 		"Origin": {
 			"Type": "SPARK"
@@ -20,9 +22,7 @@
 		},
 		"PublishStatus": "PUBLISHED",
 		"ObjectVersion": 4,
-		"ObjectId": "b5e60dad-1882-4f40-b06b-1922ef67a5a8",
-		"Name": "Retail_b15",
-		"EntityType": "DATABASE"
+		"ObjectId": "b5e60dad-1882-4f40-b06b-1922ef67a5a8"
 	},
 	"type": "DATABASE"
 }
